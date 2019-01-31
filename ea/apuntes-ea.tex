@@ -1,10 +1,11 @@
 \documentclass{book}
 
 \usepackage[utf8]{inputenc}  % para que funcionen las tildes
-\usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{txfonts}
+\usepackage{lmodern}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{thmtools, thm-restate}
 \usepackage{datetime} % para la hora de compilación
@@ -17,7 +18,9 @@
 \usepackage{multicol}
 \usepackage{subcaption}
 \usepackage{xfrac}
+\usepackage{glossaries}
 \usepackage{standalone}
+\usepackage{pgfmath}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{shapes}
@@ -29,6 +32,11 @@
 
 %\usepackage[a6paper,margin=5mm]{geometry}
 \usepackage[a4paper, top=1.5cm,bottom=1.5cm,left=1cm,right=1cm]{geometry}
+
+%\setlength{\parindent}{0pt}
+\usepackage{parskip}
+
+\usepackage{hyperref}
 
 % ESTILOS DE DEFINICIONES Y TEOREMAS
 \declaretheoremstyle[
@@ -47,6 +55,13 @@
 		bgcolor={rgb}{0.9,0.9,0.9}
 }]{mydfn}
 
+\declaretheoremstyle[
+bodyfont=\normalfont,
+spacebelow=1em,
+spaceabove=1em,
+]{myej}
+
+% DEFINICIONES DE ENTORNOS DE TEOREMAS
 \declaretheorem[
 	name=Teorema,
 	refname={teorema,teoremas},
@@ -58,14 +73,24 @@
 	name=Corolario,
 	refname={corolario,corolarios},
 	Refname={Corolario,Corolarios},
+	style=myej
 ]{cor}
 
 \declaretheorem[
 	name=Proposici\'{o}n,
 	refname={proposici\'{o}n,proposiciones},
-	Refname={Proposici\'{o}n, Proposiciones}
-	sharenumber=thm
+	Refname={Proposici\'{o}n, Proposiciones},
+	sharenumber=thm,
+	style=myej
 ]{pro}
+
+\declaretheorem[
+name=Lema,
+refname={lema,lemas},
+Refname={Lema, Lemas},
+sharenumber=thm,
+style=myej
+]{lm}
 
 %\newtheorem*{cor}{Corolario}
 \newtheorem*{lem}{Lema}
@@ -77,26 +102,60 @@
 	style=mydfn
 ]{dfn}
 
-\theoremstyle{definition}
-\newtheorem{ej}{Ejemplo}
+\declaretheorem[
+name=Ejercicio,
+refname={ejercicio,ejercicios},
+Refname={Ejercicio,Ejercicios},
+style=myej,
+numbered=no
+]{ex}
 
-\theoremstyle{remark}
-\newtheorem{obs}{Observación}
+\declaretheorem[
+name=Ejemplo,
+refname={ejemplo,ejemplos},
+Refname={Ejemplo,Ejemplos},
+style=myej
+]{ej}
+
+\declaretheorem[
+name=Observaci\'{o}n,
+refname={observaci\'{o}n,observaciones},
+Refname={Observaci\'{o}n,Observaciones},
+style=myej
+]{obs}
+
+\makeglossaries
+\newglossaryentry{di}{name={DI},description={Dominio de integridad (ver \autoref{dfn:dominiointegridad})}}
+\newglossaryentry{dip}{name={DIP},description={Dominio de ideales principales (ver \autoref{dfn:dominioidealesprincipales})}}
+\newglossaryentry{dfu}{name={DFU},description={Dominio de factorización única (ver \autoref{dfn:dfu})}}
+\newglossaryentry{de}{name={DE},description={Dominio euclídeo (ver \autoref{dfn:de})}}
+
+
 
 % COMANDOS ÚTILES PARA LA TEORÍA DE GRUPOS
-\newcommand{\normsub}{\mathbin{\triangleleft}}
+%\newcommand{\normsub}{\mathbin{\triangleleft}}
+\newcommand{\normsub}{\lhd}
 \newcommand{\uds}[1]{\mathcal{U}(#1)}
 \newcommand{\inv}[1]{#1^{-1}}
-\newcommand{\ima}{\text{Im}}
+\newcommand{\ima}{\text{Im }}
 \newcommand{\isom}{\simeq}
 \newcommand{\autom}[1]{\text{Aut}(#1)}
+\newcommand{\gen}[1]{\langle#1\rangle}
+\newcommand{\biy}[1]{\text{Biy}(#1)}
+
+%\DeclareMathSymbol{\varprod}{\mathop}{largesymbolsA}{16}
 
 \newcommand{\hr}{\rule{\textwidth}{.4pt}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\ZnZ}{\mathbb{Z}/n\mathbb{Z}}
 \newcommand{\ZmZ}{\mathbb{Z}/m\mathbb{Z}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\gr}{\text{gr }}
 
 
 \renewcommand\qedsymbol{$\clubsuit$}
@@ -105,44 +164,96 @@
 \author{Elias Hernandis}
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+	\centering
+	\vfill
+	\begin{center}
+		\begin{tikzpicture}
+		\def\N{39}
+		\def\r{7}
+		\def\angle{0};
+		
+		\foreach \n in {1,...,\N}{
+			\node (N-\n) at (90+\n*360/\N:\r) {};
+			%\draw[fill=black] (N-\n) circle (2pt);
+		}
+		
+		\foreach \a in {1,...,\N}{
+			\foreach \b in {\a,...,\N}{
+				\draw (N-\a.center) -- (N-\b.center);
+			}
+		}
+		\end{tikzpicture}
+	\end{center}
+	\vskip2cm
+	{\Large Apuntes de Estructuras Algebraicas}
+	\vskip.5cm
+	E. Hernandis et al. \\
+	Curso 2018-2019 @ UAM
+	\vfill
+\end{titlepage}	
+
+
 Revisión del \today $ $ a las \currenttime.
+
+\begin{center}
+	
+\end{center}
 
 \tableofcontents
 
-\part{Primer parcial - hoja 1}
+\part{Grupos}
 
 \input{input/1-grupos}
 
 \input{input/2-homomorfismos}
 
-\input{input/3-mas-teoremas}
+\input{input/3-clasificacion-peques}
 
-\input{input/4-aplicaciones}
+\input{input/4-cauchy}
 
-\part{Parcial 2 - hojas 2 y 3}
+\input{input/5-biyecciones}
 
-\input{input/5-cauchy}
+\input{input/6-sylow}
 
-\input{input/6-lonuevo}	
+\input{input/7-abelianos}
 
-\input{input/6-lonuevo-pt2}
+\part{Anillos}
 
-\input{input/7-sylow}
+\input{input/8-anillos}
+
+\input{input/9-homomorfismos-de-anillos}
+
+\input{input/10-anillos-de-polinomios}
 
 
-\part{Apendices}
+
+\input{input/por-clasificar}
+
+\part{Apéndices}
+
+%\renewcommand{\chaptername}{Apéndice}
+%\renewcommand{\thechapter}{\Alph{chapter}}
+%\setcounter{chapter}{0}
+
+\input{input/a-ejercicios}
 
 \chapter{Índices}
 
+%%TODO por qué no podemos utilizar only= para hacer whitelisting en lugar de blacklisting? que alguien lo arregle parfavar
 \renewcommand{\listtheoremname}{Lista de definiciones}
-\listoftheorems[ignore={thm,ej,pro,cor,obs,lem}]
+\listoftheorems[ignore={thm,ej,pro,cor,obs,lm,ex}]
 
 \renewcommand{\listtheoremname}{Lista de teoremas}
-\listoftheorems[onlynamed,ignore={dfn,ej,pro,cor,obs,lem}]
+\listoftheorems[onlynamed,ignore={dfn,ej,pro,cor,obs,lm,ex}]
 
 \renewcommand{\listtheoremname}{Lista de ejemplos}
-\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lem}]
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ex}]
+
+\renewcommand{\listtheoremname}{Lista de ejercicios}
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ej}]
+
+\printglossaries
 
 \bibliographystyle{alpha}
 \bibliography{apuntes-ea}

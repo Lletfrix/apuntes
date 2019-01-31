@@ -41,6 +41,14 @@
 \newcommand{\xbarra}{\overline{x}}
 \newcommand{\normal}{\mathcal{N}}
 \newcommand{\cov}{\text{cov}}
+\newcommand{\vero}{\text{VERO}}
+
+\makeatletter
+\newcommand{\thickhline}{%
+	\noalign {\ifnum 0=`}\fi \hrule height 1pt
+	\futurelet \reserved@a \@xhline
+}
+\makeatother
 
 \title{Resumen estadística}
 \author{Elias Hernandis}
@@ -120,7 +128,7 @@ $X,Y$ variables con muestras $x_1, \dots, x_n$, e $y_1, \dots, y_n$, respectivam
 	\end{align*}
 	\item \textbf{Poisson:} $X \sim Poisson(\lambda = np)$. Binomial con $n \to \infty, p \to 0$.
 	\begin{align*}
-	E(X) = \lambda \qquad V(X) = \lambda \qquad P(X = k) = \frac{e^{-k}\lambda^k}{k!}
+	E(X) = \lambda \qquad V(X) = \lambda \qquad P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}
 	\end{align*}
 	\item \textbf{Exponencial:} $X \sim Exp(\lambda),\ E(X) = \frac{1}{\lambda},\ V(X) = \frac{1}{\lambda^2}$
 	\begin{align*}
@@ -130,7 +138,7 @@ $X,Y$ variables con muestras $x_1, \dots, x_n$, e $y_1, \dots, y_n$, respectivam
 	\begin{align*}
 	\text{función gamma } \Gamma(s) = (s-1)\Gamma(s-1) = \int_{0}^{\infty} t^{s-1}e^{-t}dt\\
 	f_X(x) = \frac{1}{\Gamma(t)}\lambda^tx^{t-1}e^{-\lambda x},\qquad E(X^k) = \frac{(t+k-1)!}{\lambda^k(t-1)!} \\
-	\text{y es de utilidad }\int_{0}^{\infty}x^{t-1}e^{-bx}dx = \frac{\Gamma(t)}{b^t}
+	\text{y es de utilidad }\int_{0}^{\infty}x^{t}e^{-bx}dx = \frac{\Gamma(t + 1)}{b^{t+1}} = \frac{t!}{b^{t+1}}
 	\end{align*}
 	\textit{Propiedad:} $U \sim Gamma(a, b) \indep V \sim Gamma(a, c) \implies U + V \sim Gamma(a, b+c)$
 	\item \textbf{Normal}: $X \sim \normal(\mu, \sigma^2)$
@@ -273,8 +281,238 @@ Para $\alpha$ \textbf{mínimo esencial} ($F_X(x < \alpha) = 0 \land F_X(x > \alp
 P(\alpha \leq x \leq r) \xrightarrow{n \to \infty} 1,\ r > \alpha \\
 P(r \leq x \leq \beta) \xrightarrow{n \to \infty} 1,\ r < \beta
 \end{align*}
+
+
+\section{Estimación de parámetros}
+
+Sea $X$ v.a. con modelo descrito por $f(x; \theta),\ \theta \in \Theta$. Sea $x_1, \dots, x_n$ una muestra de $X$.
+
+\begin{itemize}
+	\item El \textbf{soporte} $\text{sop}_\theta = \{x \in \R \mid f(x; \theta) > 0\}$
+	\item Un \textbf{estimador} es un estadístico $T = h(x_1, \dots, x_n) = \widehat{\theta}$ que dados unos datos da una estimación de $\theta$ llamada $\widehat{\theta}$
+	
+	Sean $T, T'$ estimadores
+	\begin{itemize}
+		\item El \textbf{sesgo} de $T$ es $\text{sesgo}_\theta (T) = E_\theta(T) - \theta$
+		\item $T$ es \textbf{insesgado} $\iff E_\theta(T) = \theta,\ \forall \theta \in \Theta$
+		\item El \textbf{error cuadrático medio} de $T$ es $\text{ECM}_\theta(T) = E_\theta((T - \theta)^2)$
+		\begin{itemize}
+			\item $T$ insesgado $\implies \text{ECM}_\theta(T) = V_\theta(T)$
+		\end{itemize}
+	\end{itemize}
+	\item $T$ es más \textbf{eficiente} que $T' \iff \text{ECM}_\theta(T) < \text{ECM}_\theta(T')$ para todo $\theta \in \Theta$
+	\item $T$ es eficiente $\iff V_\theta(T) = \frac{1}{nI_X(\theta)}$
+\end{itemize}
+
+\subsection{Método de momentos}
+El \textbf{estimador por momentos de orden} $n \in \R$ se obtiene de
+\begin{align*}
+	\overline{x^n} = E_\theta(X^n)
+\end{align*}
+
+\begin{itemize}
+	\item En las distribuciones simétricas, se utilizan momentos de orden par
+	\item Si el momento no depende de $\theta$ entonces no hay estimador
+\end{itemize}
+
+\subsection{Método de máxima verosimilitud}
+Sea $X$ una v.a. con distribución $f(x; \theta)$ discreta y finita, $x_1, \dots, x_n$ muestra de $X$
+\begin{itemize}
+	\item La \textbf{función de verosimilitud} $\vero: \Theta \to \R$
+	\begin{align*}
+		\vero(\theta; x_1, \dots, x_n) = \prod_{j=1}^{n} f(x_j; \theta)
+	\end{align*}
+	\item La \textbf{estimación de máxima verosimilitud}, si existe, es $\widehat{\theta}$, el \textit{máximo global} (\textbf{único}) de $\vero$ en $\Theta$
+	\begin{itemize}
+		\item Para maximizar, es útil tomar $\log \vero$
+	\end{itemize}
+\end{itemize}
+
+
+
+\subsection{Límites de calidad de estimadores}
+
+\begin{lem}
+	[de Diotivede]
+	Sea $X$ una v.a. con soporte que no depende de $\theta$ y algunas hipótesis técnicas más. Entonces $E_\theta(Y) = 0, \forall \theta \in \Theta$.
+\end{lem}
+
+\begin{itemize}
+	\item La \textbf{variable de información}
+	\begin{align*}
+		Y = \frac{\partial}{\partial \theta} \log f(x; \theta) = \frac{\partial_\theta f(x; \theta)}{f(x; \theta)}
+	\end{align*}
+	\item La \textbf{cantidad de información} $I_X(\theta) = V_\theta(Y)$
+\end{itemize}
+
+\begin{lem}[Cramér-Rao]
+	Para todo estadístico insesgado $T$ de una v.a. $X$ se tiene
+	\begin{align*}
+		V_\theta(T) \geq \frac{1}{nI_X(\theta)}
+	\end{align*}
+\end{lem}
+
+\subsection{Comportamiento asintótico}
+
+\begin{thm}[Método delta]
+	Sea $Z_n$ una sucesión de v.a. tales que para ciertos $\alpha \in \R$ y  $\beta > 0$ se cumple
+	\begin{align*}
+		\sqrt{n}(Z_n - \alpha)\xrightarrow[n \to \infty]{d} \normal(0, \beta)
+	\end{align*}
+	y sea $g \in C^2(a,b)$ con $\alpha \in (a,b)$ y $g'(\alpha) \neq 0$. Entonces
+	\begin{align*}
+		\sqrt{n}(g(Z_n) - g(\alpha)) \xrightarrow[n \to \infty]{d} \normal(0, |g'(\alpha)|^2\beta)
+	\end{align*}
+\end{thm}
+
+Si $g'(\alpha) = 0$ entonces aplicamos
+\begin{align*}
+	n(g(Z_n) - g(\alpha)) \xrightarrow[n \to \infty]{d} \frac{g''(\alpha)}{2}\beta \chi_1^2
+\end{align*}
+exigiendo que $g \in C^3(a,b)$ y que $g''(\alpha) \neq 0$
+
+\section{Contraste de hipótesis}
+
+Para una distribución que depende de un parámetro $\theta \in \Theta$ definimos una hipótesis nula $H_0 \equiv \theta \in \Theta_0$
+
+\begin{itemize}
+	\item $p$\textbf{-valor} es el valor tal que para $\alpha > p$ rechazamos
+	\begin{itemize}
+		\item se calcula forzando igualdad con $\alpha = p$ y despejando el percentil $c_p$
+		\begin{align*}
+		F(c_p) = 1 - p \implies p = 1 - F(c_p)
+		\end{align*}
+		en una normal, la simetría nos da
+		\begin{align*}
+			\Phi(z_{p/2}) = 1 - \frac{p}{2} \implies p = 2(1 - \Phi(z_{p/2}))
+		\end{align*}
+	\end{itemize}
+	\item El \textbf{error de tipo 1} se da cuando se rechaza algo bueno
+	\item El \textbf{error de tipo 2} se da cuando se acepta algo malo
+	\item La \textbf{función de potencia} $\beta(\theta) = P(\text{rechazar})$
+	\item La \textbf{significación} es $\sup_{\theta \in \Theta_0} \beta(\theta)$
+\end{itemize}
+
+\subsection{Test por razón de verosimilitudes}
+
+Dada $H_0 \equiv \theta \in \Theta_0$ sobre un parámetro $\theta \in \Theta$...
+
+\begin{itemize}
+	\item El Test se diseña haciendo que $RV < c$ donde $c \in (0,1)$ es el calibre.
+	\item Pasos a seguir
+	\begin{enumerate}
+		\item Construir $\vero (\theta; x_1,\dots, x_n)$
+		\item Hallar $\sup_{\theta \in \Theta} \vero(\theta)$ y $\sup_{\theta \in \Theta_0} \vero(\theta) $
+		\item Construir $RV = \frac{\sup_{\theta \in \Theta_0} \vero(\theta)}{\sup_{\theta \in \Theta} \vero(\theta)}$
+		\item Definimos el test: Rechazo $H_0 \iff RV < c \in (0,1)$
+		\item Calculamos $\beta(\theta) = P_\theta(\text{rechazar}) = P_\theta(RV < c)$
+		\item Obtenemos la significación de $\sup_{\theta \in \Theta_0} \beta (\theta)$
+	\end{enumerate}
+\end{itemize}
+
+\section{Caramelos}
+
+
+\begin{align*}
+\text{Chebyshev }P(|X - E(X)| > \varepsilon) \leq \frac{V(X)}{\varepsilon^2} \\
+\text{TCL }\sqrt{n}(\Xbarra_n - E(X)) \xrightarrow{n \to \infty} \normal(0, V(X))
+\end{align*}
+
+\subsection{para ladrillitos}
+\begin{itemize}
+	\item Cuasivarianza muestral es $s^2$, cuasidesviación típica muestral es $s$. Son experimentales si son minúsculas, son de modelo teórico de muestreo aleatorio si son mayúsculas.
+\end{itemize}
+\begin{align*}
+	s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_j - \xbarra)^2\\
+	\Phi(z_{\alpha/2}) = 1 - \frac{\alpha}{2}
+\end{align*}
+
+\subsection{Más distribuciones}
+
+\begin{itemize}
+	\item \textbf{Uniforme:} $X \sim \text{Unif}([0,a])$
+	\begin{align*}
+		f_X(x) = \frac{1}{a}\mathbf{1}_{[0,a]},\qquad E(X) = \frac{a}{2},\qquad V(X) = \frac{a^2}{12}
+	\end{align*}
+	\item \textbf{Geométrica:} $X \sim \text{Geo}(p)$
+	\begin{align*}
+		f_X(k) = p(1-p)^{k-1},\qquad E(X) = \frac{1}{p},\qquad V(X) = \frac{1-p}{p^2}
+	\end{align*}
+\end{itemize}
+
+\subsection{Las funciones de distribución}
+\begin{itemize}
+	\item Para las \textbf{distribuciones discretas}
+	\begin{align*}
+		F_X(k) = P(X \leq k) = \sum_{j \leq k} f_X(j)
+	\end{align*}
+	\item \textbf{Poisson} $X \sim \text{Poiss}(\lambda = np)$
+	\begin{align*}
+		F_X(k) = e^{-\lambda}\sum_{j=0}^k \frac{\lambda^j}{j!}
+	\end{align*}
+	\item \textbf{Uniforme} $X \sim \text{Unif}([0,a]),\ a > 0$
+	\begin{align*}
+		F_X(x < 0) = 0\qquad F_X(0 \leq x \leq a) = \frac{x}{a} \qquad F_X(a < x) = 1
+	\end{align*}
+	\item \textbf{Exponencial} $X \sim \text{Exp}(\lambda),\ \lambda > 0$
+	\begin{align*}
+		F_X(x < 0) = 0 \qquad F_X(0 \leq x) = 1 - e^{-\lambda x}
+	\end{align*}
+	\item \textbf{Normal} $X \sim \normal(\mu, \sigma^2)$
+	\begin{align*}
+		F_X(x) = F_Y(\frac{x - \mu}{\sigma}) \\
+		F_Y(y < 0) = 1 - \Phi(-y) \qquad F_Y(0 < y) = \Phi(y)
+	\end{align*}
+\end{itemize}
+
+
+
+%\begin{table}[h]
+%	\centering
+%	{\renewcommand{\arraystretch}{1.4}
+%		\begin{tabular}{|l|c|c|}
+%			\hline
+%			\textbf{X es} & \textbf{orden 1} & \textbf{orden 2} \\\thickhline
+%			$\text{Ber}(p)$ & $M_p = \xbarra$ & - \\\hline
+%			$\text{Unif}([0,a])$ & $M_a = 2\xbarra$ & -\\\hline
+%			$\text{Exp}(\lambda)$ & $M_\lambda = \frac{1}{\xbarra}$ & - \\\hline
+%			$\text{Tri}([-\theta, \theta])$ & - & $M_\theta = \sqrt{6\overline{x^2}}$\\\hline
+%			$\normal(\mu, \sigma^2)$ & - & $M_\mu = \xbarra,\ M_{\sigma^2} = V_x$ \\\hline
+%	\end{tabular}}
+%\end{table}
+%
+%\begin{table}[h]
+%	\centering
+%	{\renewcommand{\arraystretch}{1.4}
+%		\begin{tabular}{|l|c|c|}
+%			\hline
+%			\textbf{X es} & $\vero(\theta; x_1, \dots, x_n)$ & $\max \vero$ en \\\thickhline
+%			$\text{Ber}(p)$ & $p^{n\xbarra}(1-p)^{n(1-\xbarra)}$ & $\widehat{p} = \xbarra$ \\\hline
+%			$\text{Unif}([0,a])$ & $\begin{cases}
+%			\left(\frac{1}{a}\right)^n &\text{ si } a \geq \max x_j \\
+%			0 & \text{ si } a < \max x_j
+%			\end{cases}$ & $\widehat{a} = \max x_j$ \\\hline
+%			$\text{Exp}(\lambda)$ & $\lambda^ne^{-n\xbarra\lambda}$ & $\widehat{\lambda} = \frac{1}{\xbarra}$ \\\hline
+%	\end{tabular}}
+%\end{table}
+%
+%\begin{table}[h]
+%	\centering
+%	{\renewcommand{\arraystretch}{1.4}
+%		\begin{tabular}{|l|c|c|}
+%			\hline
+%			\textbf{X es} & $Y$ & $I_X(\theta)$ \\\thickhline
+%			$\text{Ber}(p)$ & $\frac{x-p}{p(1-p)}$ & $\frac{1}{p(1-p)}$ \\\hline
+%			$\normal(\mu, \sigma^2)$ & $\frac{(x-\mu_0)^2 - \sigma^2}{\sigma^4}$ para $\mu_0$ fijo & $\frac{1}{2\sigma^4}$ \\\hline
+%			$\text{Exp}(\lambda)$ & $\lambda^2x - \lambda$ & $\lambda^2$ \\\hline
+%	\end{tabular}}
+%\end{table}
+
+
 \begin{flushright}
 	E. Hernandis et al., \today $ $ a las \currenttime
 \end{flushright}
+
+
 
 \end{document}

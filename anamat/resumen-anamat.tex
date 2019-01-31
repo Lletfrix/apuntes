@@ -1,0 +1,500 @@
+\documentclass[a4paper,twocolumn]{extarticle}
+
+\usepackage[utf8]{inputenc}  % para que funcionen las tildes
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{extsizes}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{datetime} % para la hora de compilación
+\usepackage[spanish,es-noquoting]{babel} % es-noquoting es para que funcione tikz
+
+%\usepackage[a6paper,margin=5mm]{geometry}
+\usepackage[a4paper, top=1cm,bottom=1cm,left=0.5cm,right=1cm]{geometry}
+
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+ \setlength{\parskip}{0cm}
+%\setlength{\columnseprule}{0.4pt}
+
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\V}{\mathbb{V}}
+
+\newcommand{\norma}[1]{\left\lVert#1\right\rVert}
+\newcommand{\dotprod}[1]{\langle #1 \rangle}
+\newcommand{\Int}{\text{ int }}
+\newcommand{\Ext}{\text{ ext }}
+\newcommand{\lacot}[1]{\mathcal{L}(#1)}
+\newcommand{\hess}{\text{Hess }}
+\newcommand{\tr}{\text{traza }}
+
+\newtheorem*{thm}{Teorema}
+
+\title{Resumen estadística}
+\author{Elias Hernandis}
+
+\begin{document}
+\section{Preliminares}
+\subsection{Normas}
+Sea $V$ un espacio vectorial, $x, y, z \in V, \lambda \in \R$
+
+\begin{itemize}
+	\item Un \textbf{producto escalar} es una función $\dotprod{\cdot, \cdot}: V \times V \to \R$ que cumple:
+	\begin{align*}
+		\dotprod{\lambda x, y} = \lambda\dotprod{x,y} 
+		&\qquad \dotprod{x + y, z} = \dotprod{x, z} + \dotprod{y, z}
+		 \\
+		\dotprod{x, y} = \dotprod{y, x}
+		&\qquad \dotprod{x, x} \geq 0,\ \dotprod{x, x} = 0 \iff x = \vec{0}_V
+	\end{align*}
+	\item Una \textbf{norma} es una función $\norma{\cdot} : V \to R$ que cumple:
+	\begin{align*}
+		\norma{x} \geq 0, \ \norma{x} = 0 \iff x = \vec{0}_V \\
+		\norma{\lambda v} = |\lambda| \norma{v} \qquad 
+		\norma{x + y} \leq \norma{x} + \norma{y}
+	\end{align*}
+	\begin{itemize}
+		\item $\norma{\cdot}$ cumple la \textbf{identidad del paralelogramo}
+		\begin{align*}
+			\norma{\frac{x+y}{2}}^2 + \norma{\frac{x- y}{2}}^2 = \frac{\norma{x}^2 + \norma{y}}{2}
+		\end{align*}
+		si y solo si procede producto escalar dado por la \textbf{identidad de polarización}
+		\begin{align*}
+			4\dotprod{x,y} = \norma{x+y}^2 - \norma{x - y}^2
+		\end{align*}
+		Se dice que esta es una \textbf{norma euclídea}.
+	\end{itemize}
+	\item Un espacio normado es un par $(V, \norma{\cdot}_V)$
+	\item Una \textbf{p-norma} es una norma $\norma{\cdot}_p : \R^n \to R$ definida con
+	\begin{align*}
+		\norma{(x_1, \dots, x_n)}_p = \left[\sum_{j=1}^{n} x_j^p\right]^{\frac{1}{p}}
+	\end{align*}
+	\begin{itemize}
+		\item El \textbf{exponente conjugado} de $p$ es $p'$ y cumple $\frac{1}{p} + \frac{1}{p'} = 1$. Es único y si $p = 1$ entonces $p' = \infty$ y viceversa
+		\item La norma euclidea que procede del producto escalar estándar es la p-norma de orden 2. 2 es el único número que tiene como conjudago a sí mismo
+		\item Las p-normas cumplen las desigualdades de \textbf{Young, Hölder y Minkowski}:
+		\begin{align*}
+			a,b > 0 &\implies ab \leq \frac{a^p}{p} + \frac{b^{p'}}{p'} \\
+			x,y \in \R^n &\implies \dotprod{x,y} \leq \norma{x}_p \norma{y}_{p'} \\
+			x,y \in \R^n &\implies \norma{x+y}_p \leq \norma{x}_p + \norma{y}_p
+		\end{align*}
+	\end{itemize}
+	\item Dos \textbf{normas} son \textbf{equivalentes} si definen los mismos abiertos
+	\begin{itemize}
+		\item en $V = \R^n$ todas las normas son equivalentes
+	\end{itemize}
+	\item Una norma $\norma{\cdot}$ es \textbf{submultiplicativa} $\iff \forall x, y,\ \norma{xy} \leq \norma{x}\norma{y}$
+	\begin{itemize}
+		\item $\norma{\cdot}$ submultiplicativa $\implies \norma{x^n} \leq \norma{x}^n$
+	\end{itemize}
+	\item La \textbf{norma de Frobenius} para matrices es $\norma{\cdot}_F = \sqrt{\tr A^\ast A}$ donde $A^\ast$ es la traspuesta conjugada de $A$
+	\begin{itemize}
+		\item La norma de Frobenius es submultiplicativa
+	\end{itemize}
+\end{itemize}
+
+\subsection{Espacios métricos}
+
+Sea $X \neq \emptyset$ conjunto y sean $x, y, z \in X$
+\begin{itemize}
+	\item Un espacio métrico es un par $(X, d)$ donde la función $d:X \times X \to \R$ es una distancia que cumple:
+	\begin{align*}
+		d(x,y) \geq 0,\ d(x,y) = 0 \iff x = y \\
+		d(x,y) = d(y,x) \qquad d(x,z) \leq d(x,y) + d(y,z)
+	\end{align*}
+	\item Si $E \subset X,\ E \neq \emptyset$ entonces la restricción $d_E: E \times E \to \R$ define una distancia
+	\item Si $E \subset \R^n = X$ no vacío, no necesariamente subespacio, entonces $\norma{x - y}_E$ define una distancia en $E$
+\end{itemize}
+
+
+\subsection{Sucesiones}
+\begin{itemize}
+	\item Una \textbf{sucesión} $\{x_n\} \subset X$ es \textbf{de Cauchy} $\iff \forall \varepsilon > 0, \exists N_\varepsilon$ tal que $n, m \geq N_\varepsilon \implies d(x_n, x_m) < \varepsilon$
+	\begin{itemize}
+		\item $(X, d)$ \textbf{completo} $\iff \{x_n\}$ de Cauchy $\implies \{x_n\}$ convergente
+	\end{itemize}
+	\item Una \textbf{sucessión} $\{x_n\} \subset X$ es \textbf{convergente} a $L \in X \iff \forall \varepsilon > 0, \exists N_\varepsilon$ tal que $n \geq N_\varepsilon \implies d(x_n, L) < \varepsilon$
+	\begin{itemize}
+		\item $\{x_n\}$ convergente $\implies \{x_n\}$ de Cauchy
+		\item Si el límite $\lim_{n \to \infty} x_n = L$ existe entonces es único
+	\end{itemize}
+\end{itemize}
+
+\subsection{Aplicaciones lineales. Normas equivalentes.}
+\begin{itemize}
+	\item Una \textbf{aplicación lineal} es \textbf{acotada} $L \in \lacot{E, F}$ si cumple alguna de
+	\begin{itemize}
+		\item $L$ es continua en $\vec{0}_E$
+		\item $L$ es continua $\forall x \in E$
+		\item $\forall x \in E,\ \exists M \mid \norma{x}_E \leq 1 \implies \norma{L(v)}_F \leq M$
+	\end{itemize}
+	\item $\norma{\cdot}_A$ domina a $\norma{\cdot}_B \iff \exists 0 < c < \infty$ tal que $\forall x \in E,\ \norma{x}_B \leq c\norma{x}_A$
+	\item $\norma{\cdot}_A, \norma{\cdot}_B$ son equivalentes $\iff \exists 0 < c, C < \infty$ tales que $\forall x \in E,\ c\norma{x}_A \leq \norma{x}_B \leq C\norma{x}_A$. Entonces,
+	\begin{itemize}
+		\item Definen los mismos abiertos y cerrados.
+		\item En $\R^n$ todas las normas son equivalentes.
+	\end{itemize}
+	
+\end{itemize}
+
+\subsection{Topología}
+Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in \R$
+\begin{itemize}
+	\item La \textbf{bola abierta} de radio $r$ y centro $a$ es el conjunto $B_r(a) = B(a; r) = \{x \in X \mid d(x, a) < r\}$
+	\item La \textbf{bola cerrada} de radio $r$ y centro $a$ es el conjunto $\overline{B}_r(a) = \overline{B}(a;r) = \{x \in X \mid d(x, a) \leq r\}$
+	\item $E$ es \textbf{abierto} $\iff \forall e \in E, \exists r > 0 \mid B_r(e) \subset E$
+	\begin{itemize}
+		\item La unión arbitrara de abiertos es un abierto
+		\item La intersección finita de abiertos es un abierto
+		\item Dado $x \in X$, un \textbf{entorno abierto} de $x$ es cualquier abierto $U \mid x \in U$.
+		\item $U$ es abierto $\iff U = \bigcup B_r(x)$
+	\end{itemize}
+	\item $E$ es \textbf{cerrado} si $E^\complement = X \setminus E$ es un abierto
+	\begin{itemize}
+		\item La intersección arbitraria de cerrados es un cerrado
+		\item La unión finita de cerrados es un cerrado
+	\end{itemize}
+	\item $E$ \textbf{abierto relativo} de $Y$ $\iff \exists E' \mid E = Y \cap E'$ y $E'$ es abierto en $X$ (análogo para cerrados)
+	\begin{itemize}
+		\item $E$ abierto relativo en $Y \implies E$ abierto en $(Y, d_Y)$ 
+	\end{itemize}
+	\item El \textbf{interior} $\Int E = \{x \in X \mid \exists r > 0, B_r(x) \subset E\}$
+	\item El \textbf{exterior} $\Ext E = \{x \in X \mid \exists r > 0, B_r(x) \cap E = \emptyset\}$
+	\item El \textbf{cierre, clausura o adherencia} $\overline{E} = \{x \in X \mid \forall r > 0, B_r(x) \cap E \neq \emptyset\}  = \{L \in X \mid \{a_n\} \subset E \text{ converge a } L\}$
+	\begin{itemize}
+		\item $E$ cerrado $\iff E = \overline{E}$
+		\item $E$ \textbf{denso} $\iff \overline{E} = X$. Tanto $\mathbb{Q}$ como $\R \setminus \mathbb{Q}$ son densos en $\R$
+	\end{itemize}
+	\item La \textbf{frontera} $\partial E = \{x \in X \mid \forall r > 0, B_r(x) \cap E \neq \emptyset \land B_r(x) \cap E^\complement \neq \emptyset\} = \{x \in X \mid x \not\in \Int E \land x \not\in \Ext E\}$
+	\item Los \textbf{puntos de acumulación} $E' = \{x \in X \mid \forall r > 0, B_r(x) \cap E \setminus\{x\} \neq \emptyset \}$
+	\begin{itemize}
+		\item $\overline{E} = E \cup E'$
+	\end{itemize}
+	\item Un \textbf{punto} $x \in E$ es \textbf{aislado} $\iff \exists r > 0 \mid B_r(x) \cap E = \{x\}$
+	\begin{itemize}
+		\item  si $\forall x,\ x \in E \implies x$ aislado entonces $E$ es \textbf{discreto} y $\{x\}$ abierto relativo de $E$
+	\end{itemize}
+	\item $(X,d)$ de \textbf{Banach} $\iff$ X es e.v., $d$ es una norma y $X$ completo
+	\item $E$ es \textbf{compacto} en $(X,d) \iff$
+	\begin{itemize}
+		\item $\{x_n\} \subset E \implies \exists \{x_{n_k}\} \subset \{x_n\}$ subsucesión convergente con límite en $K$
+		\item Todo recubrimiento $\{U_i\}$ por abiertos de $K$ tiene una subfamilia finita que también recubre a $K$
+	\end{itemize}
+	\item Propiedades de compactos
+	\begin{itemize}
+		\item $E$ compacto $\implies K$ es cerrado y acotado
+		\item en $(X,d)$, $X$ compacto $\implies (X,d)$ completo
+		\item $E \subset X$ compacto, $f$ continua en $E \implies f$ alcanza máximo y mínimo en $E$
+	\end{itemize}
+	\item Un \textbf{camino} es una aplicación continua $\alpha:I \subset \R \to X$ con $I$ un intervalo
+	\item Un \textbf{homeomorfismo} es una aplicación continua y biyectiva con inversa continua
+	\item $E$ es \textbf{conexo} (por abiertos) $\iff \nexists A, B \subset X \mid A \cap B = \emptyset \land (E \cap A) \cup (B \cap E) = E$
+	\item $E$ es \textbf{conexo} (por abiertos relativos) $\iff \forall A,B$ abiertos en $E$ con $A \cap B = \emptyset \land A \cup B = E \implies (A = \emptyset \land B = E) \lor B = \emptyset \land A = E)$
+	\begin{itemize}
+		\item Equivalentemente, $E$ conexo $\iff \nexists A,B$ abiertos en $E$ con $A\cap B = \emptyset \land E = A \cup B$
+		\item $E$ conexo y $p \in \overline{E} \implies E \cup p$ conexo
+		\item $E_1, E_2$ conexos y $E_1 \cap E_2 \neq \emptyset \implies E_1 \cap E_2$ conexo
+	\end{itemize}
+	\item $E$ es \textbf{conexo por caminos} $\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E$ un camino tal que $\alpha(0) = p \land \alpha(1) = q$
+	\begin{itemize}
+		\item $E$ es \textbf{arco-conexo} si además $f:[0,1] \to f([0,1])$ es un homeomorfismo
+		\begin{multline*}
+			E \text{ arco-conexo } \\\implies E \text{ conexo por caminos }\\ \implies E \text{ conexo }
+		\end{multline*}
+	\end{itemize}
+	\item Dado $x \in E$, la \textbf{componente conexa} que contiene a $x$ es el conjunto $\{y \in E \mid \exists A \text{ conexo, con } x \in A \land y \in A\}$
+	\begin{itemize}
+		\item La relación de equivalencia $x\sim y \iff \exists C$ conexo con $x,y \in C$ define una partición cuyas clases de equivalencia son las componentes conexas de cada punto.
+		\item Si $A \subset X$ conexo, $A$ está contenido en una única componente conexa.
+	\end{itemize}
+	\item $E$ es \textbf{convexo} $\iff \forall x, y \in E \implies [x,y] = \{tx + (1-t)y \mid t \in [0,1]\} \subset E$
+	\begin{itemize}
+		\item Más en general $x \in \R^n$ es \textbf{combinación convexa} de $v_1, \dots, v_n \iff \exists t_1, \dots, t_n \geq 0 \mid x = \sum_{i=0}^n t_iv_i$ con $\sum_{i=0}^n t_i = 1$
+	\end{itemize}
+\end{itemize}
+
+\subsection{Continuidad}
+
+Sean $(X, d_X), (Y, d_Y)$ espacios métricos, $f:X \to Y$ una función
+
+\begin{itemize}
+	\item $f$ es \textbf{continua} en $a \in X \iff \forall \varepsilon > 0, \exists \delta > 0$ tal que $f(B_\delta(a)) \subset B_\varepsilon(f(a))$. Equivalentemente, $f$ continua en $a \iff \forall \varepsilon > 0,\ \exists \delta > 0$ tal que $d_X(x, a) < \delta \implies d_Y(f(x), f(a)) < \varepsilon$.
+	\item $f$ \textbf{continua} en $X \iff$
+	\begin{itemize}
+		\item $f$ continua en $x,\ \forall x \in X$
+		\item $\forall V \subseteq Y,\ V$ abierto de $Y \implies f^{-1}(V)$ abierto de $X$
+		\item $\forall V \subseteq Y,\ V$ cerrado de $Y \implies f^{-1}(V)$ cerrado de $X$
+		\item $\forall \{x_n\} \subset X, \{x_n\} \to x_0 \implies \{f(x_n)\} \to f(x_0)$
+	\end{itemize}
+	
+	\item $f$ \textbf{uniformemente continua} $\iff \forall \varepsilon > 0, \exists \delta > 0$ tal que $d_X(x, x') \leq \delta \implies d_Y(f(x), f(x')) \leq \varepsilon$
+	\begin{itemize}
+		\item Si $(X,d)$ es compacto entonces $f$ continua en $X \implies f$ uniformemente continua
+		\item Si $f$ es uniformemente continua entonces se pueden intercambiar límite y derivada
+	\end{itemize}
+	\item Si $f$ es composición de funciones continuas entonces es continuas. Las fórmulas elementales son continuas.
+\end{itemize}
+
+\section{Diferenciabilidad}
+Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$. $f:U \to F$ es \textbf{diferenciable} en $x_0 \iff \exists T \in \lacot{E, F}$ tal que
+\begin{align*}
+	\lim_{h \to \vec{0}_E} \frac{f(x_0 + h) - f(x_0) - Th}{\norma{h}} = \vec{0}_F
+\end{align*}
+
+\begin{itemize}
+	\item Alternativamente, $f$ es diferenciable en $x_0 \iff$ podemos escribir
+	\begin{align*}
+		f(x_0 + h) = f(x_0) + Th + o(\norma{h})
+	\end{align*}
+	\item $T$ existe $\implies T$ única y la llamamos \textbf{diferencial} de $f$ en $x_0$ y se denota $(df)_{x_0}$
+	\item $f$ diferenciable en $x_0 \implies f$ continua en $x_0$
+	\item toda $T \in \lacot{E,F}$ es diferenciable en todo punto y coincide con sus diferenciales
+	\item $f$ constante $\implies f$ es diferenciable en todo punto y su diferencial $(df)_{x_0}$ es nula
+	\item La \textbf{linealidad:} $(f + g)_{x_0} = (df)_{x_0} + (dg)_{x_0}$
+	\item La \textbf{regla del producto:} $(d(f\cdot g))_{x_0} = (df)_{x_0}g(x_0) + f(x_0)(dg)_{x_0}$
+	\item La \textbf{regla de la cadena:} $(d(g \circ f))_{x_0} = (dg)_{f(x_0)} (df)_{x_0}$
+	\item La \textbf{derivada respecto de un vector} $v \in E$ en el punto $x_0 \in E$ es $D_vf(x_0) = \left.\frac{d}{dt}\right|_{t=0}f(x_0 + tv) = \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{t}$
+	\begin{itemize}
+		\item Si $\norma{v} = 1$ entonces la derivada se llama direccional
+		\item Si $v = e_j \in \{e_1, \dots, e_n\}$ la base estándar de $\R^n$, entonces $D_{e_j}f(x_0) = \left.\frac{\partial}{\partial x_j}\right|_{x_0}f = D_jf(x_0)$ es la j-ésima \textbf{derivada parcial}
+	\end{itemize}
+	\item La composición de funciones diferenciables es diferenciable. Ojo con aplicar las reglas de derivación a cosas que no son números reales (p.e. en matrices no funcionan).
+	\item \textbf{Condiciones de diferenciabilidad} de $f:\R^n \to \R^m$ en $x_0$:
+	\begin{enumerate}
+		\item Las derivadas parciales $\partial_{x_j}f(x_0)$ existen
+		\item El único candidato posible a diferencial $(df)_{x_0}$ es la aplicación lineal dada por la \textbf{matriz jacobiana} de $m \times n$
+		\begin{align*}
+			Df_{x_0} &:= \left(\begin{array}{c|c|c}
+				\partial_{x_1}f(x_0) & \dots & \partial_{x_n}f(x_0)
+			\end{array}\right)\\
+			Df_{x_0} &:= \left(\begin{array}{c}
+			Df_1(x_0) \\\hline
+			\vdots \\\hline
+			Df_m(x_0) 
+			\end{array}\right) \\
+			Df_{x_0} &:= \left(\begin{array}{ccc}
+			\partial_{x_1}f_1(x_0) & \dots & \partial_{x_n}f_1(x_0) \\
+			\vdots & \ddots & \vdots \\
+			\partial_{x_1}f_m(x_0) & \dots & \partial_{x_n}f_m(x_0) \\
+			\end{array}\right)
+		\end{align*}
+		\item $Df_{x_0}$ cumple la definición de diferenciabilidad
+	\end{enumerate}
+	\item El \textbf{gradiente} $\nabla f$ es el jacobiano de una función escalar ($f: \R^n \to \R$). Es un vector fila.
+	\item El \textbf{Jacobiano} es $\det(Df)$
+	\item Una función vectorial es diferenciable $\iff$ son diferenciables todas sus funciones componentes
+\end{itemize}
+\subsection{Extremos relativos}
+En funciones escalares $f:E \to \R$
+\begin{itemize}
+	\item $f$ tiene un \textbf{máximo relativo} en $x_0 \iff \exists U$ entorno de $x_0$ tal que $\forall x \in U \implies f(x) \leq f(x_0)$
+	\item $f$ tiene un \textbf{máximo relativo estricto} en $x_0 \iff \exists U$ entorno de $x_0$ tal que $\forall x \in U \implies f(x) < f(x_0)$
+	\item Análogamente se definen los mínimos
+	\item  el \textbf{Hessiano} es la matriz simétrica de las derivadas segundas
+	\begin{align*}
+		\hess f = \left(\begin{array}{ccc}
+		\frac{\partial^2f}{\partial x_1\partial x_1} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+		\vdots & \ddots & \vdots \\
+		\frac{\partial^2f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2}{\partial x_n \partial x_n}
+		\end{array}\right)
+	\end{align*}
+	\item $f \in C^2 \implies \frac{\partial f^2}{\partial x_j\partial x_i} = \frac{\partial f^2}{\partial x_i \partial x_j}$
+	\item Si $Df(x_0) = 0,\ f$ tiene un punto crítico en $x_0$. Además,
+	\begin{itemize}
+		\item $\hess f(x_0)$ definida positiva $\implies f$ tiene un \textbf{mínimo relativo estricto} en $x_0$
+		\item $\hess f(x_0)$ definida negativa $\implies f$ tiene un \textbf{máximo relativo estricto} en $x_0$
+		\item $f$ tiene un \textbf{mínimo relativo} en $x_0 \implies \hess f(x_0)$ es semidefinida positiva
+		\item $f$ tiene un \textbf{máximo relativo} en $x_0 \implies \hess f(x_0)$ es semidefinida negativa
+	\end{itemize}
+	\item El \textbf{Laplaciano} $\Delta f = \tr (\hess f)$
+	\begin{itemize}
+		\item $f$ es armónica en $E \iff \forall x \in E,\ \Delta f(x) = 0$
+	\end{itemize}
+	\item El \textbf{criterio de Sylvester} para una matriz cuadrada $A$ dice
+	\begin{itemize}
+		\item menores principales $> 0 \iff A$ es \textbf{definida positiva}
+		\item menores principales $\geq 0 \iff A$ es \textbf{semidefinida positiva}
+		\item menores impares $\leq 0$ y menores pares $\geq 0 \iff A$ es \textbf{semidefinida negativa}
+		\item menores impares $< 0$ y menores pares $> 0 \iff A$ \textbf{definida negativa}
+		\item en otro caso $A$ es indefinida (no implica que no haya extremo relativo)
+	\end{itemize}
+\end{itemize}
+
+\subsection{Polinomio de Taylor}
+
+Sea $f:\R^n \to \R$ una funnción de clase $C^2$. El polinomio de Taylor de grado 2 en $x_0$ es
+\begin{multline*}
+	p_{x_0}(x) = f(x_0) + \sum_{i=0}^n \frac{\partial f}{\partial x_i}(x - x_0)\\
+	+ \frac{1}{2!}\sum_{i=0}^n\sum_{j=0}^n \frac{\partial^2 f}{\partial x_i\partial x_j}(x_i - x_{0_i})(x_j - x_{0_j}) + o(\norma{x}^2)
+\end{multline*}
+
+\subsection{Tipos de aplicaciones}
+
+Sean $E,F$ e.v, sea $f: E \to F$
+\begin{itemize}
+	\item Si $F = \R$ decimos que $f$ es \textbf{convexa} $\iff \forall x,y \in E, t \in [0,1], f(tx + (1-t)y) \leq tf(x) + (1-t)f(y)$
+	\begin{itemize}
+		\item En general, si $x$ es combinación convexa de $v_1, \dots, v_n$ y $f$ es convexa entonces $f(\sum_{i=0}^n t_i v_i) \leq \sum_{i=0}^nt_if(v_i)$
+		\item $\forall x \in A, \hess f (x)$ es semidefinida positiva $\iff f$ es convexa en $A$
+	\end{itemize}
+	\item Sean $x_1, \dots, x_n$. Un punto $x$ es \textbf{combinación convexa} de $x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n$ con $\sum t_i = 1 \land t_i \geq 0$
+	\item $f$ es $\mathbf{\alpha}$\textbf{-Hölder continua} $\iff \exists c > 0 \mid \norma{f(x) - f(x')} \leq c \norma{x - x'}^\alpha$
+	\begin{itemize}
+		\item Si $\alpha > 1$ entonces $f$ es constante
+		\item Si $\alpha = 1$ entonces $f$ es de Lipschitz
+	\end{itemize}
+\end{itemize}
+
+Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
+\begin{itemize}
+	\item $f$ es \textbf{de Lipschitz} $\iff \exists K > 0$ tal que
+	\begin{align*}
+		d_Y(f(x), f(x')) \leq K d_X(x,x'),\qquad \forall x,x' \in X
+	\end{align*}
+	\begin{itemize}
+		\item Toda aplicación de Lipschitz es uniformemente continua
+		\item Si $f$ es de Lipschitz entonces $f$ es $\alpha$-Hölder continua.
+	\end{itemize}
+
+	\begin{multline*}
+	\boxed{
+		\begin{array}{c}
+		f \in C^1 \implies f \text{ de Lipschitz }\implies\\
+		\implies f \text{ uniformemente continua }\implies f\text{ continua}
+		\end{array}
+	}
+	\end{multline*}
+
+	\item $f$ es \textbf{contractiva} $\iff f$ es de Lipschitz con $K < 1 \land$ dominio y codomino coinciden, distancias incluidas ($f:(X, d_X) \to (X, d_X)$)
+	\begin{itemize}
+		\item Si $f$ es contractiva y $X$ es completo entonces $f$ tiene un único punto fijo para el que $f(x) = x$
+	\end{itemize}
+	
+	\item $f$ es \textbf{inyectiva} $\iff \forall x,x' \in X, f(x) \neq f(x') \implies x \neq x'$
+	
+	\item $f$ es \textbf{coerciva} $\iff \exists \lambda > 0$ tal que
+	\begin{align*}
+		d_Y(f(x), f(x')) \geq \lambda d_X(x,x'),\qquad \forall x,x' \in X
+	\end{align*}
+	\begin{itemize}
+		\item $f$ coerciva $\implies f$ inyectiva
+		\item Una matriz real $A \in \R^{n\times n}$ es coerciva si existe $\lambda > 0$ tal que
+		\begin{align*}
+			\forall v \in \R^n,\ v^tAv \geq \lambda \norma{v}_2^2
+		\end{align*}
+		A estos $\lambda$ se les llama constantes de coercividad.
+		\begin{itemize}
+			\item $A$ coerciva $\implies A$ invertible
+		\end{itemize}
+	\end{itemize}
+	\item $f$ es \textbf{abierta} si $\forall U \subset X$ abierto, la imagen $f(U)$ es un abierto de $Y$
+	\item $f$ es un \textbf{difeomorfismo} $\iff f: U_1 \to U_2,\ U_1,U_2$ abiertos de $\R^n$ es biyectiva, $f \in C^s$ y $f^{-1} \in C^s$
+	\begin{itemize}
+		\item $f:U_1 \to R^n$ inyectiva, $f \in C^s$ y todas las jacobianas de los puntos en $U_1$ son invertibles $\implies f$ es un difeormorfismo
+	\end{itemize}
+
+	\item Decimos que $f:\R^n \to \R^m$ es \textbf{regular} si todo punto $x_0 \in \R^n$ es un valor regular.
+	\begin{itemize}
+		\item Un \textbf{valor regular} es un punto $x_0$ tal que para un $U_0$ entorno abierto de $x_0$, la función $f:U_0 \subset \R^n \to \R^m$ es de clase $C^1(U_0)$ y la diferencial $(df)_{x_0}$ tiene rango máximo, que es $\min(n, m)$
+		\item Si $n < m$ entonces $f$ es una \textbf{inmersión}
+		\item Si $n = m$ entonces $f$ es un \textbf{difeomorfismo local}
+		\item Si $n > m$ entonces $f$ es una \textbf{sumbersión}
+		\item Para ladrillitos: si $Df$ es $1\times m$ o $n \times 1$ entonces $\text{rango } Df$ es máximo $\iff \text{rango } Df = 1 \iff Df \neq \mathbf{0}$.
+	\end{itemize}
+	\item Una \textbf{inversa local} de $f:U_0 \subset \R^n \to \R^m$ es una función $(f|_U)^{-1} : f(U) \to U$ donde $U \subseteq U_0$ es cualquier abierto tal que $f(U)$ es abierto y $f|_U$ es inyectiva.
+
+\end{itemize}
+
+
+\section{Variedades}
+\begin{itemize}
+	\item Una \textbf{variedad} en $\R^n$ de dimensión geométrica $k \geq 0$ es un conjunto $X \subseteq \R^n$ tal que $\forall x_0 \in X,\ \exists E, E' \subseteq \R^n$ abiertos con $x_0 \in E$ y un $\exists f:E \to E'$ difeomorfismo tal que
+	\begin{multline*}
+		f(X \cap E) = E' \cap (\R^k \times \{\mathbf{0}^{n-k}\}) =\\= \{y \in E' \mid y_{k+1} = y_{k+2} = \dots = y_{n} = 0\}
+	\end{multline*}
+	\begin{itemize}
+		\item Si $k = 1$ la variedad se llama curva en $\R^n$
+		\item Si $k = 2$ la variedad se llama superficie en $\R^n$
+		\item Si $k = n-1$ la variedad se llama hipersuperficie en $\R^n$
+		\item La dimensión de una variedad es única, si hay dos puntos que tienen dimensión diferente entonces no es una variedad (puede ser unión de variedades).
+		\item El difeomorfismo $f$ se llama \textbf{difeomorfismo planchador}
+		\item Una variedad se dice de clase $C^{s \geq 1} \iff f \in C^{s \geq 1}$.
+	\end{itemize}
+	\item \textbf{Teorema del grafo:} Sean $x \in \R^k, y \in \R^n$. Si $\forall (x,y) \in X \subset \R^{n+k}$ se puede expresar como $(x, f(x))$ donde $f:\R^k \to \R^n,\ f \in C^{s\geq 1}$ entonces $X$ es una $C^s$-varidedad de dimensión $k$ en $\R^{n+k}$. 
+	\item \textbf{Teorema de la preimagen:} Sea $f:U_0 \subset \R^n \to \R^m,\ n > m,\ f\in C^{s \geq 1},\ b \in \R^{m}$. Si $f$ es submersión en $a, \forall a \in f^{-1}(\{b\})$ entonces $f^{-1}(\{b\})$ es o el vacío o una variedad de dimensión $n - m$ y clase $C^s$.
+	\begin{itemize}
+		\item Si $n = m$ entonces $f^{-1}(\{b\})$ es una variedad de dimensión $0$
+		\item Para ladrillitos: $f^{-1}(\{b\})$ es el vacío si $b \notin \text{ Im } f$, caso completamente inútil por lo que nunca elegiremos $f$ y $b$ de tal manera
+	\end{itemize}
+	\item Una \textbf{parametrización} de una variedad $X$ en $\R^n$ es un abierto $W \in \R^k$ y una función $\Phi:W \to \R^n$ que cumple:
+	\begin{enumerate}
+		\item $\Phi \in C^{s \geq 1}(W)$
+		\item $\Phi(W) \subset X$
+		\item $\exists Y \neq \emptyset$ abierto relativo de $X$ tal que $Y \subset \Phi(W)$ 
+	\end{enumerate}
+	Además
+	\begin{itemize}
+		\item $\Phi$ no tiene por qué ser sobre pero $\Phi(W)$ tiene que ser otra variedad (no puede ser insignificante)
+		\item Una parametrización $\Phi$ es de máxima calidad o un \textbf{sistema de coordenadas} $\iff \Phi$ es inyectiva y regular. Esto equivale a comprobar
+		\begin{enumerate}
+			\item $\Phi(W) \subseteq M$
+			\item $D\Phi(x)$ tiene rango máximo $\forall x \in W$
+			\item $\Phi$ es inyectiva en $W$
+		\end{enumerate}
+	\end{itemize}
+\end{itemize}
+
+\section{Teoremas gordos}
+
+\begin{thm}[del valor medio]
+	Sea $f: S \subset \R^n \to \R$ una función diferenciable sobre el conjunto abierto y convexo $S$. Entonces $\forall a, b \in S,\ \exists c \in [a,b] \mid f(a) - f(b) = \nabla f(c)(a - b)$
+\end{thm}
+
+\begin{thm}[fundamental del cálculo]
+	Sea $f$ una función integrable sobre $[a,b] \subset \R$. Definimos $F:[a,b] \to \R$
+	\begin{align*}
+		F(x) = \int_{a}^{x} f(t)dt
+	\end{align*}
+	Si $f$ es continua en $c \in (a,b)$ entonces $F$ es derivable en $c$ y $F'(c) = f(c)$. Además, usando la regla de la cadena queda:
+	\begin{align*}
+		\frac{d}{dx}\int_{a(x)}^{b(x)} f(t)dt = f(b(x))b'(x) - f(a(x))a'(x)
+	\end{align*}
+\end{thm}
+
+\begin{thm}[de la función inversa]
+	Sea $(\V, \norma{\cdot})$ un espacio de Banach. Sean $U_0 \in \V$ un abierto y $f:U_0 \to \V$ una función de clase $C^1$. Si en $x_0 \in U_0$ la diferencial $L = (df)_{x_0}$ es invertible (e.d. $L$ es lineal acototada, biyectiva y con inversa $L^{-1}$ también acotada) entonces existen abiertos $U, V$ con $x_0 \in U,\ f(x_0) = y_0 \in V$  tales que $f$ es biyectiva de $U$ a $V$.
+	
+	Además, en ese caso la inversa $f^{-1}:V \to U$ es diferenciable en $y_0$ y $(df^{-1})_{y_0} = [(df)_{x_0}]^{-1}$.
+\end{thm}
+
+\begin{thm}[de la función implícita]
+	Sean $x,a \in \R^n,\ y,b \in \R^m$
+	Sea $F: \R^{n+m} \to \R^m$ una función $C^k, k \geq 1$. Sea $(a,b) \in \R^{n+m}$ tal que $F(a,b) = 0$. Si
+	\begin{align*}
+		DF_y(a,b) = \left(\begin{array}{ccc}
+		\frac{\partial F_1}{\partial y_1}(a,b) & \dots & \frac{\partial F_1}{\partial y_m}(a,b) \\
+		\vdots & \ddots & \vdots \\
+		\frac{\partial F_m}{\partial y_1}(a,b) & \dots & \frac{\partial F_m}{\partial y_m}(a,b)
+		\end{array}\right)
+	\end{align*}
+	es invertible entonces $\exists U \subset \R^n$ entorno abierto de $a$ y $\exists! g:U \to \R^m$ tal que $g(a) = b$ y $F(x, g(x)) = 0,\ \forall x \in U$. Es más, $g \in C^k$ y
+	\begin{align*}
+		\frac{\partial g}{\partial x_j}(x) = -\left[DF_y(x, g(x))\right]^{-1}_{m\times m}\left[\frac{\partial F}{\partial x_j}(x, g(x))\right]_{m \times 1}
+	\end{align*}
+	Esto es: las columnas de la jacobiana de $g$, que es una matriz $m \times n$, van dadas por la expresión anterior.
+\end{thm}
+\begin{itemize}
+	\item Si de una ecuación queremos despejar $y$, mandamos todo a un lado y lo que no se puede anular es la matriz de las derivadas de $y$.
+	\item En este enunciado se escribe lo que quieres despejar después, como el $y \in \R^m$ pero a veces se pone antes. Da igual, lo que importa es la regla mnemotécnica de antes.
+\end{itemize}
+
+\begin{flushright}
+	E. Hernandis, \today $ $ a las \currenttime
+\end{flushright}
+
+\end{document}
