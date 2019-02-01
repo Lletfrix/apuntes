@@ -3,7 +3,7 @@
 \chapter{Introducci\'{o}n a las ecuaciones diferenciales}
 
 \section{Idea intuitiva}
-\begin{dfn}[Ecuacion diferencial de primer orden]
+\begin{dfn}[Ecuación diferencial de primer orden]
 	Sea $\mbf{y} = f(x)$, una \textbf{ecuación diferencial de primer orden} es una ecuación de la forma: $\mbf{y'}=F(x,\mathbf{y})$.\\
     Sea $g(x)$ una función de x, diremos que es solución cuando la ecuación diferencial se cumpla para $\mbf{y} = g(x)$.
 \end{dfn}
@@ -190,7 +190,7 @@ y por tanto,
 
 Nuestro objetivo es que dada una familia de curvas $fam_{C}$, podamos encontrar una (\textit{familia de}) curva que sea ortogonal a todas las de la familia en los puntos de cruce.\\\\
 Supongamos que la familia original satisface una ecuación diferencial ordinaria $\mbf{y_1'} = f(x, \mbf{y_1})$. Queremos encontrar otra ecuación que defina a la ortogonal.\\\\
-Como $fam_{C}$ sigue una EDO (\textit{ecuacion diferencial ordinaria}), podemos afirmar que $pend_{C} = \mbf{y_1'} = f(x, \mbf{y_1})$. Usando \ref{eq:pendientes}, $pend_{C^\perp} = \frac{-1}{f(x, \mbf{y_1})}$. Pero además, si $C^\perp$ sigue una EDO, está dada por una función $\mbf{y_2} = y_2(x)$ y entonces $\mbf{y_2'} = \frac{-1}{f(x, \mbf{y_1})}$.\\
+Como $fam_{C}$ sigue una EDO (\textit{ecuación diferencial ordinaria}), podemos afirmar que $pend_{C} = \mbf{y_1'} = f(x, \mbf{y_1})$. Usando \ref{eq:pendientes}, $pend_{C^\perp} = \frac{-1}{f(x, \mbf{y_1})}$. Pero además, si $C^\perp$ sigue una EDO, está dada por una función $\mbf{y_2} = y_2(x)$ y entonces $\mbf{y_2'} = \frac{-1}{f(x, \mbf{y_1})}$.\\
 Concluimos con que dada $fam_C$ descrita por $\mbf{y'}=f(x,\mbf{y})$, podemos encontrar $fam_{C^\perp}$ que satisface:
 $$
     \mbf{y'} = -\frac{1}{f(x, \mbf{y})}
@@ -283,3 +283,7 @@ $$
         Se observa que son curvas ortogonales a la familia original.
     \end{center}
 \end{eg}
+
+\section{Trayectorias ortogonales en coordenadas polares}
+Veamos que al igual que encontramos una expresión para la trayectorias ortogonales en coordenadas rectangulares, también lo podemos hacer en coordenadas polares. En este caso partimos de una familia de curvas $fam_C$ descrita por la solución de una EDO $\mbf{r'} = h(\mbf{r}, \theta)$. ¿Cuál es la familia ortogonal $fam_{C^\perp}$?.\\\\
+Para ello tenemos que empezar analizando la expresión de la tangente como ecuación
