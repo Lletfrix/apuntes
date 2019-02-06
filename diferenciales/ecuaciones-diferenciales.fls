@@ -1,4 +1,4 @@
-PWD D:/Documents/Universidad/tercero/2_cuatrimestre/diferenciales/apuntes
+PWD D:/Documents/apuntes-repo/diferenciales
 INPUT c:/texlive/2018/texmf-var/web2c/luatex/lualatex.fmt
 INPUT ./ecuaciones-diferenciales.tex
 OUTPUT ecuaciones-diferenciales.log
@@ -821,6 +821,18 @@ INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmmonoslant10-reg
 INPUT ./tikzbuild/ecuaciones-diferenciales-figure2.md5
 OUTPUT ecuaciones-diferenciales.auxlock
 OUTPUT ecuaciones-diferenciales.auxlock
+INPUT ./images/1-ortogonalpolares.png
+INPUT ./images/1-ortogonalpolares.png
+INPUT ./images/1-ortogonalpolares.png
+INPUT ./images/1-ortogonalpolares2.png
+INPUT ./images/1-ortogonalpolares2.png
+INPUT ./images/1-ortogonalpolares2.png
+INPUT ./images/1-ortogonalpolares3.png
+INPUT ./images/1-ortogonalpolares3.png
+INPUT ./images/1-ortogonalpolares3.png
+INPUT ./images/1-espejo.png
+INPUT ./images/1-espejo.png
+INPUT ./images/1-espejo.png
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe

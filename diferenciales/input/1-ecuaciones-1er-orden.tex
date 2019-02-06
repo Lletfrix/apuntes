@@ -238,7 +238,7 @@ $$
             $$
                 x^2-\mbf{y}^2 = c \rightarrow \Dd{x} (x^2-y^2=c) \rightarrow 2x - 2\mbf{y}\mbf{y'} = 0 \implies \mbf{y'} = \frac{x}{\mbf{y}} = f(x,\mbf{y})
             $$
-        \item \texttt{Econtrar la EDO para trayectorias ortogonales.}\\
+        \item \texttt{Encontrar la EDO para trayectorias ortogonales.}\\
             $$
                 \mbf{y'} = -\frac{1}{f(x, \mbf{y})} = -\frac{\mbf{y}}{x}
             $$
@@ -284,6 +284,106 @@ $$
     \end{center}
 \end{eg}
 
-\section{Trayectorias ortogonales en coordenadas polares}
+\subsection{Trayectorias ortogonales en coordenadas polares}
 Veamos que al igual que encontramos una expresión para la trayectorias ortogonales en coordenadas rectangulares, también lo podemos hacer en coordenadas polares. En este caso partimos de una familia de curvas $fam_C$ descrita por la solución de una EDO $\mbf{r'} = h(\mbf{r}, \theta)$. ¿Cuál es la familia ortogonal $fam_{C^\perp}$?.\\\\
-Para ello tenemos que empezar analizando la expresión de la tangente como ecuación
+Para ello tenemos que empezar analizando la expresión de la tangente como ecuación.
+
+\begin{wrapfigure}{l}{.6\textwidth}
+  \begin{center}
+    \includegraphics{1-ortogonalpolares.png}
+  \end{center}
+  \caption{Analisis de $\mathrm{d}r$ y $\mathrm{d}\theta$}\label{img:1-polort}
+\end{wrapfigure}
+En la figura \ref{img:1-polort} hemos trazado una curva arbitraria $C$. Queremos hallar una ecuación diferencial que describa a la tangente en cierto punto $p = (r,\theta)$. Para ello, hallamos un nuevo punto $q = (r + \mathrm{d}r, \theta +\mathrm{d}\theta) \in C$. Se indica además la cirfumferencia $s$ de radio $r$ con centro en $0$, y la recta tangente $t$ al punto original $p$.\\\\
+Observamos que $s$ es perpendicular a las rectas que unen el origen con $p$ y $q$ ($\vec{0p}$ y $\vec{0q}$ respectivamente), ya que son trazadas desde el radio de la misma. Además, la intersección de $\vec{0q}$ con $s$ nos marca el punto $q' = (r, \theta +\mathrm{d}\theta)$. Finalmente, denominamos $\phi$ al ángulo del que queremos hallar la tangente.
+
+El gráfico de la figura \ref{img:1-polort} está distorsionado. Tanto $\mathrm{d}r$ como $\mathrm{d}\theta$ son infinitesimales, es decir, extremadamente pequeños. Debido a ello podemos hacer distintas asunciones.\\\\
+Para comenzar, el arco de circumferencia que une $p$ y $q'$ tiene longitud $r\mathrm{d}\theta$ y podemos aproximarlo con un segmento que va a ser perpendicular a las rectas $\vec{0p}$ y $\vec{0q}$. Esto hará que $\vec{0p}$ y $\vec{0q}$ sean aproximadamente paralelas, pues comparten un mismo segmento perpendicular a ellas.\\ Además, podemos aproximar el arco de $C$ que une $p$ y $q$ con un segmento de $t$. Esto se ilustra en la figura \ref{img:1-polort2}.
+
+\begin{wrapfigure}{r}{.5\textwidth}
+  \begin{center}
+    \includegraphics[scale=1.2]{1-ortogonalpolares2.png}
+  \end{center}
+  \caption{Aproximación por infinitesimales}\label{img:1-polort2}
+\end{wrapfigure}
+
+Como puede apreciarse en \ref{img:1-polort2}, el área sombreada se corresponde con un triangulo rectángulo en la aproximación, y de hecho tenemos descritos los catetos, lo que nos permite hallar $\tan\phi'$. Sin embargo, como hemos visto en la aproximación, ambas rectas perpendiculares a $ts$ son paralelas entre sí. Es fácil ver entonces que $\phi = \phi'$ y al describir $\tan\phi'$ hemos descrito $\tan\phi$.\\\\
+Por tanto, podemos concluir que:
+$$
+\tan\phi = \frac{r\mathrm{d}\theta}{\mathrm{d}r} = r \frac{1}{\dd{r}{\theta}} = \frac{r}{r'}
+$$
+Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitaria en forma de ecuación diferencial $r' = h(r,\theta)$, podemos hallar $fam_{C^\perp}$ que buscábamos al comienzo de la sección. Para ello, vamos a considerar de nuevo una curva arbitraria $C$ y su perpendicular $C^\perp$. Nos interesa especialmente la relación que existe entre los ángulos de las rectas tangentes de cada curva.\\\\
+\begin{wrapfigure}{r}{.5\textwidth}
+  \begin{center}
+    \includegraphics[scale=1]{1-ortogonalpolares3.png}
+  \end{center}
+  \caption{Angulos entre curvas ortogonales}\label{img:1-polort3}
+\end{wrapfigure}
+
+En la figura \ref{img:1-polort3} se ilustra la relación que buscamos. Supongamos que las dos curvas se cortan en un punto $p = (r, \theta)$ y consideramos la recta $\vec{0p}$. Al igual que en la figura \ref{img:1-polort}, definimos $\phi_C$ como el ángulo existente entre $\vec{0p}$ y la curva $C$. Siguiendo el mismo procidimiento podemos definir $\phi_{C^\perp}$.\\
+Como por definición $C \perp C^{\perp}$, entonces el ángulo existente entre ellas es $\sfrac{\pi}{2}$, por tanto: $\phi_{C^\perp} = \sfrac{\pi}{2} + \phi_C$.\\\\
+Del caso en coordenadas rectangulares recordamos la ecuación:
+$$
+\tan(\phi_{C^\perp}) = -\frac{1}{ \tan(\phi_C)}
+$$
+donde a la derecha de la ecuación figura todo lo relacionado con la curva original y a la izquierda lo relacionado con la curva tangente. Como hallamos antes que $\tan\alpha = \sfrac{r}{r'}$ para un ángulo $\alpha$ que describa a la recta tangente, de la misma forma $\tan(\phi_{C^\perp}) = \sfrac{r}{r'}$ describe a su recta tangente, que es ortogonal a la curva $C$ original.\\ Usando esto, la definición $r' = h(r, \theta)$ del comienzo de la sección y la ecuacion anterior obtenemos:
+$$
+\frac{r}{r'} = -\frac{1}{\sfrac{r}{r'}} = -\frac{1}{\sfrac{r}{h(r,\theta)}} \implies \frac{r}{r'} = -\frac{h(r,\theta)}{r}
+$$
+Finalmente, de la expreisón anterior hallamos la ecuación diferencial general para describir a $fam_{C^\perp}$ a partir de la función $h(r, \theta)$ que describe a $fam_C$:
+$$
+    r' = -\frac{r^2}{h(r, \theta)}
+$$
+\section{Ecuaciones homogéneas de grado 0}
+En esta sección daremos un breve método para resolver ecuaciones homogéneas de grado $0$.
+\begin{dfn}[Ecuación homogénea de grado k]
+    Sea $f: \matbb{K} x \matbb{K} \longrightarrow \matbb{K}$, decimos que es \textbf{homogénea de grado k} \iff $f(\lambda x_1, \lambda x_2) = \lambda^k \cdot f(x_1, x_2)$
+\end{dfn}
+Nos interesarán especialmente las de grado $k=0$, es decir, aquellas en que $f(\lambda x_1, \lambda x_2) = f(x_1, x_2)$.\\\\
+Supongamos que tenemos la EDO $\mbf{y'} = f(x, \mbf{y})$, tenemos que $f(x, \mbf{y}) = f(x, \mbf{y} \cdot \sfrac{x}{x})$. Si $f$ es homogénea de grado 0, y tomamos $\lambda = x$ entonces, $f(x, \mbf{y} \cdot \sfrac{x}{x}) = f(\lambda, y \cdot \sfrac{\lambda}{x}) = \lambda^0 f(1, \sfrac{\mbf{y}}{x})$, es decir:
+$$
+    \mbf{y}' = f(x,\mbf{y}) = f\left(1, \frac{\mbf{y}}{x}\right)
+$$
+Haciendo el cambio $\mbf{z} = \sfrac{\mbf{y}}{x}$ y desarrollando $\mbf{z'}$ tenemos:
+$$
+    \mbf{z'} = \frac{\mbf{y'}}{x} - \frac{\mbf{y}}{x} = \frac{f\left(1,\frac{\mbf{y}}{x}\right)}{x} - \frac{1}{x} \frac{\mbf{y}}{x} = \frac{f(1,\mbf{z}) - \mbf{z}}{x}
+$$
+que es una EDO de variables separables.\\Veamos un ejemplo con resolución por este método:
+\begin{eg}[Espejo parabólico]
+    Queremos construir un espejo para los faros de un automóvil. Buscamos que si la luz proviene del origen (la bombilla), ésta salga reflejada paralela al suelo. Vamos a hallar qué forma tiene que tener una sección del espejo (que tiene simetría radial) que cumple nuestro objetivo. Vamos a ejemplificar con la ayuda del diagrama siguiente.\\
+    \begin{minipage}[c]{0.5\linewidth}
+      \begin{center}
+          \raisebox{\dimexpr \topskip-\height}{
+        \includegraphics[width=\textwidth]{1-espejo.png}}
+      \end{center}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.45\textwidth}
+        En la figura hemos marcado 4 ángulos: $\alpha$, $\beta$, $\theta$ y $\psi$.\\ Si nos fijamos con más detenimiento, como la trayectoria del rayo es paralela al eje $X$ los ángulos que forman ambas con la recta tangente en un punto arbitrario del espejo son idénticos, por lo que $\beta = \theta$.\\ Además, debido a que en la reflexión de un haz de luz el ángulo de reflexión coincide con el de incidencia tenemos que $\alpha = \beta$.\\ Es fácil ver que el ángulo suplementario a $\psi$ ($\pi - \psi\ rad$) forma parte de los ángulos internos de un triángulo, junto con $\alpha$ y $\theta$. Por ello, podemos expresar la igualdad $\alpha + \theta + (\pi - \psi) = \pi\ rad \implies \psi = \alpha + \theta = 2\theta$.
+    \end{minipage}
+    Como ya viene siendo conocido, $\tan(\theta) = \mbf{y}'$. Y si nos fijamos en la figura, para cualquier punto $(x,\mbf{y})$ del espejo $\tan(\psi) = \sfrac{\mbf{y}}{x}$. Por tanto:
+    $$
+        \frac{\mbf{y}}{x} = \tan(\psi) = \tan(2\theta) = \frac{\sin(2\theta)}{\cos(2\theta)} = \frac{2\sin(\theta)\cos(\theta)}{\cos^2(\theta)-\sin^2(\theta)} = \frac{2\tan(\theta)}{1-\tan^2(\theta)} = \frac{2\mbf{y'}}{1-\mbf{y'}^2}
+    $$
+    es decir,
+    $$
+        (1-\mbf{y'}^2)\cdot \mbf{y} = 2\mbf{y'}\cdot x \implies \mbf{y'} = \frac{-x \pm (x^2+\mbf{y}^2)^{\sfrac{1}{2}}}{\mbf{y}}
+    $$
+    de las dos opciones que tenemos, tenemos que ver cuál es válida. Como la pendiente de la recta tangente es positiva, nuestra ecuación diferencial sólo puede ser:
+    $$
+        \mbf{y'} = \frac{-x + \sqrt{(x^2+\mbf{y}^2)}}{\mbf{y}}
+    $$
+    Salta a la vista que no podemos resolverla por el método de separación de variables. Por ello, vamos a considerar un cambio de variables para convertirla en una ecuación de variables separables.\\\\
+    Sea $z(x) = \sfrac{y(x)}{x}$, hallamos la expresión de $\mbf{z'}$:
+    $$
+        \mbf{z'} = \frac{\mbf{y'}}{x} - \frac{\mbf{y}}{x^2} = \frac{1}{x} \cdot (\mbf{y'} - \mbf{z}) = \frac{1}{x} \cdot \left(\frac{-x + \sqrt{(x^2+\mbf{y}^2)}}{\mbf{y}} - \mbf{z}\right) = \frac{1}{x} \cdot \left(-\frac{x}{\mbf{y}} +\sqrt{\left(\frac{x}{\mbf{y}}\right)^2+1} -\mbf{z}\right)
+    $$
+    y si del último paso hacemos el cambio $\sfrac{1}{\mbf{z}} = \sfrac{x}{\mbf{y}}$ obtenemos:
+    $$
+        \mbf{z'} = \frac{1}{x} \cdot \left(-\frac{1}{\mbf{z}} + \sqrt{\frac{1}{\mbf{z}^2}+1} - \mbf{z} \right)
+    $$
+    que es de variables separables.\\\\
+    La solución a esta EDO es: $1 - \sqrt{1+\mbf{z}^2} = \frac{c}{x}$ y como $\mbf{z} = \sfrac{\mbf{y}}{x}$ obtenemos la ecuación que describe la altura de nuestro espejo en función de $x$ y una constante $c$, a falta de algún dato extra para resolver un PVI.
+    $$
+        y(x) = \sqrt{c^2 + 2cx}
+    $$
+\end{eg}
