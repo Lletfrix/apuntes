@@ -93,7 +93,7 @@ Esta sección trata sobre el primer método de resolución de ecuaciones diferen
     Sea $\P \equiv \mbf{y'} = x\mbf{y}$. Halla las soluciones de la ecuación.\\
     $\mbf{y'} = \dd{y}{x}$, con esta igualdad podemos hacer manipulaciones sin justificar (de momento).
     $$
-        \dd{y}{x} = x \mbf{y} \implies \frac{dy}{\mbf{y}} = x\mathrm{d}x \implies \int \frac{dy}{\mbf{y}} = \int x\mathrm{d}x \implies \log|\mbf{y}| = \frac{x^2}{2} + C \implies |\mbf{y}| = e^{\sfrac{x^2}{2} + C} = e^C \cdot e^{\sfrac{x^2}{2}}
+        \dd{y}{x} = x \mbf{y} \implies \frac{dy}{\mbf{y}} = x\d x \implies \int \frac{dy}{\mbf{y}} = \int x\d x \implies \log|\mbf{y}| = \frac{x^2}{2} + C \implies |\mbf{y}| = e^{\sfrac{x^2}{2} + C} = e^C \cdot e^{\sfrac{x^2}{2}}
     $$
     $$
         \mbf{y} = \pm e^C \cdot e^{\sfrac{x^2}{2}} = ke^{\sfrac{x^2}{2}} \mid k \in \R
@@ -244,7 +244,7 @@ $$
             $$
         \item \texttt{Resolver la ecuación anterior}\\
             $$
-                \dd{y}{x} = -\frac{\mbf{y}}{x} \implies -\frac{\mathrm{d}y}{\mbf{y}} = \frac{\mathrm{d}x}{x} \implies \log|y| = \log|x| + \mathcal{C}
+                \dd{y}{x} = -\frac{\mbf{y}}{x} \implies -\frac{\d y}{\mbf{y}} = \frac{\d x}{x} \implies \log|y| = \log|x| + \mathcal{C}
             $$
             es decir,
             $$
@@ -292,13 +292,13 @@ Para ello tenemos que empezar analizando la expresión de la tangente como ecuac
   \begin{center}
     \includegraphics{1-ortogonalpolares.png}
   \end{center}
-  \caption{Analisis de $\mathrm{d}r$ y $\mathrm{d}\theta$}\label{img:1-polort}
+  \caption{Analisis de $\d r$ y $\d \theta$}\label{img:1-polort}
 \end{wrapfigure}
-En la figura \ref{img:1-polort} hemos trazado una curva arbitraria $C$. Queremos hallar una ecuación diferencial que describa a la tangente en cierto punto $p = (r,\theta)$. Para ello, hallamos un nuevo punto $q = (r + \mathrm{d}r, \theta +\mathrm{d}\theta) \in C$. Se indica además la cirfumferencia $s$ de radio $r$ con centro en $0$, y la recta tangente $t$ al punto original $p$.\\\\
-Observamos que $s$ es perpendicular a las rectas que unen el origen con $p$ y $q$ ($\vec{0p}$ y $\vec{0q}$ respectivamente), ya que son trazadas desde el radio de la misma. Además, la intersección de $\vec{0q}$ con $s$ nos marca el punto $q' = (r, \theta +\mathrm{d}\theta)$. Finalmente, denominamos $\phi$ al ángulo del que queremos hallar la tangente.
+En la figura \ref{img:1-polort} hemos trazado una curva arbitraria $C$. Queremos hallar una ecuación diferencial que describa a la tangente en cierto punto $p = (r,\theta)$. Para ello, hallamos un nuevo punto $q = (r + \d r, \theta +\d \theta) \in C$. Se indica además la cirfumferencia $s$ de radio $r$ con centro en $0$, y la recta tangente $t$ al punto original $p$.\\\\
+Observamos que $s$ es perpendicular a las rectas que unen el origen con $p$ y $q$ ($\vec{0p}$ y $\vec{0q}$ respectivamente), ya que son trazadas desde el radio de la misma. Además, la intersección de $\vec{0q}$ con $s$ nos marca el punto $q' = (r, \theta +\d \theta)$. Finalmente, denominamos $\phi$ al ángulo del que queremos hallar la tangente.
 
-El gráfico de la figura \ref{img:1-polort} está distorsionado. Tanto $\mathrm{d}r$ como $\mathrm{d}\theta$ son infinitesimales, es decir, extremadamente pequeños. Debido a ello podemos hacer distintas asunciones.\\\\
-Para comenzar, el arco de circumferencia que une $p$ y $q'$ tiene longitud $r\mathrm{d}\theta$ y podemos aproximarlo con un segmento que va a ser perpendicular a las rectas $\vec{0p}$ y $\vec{0q}$. Esto hará que $\vec{0p}$ y $\vec{0q}$ sean aproximadamente paralelas, pues comparten un mismo segmento perpendicular a ellas.\\ Además, podemos aproximar el arco de $C$ que une $p$ y $q$ con un segmento de $t$. Esto se ilustra en la figura \ref{img:1-polort2}.
+El gráfico de la figura \ref{img:1-polort} está distorsionado. Tanto $\d r$ como $\d \theta$ son infinitesimales, es decir, extremadamente pequeños. Debido a ello podemos hacer distintas asunciones.\\\\
+Para comenzar, el arco de circumferencia que une $p$ y $q'$ tiene longitud $r\d \theta$ y podemos aproximarlo con un segmento que va a ser perpendicular a las rectas $\vec{0p}$ y $\vec{0q}$. Esto hará que $\vec{0p}$ y $\vec{0q}$ sean aproximadamente paralelas, pues comparten un mismo segmento perpendicular a ellas.\\ Además, podemos aproximar el arco de $C$ que une $p$ y $q$ con un segmento de $t$. Esto se ilustra en la figura \ref{img:1-polort2}.
 
 \begin{wrapfigure}{r}{.5\textwidth}
   \begin{center}
@@ -310,7 +310,7 @@ Para comenzar, el arco de circumferencia que une $p$ y $q'$ tiene longitud $r\ma
 Como puede apreciarse en \ref{img:1-polort2}, el área sombreada se corresponde con un triangulo rectángulo en la aproximación, y de hecho tenemos descritos los catetos, lo que nos permite hallar $\tan\phi'$. Sin embargo, como hemos visto en la aproximación, ambas rectas perpendiculares a $ts$ son paralelas entre sí. Es fácil ver entonces que $\phi = \phi'$ y al describir $\tan\phi'$ hemos descrito $\tan\phi$.\\\\
 Por tanto, podemos concluir que:
 $$
-\tan\phi = \frac{r\mathrm{d}\theta}{\mathrm{d}r} = r \frac{1}{\dd{r}{\theta}} = \frac{r}{r'}
+\tan\phi = \frac{r\d \theta}{\d r} = r \frac{1}{\dd{r}{\theta}} = \frac{r}{r'}
 $$
 Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitaria en forma de ecuación diferencial $r' = h(r,\theta)$, podemos hallar $fam_{C^\perp}$ que buscábamos al comienzo de la sección. Para ello, vamos a considerar de nuevo una curva arbitraria $C$ y su perpendicular $C^\perp$. Nos interesa especialmente la relación que existe entre los ángulos de las rectas tangentes de cada curva.\\\\
 \begin{wrapfigure}{r}{.5\textwidth}
@@ -337,7 +337,7 @@ $$
 \section{Ecuaciones homogéneas de grado 0}
 En esta sección daremos un breve método para resolver ecuaciones homogéneas de grado $0$.
 \begin{dfn}[Ecuación homogénea de grado k]
-    Sea $f: \matbb{K} x \matbb{K} \longrightarrow \matbb{K}$, decimos que es \textbf{homogénea de grado k} \iff $f(\lambda x_1, \lambda x_2) = \lambda^k \cdot f(x_1, x_2)$
+    Sea $f: \matbb{K} x \matbb{K} \longrightarrow \matbb{K}$, decimos que es \textbf{homogénea de grado k} $\iff f(\lambda x_1, \lambda x_2) = \lambda^k \cdot f(x_1, x_2)$
 \end{dfn}
 Nos interesarán especialmente las de grado $k=0$, es decir, aquellas en que $f(\lambda x_1, \lambda x_2) = f(x_1, x_2)$.\\\\
 Supongamos que tenemos la EDO $\mbf{y'} = f(x, \mbf{y})$, tenemos que $f(x, \mbf{y}) = f(x, \mbf{y} \cdot \sfrac{x}{x})$. Si $f$ es homogénea de grado 0, y tomamos $\lambda = x$ entonces, $f(x, \mbf{y} \cdot \sfrac{x}{x}) = f(\lambda, y \cdot \sfrac{\lambda}{x}) = \lambda^0 f(1, \sfrac{\mbf{y}}{x})$, es decir:
@@ -387,3 +387,345 @@ que es una EDO de variables separables.\\Veamos un ejemplo con resolución por e
         y(x) = \sqrt{c^2 + 2cx}
     $$
 \end{eg}
+
+\section{Ecuaciones lineales de orden I}
+Vamos a ver un nuevo tipo de ecuaciones que no se pueden resolver por los métodos anteriormente descritos, sin embargo, vamos a comenzar ejemplificando el tipo de ecuación para enunciar una proposición más adelante.
+
+\begin{eg}[Ecuaciones lineales de orden I]\label{eg:lineal-order}
+    Sea $\mathcal{(EC)} \equiv \mbf{x'} = \mbf{x} + t$, vamos a intentar resolverla, es decir, queremos encontrar una expresión para x(t). Además, nos interesa también considerar el caso simplificado en que nuestra ecuación fuera $\mbf{x'} = \mbf{x}$.
+    \begin{itemize}
+        \item En el caso simplificado es sencillo ver que $x(t) = e^t$ resuelve la ecuación. De hecho se puede resolver por separación de variables.
+
+        \item Para hallar expresión de $x(t)$ que resuelve la ecuación vamos a construirnos una $y(t)$ para la que podamos encontrar dos definiciones distintas, una que dependa de $x(t)$ y otra que lo haga exclusivamente de $t$. Una forma de hallar las dos deficiones distintas de la misma $y(t)$ es integrando $y'(t)$, usando convenientemente la ecuación $\mathcal{(EC)}$ que conocemos.\\\\
+        Por tanto, queremos encontrar una $y(t)$ que dependa de $x(t)$ y que $\int y'(t)$ no dependa de $x(t)$. Por $\mathcal{(EC)}$ sabemos que $\mbf{x'} - \mbf{x} = t$, así que si en la expresión de $y'(t)$ podemos hacer esa sustitución, $y'(t)$ dependerá exclusivamente de $t$.\\\\
+        Sea $y(t) = e^{-t}\cdot x(t)$, vamos a ver si podemos hacer lo descrito anteriormente:
+        $$
+            y'(t) = -e^{-t}\cdot \mbf{x} + e^{-t} \cdot \mbf{x'} = e^{-t} \cdot (\mbf{x'}  - \mbf{x}) = t \cdot e^{-t}
+        $$
+        Una vez hemos hallado una expresión de $y'(t)$ que no depende de $\mbf{x}$, solo queda integrar y despejar $x(t)$ de $y(t) = \int y'(t)$:
+        $$
+            \int y'(t) \d t = \int t \cdot e^{-t} \d t = -te^{-t} - e^{-t} + C,\ C\ constante
+        $$
+        es decir,
+        $$
+            y(t) = \int y'(t) \d t \implies e^{-t} \cdot x(t) = -te^{-t} - e^{-t} + C \implies x(t) = Ce^t - 1 - t
+        $$
+    \end{itemize}
+    Con lo que hemos hallado la solución general a nuestra ecuación.
+\end{eg}
+\begin{obs}
+    Veamos ciertos aspectos de lo que hemos hallado.\\
+    \begin{enumerate}
+        \item $(-1-t)$ es una solución particular de $\mathcal{(EC)}$ (cuando $C=0$).
+        \item $e^t$ es solución de la \textit{ecuación homogénea} $\mbf{x'} = \mbf{x}$.
+        \item Esa ecuación homogénea es lineal, es decir, la suma de ecuaciones es solución, y por tanto la multipliación por un escalar también lo es.
+        $$
+        \begin{cases}
+            \mbf{x'} = \mbf{x}\\ \mbf{y'} = \mbf{y}
+        \end{cases}
+        \implies (\mbf{x}+\mbf{y})' = \mbf{x} + \mbf{y}
+        $$
+        y además, si $x(t)$ es solución, $\lambda x(t)$ también lo es.
+        \item Todas las solución de $\mbf{x'} = \mbf{x}$ (la homogénea) son $x(t) = Ce^t$.
+        \item $x(t) = Ce^t - 1 - t$ nos dice que la solución general a $\mathcal{(EC)}$ es igual a una solución particular $(-1-t)$ más la solución de la homogénea.
+    \end{enumerate}
+\end{obs}
+Lo que hemos hecho ha sido encontrar una solución de una ecuación del tipo $\mbf{x'} = \alpha(t)\cdot\mbf{x}+\beta(t)$ (con $\alpha(t) = 1,\ \beta(t) = t)$). Para resolver este tipo de ecuaciones enunciamos la siguiente proposición:
+
+\begin{pro}
+    Sean $\alpha,\ \beta:\ [a,b] \longrightarrow \R$ funciones continuas. Y sean:
+    \begin{gather*}
+        A(t) = \int_a^t \alpha(u) \d u \ \ \ \ H(t) = \int_a^t e^{-A(u)} \beta(u) \d u
+    \end{gather*}
+    Entonces:
+    \begin{enumerate}
+        \item $x(t)$ verifica $x'(t) = \alpha(t)x(t)+\beta(t)\ \forall t \in [a,b] \iff \exists c \in \R : x(t) = H(t) \cdot e^{A(t)} + c \cdot e^{A(t)}$
+        \item Dados $t_0 \in (a,b)$, $x_0 \in \R$ entonces $\exists ! c : x(t) = H(t) \cdot e^{A(t)} + c \cdot e^{A(t)}$ es solución del PVI:
+        $$
+            \begin{cases}
+                x'(t) = \alpha(t)\cdot x(t) + \beta(t)\\
+                x(t_0) = x_0
+            \end{cases}
+        $$
+    \end{enumerate}
+\end{pro}
+\begin{proof}
+    Vamos a demostrar $1$ y $2$ por separado:
+    \begin{enumerate}
+        \item Tenemos $\mathcal{(EC)} \equiv x'(t) = \alpha(t)x(t) + \beta(t)$ con $\alpha, \beta$ continuas.\\
+        La ecuación homogénea asociada a $\mathcal{(EC)}$ es $x'(t) = \alpha(t)x(t)$ que es lineal, es decir, la suma de soluciones es solución. Tenemos:
+        $$
+        \begin{cases}
+            x_1'(t) = \alpha(t)x_1(t)\\
+            x_2'(t) = \alpha(t)x_2(t)
+        \end{cases} \implies (\mbf{x_1} + \mbf{x_2})' = \alpha(t)\cdot(\mbf{x_1} + \mbf{x_2})
+        $$
+        \begin{obs}
+            Si sumo soluciones de $\mathcal{(EC)}$ obtengo $(\mbf{x_1} + \mbf{x_2})' = \alpha(t)\cdot(\mbf{x_1} + \mbf{x_2}) + 2\beta(t)$
+        \end{obs}
+        Para hallar la solución general vamos a proceder de forma parecida al ejemplo \ref{eg:lineal-order}. Sea $A(t)$ tal que $A'(t) = \alpha(t)$, entonces $x(t) = e^{A(t)}$ verifica la ecuación homogénea.\\\\
+        Construimos $y(t) = e^{-A(t)}\cdot\mbf{x}$, y la igualamos con la integral de su derivada:
+        $$
+            (e^{-A(t)}\cdot\mbf{x})' = e^{-A}\mbf{x'} - e^{-A}\cdot \mbf{x} \cdot A' = e^{-A} \cdot (\mbf{x'} - \alpha \mbf{x}) = e^{-A} \cdot \beta
+        $$
+        entonces,
+        $$
+            y(t) = e^{-A(t)} \cdot x(t) = \int e^{-A(t)}\cdot\beta(t) \d t \implies e^{-A(t)} \cdot x(t) = H(t) + C \implies x(t) = e^{A(t)} \cdot (H(t) + C)
+        $$
+        \item $x_0 = x(t_0) = c\cdot e^{A(t_0)} + e^{A(t_0)} \cdot H(t) \implies \exists ! c$ pues $e^{A(t_0)} \neq 0$. Y por tanto, para el PVI:
+        $$
+            \begin{cases}
+                x'(t) = \alpha(t)\cdot x(t) + \beta(t)\\
+                x(t_0) = x_0
+            \end{cases}
+        $$existe solución y es única.
+    \end{enumerate}
+\end{proof}
+%%Considerar si añadir la primera parte de la clase del 05/02
+\section{Teoremas de existencia y unicidad}
+En la sección anterior hemos enunciado una preposición que denominamos de \texit{existencia y unicidad} para ecuaciones lineales de orden I. Nos gustaría dar condiciones más genereales para saber si existen y son únicas ciertas soluciones.\\
+Consideraremos el PVI general:
+$$
+    \begin{cases}
+        \mbf{x'} = f(t, \mbf{x}) \\ x(t_0) = t_0
+    \end{cases}
+$$
+\begin{thm}[Existencia y unicidad global]
+    Sea $f: [a,b] \subset \R \longrightarrow \R$, con $f \in C^1$.\\Si $\dd{f}{x} = f_x$ es acotada,  es decir:
+    $$
+        \exists L \in \R : |f_x(t, \mbf{x})| \leq L\ \forall t\in[a,b],\ \forall x\in R
+    $$ entonces, el PVI tiene solución y es única.
+\end{thm}
+La demostración la veremos más adelante cuando cosideremos el caso \texit{n-dimensional}.
+
+\begin{obs}
+    Vamos a ver ciertos aspectos de este resultado.\\
+    \begin{enumerate}
+        \item  Gráfica de la solución\\
+        \begin{minipage}[c]{0.5\linewidth}
+          \begin{center}
+              \raisebox{\dimexpr \topskip-\height}{
+            \includegraphics[width=\textwidth]{1-existencia-unicidad.png}}
+          \end{center}
+        \end{minipage}\hfill
+        \begin{minipage}[c]{0.45\textwidth}
+            A nivel visual, no puede haber dos soluciones como las de la figura. Si las hubiera, el PVI tendría dos soluciones distintas para $t_0$ y habíamos dicho que era única.\\\\
+            Analíticamente podemos considerar el gráfico de $x(t)$ como un subconjunto del plano $\R^2$. Si consideramos cada solución de esta forma, digamos $S_1, S_2$, entonces:
+            $$
+                S_1 \cap S_2 \neq \varnothing \iff S_1 = S_2
+            $$
+        \end{minipage}
+        \item Unicidad en la recta real\\
+        \begin{minipage}[c]{0.5\linewidth}
+          \begin{center}
+              \raisebox{\dimexpr \topskip-\height}{
+            \includegraphics[width=\textwidth]{1-extension-unicidad.png}}
+          \end{center}
+        \end{minipage}\hfill
+        \begin{minipage}[c]{0.45\textwidth}
+            Sea $f: \R \times \R \longrightarrow \R$ cumple que $|f_x \leq L|$ (su derivada está acotada), entonces el PVI:
+                $$
+                    \begin{cases}
+                        \mbf{x'} = f(t, \mbf{x})\\
+                        x(t_0) = x_0
+                    \end{cases}
+                $$
+            entonces tiene solución y es única $ \forall t \in \R$\\\\
+            Si nos fijamos en la imagen de la izquierda, la idea intuitiva surge de tener una solución $x(t)$ definida sobre un intervalo $[-n, n]$. Si podemos extender $x(t)$ a $[-n-1, n+1]$, ésta tiene que coincidir en $[-n,n]$ y por unicidad, la solución es la misma. Podemos hacer esto para cualquier intervalo mayor que $[-n,n]$ y por tanto sobre la totalidad de $\R$.\\Formalemente puede intentar demostrarse por inducción sobre el tamaño del intervalo.
+        \end{minipage}
+        %% Mirar si introducir el ejemplo de mi página 19. Parece repetido.
+    \end{enumerate}
+\end{obs}
+\begin{th_ex}
+    Supongamos que $x(t)$ resuelve $\mbf{x'} = f(x)$ y $\lim_{t \to \infty} x(t) = a$. ¿Podemos asegurar que $f(a) = 0$?.\\ \textit{Pista:} tener en cuenta que el recíproco es cierto. Es decir, si $f(a) = 0$ entonces sabemos que hay ecauciones que se acercan a $a$ conforme avanzan.
+\end{th_ex}
+La versión global del teorema de existencia y unicidad no es muy útil. Veamos dos situaciones simples en las que no funciona.\\\\
+Sea el PVI:
+$$
+    \begin{cases}
+        \mbf{x'} = \mbf{x}^2\\
+        x(0)=1
+    \end{cases} t\in [-2,2] \text{ no tiene solución.}
+$$
+Si intentamos resolverlo:
+\begin{gather*}
+    \dd{x}{t} = \mbf{x}^2 \implies \int \frac{\d x}{\mbf{x}^2} = \int \d t \implies -\frac{1}{\mbf{x}} = t + C\\
+    x(0) = 1 \implies C = -1 \implies x(t) = \frac{1}{1-t}
+\end{gather*}
+que no es solución en $[-2,2]$ pues no está definida para $t=1$.\\\\
+
+\begin{wrapfigure}[12]{r}{0.6\textwidth}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-no-unicidad.png}
+  \end{center}
+  \caption{Solución no única}\label{img:1-no-unicidad}
+\end{wrapfigure}
+Consideremos ahora el PVI:
+$$
+    \begin{cases}
+        \mbf{x'} = \mbf{x}^{\sfrac{2}{3}}\\
+        x(0)=0
+    \end{cases}
+$$
+es facil ver que tanto $x_1(t) = 0$ como $x_2(t)=(\frac{t}{3})^3$ resuelven el PVI. De hecho, si combino trozos de la función puedo hallar más. En la figura se representan ambas soluciones y se resalta una posible combinación.\\\\
+
+\begin{thm}[Existencia y unicidad local]
+    Sean $[a,b] \times [c,d] = A \subset \R \times \R$, una función $f: A \longrightarrow \R$ con $f \in C^1$ y $t_0\in(a,b)$, $x_0\in(c,d)$. Entonces:\\
+    \begin{itemize}
+        \item Existencia:\\
+            $
+                \exists \delta > 0 \text{ y } x:(t_0 - \delta, t_0 + \delta) \longrightarrow \R, \mbf{x}\in C^1
+            $ tal que $\mbf{x}$ es solución del PVI:
+            $$
+                \begin{cases}
+                    \mbf{x'} = f(t, \mbf{x})\\
+                    x(t_0) = x_0
+                \end{cases}
+                \text{con } \delta < \min(t_0 - a, b - t_0)
+            $$
+        \item Unicidad:\\
+        Si $x_1(t)$, $x_2(t)$ son $C^1$ en un intervalo $(t_0-\varepsilon, t_0+\varepsilon)$ y satisfacen:\\
+        $$
+            \begin{cases}
+                \mbf{x_i'} = f(t, \mbf{x_i}),\ |t-t_0| < \varepsilon\\
+                x_i(t_0) = x_0
+            \end{cases}
+            \text{con } \varepsilon < \min(t_0 - a, b - t_0)
+        $$ entonces $x_1(t) = x_2(t)\ \forall t : |t-t_0| < varepsilon$.
+    \end{itemize}
+\end{thm}
+De nuevo, se deja la demostración para cuando enunciemos el caso \textit{n-dimensional}.
+\begin{obs}
+    Al igual que en el caso global, vamos a estudiar una serie de implicaciones de este resultado.\\
+    \begin{enumerate}
+        \item Unicidad local.\\
+        Podemos expresar la solución analíticamente como:\\\\
+        Sean $x_1(t),\ x_2(t)$ soluciones a un PVI. Si $x_1(t_0) = x_2(t_0)$, entonces $ \exists \varepsilon>0: x_1(t) = x_2(t),\ \forall t : |t-t_0| < \varepsilon$
+        \item Prolongación de la solución.\\
+        \begin{center}
+            \raisebox{\dimexpr \topskip-\height}{
+          \includegraphics[width=0.7\textwidth]{1-prolongacion-solucion.png}}
+        \end{center}
+        Puede ocurrir que hayamos definido la función sobre un área más pequeña de lo necesario. En la imagen superior se representa esta casuística.\\
+        En este caso, podemos prolongar la solución gracias a la unicidad, si existiera otra solución con $t\in[a,b]$ que estuviera definida en todo $[c, d']$, entonces debería coincidir con nuestra solución original por compartir el punto $(t, d)$. Podríamos preguntarnos  entonces si existe un intervalo cerrado máximo en el que existe nuestra solución.
+        \item Acerca de las hipóstesis.\\
+        No es necesario pedir que $f \in C^1$. Para la existencia sólo necesitamos que $f$ sea continua, y para la unicidad nos basta con que $f_x$ exista y sea continua. En el caso general veremos que podemos pedir incluso menos para la unicidad.
+    \end{enumerate}
+\end{obs}
+
+\subsection{Regularidad de soluciones}
+En ocasiones nos va a interesar saber como de buena es la función que resuelve nuestra EDO, entendiendo buena por cómo de suave es. Supongamos que nuestra ecuación diferencial es $x'(t) = f(t, x(t))$ definida en un intervalo, con $f:[a,b] \times [c,d] \subset \R^2 \longrightarrow \R$ continua y $x(t)$ derivable.\\
+Entonces:
+\begin{align*}
+    x(t) \text{ derivable} &\implies x(t) \text{ continua}.\\
+    \begin{cases}
+        x(t) \text{ continua}\\
+        f(t_1, t_2) \text{ continua}
+    \end{cases} &\implies [\text{componiendo $f$ con $x(t)$ como $t_2=x(t)$})]\ f(t, x(t))\text{ es continua}\implies\\
+     &\implies x'(t)\text{ es continua}\implies x(t) \in C^1
+\end{align*}
+Además, si $f(t_1, t_2) \in C^1$ entonces $f(t, x(t)) \in C^1$, pues:
+$$
+    \Dd{t}(f(t, x(t))) = f_t(t, x(t)) + f_x(t, x(t)) \cdot x'(t)
+$$
+De donde sabemos que tanto $f_t$ como $f_x$ son continuas pues $f(t_1, t_2) \in C^1$ y $x'(t)$ es continua como acabamos de ver. Y como $x''(t) = \Dd{t}(x'(t)) = \Dd{t}(f(t, x(t)))$ que es continua, entonces $x(t) \in C^2$.\\\\
+Repitiendo este argumento, concluimos con que: $f(t_1,t_2) \in C^k \implies x(t) \in C^{k+1}$.
+
+\section{Ecuaciones exactas}
+Hasta ahora hemos visto como resolver ecuaciones de variables separables, homogéneas de grado 0 y lineales de orden I. Veamos un método más.\\\\
+Supongamos que $\mbf{y}$ está definida implicitamente por $g(x, \mbf{y}) = cte$ con $g \in C^1$. Si derivamos $g(x, \mbf{y}) = cte)$ respecto de $x$ obtenemos:
+$$
+    g_x(x, y(x)) + g_y(x, y(x)) \cdot y'(x) = 0, \text{ es decir,}
+$$
+$y(x)$ se resuelve a partir de.
+$$
+    \mbf{y'} = -\frac{g_x(x,\mbf{y})}{g_y(x,\mbf{y})}
+$$
+\begin{obs}
+    Podemos argumentar a la inversa. Si $y(x)$ verifica la EDO, entonces $g(x, y(x))$ es constante (en intervalos), pues $\Dd{x}(g(x, y(x))) = 0$
+\end{obs}
+Además, la notación habitual para este tipo de ecuaciones es:
+$$
+    \mbf{y'} = \dd{y}{x} = -\frac{g_x(x,\mbf{y})}{g_y(x,\mbf{y})} \implies g_x\d x + g_y \d y = 0
+$$
+Supongamos que tenemos una ecuación $y'(x) = \frac{M(x,y)}{N(x,y)}$, es decir, $M\d x + N \d y = 0$. Nos gustaría saber cuándo existe $g(x, \mbf{y}) : M = g_x,\ N = g_y$, ya que en ese caso es exacta y y su solución es $g(x, \mbf{y}) = C \mid C \text{constante}$ en forma implícita.
+\begin{eg}
+    Sea $\mbf{y'} = \frac{-\mbf{y}}{x}$, es decir, $\mbf{y}\d x + x \d y = 0$ es una ecuación exacta.\\
+    De hecho la $g$ necesaria es $g(x,\mbf{y}) = xy$ pues $g_x = \mbf{y}$ y $g_y = x$. Y por tanto, la solucion general es:
+    $$
+        x\mbf{y} = C \implies y(x) = \frac{C}{x}
+    $$
+    De hecho, esta ecuación es de los tres tipos que hemos visto.
+\end{eg}
+\begin{pro}[Condición necesaria de ecuación exacta]
+    $$
+        \mathcal{EC} \equiv M\d x + N\d y \text{ es exacta y }g(x, \mbf{y}) \in C^2 \implies M_y = N_x
+    $$
+\end{pro}
+\begin{proof}
+    Si $\mathcal{EC}$ es exacta, entonces $\exists g : M = g_x,\ N = g_y$. Como $g \in C^2$, sabemos que $g_{xy} = g_{yx}$, entonces:
+    $$
+        \begin{cases}
+            g_{xy} = (g_x)_y = M_y\\
+            g_{yx} = (g_y)_x = N_x
+        \end{cases} \implies M_y = N_x
+    $$
+\end{proof}
+\begin{obs}
+    Sabemos que una ecuación es exacta cuando $(M, N) = \Nabla g$, sea $\gamma$ cualquier curva tal que $\gamma : [a,b]\subset\R \longrightarrow \R^2$ en $\R^2$. Entonces:
+    $$
+        \int_\gamma M\d x + N\d y = g(\gamma(b)) - g(\gamma(a))
+    $$
+    Es claro que si la curva es cerrada, $\gamma(a)=\gamma(b)$ y la integral es nula.
+\end{obs}
+
+\begin{eg}[Ecuación exacta]
+    Sea $\mathcal{(EC)} \equiv (\mbf{y}+x^3) dx + (x+\mbf{y}^3) dy = 0$ es facil ver que cumple la condición de $M_x = N_y$.\\
+    Nos gustaría hallar cual sería nuestra $g$ a partir de que $g_x=M$ y $g_y=N$. Sabemos que $g_x = M = y + x^3$.
+    Si integramos en $x$ (suponiendo $\mbf{y}$ constante):
+    $$
+    g(x,\mbf{y} = yx + x^4/4 + C(y) \text{para C una constante vista desde $x$}.
+    $$
+    Además,
+    \begin{gather*}
+        x+\mbf{y}^3 = N = g_y = x + c'(\mbf{y}) \implies c'(\mbf{y}) = \mbf{y}^3\\
+        c'(\mbf{y}) = \mbf{y}^3 \implies c(\mbf{y}) = \frac{\mbf{y}^4}{4} + cte.
+    \end{gather*}
+
+    Por lo que tenemos: $g(x,\mbf{y}) = x\mbf{y} + \frac{x^4+\mbf{y}^4}{4}$. Es decir, las soluciones de $\mathcal{(EC)}$ vienen dadas por $xy + \frac{x^4+y^4}{4} = C \text{($C$ constante)}$.\\
+
+    Por ejemplo, una solución particular para C=1 es:
+
+    $$xy + \frac{x^4+y^4}{4} = 1, \text{ que es la curva roja en la imagen siguiente.}$$
+    \begin{center}
+        \raisebox{\dimexpr \topskip-\height}{
+      \includegraphics[width=0.5\textwidth]{1-ecuacion-exacta.png}}
+    \end{center}
+\end{eg}
+
+Queremos ahora analizar la condición necesaria y suficiente que nos asegure que podamos realizar el procedimiento del ejemplo. Haremos uso de la siguiente proposición.
+\begin{pro}
+Sea $\Omega\subset\R^2$ un abierto simplemente conexo. Sean $M, N : \Omega \to \R\text{ con } M,N \in C^1$, entonces:
+$$
+\exists g : \Omega \to \R \text{ con } g \in C^2 \text{ tal que } M = \left.g_x\right|_\Omega, \left.N=g_y\right|_\Omega \iff \left.M_y\right|_\Omega = \left.N_x\right|_\Omega.
+    $$
+\end{pro}
+La demostración se deja al lector.\\\\
+A modo de recordatorio vamos a dar una definición de \textit{abierto simplemente conexo}.
+\begin{dfn}
+    Sea $\Omega \subset \R^2$ un abierto acotado.\\
+    Decimos que $\Omega$ es \textbf{simplemente conexo} $\iff$ $\Omega^C = \R^2\Omega$ es conexo.
+\end{dfn}
+
+\section{Factores integrantes}
+Sea de nuevo $\mathcal{(EC)}_1 = M \d x + N\d y = 0$, pero supongamos ahora que no se cumple la condición $M_x = N_y$ necesaria para encontrar una ecuación exacta. Nos preguntamos si podemos encontrar un $\mu(x, \mbf{y})$ no trivial de forma que teniendo la ecuación $\mathcal{(EC)}_2 = \mu(x, \mbf{y}) M \d x + \mu(x, \mbf{y}) N\d y = 0$ se cumpla:
+\begin{equation}\label{eq:factor-integrante}
+    (\mu M)_y = (\mu N)_x
+\end{equation}
+Llamamos a $\mu$ factor integrante de $\mathcal{(EC)}_1$. Veremos que siempre existe pero que es dificil de encontrar.\\
+Calculando \ref{eq:factor-integrante}, obtenemos:
+\begin{gather*}
+    M \frac{\partial \mu}{\partial y} - N \frac{\partial \mu}{\partial x} + (M_y - N_x) \mu = 0\\
+    \left(M \frac{\partial}{\partial y} - N \frac{\partial}{\partial x}\right)\mu + (M_y - N_x) \mu = 0
+\end{gather*}
+de donde tendremos que calcular $\mu$. Como suele resultar difícil, habitualmente se intenta que $\mu$ solo dependa de una de las dos variables, es decir, $\mu=\mu(y)$ o $\mu=\mu(x)$.

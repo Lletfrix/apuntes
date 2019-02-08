@@ -157,7 +157,8 @@ style=myeg
 name=Observaci\'{o}n,
 refname={observaci\'{o}n,observaciones},
 Refname={Observaci\'{o}n,Observaciones},
-style=myej
+style=myej,
+numbered=no
 ]{obs}
 
 \makeglossaries
@@ -169,6 +170,7 @@ style=myej
 
 \setcounter{chapter}{-1}
 %COMANDOS ÚTILES PARA DERIVADAS
+\AtBeginDocument{\renewcommand{\d}{\mathrm{d}}}
 \newcommand{\Dd}[1]{\frac{\mathrm{d}}{\mathrm{d}#1}}
 \newcommand{\dd}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
 \newcommand{\mbf}[1]{\mathbf{#1}}
