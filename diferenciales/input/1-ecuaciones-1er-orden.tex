@@ -147,7 +147,7 @@ Entonces, $\mbf{y'}(x_0) = \tan{\theta}$, que es la pendiente de la recta tangen
 Ilustramos en la figura \ref{img:1-siggeom2} entonces la casuística de conocer $\P \equiv \mbf{y'} = f(x,\mbf{y})$. En este caso, nos preguntamos que aspecto podría tener $\mbf{y}$ para que fuera solución de $\P$. Como conocemos $y'(x_0)$, podemos considerar que $\mathcal{S}$ es un semento paralelo a la recta tangente de la gráfica en $x_0$. Es fácil ver que $\mathcal{C}_1$ no puede ser solución de $\P$ pues $\mathcal{C}'_1(x_0) \neq y'(x_0)$. Sin embargo, es evidente que $\mathcal{C}_2$ sí resuelve $\P$.\\\\
 Si repetimos el procedimiento de determinar como son las pendientes (como acabamos de hacer para $x_0$) para todos los puntos, hallamos el \textit{campo de pendientes}.
 
-\begin{eg}[Hallar un campo de pendientes]
+\begin{eg}[Hallar un campo de pendientes]\label{eg:campo-pendientes}
     Sea $\P \equiv \mbf{x'} = t^2 + \mbf{x}^2$, es decir, $f(t, \mbf{x}) = t^2 + \mbf{x}^2$. Si queremos hallar qué pendiente se le asigna al punto $p = (\sfrac{1}{\sqrt{2}},\sfrac{1}{\sqrt{2}})$ evaluamos la función $f$, $f(p) = 1$. Por tanto, la función $\mbf{x}$ que soluciona $\P$ tiene tangente con pendiente $1$ en $t = \sfrac{1}{\sqrt{2}}$.\\\\
     De hecho, es lógico pensar que a cualquier punto que cumpla $t^2 + \mbf{x}^2 = 1$ se le asignará una pendiente de $1$ a su recta tangente. Este conjunto de puntos conforman la \textbf{isoclina} de pendiente 1.\\\\
     De forma general, para una constante $c$ dada (en este ejemplo necesariamente no negativa pues $f(t, \mbf{x})$ es suma de cuadrados), podemos definir la isoclina de pendiente c:
@@ -391,7 +391,7 @@ que es una EDO de variables separables.\\Veamos un ejemplo con resolución por e
 \section{Ecuaciones lineales de orden I}
 Vamos a ver un nuevo tipo de ecuaciones que no se pueden resolver por los métodos anteriormente descritos, sin embargo, vamos a comenzar ejemplificando el tipo de ecuación para enunciar una proposición más adelante.
 
-\begin{eg}[Ecuaciones lineales de orden I]\label{eg:lineal-order}
+\begin{eg}[Ecuaciones lineales de orden I - Intuición]\label{eg:lineal-order}
     Sea $\mathcal{(EC)} \equiv \mbf{x'} = \mbf{x} + t$, vamos a intentar resolverla, es decir, queremos encontrar una expresión para x(t). Además, nos interesa también considerar el caso simplificado en que nuestra ecuación fuera $\mbf{x'} = \mbf{x}$.
     \begin{itemize}
         \item En el caso simplificado es sencillo ver que $x(t) = e^t$ resuelve la ecuación. De hecho se puede resolver por separación de variables.
@@ -481,6 +481,35 @@ Lo que hemos hecho ha sido encontrar una solución de una ecuación del tipo $\m
         $$existe solución y es única.
     \end{enumerate}
 \end{proof}
+
+\begin{eg}[Resolución ecuación lineal de orden I]
+    Sea $y'(x) = x^3 - 2x\cdot y(x)$, donde $\beta(x) = x^3$ y $\alpha(x) = 2x$. Queremos hallar la expresión de todas las posibles soluciones, es decir, la solución general.\\\\
+    \begin{enumerate}
+        \item \texttt{Solución general de la homogénea}\\\\
+        La ecuación de la homogénea es $\mbf{y}'=-2x\mbf{y}$. Es de variables separables, resolviendo obtenemos:
+        $$
+            y(x) = C \cdot e^{-x^2} : C \text{ es constante.}
+        $$
+        \item \texttt{Tomando $e^{-x^2}$ una solución de (1)}\\\\
+        Volvemos a la ecuación $\mbf{y}' = x^3-2x\mbf{y}$. Por tanto, podemos reescribir $\mbf{y}' como: 2x\mbf{y} + \mbf{y}' = x^3$.\\
+        A continuación, hacemos el cambio
+        $$
+            z(x) = e^{-(-x^2)} y(x) = e^{x^2} \mbf{y} \text{ y hallamos $z'(x)$.}
+        $$
+        $$
+            \mbf{z}' = 2x\mbf{y}e^{x^2} + e^{x^2} = e^{x^2}\cdot (2x\mbf{y}+\mbf{y}') = e^{x^2} x^3.
+        $$
+        Hallamos $z(x)$ integrando $\mbf{z}'$:
+        $$
+            z(x) = \int x^3 e^{x^2} \d x = \frac{x^2-1}{2} \cdot e^{x^2} + C.\text{ (se resuelve por partes).}
+        $$
+        Igualando a nuestra $z(x) = e^{x^2} \mbf{y}$ original, despejamos $y(x)$:
+        $$
+            y(x) = \frac{x^2-1}{2} + C e^{-x^2}
+        $$
+        Donde $\frac{x^2-1}{2}$ coincide con una solución particular con $C = 0$, y $C e^{-x^2}$ es la solución general de la homogénea.
+    \end{enumerate}
+\end{eg}
 %%Considerar si añadir la primera parte de la clase del 05/02
 \section{Teoremas de existencia y unicidad}
 En la sección anterior hemos enunciado una preposición que denominamos de \texit{existencia y unicidad} para ecuaciones lineales de orden I. Nos gustaría dar condiciones más genereales para saber si existen y son únicas ciertas soluciones.\\
@@ -545,7 +574,7 @@ $$
     \begin{cases}
         \mbf{x'} = \mbf{x}^2\\
         x(0)=1
-    \end{cases} t\in [-2,2] \text{ no tiene solución.}
+    \end{cases} t\in [-2,2] \text{ no tiene solución.} \label{eg:no-solution}
 $$
 Si intentamos resolverlo:
 \begin{gather*}
@@ -591,7 +620,7 @@ es facil ver que tanto $x_1(t) = 0$ como $x_2(t)=(\frac{t}{3})^3$ resuelven el P
                 x_i(t_0) = x_0
             \end{cases}
             \text{con } \varepsilon < \min(t_0 - a, b - t_0)
-        $$ entonces $x_1(t) = x_2(t)\ \forall t : |t-t_0| < varepsilon$.
+        $$ entonces $x_1(t) = x_2(t)\ \forall t : |t-t_0| < \varepsilon$.
     \end{itemize}
 \end{thm}
 De nuevo, se deja la demostración para cuando enunciemos el caso \textit{n-dimensional}.
@@ -649,7 +678,7 @@ $$
     \mbf{y'} = \dd{y}{x} = -\frac{g_x(x,\mbf{y})}{g_y(x,\mbf{y})} \implies g_x\d x + g_y \d y = 0
 $$
 Supongamos que tenemos una ecuación $y'(x) = \frac{M(x,y)}{N(x,y)}$, es decir, $M\d x + N \d y = 0$. Nos gustaría saber cuándo existe $g(x, \mbf{y}) : M = g_x,\ N = g_y$, ya que en ese caso es exacta y y su solución es $g(x, \mbf{y}) = C \mid C \text{constante}$ en forma implícita.
-\begin{eg}
+\begin{eg}[Ecuación exacta simple]
     Sea $\mbf{y'} = \frac{-\mbf{y}}{x}$, es decir, $\mbf{y}\d x + x \d y = 0$ es una ecuación exacta.\\
     De hecho la $g$ necesaria es $g(x,\mbf{y}) = xy$ pues $g_x = \mbf{y}$ y $g_y = x$. Y por tanto, la solucion general es:
     $$
@@ -728,4 +757,78 @@ Calculando \ref{eq:factor-integrante}, obtenemos:
     M \frac{\partial \mu}{\partial y} - N \frac{\partial \mu}{\partial x} + (M_y - N_x) \mu = 0\\
     \left(M \frac{\partial}{\partial y} - N \frac{\partial}{\partial x}\right)\mu + (M_y - N_x) \mu = 0
 \end{gather*}
-de donde tendremos que calcular $\mu$. Como suele resultar difícil, habitualmente se intenta que $\mu$ solo dependa de una de las dos variables, es decir, $\mu=\mu(y)$ o $\mu=\mu(x)$.
+de donde tendremos que calcular $\mu$. Como suele resultar difícil, habitualmente se intenta que $\mu$ solo dependa de una de las dos variables, es decir, $\mu=\mu(y)$ o $\mu=\mu(x)$.\\\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 11/02
+Veamos un ejemplo de ecuacion de factores integrantes
+\begin{eg}[Factores integrantes]
+    Sea $x\mbf{y}\ \d x + \mb{y}^2 \d y = 0$, esta claro que $M = x\mbf{y}$, $N = \mbf{y}^2$. Para ver si puede ser una ecuación exacta evaluamos si cumple la condición necesaria $M_y = N_x$, sin embargo las derivadas cruzadas son $M_y=x$ y $N_x = 0$ y por tanto no puede ser ecuación exacta.\\\\
+    Nos preguntamos entonces por cual es su factor integrante. Para encontrarlo vamos a intentar que $\mu$ dependa solo de una variable (o de una combinación lineal, i.e $z = x+y$).\\
+    \begin{enumerate}
+        \item \texttt{Intentamos que $\mu$ dependa de $x$.}\\\\
+            Transformamos nuestra ecuación en: $(\mathcal{EC})\equiv \mu M\ \d x + \mu N\ \d y = 0$. Es decir, tenemos:
+            $$
+                \mu(x)\ x\mbf{y}\  \d x + \mu(x)\ \mbf{y}^2\ \d y = 0, \text{entonces hallamos las nuevas $M_y$ y $N_x$ para hallar $\mu$}
+            $$
+            como se tiene que cumplir que $M_y = N_x$
+            $$
+                M_y = \mu(x)\ x = \mu'(x)\ \mbf{y}^2 = N_x \implies \frac{\mu'(x)}{\mu(x)} = \frac{x}{\mbf{y}}
+            $$
+            y es claro que no tiene solución, pues la parte de la izquierda no depende de y.
+        \item \texttt{Intentamos que $\mu$ dependa de $\mbf{y}$.}\\\\
+        Repitiendo el mismo procedimiento, hallamos las nuevas $M_y$ y $N_x$ para hallar $\mu$ que cumple la condición necesaria. Obtenemos:\\\\
+        $$
+            \frac{\mu'(y)}{\mu(y)} = \frac{-1}{y} \implies (log |\mu|) = -log |y| \implies \mu(y) = \frac{1}{y} \text{ es solución}.
+        $$
+        Es decir, $(\mathcal{EC}) \equiv x\ \d x + \mbf{y}\ \d y = 0$. Podemos resolverla por separación de variables y su solución es:
+        $$
+            \frac{x^2+\mbf{y}^2}{2} = C \implies x^2+\mbf{y}^2 = C
+        $$
+    \end{enumerate}
+\end{eg}
+
+\begin{obs}
+    Sea la ecuación lineal de primer orden $\mbf{y}' = a(x) \cdot \mbf{y} + b(x)$.\\
+    Con $A(x) : A'(x) = a(x)$ $(e^{A(x)})$. %%TODO: Completar
+    Entonces $e^{-A(x)}$ es un factor integrante de $y'(x) = a(x) \cdot y(x) + b(x)$.
+\end{obs}
+
+\begin{eg}[Análisis de cotas en una ecuación diferencial]
+Vamos a hacer un aparte para retomar el ejemplo \ref{eg:campo-pendientes}. Teníamos que $(\mathcal{EC}1) \equiv \mbf{x}' = t^2 + \mbf{x}^2 = f(t, \mbf{x})$ y llegábamos a la conclusión a través de trazar su campo de pendientes de que $x(t) \uparrow \infty$, pero no sabíamos si lo hacía de forma asintótica o lo alcanza cuando $t \to \infty$, aunque el campo parecía indicar que lo hacía de forma asintótica en $t=1$ o antes. Vamos a tratarla de forma analítica comparándola con otra ecuación que se asemeja y que ya conocemos.\\\\
+Sabemos que $|f_x| < L$ no se cumple, pues $2x \to \infty$ si $x \to \infty$ y no podemos aplicar el teorema de existencia y unicidad global.\\
+Vamos a comparar la solución de $(\mathcal{EC}1)$ donde exista con la de:
+$$
+    (\mathcal{EC}2)\equiv
+    \begin{cases}
+        \mbf{x}' = \mbf{x}^2\\
+        x(0) = 1
+    \end{cases}
+$$
+Sean $u(t)$ la solución de $(\mathcal{EC}1)$ y $v(t)$ la solución de $(\mathcal{EC}2)$. A primera vista en $t=0$ ambas tienen la misma pendiente pues $f(0,1) = 1$.
+Sabemos tambien que $u(t)$ crece más rapido que $v(t)$ por que en el momento en que $t \neq 0$, crecerá más rápido (pues $t^2 + x(t^2) \geq x(t^2)$). Cualitativamente podemos afirmar que $u(t)$ "va por encima" de $v(t)$. Nos gustaría hacer una comparativa cuantitativa de ambas.\\\\
+Para ello, consideramos $z(t) = u(t) - v(t)$. Ahora, calculamos $z'(t)$:
+$$
+    z'(t) =  u'(t) - v'(t) = t^2+u^2-v^2 = t^2 + (u - v)\cdot(u + v) = t^2 + \mbf{z}\cdot(u + v).
+$$
+En este caso no conocemos explícitamente $(u(t)+v(t))$, pero podemos afirmar que como $(u(t),v(t))$ son crecientes $\forall t\geq0$ y para $t=0$ valen 1, entonces $(u + v) \geq 2$. Por tanto,
+$$
+    \mbf{z}' \geq 2\mbf{z} + t^2 \implies \mbf{z}' - 2\mbf{z}\geq t^2.
+$$
+Sea $w(t) = e^{-2t}\cdot z(t)$, entonces $\mbf{w}' = e^{-2t}(\mbf{z}'-2\mbf{z}) \geq e^{-2t}t^2 \geq t^2$. Entonces $\mbf{w}' \geq e^{-2t}t^2$ y además $w(0) = z(0) = 1 - 1 = 0$. A partir de esto tenemos:
+$$ %%TODO: Preguntar por esta definición de w(t)
+    w(t) = w(0) + \int_0^t w'(s) \d s \geq \int_0^t s^2 e^{-2s} \d s = \left.e^{-2s} \cdot \frac{2s^2 + 2s + 1}{4}\right|_0^t
+$$
+es decir,
+$$
+    w(t) \geq \frac{1}{4} - e^{-2t} \frac{2t^2 + 2t + 1}{4} \text{, y como } w(t) = e^{-2t} z(t) \text{ entonces,}
+$$
+$$
+    z(t) \geq \frac{e^{2t} - (2t^2 + 2t + 1) }{4} \implies u(t) - v(t) \geq \frac{e^{2t} - (2t^2 + 2t + 1) }{4} \implies u(t) \geq v(t) + \frac{e^{2t} - (2t^2 + 2t + 1) }{4}
+$$
+Como vimos en \ref{eg:no-solution}, $v(t) = \frac{1}{1-t}$ y por tanto $v \to \infty$ cuando $t \to 1$. Y ya que $u(t) \geq v(t) + \frac{e^{2t} - (1 + 2t + 2t^2)}{4}$, $u \to \infty$ antes de $t = 1$.
+\end{eg}
+\begin{th_ex} %TODO: Que cojones es esto
+    Encontrar otra ecuacion que sea sencilla de resolver para $u(t) \geq x$.
+\end{th_ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 12/02
