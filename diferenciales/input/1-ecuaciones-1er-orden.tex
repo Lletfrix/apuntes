@@ -392,25 +392,23 @@ que es una EDO de variables separables.\\Veamos un ejemplo con resolución por e
 Vamos a ver un nuevo tipo de ecuaciones que no se pueden resolver por los métodos anteriormente descritos, sin embargo, vamos a comenzar ejemplificando el tipo de ecuación para enunciar una proposición más adelante.
 
 \begin{eg}[Ecuaciones lineales de orden I - Intuición]\label{eg:lineal-order}
-    Sea $\mathcal{(EC)} \equiv \mbf{x'} = \mbf{x} + t$, vamos a intentar resolverla, es decir, queremos encontrar una expresión para x(t). Además, nos interesa también considerar el caso simplificado en que nuestra ecuación fuera $\mbf{x'} = \mbf{x}$.
-    \begin{itemize}
-        \item En el caso simplificado es sencillo ver que $x(t) = e^t$ resuelve la ecuación. De hecho se puede resolver por separación de variables.
+    Sea $\mathcal{(EC)} \equiv \mbf{x'} = \mbf{x} + t$, vamos a intentar resolverla, es decir, queremos encontrar una expresión para x(t).\\
+    \begin{enumerate}
+        \item Vamos a considerar primero la ecuación sin el término que únicamente depende de $t$ : $\mbf{x}' = \mbf{x}$. En este caso es sencillo ver que $e^t$ es solución.
 
-        \item Para hallar expresión de $x(t)$ que resuelve la ecuación vamos a construirnos una $y(t)$ para la que podamos encontrar dos definiciones distintas, una que dependa de $x(t)$ y otra que lo haga exclusivamente de $t$. Una forma de hallar las dos deficiones distintas de la misma $y(t)$ es integrando $y'(t)$, usando convenientemente la ecuación $\mathcal{(EC)}$ que conocemos.\\\\
-        Por tanto, queremos encontrar una $y(t)$ que dependa de $x(t)$ y que $\int y'(t)$ no dependa de $x(t)$. Por $\mathcal{(EC)}$ sabemos que $\mbf{x'} - \mbf{x} = t$, así que si en la expresión de $y'(t)$ podemos hacer esa sustitución, $y'(t)$ dependerá exclusivamente de $t$.\\\\
-        Sea $y(t) = e^{-t}\cdot x(t)$, vamos a ver si podemos hacer lo descrito anteriormente:
+        \item Consideramos ahora $y(t) = e^{-t}x(t)$, donde $x(t)$ es solución de $\mathcal{(EC)}$ (como observación, $e^-t$ es la inversa de la solución encontrada en (1)). Derivando se obtiene que:
         $$
             y'(t) = -e^{-t}\cdot \mbf{x} + e^{-t} \cdot \mbf{x'} = e^{-t} \cdot (\mbf{x'}  - \mbf{x}) = t \cdot e^{-t}
         $$
-        Una vez hemos hallado una expresión de $y'(t)$ que no depende de $\mbf{x}$, solo queda integrar y despejar $x(t)$ de $y(t) = \int y'(t)$:
+        Solo queda integrar y despejar $x(t)$ de $y(t) = \int y'(t)$:
         $$
-            \int y'(t) \d t = \int t \cdot e^{-t} \d t = -te^{-t} - e^{-t} + C,\ C\ constante
+            y(t) = \int y'(t) \d t = \int t \cdot e^{-t} \d t = -te^{-t} - e^{-t} + C,\ C\ constante
         $$
         es decir,
         $$
-            y(t) = \int y'(t) \d t \implies e^{-t} \cdot x(t) = -te^{-t} - e^{-t} + C \implies x(t) = Ce^t - 1 - t
+            e^{-t} \cdot x(t) = -te^{-t} - e^{-t} + C \implies x(t) = Ce^t - 1 - t
         $$
-    \end{itemize}
+    \end{enumerate}
     Con lo que hemos hallado la solución general a nuestra ecuación.
 \end{eg}
 \begin{obs}
