@@ -830,3 +830,158 @@ Como vimos en \ref{eg:no-solution}, $v(t) = \frac{1}{1-t}$ y por tanto $v \to \i
 \end{th_ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 12/02
+
+\section{Ecuaciones de orden II}
+Hasta ahora hemos estudiado distintas ecuaciones de orden I. Vamos a ver un nuevo tipo de ecuaciones que involucra la segunda derivada y hay diversos ejemplos en el estudio de la Física.
+
+\begin{dfn}[Ecuaciones de orden II]
+    Sea $\mbf{x} = f(t)$, una \textbf{ecuación diferencial de segundo orden} es una ecuación de la forma: $\mbf{x}'' = F(t, \mbf{x}, \mbf{x}')$
+\end{dfn}
+
+\begin{obs}
+    La ecuación $\mbf{x}'' = 5\mbf{x}'$ es de orden 2 sólo formalmente, ya que se resuelve como una de primer orden. Con $y(t) = 5\mbf{y}, \mbf{y}' = 5\mbf{y} \implies y(t) = ce^{5t} \implies x(t) = \int C e^{5t} = a + b e^5t$. Sin embargo tenemos dos parametros, para determinarlos necesitamos añadir dos condiciones.El PVI entonces sería del tipo:
+    $$
+        \begin{cases}
+            \mbf{x}'' = 5\mbf{x}'\\
+            x(0) = 1\\
+            x'(0) = 0
+        \end{cases}
+    $$
+    Con esto hallaríamos $a+b = 1$, $b=0$.\\\\
+    Sin embargo, podemos tener otro tipo de condiciones que no serían un PVI, por ejemplo, dar dos condiciones para x(t) y ninguna para x'(t). Estas no tienen aseguradas existencia y unicidad y lo veremos más adelante.
+\end{obs}
+
+Como fuente de ejemplos para esta sección utilizaremos la segunda ley de Newton $F = m\cdot a$.
+
+\begin{eg}[Muelles]\label{eg:muelle}
+    %%TODO: Incluir dibujo del muelle.
+      \begin{center}
+        \includegraphics[height=0.1\textheight]{1-muelle.png}
+      \end{center}
+        Consideramos que $x=0$ corresponde a la situación de equilibrio, es decir totalmente parado. Además vamos a suponer que:
+        \begin{itemize}
+            \item no hay fricción con la superficie ni con el aire.
+            \item tenemos movimientos oscilatorios desde la situación de equilibrio.
+            \item la masa es puntual.
+        \end{itemize}
+        La fuerza por tanto se expresa como $F = -k x$, donde $k$ es la constante del muelle y es negativa por que va en sentido contrario al vector posición con origen en $x=0$.\\\\
+        La ecuación diferencial de este modelo es:
+        $$
+            m\mbf{x}'' = -k \mbf{x} \implies \mbf{x}'' = -\frac{k}{m}\cdot \mbf{x}
+        $$
+    Consideramos que $x=0$ corresponde a la situación de equilibrio, es decir totalmente parado. Además vamos a suponer que:
+    \begin{itemize}
+        \item no hay fricción con la superficie ni con el aire.
+        \item tenemos movimientos oscilatorios desde la situación de equilibrio.
+        \item la masa es puntual.
+    \end{itemize}
+    La fuerza por tanto se expresa como $F = -k x$, donde $k$ es la constante del muelle y es negativa por que va en sentido contrario al vector posición con origen en $x=0$.\\\\
+    La ecuación diferencial de este modelo es:
+    $$
+        m\mbf{x}'' = -k \mbf{x} \implies \mbf{x}'' = -\frac{k}{m}\cdot \mbf{x}
+    $$
+    Vamos a hallar sus soluciones. Definimos $y(t) = x(\alpha t)$ (para \textit{esconder} el parametro $\frac{k}{m}$), vamos a ver cual es este $\alpha$:
+    $$
+    \mbf{y}'' = \alpha^2\cdot \mbf{x}''(\alpha t) = a^2\left(-\frac{k}{m}\cdot x(\alpha t)\right) = -\frac{k}{m} \alpha ^2\cdot y(t)
+    $$
+    Eligiendo $\alpha = \sqrt{\frac{m}{k}}$ tenemos $\mbf{y}'' = -\mbf{y}$. Vemos fácilmente que:\\\\
+    \begin{enumerate}
+        \item $\sin (t)$ y $\cos(t)$ son soluciones.
+        \item $\mbf{y}'' = \mbf{y}$ es lineal.\\\\
+        Es decir, si $y_1(t), y_2(t)$ son solución, entonces:
+        $$
+            \alpha_1 \mbf{y}_1 + \alpha_2 \mbf{y}_2 \text{ es solución } \forall \alpha_1, \alpha_2 \in \R
+        $$
+        Entonces con $\mbf{y}_1 = \sin$, $\mbf{y}_2 = \cos$ sabemos que:
+        $$
+            \alpha_1\sin(t) + \alpha_2\cos(t) \text{ es solución.}
+        $$
+        A priori no sabemos si estas son todas las soluciones. Podemos asegurar que sí con el teorema \ref{thm:exist-unic-ii} que se enuncia tras este ejemplo.\\\\
+        Dados cualquier $y_0$, $y_1$ entonces:
+        $$
+            \exist \alpha, \beta : \mbf{y}_{\alpha, \beta} = \alpha \sin (t) + \beta \cos (t)
+        $$
+        que cumplen:
+        $$
+            \beta = y_{\alpha, \beta} (0) = y_0.\text{         } \alpha = y_{\alpha, \beta}'(0) = y_1.
+        $$
+        es decir, $\alpha, \beta$ forman el vector $(\alpha$ $\beta)$ = $(y_1$ $y_0)$. Por tanto, en el momento en que sepamos el valor $y(0)$, $y'(0)$ lo hemos resuelto pues $y(t) = y(0) \cos (t) + y'(0) \sin (t)$.
+    \end{enumerate}
+\end{eg}
+
+\begin{thm}[Existencia y unicidad para ecuaciones lineales de orden II]\label{thm:exist-unic-ii}
+    Sean: \\$(\mathcal{EC}) \equiv \mbf{x}'' + p(t)\mbf{x}' + q(t) \mbf{x} = r(t)$ con $p, q, r: [a, b] \subset \R \to \R$ continuas y $t_0 \in [a, b]$, $x_0,\ x_1 \in R$ entonces existe una solución y es única al PVI:
+    $$
+        \begin{cases}
+            \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t),\ \forall t \in [a, b].\\
+            x(t_0) = x_0\\
+            x'(t_1) = x_1\\
+        \end{cases}
+    $$
+\end{thm}
+La demostración de nuevo se deja para el caso general.\\\\
+Vamos a enunciar ciertas propiedades.
+\begin{enumerate}
+    \item Es lineal, el conjunto de soluciones es un espacio vectorial.
+    $$
+        \text{Sean } \mbf{x}_1, \mbf{x}_2 \text{ soluciones, } \alpha_1, \alpha_2 \in \R \implies \alpha_1 x_1(t) + \alpha_2 x_2(t) \text{ es solución.}
+    $$
+    \item Ese espacio vectorial tiene dimensión 2.
+\end{enumerate}
+\begin{proof} (\textit{A las propiedades})\\
+    \begin{enumerate}
+        \item Se demuestra como en el ejemplo.
+        \item Sea $x_1$ la solución del PVI:
+        $$
+        \begin{cases}
+            \mbf{x}'' + p(t) \mbf{x}' + q(t) \mbf{x} = 0\\
+            x(a) = 1\\
+            x'(a) = 0
+        \end{cases}
+        $$
+        y sea $x_2$ la solución del PVI:
+        $$
+        \begin{cases}
+            \mbf{x}'' + p(t) \mbf{x}' + q(t) \mbf{x} = 0\\
+            x(a) = 0\\
+            x'(a) = 1
+        \end{cases}
+        $$
+        Por existencia y unicidad, $\mbf{x}_1, \mbf{x}_2$ existen en $[a,b]$. Además, ninguna es un múltiplo de la otra, es decir, son linealmente independientes pues:
+        \begin{itemize}
+            \item Cualquier $\mbf{x} = \alpha \mbf{x}_1$ cumple $x'(a) = 0$ pero $x_2'(a) \neq 0$.
+            \item Cualquier $\mbf{x} = \beta \mbf{x}_2$ cumple $x(a) = 0$ pero $x_1(a) \neq 0$.
+        \end{itemize}
+        Por tanto, la dimensión del espacio de soluciones es al menos 2. Para ver que es justo dos se sigue:\\\\
+        Dada cualquier solución x(t) de la ecuación
+        $$
+            x(t) = x(a) \cdot x_1(t) + x'(a) \cdot x_2(t)
+        $$ %%TODO: Clarificar.
+        por unicidad, el término de la derecha es solución con:
+        $$
+            \begin{cases}
+                \text{ valor en a igual a $x(a)$}\\
+                \text{ derivada en a igual a $x'(a)$}
+            \end{cases}
+        $$
+    \end{enumerate}
+\end{proof}
+
+\begin{obs}
+    Como vimos en el ejemplo \ref{eg:muelle}, para resolver $\mbf{x}'' + p(t) \mbf{x}' + q(t) \mbf{x} = 0$ basta encontrar dos soluciones linealmente independientes.
+\end{obs}
+
+\begin{eg}[Ecuaciones de orden II como sistemas]
+    Cosideramos $(\mathcal{EC} \equiv f(t, \mbf{x}, \mbf{x}'))$. Sea $\mbf{y} = \mbf{x'}$, entonces podemos resolverla resolviendo un sistema de ecuaciones. Para ello consideraremos el vector $X(t) = \left[\begin{smallmatrix} x(t) \\ y(t) \end{smallmatrix}\right]$. Si derivamos:
+    $$
+        X'(t) = \left[\begin{matrix} x'(t) \\ y'(t) \end{matrix}\right] = \left[\begin{matrix} y \\ f(t, x, x') \end{matrix}\right]= \left[\begin{matrix} y \\ f(t, x, y) \end{matrix}\right] = F(t, X)
+    $$
+    Con lo que llegamos a la expresión:
+    $$
+        X'(t) = F(t, X) \text{ que representa un sistema de ecuaciones}
+    $$
+    %%TODO: Clarificar
+
+\end{eg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 13/02
