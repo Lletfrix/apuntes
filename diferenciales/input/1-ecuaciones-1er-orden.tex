@@ -920,15 +920,15 @@ Como fuente de ejemplos para esta sección utilizaremos la segunda ley de Newton
     $$
 \end{thm}
 La demostración de nuevo se deja para el caso general.\\\\
-Vamos a enunciar ciertas propiedades.
-\begin{enumerate}
+Vamos a enunciar ciertas \textbf{propiedades}.
+\begin{enumerate} \label{properties:ecua-lin-ii}
     \item Es lineal, el conjunto de soluciones es un espacio vectorial.
     $$
-        \text{Sean } \mbf{x}_1, \mbf{x}_2 \text{ soluciones, } \alpha_1, \alpha_2 \in \R \implies \alpha_1 x_1(t) + \alpha_2 x_2(t) \text{ es solución.}
+        \text{Sean } \mbf{x}_1, \mbf{x}_2 \text{ soluciones de la homogénea, } \alpha_1, \alpha_2 \in \R \implies \alpha_1 x_1(t) + \alpha_2 x_2(t) \text{ es solución de la homogénea.}
     $$
     \item Ese espacio vectorial tiene dimensión 2.
 \end{enumerate}
-\begin{proof} (\textit{A las propiedades})\\
+\begin{proof} (\textit{de las propiedades})\\
     \begin{enumerate}
         \item Se demuestra como en el ejemplo.
         \item Sea $x_1$ la solución del PVI:
@@ -985,3 +985,107 @@ Vamos a enunciar ciertas propiedades.
 \end{eg}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 13/02
+\begin{pro}[Estructura de soluciones de la $(\mathcal{EC}) \equiv \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t)$] %%TODO: Esto está un poco lioso.
+    Vamos a matizar las propiedades descritas en \ref{properties:ecua-lin-ii} en forma de proposición.
+    \begin{enumerate}
+        \item Sean $p, q, r : [\alpha, \beta] \subset \R \to \R$ funciones continuas, el conjunto de soluciones de la EDO homogénea $(\mathcal{EC H}) \equiv \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = 0$ es un espacio vectorial de dimensión 2. Es decir, existen 2 soluciones linealmente independientes $x_1(t)$, $x_2(t)$.\\Además, todas las soluciones son de la forma $\alpha_1  x_1(t) + \alpha_2 x_2(t)$ con $\alpha_1, \alpha_2 \in \R$.\\\\
+            Este par $(\mbf{x}_1, \mbf{x}_2)$ se obtiene, por ejemplo, resolviendo los PVI:
+            $$
+                \begin{cases}
+                    \mbf{x}''+p(t)\mbf{x}'+q(t)\mbf{x}=0\\
+                    x(t_0)=1
+                    x'(t_0)=0
+                \end{cases}
+                \begin{cases}
+                    \mbf{x}''+p(t)\mbf{x}'+q(t)\mbf{x}=0\\
+                    x(t_0)=0
+                    x'(t_0)=1
+                \end{cases}
+            $$
+            \item Sea $x_p(t)$ una solución particular de $(\mathcal{EC})$ entonces cualquier solución se escribe:
+            $$
+                x(t) = x_p(t) + \alpha_1 \cdot x_1(t) + \alpha_2 \cdot x_2(t)
+            $$
+    \end{enumerate}
+\end{pro}
+\begin{proof}
+    La prueba de cada apartado:\\
+    \begin{enumerate}
+        \item Visto en la demostración de las propiedades \ref{properties:ecua-lin-ii}.
+        \item Si $x(t)$ resuelve la EDO, entonces $x(t) - x_p(t)$ resuelve la EDO homogénea asociada. Por tanto $\exists \alpha_1, \alpha_2 \in \R : x(t) - x_p(t) = \alpha_1 x_1(t) + \alpha_2 x_2(t)$.
+    \end{enumerate}
+\end{proof}
+\begin{obs}
+    El procedimiento habitual es resolver primero la ecuación homogénea y luego buscar la solución particular de la EDO original. Se dice que la solución general de la EDO original = solución particular + solución general de la homogénea.
+\end{obs}
+\subsection{Ecuaciones lineales de orden 2 con coeficientes constantes.}
+Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos a ver distintos ejemplos para la resolución de este tipo de ecuaciones.
+\begin{eg}[Ecuación lineal de orden 2: $ \mbf{x}'' + 3\mbf{x}' + 2\mbf{x} = 0 $]
+    \begin{itemize}
+        \item Intentamos $x(t) = e^{\lambda t},\ \forall \lambda\in \R$. Que sea solución quiere decir que $(\lambda^2 + 3\lambda + 2)\cdot e^{\lambda t} = 0$, entonces $e^{\lambda t} \text{ es solución } \iff \lambda^2+3\lambda+2=0 \implies \lambda = -1 \text{ o } \lambda = -2 $. De esta forma podemos hallamos:
+        \begin{gather*}
+            x_1(t) = e^{-t}\\
+            x_2(t) = e^{-2t}
+        \end{gather*}son soluciones.
+        \item Por tanto, como son linealmente independientes $\implies x(t) = \alpha_1 e^{-t} + \alpha_2 e^{-2t}$ es la solución general.
+    \end{itemize}
+\end{eg}
+\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0$]\label{eg:ecua-lin-ii-gen}
+    Volviendo a intentar $x(t) = e^{\lambda t}$, tenemos que $e^{\lambda t}$ es solución $\iff \lambda^2+a\lambda+b=0$. De aqui deducimos distintos casos:
+        \begin{itemize}
+            \item $\lambda_1 \neq \lambda_2 \in \R \iff (a^2 - 4b > 0)$, las soluciones son:
+            \begin{gather*}
+                \mbf{x}_1 = e^{\lambda_1 t} \\ \mbf{x}_2 = e^{\lambda_2 t}
+            \end{gather*}
+            \item $\lambda_1 \neq \lambda_2 \not\in \R \iff (a^2 - 4b < 0)$.\\\\
+            Como los coeficientes $a,b \in \R \implies \lamdba_2 = \bar{\lambda_1}$. Si $\lambda_1 = \mu + i \omega \implies \lambda_2 = \mu - i \omega$, y con $\omega \neq 0 \implies (\lambda_1 \neq \lambda_2)$. Entonces:
+            $$
+                e^{\lambda_1 t} = e^{\mu t + i \omega t} = e^{\mu t} e^{i\omega t} = e^{\mu t} \cdot (\cos(\omega t) + i\sin(\omega t)) = e^{\mu t} \cos(\omega t) + i e^{\mu t} \sin (\omega t)
+            $$
+            Afirmamos entonces que:
+            \begin{gather*}
+                \mbf{x}_1 = e^{\mu t} \cos(\omega t) \\ \mbf{x}_2 = e^{\mu t} \sin(\omega t)
+            \end{gather*}
+            son soluciones y linealmente independientes.
+            \item $\lambda_1 = \lambda_2 \in \R$
+            \begin{gather*}
+                x_1(t) = e^{\lambda_1 t} \\ x_2(t) = t e^{\lambda_1 t}
+            \end{gather*} son solución y linealmente independientes.
+        \end{itemize}
+\end{eg}
+
+\begin{th_ex}
+    Comprobar en el caso 3 del ejemplo anterior que $x_2(t) = t e^{\lambda_1 t}$ es solución y linealmente independiente de $x_1$.
+\end{th_ex}
+
+\begin{eg}[Ecuación lineal de orden 2: $ \mbf{x}'' + \mbf{x}' + \mbf{x} = 0 $]
+    Siguiendo el ejemplo \ref{eg:ecua-lin-ii-gen}, es una ecuación del caso 2. $\lambda = \frac{-1 \pm i\sqrt{3}}{2} \implies \mu = -\frac{1}{2},\ \omega = \frac{\sqrt{3}}{2}$. Y nuestra solución es:
+    \begin{gather*}
+        \mbf{x}_1 = e^{-\sfrac{1}{2}} \sin\left(\frac{\sqrt{3}}{2}\right) \\ \mbf{x}_2 = e^{-\sfrac{1}{2}} \cos\left(\frac{\sqrt{3}}{2}\right)
+    \end{gather*}
+\end{eg}
+
+\begin{eg}[Ecuación lineal de orden 2: $ \mbf{x}'' + 2\mbf{x}' + \mbf{x} = 0 $]
+    Es fácil ver que $\lambda_1 = \lambda_2 = 1$. Siguiendo \ref{eg:ecua-lin-ii-gen}, las soluciónes son:
+    \begin{gather*}
+        x_1(t) = e^{ t} \\ x_2(t) = t e^{t}
+    \end{gather*}
+\end{eg}
+
+\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+2\mbf{x}=te^t$ ] %%TODO: Completar de la foto.
+    Intentamos ver si $x(t) = e^t(\alpha + \beta t)$ es solución. Entonces:
+    \begin{gather*}
+        x'(t) = e^{ t}(\alpha + \beta + \beta t) \\ x''(t) = e^t (\alpha + 2\beta + \beta t)
+    \end{gather*}
+    Sustituyendo en la ecuación original:
+    $$
+        \mbf{x}''+3\mbf{x}'+2\mbf{x} = e^t (6 \beta t + 6 \alpha + 5 \beta) \text{ entonces,}
+    $$
+    $$
+        e^t (6 \beta t + 6 \alpha + 5 \beta) = te^t \implies \begin{cases}
+            6\beta = 1\\
+            6\alpha + 5\beta = 0
+    \end{cases}
+    $$ que es fácil de resolver para $\alpha$ y $\beta$.
+\end{eg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 14/02
