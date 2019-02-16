@@ -1072,7 +1072,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
     \end{gather*}
 \end{eg}
 
-\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+2\mbf{x}=te^t$ ] %%TODO: Completar de la foto.
+\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+2\mbf{x}=te^t$ ]\label{eg:ecua-lin-tet} %%TODO: Completar de la foto.
     Intentamos ver si $x(t) = e^t(\alpha + \beta t)$ es solución. Entonces:
     \begin{gather*}
         x'(t) = e^{ t}(\alpha + \beta + \beta t) \\ x''(t) = e^t (\alpha + 2\beta + \beta t)
@@ -1089,3 +1089,73 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
     $$ que es fácil de resolver para $\alpha$ y $\beta$.
 \end{eg}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 14/02
+\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+2\mbf{x}=te^{-t}$ ]
+    Si intentamos hacerlo como en el ejemplo \ref{eg:ecua-lin-tet} no podremos resolverlo.\\ Vamos a intentar el cambio $x(t) = e^{-t} (\alpha + \beta + \gamma t^2)$, donde veremos que $\alpha$ sobra y que $\gamma$ es necesario. Entonces la ecuación queda como:
+    $$
+        \mbf{x}' = e^{-t} (-\alpha -\beta t - \gamma t^2 + \beta + 2 t) \implies \ldots \implies \mbf{x}'' + 3\mbf{x}' + 2x = e^{-t} (4\gamma + 2\beta + 2\gamma t)
+    $$
+    Vemos que no aparece el término $\alpha$, esto es por que $e^{-\lambda t}$ cuando $\lambda$ es un autovalor de la ecuación homogénea es solución. Es decir,
+    $$
+        x(t) = e^{-t}(t-\frac{t^2}{2}) \text{ es una solución particular.}
+    $$
+\end{eg}
+\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+\mbf{x}=te^{-t}$]
+    En este caso, si intentamos que $x(t) = e^{\lambda t}$ sea solución de la homogénea $\mbf{x}'' + 2\mbf{x}' + \mbf{x} = 0$, tenemos que resolver para $\lambda^2 + 2\lambda + 1 = 0$, de donde obtenemos la solución doble: $\lambda = -1$.\\\\
+    Se puede comprobar que dos soluciones independientes de la homogénea son $e^{-t},\ te^{-t}$. Para buscar una solución particular de la ecuación orginal tomamos:
+    $$
+        x(t) = (\alpha + \beta t + \gamma t^2 + \delta t^3) e^{-t}
+    $$
+    De donde veremos que $\alpha + \beta t$ sobrarán. La idea subyacente es que tenemos que añadir tantos grados al polinomio $x(t)$ como la multiplicidad de las raíces.
+\end{eg}
+\begin{obs}
+    Lo que hemos hecho para la resolución ha sido tomar:
+    $$
+        x(t) = e^{\gamma t} \cdot pol(t) \implies x'(t) \text{ es del mismo tipo que } e^{\gamma t} \cdot \hat{pol}(t)
+    $$
+    Nos gustaría saber que familias cumplen la propiedad anterior.
+    \begin{enumerate}
+        \item $e^{\gamma t} pol(t)$, con pol(t) un polinomio de cualquier grado. Si $\gamma$ es una solución de intentar $e^{\gamma t}$ como solución a la homogénea, entonces tenemos que añadir tantos grados al polinomio como multiplicidad de $\gamma$ en la ecuación que resuelve. Como caso particular si $\gamma = 0$, nuestra expresión son sólo polinomios.
+        \item $e^{\gamma t} (pol_1(t) \sin(\alpha t) + pol_2(t)\cos(\alpha t))$. Análogo con los complejos. %%TODO: Dijo Antonio que es irrelevante.
+    \end{enumerate}
+\end{obs}
+\subsection{Ecuaciones lineales de orden 2 con coeficientes no constantes.}
+
+Vamos a comentar algunos resultados para el caso general de ecuaciones lineales de orden 2. Es decir, para la ecuación:
+$$
+    \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t), \text{ con } p,q,r : [\alpha, \beta] \subset \R \to \R \text{ continuas.}
+$$
+y por tanto, tenemos existencia y unicidad para el PVI:
+$$
+    \begin{cases}
+        \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t)\\
+        x(t_0) = x_0
+        x'(t_0) = y_0`
+    \end{cases}
+$$
+
+\begin{enumerate}
+    \item Si se tiene una solución $x_1(t)$ de la homogénea  $(\mathcal{ECH}) \equiv \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = 0$ y $x_1(t) \neq 0\ \forall t \in [\alpha, \beta]$ se puede encontrar una segunda linealmente independiente de la primera, de la forma: $x_2(t) = u(t) x_1(t)$ con $u(t)$ apropiada.
+
+    \item $\mbf{x}_1$, $\mbf{x}_2$ linealmente independientes y soluciones de la homogénea, se puede encontrar una solución particular de $\mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t)$ de la forma:
+    $u_1(t) x_1(t) + u_2(t)x_2(t)$.
+\end{enumerate}
+
+\begin{proof}
+    Se considera que $x_1(t)$ es suficientemente buena como para no tener ningún caso crítico durante el desarrollo de la prueba.\\\\
+    \begin{enumerate}
+        \item Sea $x(t) = u(t)x_1(t) \implies \mbf{x}' = \mbf{u}'\mbf{x}_1 + \mbf{u}\mbf{x}_1' \text{ y } \mbf{x}'' = \mbf{u}''\mbf{x}_1 + 2\mbf{u}'\mbf{x}_1' + \mbf{u}\mbf{x}_1''$. Entonces:
+        $$
+            \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = \mbf{u}(\mbf{x}_1'' +p(t)\mbf{x}_1' + q(t)\mbf{x}_1) + \mbf{u}'(2\mbf{x}_1' + p\mbf{x}_1) + \mbf{u}''\mbf{x}_1= 0
+        $$ y por tanto, $u(t) \cdot x_1(t)$ es solución de la homogénea $\iff \mbf{u}''\mbf{x}_1 + \mbf{u}(2\mbf{x}_1' + p(t)\mbf{x}_1) = 0$ pues $ \mbf{u}(\mbf{x}_1'' +p(t)\mbf{x}_1' + q(t)\mbf{x}_1) = 0$.\\\\
+        Si llamamos $y(t) = u'(t)$ entonces:
+        \begin{gather*}
+            \mbf{y}' = -\frac{2\mbf{x}_1' + p(t)\mbf{x}_1}{\mbf{x}_1}\cdot y = \left(-\frac{2\mbf{x}_1'}{\mbf{x}_1} + p(t) \right) y \implies \\
+            \implies \int \frac{\d y}{y} = \int \frac{-2\mbf{x}_1'}{\mbf{x}_1} - p(t) dt \implies \\
+            \implies \mbf{y} = \frac{e^{-P(t)}}{x_1^2(t)} \text{ donde } P'(t) = p(t)
+        \end{gather*}
+        por tanto, como $\mbf{u}' = \mbf{y} \implies u(t) = \int \frac{\mbf{u}^{-P}}{\mbf{x}_1^2} $
+    \end{enumerate}
+    Entonces, $x_2(t) = u(t)x_1(t)$ con $u(t)$ una primitiva de $\frac{\mbf{u}^{-P}}{\mbf{x}_1^2} $ es solución de la homogénea y es linealmente independiente de $\mbf{x}_1$ pues basta er que $u(t) \neq $ constante. Y esto es cierto pues es la primitiva de una exponencial, que nunca se anula.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 18/02
+    \item
+\end{proof}
