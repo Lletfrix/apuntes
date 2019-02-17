@@ -162,7 +162,7 @@ Si repetimos el procedimiento de determinar como son las pendientes (como acabam
       \end{center}
     \end{minipage}\hfill
     \begin{minipage}[c]{0.65\textwidth}
-        Hemos representado las isoclinas junto con un pequeño segmento de pendiente $c$ para disintos valores de $c$. Como las isoclinas cumplen que $t^2 + \mbf{x}^2 = c$, estas son las circumferencias de radio $\sqrt{c}$ con $c > 0$.\\
+        Hemos representado las isoclinas junto con un pequeño segmento de pendiente $c$ para disintos valores de $c$. Como las isoclinas cumplen que $t^2 + \mbf{x}^2 = c$, estas son las circunferencias de radio $\sqrt{c}$ con $c > 0$.\\
         Podemos observar tambien que $ISO_0 = \{(0,0)\}$ e $ISO_{c < 0} = \varnothing$.\\\\ Llamamos a la gráfica con pequeños segmentos \textit{campo de pendientes} y por tanto, una función que resuelva $\P$ tiene que ser tangente al segmento del punto por el que pase.
     \end{minipage}
     Sin embargo, los campos de pendientes permiten ver cómo es la función a grandes rasgos. En nuestro ejemplo parece indicar que $x(t) \uparrow \infty$, pero no sabemos si lo hace de forma asintótica ($x(t) \uparrow \infty$ en t finito), o x(t) crece a infinito cuando $t \rightarrow \infty$.\\
@@ -292,13 +292,13 @@ Para ello tenemos que empezar analizando la expresión de la tangente como ecuac
   \begin{center}
     \includegraphics{1-ortogonalpolares.png}
   \end{center}
-  \caption{Analisis de $\d r$ y $\d \theta$}\label{img:1-polort}
+  \caption{Análisis de $\d r$ y $\d \theta$}\label{img:1-polort}
 \end{wrapfigure}
 En la figura \ref{img:1-polort} hemos trazado una curva arbitraria $C$. Queremos hallar una ecuación diferencial que describa a la tangente en cierto punto $p = (r,\theta)$. Para ello, hallamos un nuevo punto $q = (r + \d r, \theta +\d \theta) \in C$. Se indica además la cirfumferencia $s$ de radio $r$ con centro en $0$, y la recta tangente $t$ al punto original $p$.\\\\
 Observamos que $s$ es perpendicular a las rectas que unen el origen con $p$ y $q$ ($\vec{0p}$ y $\vec{0q}$ respectivamente), ya que son trazadas desde el radio de la misma. Además, la intersección de $\vec{0q}$ con $s$ nos marca el punto $q' = (r, \theta +\d \theta)$. Finalmente, denominamos $\phi$ al ángulo del que queremos hallar la tangente.
 
 El gráfico de la figura \ref{img:1-polort} está distorsionado. Tanto $\d r$ como $\d \theta$ son infinitesimales, es decir, extremadamente pequeños. Debido a ello podemos hacer distintas asunciones.\\\\
-Para comenzar, el arco de circumferencia que une $p$ y $q'$ tiene longitud $r\d \theta$ y podemos aproximarlo con un segmento que va a ser perpendicular a las rectas $\vec{0p}$ y $\vec{0q}$. Esto hará que $\vec{0p}$ y $\vec{0q}$ sean aproximadamente paralelas, pues comparten un mismo segmento perpendicular a ellas.\\ Además, podemos aproximar el arco de $C$ que une $p$ y $q$ con un segmento de $t$. Esto se ilustra en la figura \ref{img:1-polort2}.
+Para comenzar, el arco de circunferencia que une $p$ y $q'$ tiene longitud $r\d \theta$ y podemos aproximarlo con un segmento que va a ser perpendicular a las rectas $\vec{0p}$ y $\vec{0q}$. Esto hará que $\vec{0p}$ y $\vec{0q}$ sean aproximadamente paralelas, pues comparten un mismo segmento perpendicular a ellas.\\ Además, podemos aproximar el arco de $C$ que une $p$ y $q$ con un segmento de $t$. Esto se ilustra en la figura \ref{img:1-polort2}.
 
 \begin{wrapfigure}{r}{.5\textwidth}
   \begin{center}
@@ -307,7 +307,7 @@ Para comenzar, el arco de circumferencia que une $p$ y $q'$ tiene longitud $r\d 
   \caption{Aproximación por infinitesimales}\label{img:1-polort2}
 \end{wrapfigure}
 
-Como puede apreciarse en \ref{img:1-polort2}, el área sombreada se corresponde con un triangulo rectángulo en la aproximación, y de hecho tenemos descritos los catetos, lo que nos permite hallar $\tan\phi'$. Sin embargo, como hemos visto en la aproximación, ambas rectas perpendiculares a $ts$ son paralelas entre sí. Es fácil ver entonces que $\phi = \phi'$ y al describir $\tan\phi'$ hemos descrito $\tan\phi$.\\\\
+Como puede apreciarse en \ref{img:1-polort2}, el área sombreada se corresponde con un triángulo rectángulo en la aproximación, y de hecho tenemos descritos los catetos, lo que nos permite hallar $\tan\phi'$. Sin embargo, como hemos visto en la aproximación, ambas rectas perpendiculares a $ts$ son paralelas entre sí. Es fácil ver entonces que $\phi = \phi'$ y al describir $\tan\phi'$ hemos descrito $\tan\phi$.\\\\
 Por tanto, podemos concluir que:
 $$
 \tan\phi = \frac{r\d \theta}{\d r} = r \frac{1}{\dd{r}{\theta}} = \frac{r}{r'}
@@ -330,7 +330,7 @@ donde a la derecha de la ecuación figura todo lo relacionado con la curva origi
 $$
 \frac{r}{r'} = -\frac{1}{\sfrac{r}{r'}} = -\frac{1}{\sfrac{r}{h(r,\theta)}} \implies \frac{r}{r'} = -\frac{h(r,\theta)}{r}
 $$
-Finalmente, de la expreisón anterior hallamos la ecuación diferencial general para describir a $fam_{C^\perp}$ a partir de la función $h(r, \theta)$ que describe a $fam_C$:
+Finalmente, de la expresión anterior hallamos la ecuación diferencial general para describir a $fam_{C^\perp}$ a partir de la función $h(r, \theta)$ que describe a $fam_C$:
 $$
     r' = -\frac{r^2}{h(r, \theta)}
 $$
@@ -1038,7 +1038,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
                 \mbf{x}_1 = e^{\lambda_1 t} \\ \mbf{x}_2 = e^{\lambda_2 t}
             \end{gather*}
             \item $\lambda_1 \neq \lambda_2 \not\in \R \iff (a^2 - 4b < 0)$.\\\\
-            Como los coeficientes $a,b \in \R \implies \lamdba_2 = \bar{\lambda_1}$. Si $\lambda_1 = \mu + i \omega \implies \lambda_2 = \mu - i \omega$, y con $\omega \neq 0 \implies (\lambda_1 \neq \lambda_2)$. Entonces:
+            Como los coeficientes $a,b \in \R \implies \lambda_2 = \bar{\lambda_1}$. Si $\lambda_1 = \mu + i \omega \implies \lambda_2 = \mu - i \omega$, y con $\omega \neq 0 \implies (\lambda_1 \neq \lambda_2)$. Entonces:
             $$
                 e^{\lambda_1 t} = e^{\mu t + i \omega t} = e^{\mu t} e^{i\omega t} = e^{\mu t} \cdot (\cos(\omega t) + i\sin(\omega t)) = e^{\mu t} \cos(\omega t) + i e^{\mu t} \sin (\omega t)
             $$
@@ -1094,7 +1094,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
     $$
         \mbf{x}' = e^{-t} (-\alpha -\beta t - \gamma t^2 + \beta + 2 t) \implies \ldots \implies \mbf{x}'' + 3\mbf{x}' + 2x = e^{-t} (4\gamma + 2\beta + 2\gamma t)
     $$
-    Vemos que no aparece el término $\alpha$, esto es por que $e^{-\lambda t}$ cuando $\lambda$ es un autovalor de la ecuación homogénea es solución. Es decir,
+    Vemos que no aparece el término $\alpha$, esto es porque $e^{-\lambda t}$ cuando $\lambda$ es un autovalor de la ecuación homogénea es solución. Es decir,
     $$
         x(t) = e^{-t}(t-\frac{t^2}{2}) \text{ es una solución particular.}
     $$
@@ -1155,7 +1155,7 @@ $$
         \end{gather*}
         por tanto, como $\mbf{u}' = \mbf{y} \implies u(t) = \int \frac{\mbf{u}^{-P}}{\mbf{x}_1^2} $
     \end{enumerate}
-    Entonces, $x_2(t) = u(t)x_1(t)$ con $u(t)$ una primitiva de $\frac{\mbf{u}^{-P}}{\mbf{x}_1^2} $ es solución de la homogénea y es linealmente independiente de $\mbf{x}_1$ pues basta er que $u(t) \neq $ constante. Y esto es cierto pues es la primitiva de una exponencial, que nunca se anula.
+    Entonces, $x_2(t) = u(t)x_1(t)$ con $u(t)$ una primitiva de $\frac{\mbf{u}^{-P}}{\mbf{x}_1^2} $ es solución de la homogénea y es linealmente independiente de $\mbf{x}_1$ pues basta ver que $u(t) \neq $ constante. Y esto es cierto pues es la primitiva de una exponencial, que nunca se anula.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 18/02
     \item
 \end{proof}
