@@ -1132,14 +1132,15 @@ $$
         x'(t_0) = y_0
     \end{cases}
 $$
-
+\begin{pro}[Método de variación de constantes]
+    Vamos a enunciar un método para encontrar soluciones particulares a partir de la solución de la ecuación homogénea:\\\\
 \begin{enumerate}
     \item Si se tiene una solución $x_1(t)$ de la homogénea  $(\mathcal{ECH}) \equiv \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = 0$ y $x_1(t) \neq 0\ \forall t \in [\alpha, \beta]$ se puede encontrar una segunda linealmente independiente de la primera, de la forma: $x_2(t) = u(t) x_1(t)$ con $u(t)$ apropiada.
 
-    \item $\mbf{x}_1$, $\mbf{x}_2$ linealmente independientes y soluciones de la homogénea, se puede encontrar una solución particular de $\mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t)$ de la forma:
-    $u_1(t) x_1(t) + u_2(t)x_2(t)$.
+    \item $\mbf{x}_1$, $\mbf{x}_2$ linealmente independientes y soluciones de la homogénea (con $r(t) = 0$), se puede encontrar una solución particula r$\mbf{x}_p$ de $\mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t)$ de la forma:
+    $$\mbf{x}_p = u_1(t) x_1(t) + u_2(t)x_2(t)$$.
 \end{enumerate}
-
+\end{pro}
 \begin{proof}
     Se considera que $x_1(t)$ es suficientemente buena como para no tener ningún caso crítico durante el desarrollo de la prueba.\\\\
     \begin{enumerate}
@@ -1154,8 +1155,197 @@ $$
             \implies \mbf{y} = \frac{e^{-P(t)}}{x_1^2(t)} \text{ donde } P'(t) = p(t)
         \end{gather*}
         por tanto, como $\mbf{u}' = \mbf{y} \implies u(t) = \int \frac{\mbf{u}^{-P}}{\mbf{x}_1^2} $
-    \end{enumerate}
+
     Entonces, $x_2(t) = u(t)x_1(t)$ con $u(t)$ una primitiva de $\frac{\mbf{u}^{-P}}{\mbf{x}_1^2} $ es solución de la homogénea y es linealmente independiente de $\mbf{x}_1$ pues basta ver que $u(t) \neq $ constante. Y esto es cierto pues es la primitiva de una exponencial, que nunca se anula.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 18/02
-    \item
+    \item Sea $\mbf{x} = x_p(t) = u_1(t) x_1(t) + u_2(t)x_2(t)$ una solución particular. Entonces:
+    $$
+        \mbf{x}' = \mbf{u}_1 \mbf{x}_1' + \mbf{u}_2 \mbf{x}_2' + \mbf{u}_1' \mbf{x}_1 + \mbf{u}_2' \mbf{x}_2
+    $$
+    donde pedimos que
+
+    \begin{equation}\ref{eq:ecua-lin-cond-1}
+        \mbf{u}_1' \mbf{x}_1 + \mbf{u}_2' \mbf{x}_2 = 0
+    \end{equation}
+    Además:
+    $$
+        \mbf{x}'' = (\mbf{u}_1 \mbf{x}_1' + \mbf{u}_2 \mbf{x}_2')' = \mbf{u}_1 \mbf{x}_1'' + \mbf{u}_2 \mbf{x}_2'' + \mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2'
+    $$
+    Y sustituyendo en nuestra EDO original:
+    $$
+        \mbf{x}'' + p(t) \mbf{x}' + q(t) \mbf{x} = \mbf{u}_1 ( \mbf{x}_1'' + p(t) \mbf{x}_1' + q(t) \mbf{x}_1) + \mbf{u}_2 ( \mbf{x}_2'' + p(t) \mbf{x}_2' + q(t) \mbf{x}_2)  + \mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2' = r(t)
+    $$
+    Donde los dos primeros sumandos son nulos pues $\mbf{x}_1,\ \mbf{x}_2$ son soluciones de la homogénea, así hallamos la condición $\mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2' = r(t)$. Y por la condición que pedimos en \label{eq:ecua-lin-cond-1}, $\mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2'$ es solución de $x(t) = \mbf{u}_1 \mbf{x}_1 + \mbf{u}_2 \mbf{x}_2 \iff$ se resuelve el sistema:
+    $$
+        \begin{cases}
+            \mbf{u}_1' \mbf{x}_1 + \mbf{u}_2' \mbf{x}_2 = 0\\
+            \mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2 = r
+        \end{cases} \text{es decir }
+        \left[
+        \begin{matrix}
+            x_1(t_0) & x_2(t_0)\\
+            x_1'(t_0) & x_2'(t_0)
+        \end{matrix}
+        \right]
+        \left[
+        \begin{matrix}
+            u_1(t_0) & u_2(t_0)\\
+            u_1'(t_0) & u_2'(t_0)
+        \end{matrix}
+        \right] =
+        \left[
+        \begin{matrix}
+            0\\
+            r(t)
+        \end{matrix}
+        \right]
+    $$
+    Donde llamamos a la primera matriz $W(t)$, el <<wronskiano>> de $\mbf{x}_1,\ \mbf{x}_2$.\\\\
+    Para ayudarnos con la demostración vamos a hacer uso del lema \ref{pro:lin-impl-wrost} que se enuncia posteriormente. Este lema nos dice que si $\mbf{x}_1, \mbf{x}_2$ son linealmente independientes entonces $W(t) \neq 0\ \forall t\in[\alpha, \beta]$.\\\\
+    Sabiendo esto, $W(t)$ es invertible y entonces:
+    $$
+        \left[
+            \begin{matrix}
+                \mbf{u}_1'\\
+                \mbf{u}_2'\\
+            \end{matrix}
+        \right] = W^{-1} \cdot
+        \left[
+            \begin{matrix}
+                0\\
+                r\\
+            \end{matrix}
+        \right] \implies
+        \begin{cases}
+            \mbf{u}_1' = \frac{-x_2(t) r(t)}{W(t)}\\
+            \mbf{u}_2' = \frac{x_1(t) r(t)}{W(t)}
+        \end{cases}
+    $$ y finalmente hallamos $\mbf{u}_1, \mbf{u}_2$ como primitivas de lo anterior:
+    \begin{gather*}
+        \mbf{u}_1 = \int_u^t \frac{-x_2(s) r(s)}{W(s)} \d s \\
+        \mbf{u}_2 = \int_u^t \frac{x_1(s) r(s)}{W(s)} \d s
+    \end{gather*}
+    \end{enumerate}
 \end{proof}
+\begin{pro}[Linealmente independiente $\implies$ wronskiano no nulo en todo punto]\label{pro:lin-impl-wrost}
+    Sean $\mbf{x}_1, \mbf{x}_2$ soluciones linealmente independientes. Sea
+    $$
+        W(t) = \left[
+        \begin{matrix}
+            x_1(t_0) & x_2(t_0)\\
+            x_1'(t_0) & x_2'(t_0)
+        \end{matrix}
+        \right]
+    $$ entonces, $W(t) \neq 0\ \forall t\in[\alpha, \beta]$
+\end{pro}
+\begin{proof}
+    Demostraremos el contrarrecíproco, es decir, si $W(t_0) = 0$ en algun punto entonces $\mbf{x}_1, \mbf{x}_2$ son linealmente dependientes.\\\\
+    Si $\exists t_0 \in [\alpha, \beta] : W(t_0) = 0$ entonces las columnas de
+    $$
+    \left[
+    \begin{matrix}
+        x_1(t_0) & x_2(t_0)\\
+        x_1'(t_0) & x_2'(t_0)
+    \end{matrix}
+    \right]
+    $$
+    son linealmente dependientes, es decir, una es un múltiplo de la otra. Digamos que:
+    $$
+    \left[
+    \begin{matrix}
+        x_2(t_0)\\
+        x_2'(t_0)
+    \end{matrix}
+    \right] = c \cdot
+    \left[
+    \begin{matrix}
+        x_1(t_0)\\
+        x_1'(t_0)
+    \end{matrix}
+    \right]
+    $$
+    Entonces, $\mbf{x}_2$ y $c\mbf{x}_1$ satisfacen las mismas condiciones inciales y por unicidad de soluciones del PVI:
+    $$
+        \begin{cases}
+            \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = 0\\
+            x(t_0) = x_0\\
+            y(t_0) = y_0
+        \end{cases}
+    $$
+    se tiene por tanto que $x_2(t) \equiv c \cdot x_1(t)\ \forall t \in [\alpha, \beta]$, con lo que hemos demostrado el contrarrecíproco.
+\end{proof}
+\begin{pro}[Wronskiano no nulo en un punto $\implies$ linealmente independientes]
+    Si $W(t_0)\neq 0$ para algún $t_0 \in [\alpha, \beta]$ entonces $\mbf{x}_1,\ \mbf{x}_2$ son linealmente independientes. Como consecuencia, $W(t) \neq 0\ \forall t\in [\alpha, \beta]$.
+\end{pro}
+\begin{proof}
+    Directamente (si $W(t_0) \neq 0)$ entonces:
+    $$
+    \left[
+    \begin{matrix}
+        x_2(t_0)\\
+        x_2'(t_0)
+    \end{matrix}
+    \right] \neq c \cdot
+    \left[
+    \begin{matrix}
+        x_1(t_0)\\
+        x_1'(t_0)
+    \end{matrix}
+    \right] \forall c \text{ constante} \implies x_2(t) \neq c x_1(t)\ \forall c \text{ constante.}
+    $$
+\end{proof}
+\begin{th_ex}
+    Resolver la demostración anterior justificando primero que $W(t)$ satisface que $W'(t) + p(t)W(t) = 0$, y por tanto $W(t) = W(t_0)e^{-\int_{t_0}^t p(s) \d s}$. Esa expresión es siempre $0$ o siempre $\neq 0$.
+\end{th_ex}
+Como comentarios a este desarrollo:
+\begin{obs}
+    \begin{enumerate}
+    \item Puede ser útil la expresión de la derivada del determinante de una matriz de funciones:
+    $$
+        \Dd{t}
+        \left|
+        \begin{matrix}
+            a(t) & b(t) \\
+            c(t) & d(t)
+        \end{matrix}
+        \right| =
+        \left|
+        \begin{matrix}
+            a'(t) & b'(t) \\
+            c(t) & d(t)
+        \end{matrix}
+        \right| +
+        \left|
+        \begin{matrix}
+            a(t) & b(t) \\
+            c'(t) & d'(t)
+        \end{matrix}
+        \right|
+    $$
+    \item Este método también es útil para coeficientes constantes si $r(t)$ no es de las familias:
+    \begin{gather*}
+        exp \cdot pol\\
+        exp \cdot (pol_1\cdot\sin + pol_2\cdot\cos)
+    \end{gather*}
+
+    \item Estas propiedades están enunciadas sobre intervalos compactos, se pueden ir ampliando los intervalos hasta llenar $\R$.
+    \end{enumerate}
+\end{obs}
+\begin{eg}
+    Sea $(1-x^2)\mbf{y}'' - 2x\mbf{y}' + 2\mbf{y} = 0$ con $x\in(-1,\ 1)$.\\%TODO: Pedir polinomios de Legendre
+    Es facil ver que $y_1(x) = x$ es solución. Vamos a encontrar todas la soluciones de la ecuación.
+    \begin{enumerate}
+        \item Como es una ecuación homogénea de orden 2 basta encontrar $y_2(x)$ linealmente independiente de $\mbf{y}_1$.
+        \item Buscamos $y_2(x) = u(x)\cdot y_1(x) = x \cdot u(x)$. Derivando obtenemos que:\\
+        $\mbf{y}_2$ es solución $\iff \frac{\mbf{u}''}{\mbf{u}'} = \frac{4x^2-2}{x-x^3}$
+        \item Por tanto:$$
+            \log |\mbf{u}'| = \int \frac{4x^2-2}{x-x^3} \d x = \int \frac{3x^2-1}{x-x^3} \d x + \int \frac{x^2-1}{x-x^3}
+            $$
+    \end{enumerate}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 19/02
+    Como resultado obtenemos:
+    \begin{gather*}
+        u(x) = -\frac{1}{x} + \frac{1}{2}\log\left(\frac{1+x}{1-x}\right)\\
+        \mbf{y}_2 = -1 + \frac{x}{2}\log\left(\frac{1+x}{1-x}\right)
+    \end{gather*}
+\end{eg}
