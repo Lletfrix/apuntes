@@ -80,7 +80,7 @@ El crecimiento de una población de organismos lo suficientemente grandes no se 
 \end{wrapfigure}
 Habiendo encontrado las soluciones de la funcion anterior, nos preguntamos como varía la población frente al tiempo. Más adelante veremos formalmente como representar $\mbf{x}$ frente a $t$. Sin embargo, podemos razonar el aspecto de la función.
 Sabemos que tiene que corregirse cerca de L, y que si $\mbf{x} << L$ entonces tiene un crecimiento parecido al exponencial. Por tanto, podría tener el aspecto de la figura \ref{img:1-poblaciontiempo}.
-De este gráfico podemos deducir varias cosas. Para empezar, sabemos que $\mbf{x''}(t_0)=0$ tiene solución para la curva $c_2$ ya que tiene un punto de inflexión. Además, observamos disintos tipos de crecimiento en función del valor de $x(0)$ por lo que tendría sentido intentar determinar para qué valores $x_0$ obtenemos el crecimiento de $c_1$ y para cuáles el de $c_2$.
+De este gráfico podemos deducir varias cosas. Para empezar, sabemos que $\mbf{x''}(t_0)=0$ tiene solución para la curva $c_2$ ya que tiene un punto de inflexión. Además, observamos distintos tipos de crecimiento en función del valor de $x(0)$ por lo que tendría sentido intentar determinar para qué valores $x_0$ obtenemos el crecimiento de $c_1$ y para cuáles el de $c_2$.
 
 \begin{th_ex}\label{thex:29/01-0}
     ¿Para qué valores de $x_0$ se dan los diferentes crecimientos de $c_1$ y $c_2$?.\\
@@ -115,7 +115,7 @@ Vamos a generalizar el método por medio de la siguiente proposición.
     \begin{align*}
         \intertext{Por la regla de la cadena:}
             &\Dd{x} G(y(x)) = \dd{G}{\mbf{y}}(y(x)) \cdot \dd{y}{x}(x) \\
-        \intertext{Como $\dd{G}{\mbf{y}} = g(\mbf{y})$ y $\dd{y}{x} = \frac{f(x)}{g(\mbf{y})}$   por hipóstesis:}
+        \intertext{Como $\dd{G}{\mbf{y}} = g(\mbf{y})$ y $\dd{y}{x} = \frac{f(x)}{g(\mbf{y})}$   por hipótesis:}
             &\dd{G}{\mbf{y}}(y(x)) \cdot \dd{y}{x}(x) = g(y(x)) \cdot \frac{f(x)}{g(y(x))} = f(x) = \Dd{x} F(x)
         \intertext{Es decir:}
             &\Dd{x}G(y(x)) = \Dd{x}F(x) \implies \Dd{x}G(y(x)) - \Dd{x}F(x) = 0 \implies G(y(x)) - F(x)  =  \mathcal{C} \implies G(y(x)) = F(x) + \mathcal{C}
@@ -162,8 +162,8 @@ Si repetimos el procedimiento de determinar como son las pendientes (como acabam
       \end{center}
     \end{minipage}\hfill
     \begin{minipage}[c]{0.65\textwidth}
-        Hemos representado las isoclinas junto con un pequeño segmento de pendiente $c$ para disintos valores de $c$. Como las isoclinas cumplen que $t^2 + \mbf{x}^2 = c$, estas son las circunferencias de radio $\sqrt{c}$ con $c > 0$.\\
-        Podemos observar tambien que $ISO_0 = \{(0,0)\}$ e $ISO_{c < 0} = \varnothing$.\\\\ Llamamos a la gráfica con pequeños segmentos \textit{campo de pendientes} y por tanto, una función que resuelva $\P$ tiene que ser tangente al segmento del punto por el que pase.
+        Hemos representado las isoclinas junto con un pequeño segmento de pendiente $c$ para distintos valores de $c$. Como las isoclinas cumplen que $t^2 + \mbf{x}^2 = c$, estas son las circunferencias de radio $\sqrt{c}$ con $c > 0$.\\
+        Podemos observar también que $ISO_0 = \{(0,0)\}$ e $ISO_{c < 0} = \varnothing$.\\\\ Llamamos a la gráfica con pequeños segmentos \textit{campo de pendientes} y por tanto, una función que resuelva $\P$ tiene que ser tangente al segmento del punto por el que pase.
     \end{minipage}
     Sin embargo, los campos de pendientes permiten ver cómo es la función a grandes rasgos. En nuestro ejemplo parece indicar que $x(t) \uparrow \infty$, pero no sabemos si lo hace de forma asintótica ($x(t) \uparrow \infty$ en t finito), o x(t) crece a infinito cuando $t \rightarrow \infty$.\\
     Esto no puede resolverse gráficamente y veremos como resolverlo de forma analítica más adelante.
@@ -172,7 +172,7 @@ Si repetimos el procedimiento de determinar como son las pendientes (como acabam
 \section{Ecuaciones diferenciales y problemas geométricos}
 Gracias a la relación de la derivada con la tangencia de funciones, podemos plantear problemas geométricos en forma de ecuación diferencial.
 \subsection{Trayectorias ortogonales}
-De la recta tagente a un punto surge el concepto de recta normal a ese punto, que no es más que la recta perpendicular a la tangente y que pasa por dicho punto. Para ver como se relacionan estas dos rectas vamos a hacer un análisis simple. Diremos que dos curvas son ortogonales si en el punto de cruce las rectas tangentes a cada curva son perpendiculares entre sí.
+De la recta tangente a un punto surge el concepto de recta normal a ese punto, que no es más que la recta perpendicular a la tangente y que pasa por dicho punto. Para ver como se relacionan estas dos rectas vamos a hacer un análisis simple. Diremos que dos curvas son ortogonales si en el punto de cruce las rectas tangentes a cada curva son perpendiculares entre sí.
 \begin{wrapfigure}[20]{l}{0.5\textwidth}
   \begin{center}
     \includegraphics[width=0.48\textwidth]{1-trayectoriasortogonales.png}
@@ -279,7 +279,7 @@ $$
             \end{axis}
         \end{tikzpicture}\hfill \break
         \vspace{1pt}
-        En azul posibles soluciones para disintos valores de $k$, en negro la familia original\\
+        En azul posibles soluciones para distintos valores de $k$, en negro la familia original\\
         Se observa que son curvas ortogonales a la familia original.
     \end{center}
 \end{eg}
@@ -312,7 +312,7 @@ Por tanto, podemos concluir que:
 $$
 \tan\phi = \frac{r\d \theta}{\d r} = r \frac{1}{\dd{r}{\theta}} = \frac{r}{r'}
 $$
-Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitaria en forma de ecuación diferencial $r' = h(r,\theta)$, podemos hallar $fam_{C^\perp}$ que buscábamos al comienzo de la sección. Para ello, vamos a considerar de nuevo una curva arbitraria $C$ y su perpendicular $C^\perp$. Nos interesa especialmente la relación que existe entre los ángulos de las rectas tangentes de cada curva.\\\\
+Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitraria en forma de ecuación diferencial $r' = h(r,\theta)$, podemos hallar $fam_{C^\perp}$ que buscábamos al comienzo de la sección. Para ello, vamos a considerar de nuevo una curva arbitraria $C$ y su perpendicular $C^\perp$. Nos interesa especialmente la relación que existe entre los ángulos de las rectas tangentes de cada curva.\\\\
 \begin{wrapfigure}{r}{.5\textwidth}
   \begin{center}
     \includegraphics[scale=1]{1-ortogonalpolares3.png}
@@ -320,13 +320,13 @@ Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitaria 
   \caption{Angulos entre curvas ortogonales}\label{img:1-polort3}
 \end{wrapfigure}
 
-En la figura \ref{img:1-polort3} se ilustra la relación que buscamos. Supongamos que las dos curvas se cortan en un punto $p = (r, \theta)$ y consideramos la recta $\vec{0p}$. Al igual que en la figura \ref{img:1-polort}, definimos $\phi_C$ como el ángulo existente entre $\vec{0p}$ y la curva $C$. Siguiendo el mismo procidimiento podemos definir $\phi_{C^\perp}$.\\
+En la figura \ref{img:1-polort3} se ilustra la relación que buscamos. Supongamos que las dos curvas se cortan en un punto $p = (r, \theta)$ y consideramos la recta $\vec{0p}$. Al igual que en la figura \ref{img:1-polort}, definimos $\phi_C$ como el ángulo existente entre $\vec{0p}$ y la curva $C$. Siguiendo el mismo procedimiento podemos definir $\phi_{C^\perp}$.\\
 Como por definición $C \perp C^{\perp}$, entonces el ángulo existente entre ellas es $\sfrac{\pi}{2}$, por tanto: $\phi_{C^\perp} = \sfrac{\pi}{2} + \phi_C$.\\\\
 Del caso en coordenadas rectangulares recordamos la ecuación:
 $$
 \tan(\phi_{C^\perp}) = -\frac{1}{ \tan(\phi_C)}
 $$
-donde a la derecha de la ecuación figura todo lo relacionado con la curva original y a la izquierda lo relacionado con la curva tangente. Como hallamos antes que $\tan\alpha = \sfrac{r}{r'}$ para un ángulo $\alpha$ que describa a la recta tangente, de la misma forma $\tan(\phi_{C^\perp}) = \sfrac{r}{r'}$ describe a su recta tangente, que es ortogonal a la curva $C$ original.\\ Usando esto, la definición $r' = h(r, \theta)$ del comienzo de la sección y la ecuacion anterior obtenemos:
+donde a la derecha de la ecuación figura todo lo relacionado con la curva original y a la izquierda lo relacionado con la curva tangente. Como hallamos antes que $\tan\alpha = \sfrac{r}{r'}$ para un ángulo $\alpha$ que describa a la recta tangente, de la misma forma $\tan(\phi_{C^\perp}) = \sfrac{r}{r'}$ describe a su recta tangente, que es ortogonal a la curva $C$ original.\\ Usando esto, la definición $r' = h(r, \theta)$ del comienzo de la sección y la ecuación anterior obtenemos:
 $$
 \frac{r}{r'} = -\frac{1}{\sfrac{r}{r'}} = -\frac{1}{\sfrac{r}{h(r,\theta)}} \implies \frac{r}{r'} = -\frac{h(r,\theta)}{r}
 $$
@@ -416,7 +416,7 @@ Vamos a ver un nuevo tipo de ecuaciones que no se pueden resolver por los métod
     \begin{enumerate}
         \item $(-1-t)$ es una solución particular de $\mathcal{(EC)}$ (cuando $C=0$).
         \item $e^t$ es solución de la \textit{ecuación homogénea} $\mbf{x'} = \mbf{x}$.
-        \item Esa ecuación homogénea es lineal, es decir, la suma de ecuaciones es solución, y por tanto la multipliación por un escalar también lo es.
+        \item Esa ecuación homogénea es lineal, es decir, la suma de ecuaciones es solución, y por tanto la multiplicación por un escalar también lo es.
         $$
         \begin{cases}
             \mbf{x'} = \mbf{x}\\ \mbf{y'} = \mbf{y}
@@ -510,7 +510,7 @@ Lo que hemos hecho ha sido encontrar una solución de una ecuación del tipo $\m
 \end{eg}
 %%Considerar si añadir la primera parte de la clase del 05/02
 \section{Teoremas de existencia y unicidad}
-En la sección anterior hemos enunciado una preposición que denominamos de \texit{existencia y unicidad} para ecuaciones lineales de orden I. Nos gustaría dar condiciones más genereales para saber si existen y son únicas ciertas soluciones.\\
+En la sección anterior hemos enunciado una preposición que denominamos de \texit{existencia y unicidad} para ecuaciones lineales de orden I. Nos gustaría dar condiciones más generales para saber si existen y son únicas ciertas soluciones.\\
 Consideraremos el PVI general:
 $$
     \begin{cases}
@@ -523,7 +523,7 @@ $$
         \exists L \in \R : |f_x(t, \mbf{x})| \leq L\ \forall t\in[a,b],\ \forall x\in R
     $$ entonces, el PVI tiene solución y es única.
 \end{thm}
-La demostración la veremos más adelante cuando cosideremos el caso \texit{n-dimensional}.
+La demostración la veremos más adelante cuando consideremos el caso \texit{n-dimensional}.
 
 \begin{obs}
     Vamos a ver ciertos aspectos de este resultado.\\
@@ -558,13 +558,13 @@ La demostración la veremos más adelante cuando cosideremos el caso \texit{n-di
                     \end{cases}
                 $$
             entonces tiene solución y es única $ \forall t \in \R$\\\\
-            Si nos fijamos en la imagen de la izquierda, la idea intuitiva surge de tener una solución $x(t)$ definida sobre un intervalo $[-n, n]$. Si podemos extender $x(t)$ a $[-n-1, n+1]$, ésta tiene que coincidir en $[-n,n]$ y por unicidad, la solución es la misma. Podemos hacer esto para cualquier intervalo mayor que $[-n,n]$ y por tanto sobre la totalidad de $\R$.\\Formalemente puede intentar demostrarse por inducción sobre el tamaño del intervalo.
+            Si nos fijamos en la imagen de la izquierda, la idea intuitiva surge de tener una solución $x(t)$ definida sobre un intervalo $[-n, n]$. Si podemos extender $x(t)$ a $[-n-1, n+1]$, ésta tiene que coincidir en $[-n,n]$ y por unicidad, la solución es la misma. Podemos hacer esto para cualquier intervalo mayor que $[-n,n]$ y por tanto sobre la totalidad de $\R$.\\Formalmente puede intentar demostrarse por inducción sobre el tamaño del intervalo.
         \end{minipage}
         %% Mirar si introducir el ejemplo de mi página 19. Parece repetido.
     \end{enumerate}
 \end{obs}
 \begin{th_ex}
-    Supongamos que $x(t)$ resuelve $\mbf{x'} = f(x)$ y $\lim_{t \to \infty} x(t) = a$. ¿Podemos asegurar que $f(a) = 0$?.\\ \textit{Pista:} tener en cuenta que el recíproco es cierto. Es decir, si $f(a) = 0$ entonces sabemos que hay ecauciones que se acercan a $a$ conforme avanzan.
+    Supongamos que $x(t)$ resuelve $\mbf{x'} = f(x)$ y $\lim_{t \to \infty} x(t) = a$. ¿Podemos asegurar que $f(a) = 0$?.\\ \textit{Pista:} tener en cuenta que el recíproco es cierto. Es decir, si $f(a) = 0$ entonces sabemos que hay ecuaciones que se acercan a $a$ conforme avanzan.
 \end{th_ex}
 La versión global del teorema de existencia y unicidad no es muy útil. Veamos dos situaciones simples en las que no funciona.\\\\
 Sea el PVI:
@@ -594,7 +594,7 @@ $$
         x(0)=0
     \end{cases}
 $$
-es facil ver que tanto $x_1(t) = 0$ como $x_2(t)=(\frac{t}{3})^3$ resuelven el PVI. De hecho, si combino trozos de la función puedo hallar más. En la figura se representan ambas soluciones y se resalta una posible combinación.\\\\
+es fácil ver que tanto $x_1(t) = 0$ como $x_2(t)=(\frac{t}{3})^3$ resuelven el PVI. De hecho, si combino trozos de la función puedo hallar más. En la figura se representan ambas soluciones y se resalta una posible combinación.\\\\
 
 \begin{thm}[Existencia y unicidad local]
     Sean $[a,b] \times [c,d] = A \subset \R \times \R$, una función $f: A \longrightarrow \R$ con $f \in C^1$ y $t_0\in(a,b)$, $x_0\in(c,d)$. Entonces:\\
@@ -635,7 +635,7 @@ De nuevo, se deja la demostración para cuando enunciemos el caso \textit{n-dime
         \end{center}
         Puede ocurrir que hayamos definido la función sobre un área más pequeña de lo necesario. En la imagen superior se representa esta casuística.\\
         En este caso, podemos prolongar la solución gracias a la unicidad, si existiera otra solución con $t\in[a,b]$ que estuviera definida en todo $[c, d']$, entonces debería coincidir con nuestra solución original por compartir el punto $(t, d)$. Podríamos preguntarnos  entonces si existe un intervalo cerrado máximo en el que existe nuestra solución.
-        \item Acerca de las hipóstesis.\\
+        \item Acerca de las hipótesis.\\
         No es necesario pedir que $f \in C^1$. Para la existencia sólo necesitamos que $f$ sea continua, y para la unicidad nos basta con que $f_x$ exista y sea continua. En el caso general veremos que podemos pedir incluso menos para la unicidad.
     \end{enumerate}
 \end{obs}
@@ -660,7 +660,7 @@ Repitiendo este argumento, concluimos con que: $f(t_1,t_2) \in C^k \implies x(t)
 
 \section{Ecuaciones exactas}
 Hasta ahora hemos visto como resolver ecuaciones de variables separables, homogéneas de grado 0 y lineales de orden I. Veamos un método más.\\\\
-Supongamos que $\mbf{y}$ está definida implicitamente por $g(x, \mbf{y}) = cte$ con $g \in C^1$. Si derivamos $g(x, \mbf{y}) = cte)$ respecto de $x$ obtenemos:
+Supongamos que $\mbf{y}$ está definida implícitamente por $g(x, \mbf{y}) = cte$ con $g \in C^1$. Si derivamos $g(x, \mbf{y}) = cte)$ respecto de $x$ obtenemos:
 $$
     g_x(x, y(x)) + g_y(x, y(x)) \cdot y'(x) = 0, \text{ es decir,}
 $$
@@ -675,10 +675,10 @@ Además, la notación habitual para este tipo de ecuaciones es:
 $$
     \mbf{y'} = \dd{y}{x} = -\frac{g_x(x,\mbf{y})}{g_y(x,\mbf{y})} \implies g_x\d x + g_y \d y = 0
 $$
-Supongamos que tenemos una ecuación $y'(x) = \frac{M(x,y)}{N(x,y)}$, es decir, $M\d x + N \d y = 0$. Nos gustaría saber cuándo existe $g(x, \mbf{y}) : M = g_x,\ N = g_y$, ya que en ese caso es exacta y y su solución es $g(x, \mbf{y}) = C \mid C \text{constante}$ en forma implícita.
+Supongamos que tenemos una ecuación $y'(x) = \frac{M(x,y)}{N(x,y)}$, es decir, $M\d x + N \d y = 0$. Nos gustaría saber cuándo existe $g(x, \mbf{y}) : M = g_x,\ N = g_y$, ya que en ese caso es exacta y su solución es $g(x, \mbf{y}) = C \mid C \text{constante}$ en forma implícita.
 \begin{eg}[Ecuación exacta simple]
     Sea $\mbf{y'} = \frac{-\mbf{y}}{x}$, es decir, $\mbf{y}\d x + x \d y = 0$ es una ecuación exacta.\\
-    De hecho la $g$ necesaria es $g(x,\mbf{y}) = xy$ pues $g_x = \mbf{y}$ y $g_y = x$. Y por tanto, la solucion general es:
+    De hecho la $g$ necesaria es $g(x,\mbf{y}) = xy$ pues $g_x = \mbf{y}$ y $g_y = x$. Y por tanto, la solución general es:
     $$
         x\mbf{y} = C \implies y(x) = \frac{C}{x}
     $$
@@ -707,7 +707,7 @@ Supongamos que tenemos una ecuación $y'(x) = \frac{M(x,y)}{N(x,y)}$, es decir, 
 \end{obs}
 
 \begin{eg}[Ecuación exacta]
-    Sea $\mathcal{(EC)} \equiv (\mbf{y}+x^3) dx + (x+\mbf{y}^3) dy = 0$ es facil ver que cumple la condición de $M_x = N_y$.\\
+    Sea $\mathcal{(EC)} \equiv (\mbf{y}+x^3) dx + (x+\mbf{y}^3) dy = 0$ es fácil ver que cumple la condición de $M_x = N_y$.\\
     Nos gustaría hallar cual sería nuestra $g$ a partir de que $g_x=M$ y $g_y=N$. Sabemos que $g_x = M = y + x^3$.
     Si integramos en $x$ (suponiendo $\mbf{y}$ constante):
     $$
@@ -749,7 +749,7 @@ Sea de nuevo $\mathcal{(EC)}_1 = M \d x + N\d y = 0$, pero supongamos ahora que 
 \begin{equation}\label{eq:factor-integrante}
     (\mu M)_y = (\mu N)_x
 \end{equation}
-Llamamos a $\mu$ factor integrante de $\mathcal{(EC)}_1$. Veremos que siempre existe pero que es dificil de encontrar.\\
+Llamamos a $\mu$ factor integrante de $\mathcal{(EC)}_1$. Veremos que siempre existe pero que es difícil de encontrar.\\
 Calculando \ref{eq:factor-integrante}, obtenemos:
 \begin{gather*}
     M \frac{\partial \mu}{\partial y} - N \frac{\partial \mu}{\partial x} + (M_y - N_x) \mu = 0\\
@@ -758,10 +758,10 @@ Calculando \ref{eq:factor-integrante}, obtenemos:
 de donde tendremos que calcular $\mu$. Como suele resultar difícil, habitualmente se intenta que $\mu$ solo dependa de una de las dos variables, es decir, $\mu=\mu(y)$ o $\mu=\mu(x)$.\\\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 11/02
-Veamos un ejemplo de ecuacion de factores integrantes
+Veamos un ejemplo de ecuación de factores integrantes
 \begin{eg}[Factores integrantes]
     Sea $x\mbf{y}\ \d x + \mb{y}^2 \d y = 0$, esta claro que $M = x\mbf{y}$, $N = \mbf{y}^2$. Para ver si puede ser una ecuación exacta evaluamos si cumple la condición necesaria $M_y = N_x$, sin embargo las derivadas cruzadas son $M_y=x$ y $N_x = 0$ y por tanto no puede ser ecuación exacta.\\\\
-    Nos preguntamos entonces por cual es su factor integrante. Para encontrarlo vamos a intentar que $\mu$ dependa solo de una variable (o de una combinación lineal, i.e $z = x+y$).\\
+    Nos preguntamos entonces por cual es su factor integrante. Para encontrarlo vamos a intentar que $\mu$ dependa solo de una variable (o de una combinación lineal, por ejemplo $z = x+y$).\\
     \begin{enumerate}
         \item \texttt{Intentamos que $\mu$ dependa de $x$.}\\\\
             Transformamos nuestra ecuación en: $(\mathcal{EC})\equiv \mu M\ \d x + \mu N\ \d y = 0$. Es decir, tenemos:
@@ -803,7 +803,7 @@ $$
     \end{cases}
 $$
 Sean $u(t)$ la solución de $(\mathcal{EC}1)$ y $v(t)$ la solución de $(\mathcal{EC}2)$. A primera vista en $t=0$ ambas tienen la misma pendiente pues $f(0,1) = 1$.
-Sabemos tambien que $u(t)$ crece más rapido que $v(t)$ por que en el momento en que $t \neq 0$, crecerá más rápido (pues $t^2 + x(t^2) \geq x(t^2)$). Cualitativamente podemos afirmar que $u(t)$ "va por encima" de $v(t)$. Nos gustaría hacer una comparativa cuantitativa de ambas.\\\\
+Sabemos también que $u(t)$ crece más rápido que $v(t)$ por que en el momento en que $t \neq 0$, crecerá más rápido (pues $t^2 + x(t^2) \geq x(t^2)$). Cualitativamente podemos afirmar que $u(t)$ "va por encima" de $v(t)$. Nos gustaría hacer una comparativa cuantitativa de ambas.\\\\
 Para ello, consideramos $z(t) = u(t) - v(t)$. Ahora, calculamos $z'(t)$:
 $$
     z'(t) =  u'(t) - v'(t) = t^2+u^2-v^2 = t^2 + (u - v)\cdot(u + v) = t^2 + \mbf{z}\cdot(u + v).
@@ -826,7 +826,7 @@ $$
 Como vimos en \ref{eg:no-solution}, $v(t) = \frac{1}{1-t}$ y por tanto $v \to \infty$ cuando $t \to 1$. Y ya que $u(t) \geq v(t) + \frac{e^{2t} - (1 + 2t + 2t^2)}{4}$, $u \to \infty$ antes de $t = 1$.
 \end{eg}
 \begin{th_ex} %TODO: Que cojones es esto
-    Encontrar otra ecuacion que sea sencilla de resolver para $u(t) \geq x$.
+    Encontrar otra ecuación que sea sencilla de resolver para $u(t) \geq x$.
 \end{th_ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 12/02
@@ -839,7 +839,7 @@ Hasta ahora hemos estudiado distintas ecuaciones de orden I. Vamos a ver un nuev
 \end{dfn}
 
 \begin{obs}
-    La ecuación $\mbf{x}'' = 5\mbf{x}'$ es de orden 2 sólo formalmente, ya que se resuelve como una de primer orden. Con $y(t) = 5\mbf{y}, \mbf{y}' = 5\mbf{y} \implies y(t) = ce^{5t} \implies x(t) = \int C e^{5t} = a + b e^5t$. Sin embargo tenemos dos parametros, para determinarlos necesitamos añadir dos condiciones.El PVI entonces sería del tipo:
+    La ecuación $\mbf{x}'' = 5\mbf{x}'$ es de orden 2 sólo formalmente, ya que se resuelve como una de primer orden. Con $y(t) = 5\mbf{y}, \mbf{y}' = 5\mbf{y} \implies y(t) = ce^{5t} \implies x(t) = \int C e^{5t} = a + b e^5t$. Sin embargo tenemos dos parámetros, para determinarlos necesitamos añadir dos condiciones. El PVI entonces sería del tipo:
     $$
         \begin{cases}
             \mbf{x}'' = 5\mbf{x}'\\
@@ -880,7 +880,7 @@ Como fuente de ejemplos para esta sección utilizaremos la segunda ley de Newton
     $$
         m\mbf{x}'' = -k \mbf{x} \implies \mbf{x}'' = -\frac{k}{m}\cdot \mbf{x}
     $$
-    Vamos a hallar sus soluciones. Definimos $y(t) = x(\alpha t)$ (para \textit{esconder} el parametro $\frac{k}{m}$), vamos a ver cual es este $\alpha$:
+    Vamos a hallar sus soluciones. Definimos $y(t) = x(\alpha t)$ (para \textit{esconder} el parámetro $\frac{k}{m}$), vamos a ver cual es este $\alpha$:
     $$
     \mbf{y}'' = \alpha^2\cdot \mbf{x}''(\alpha t) = a^2\left(-\frac{k}{m}\cdot x(\alpha t)\right) = -\frac{k}{m} \alpha ^2\cdot y(t)
     $$
@@ -972,7 +972,7 @@ Vamos a enunciar ciertas \textbf{propiedades}.
 \end{obs}
 
 \begin{eg}[Ecuaciones de orden II como sistemas]
-    Cosideramos $(\mathcal{EC} \equiv f(t, \mbf{x}, \mbf{x}'))$. Sea $\mbf{y} = \mbf{x'}$, entonces podemos resolverla resolviendo un sistema de ecuaciones. Para ello consideraremos el vector $X(t) = \left[\begin{smallmatrix} x(t) \\ y(t) \end{smallmatrix}\right]$. Si derivamos:
+    Consideramos $(\mathcal{EC} \equiv f(t, \mbf{x}, \mbf{x}'))$. Sea $\mbf{y} = \mbf{x'}$, entonces podemos resolverla resolviendo un sistema de ecuaciones. Para ello consideraremos el vector $X(t) = \left[\begin{smallmatrix} x(t) \\ y(t) \end{smallmatrix}\right]$. Si derivamos:
     $$
         X'(t) = \left[\begin{matrix} x'(t) \\ y'(t) \end{matrix}\right] = \left[\begin{matrix} y \\ f(t, x, x') \end{matrix}\right]= \left[\begin{matrix} y \\ f(t, x, y) \end{matrix}\right] = F(t, X)
     $$
@@ -1031,7 +1031,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
     \end{itemize}
 \end{eg}
 \begin{eg}[Ecuación lineal de orden 2: $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0$]\label{eg:ecua-lin-ii-gen}
-    Volviendo a intentar $x(t) = e^{\lambda t}$, tenemos que $e^{\lambda t}$ es solución $\iff \lambda^2+a\lambda+b=0$. De aqui deducimos distintos casos:
+    Volviendo a intentar $x(t) = e^{\lambda t}$, tenemos que $e^{\lambda t}$ es solución $\iff \lambda^2+a\lambda+b=0$. De aquí deducimos distintos casos:
         \begin{itemize}
             \item $\lambda_1 \neq \lambda_2 \in \R \iff (a^2 - 4b > 0)$, las soluciones son:
             \begin{gather*}
@@ -1066,7 +1066,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
 \end{eg}
 
 \begin{eg}[Ecuación lineal de orden 2: $ \mbf{x}'' + 2\mbf{x}' + \mbf{x} = 0 $]
-    Es fácil ver que $\lambda_1 = \lambda_2 = 1$. Siguiendo \ref{eg:ecua-lin-ii-gen}, las soluciónes son:
+    Es fácil ver que $\lambda_1 = \lambda_2 = 1$. Siguiendo \ref{eg:ecua-lin-ii-gen}, las soluciones son:
     \begin{gather*}
         x_1(t) = e^{ t} \\ x_2(t) = t e^{t}
     \end{gather*}
@@ -1101,7 +1101,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
 \end{eg}
 \begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+\mbf{x}=te^{-t}$]
     En este caso, si intentamos que $x(t) = e^{\lambda t}$ sea solución de la homogénea $\mbf{x}'' + 2\mbf{x}' + \mbf{x} = 0$, tenemos que resolver para $\lambda^2 + 2\lambda + 1 = 0$, de donde obtenemos la solución doble: $\lambda = -1$.\\\\
-    Se puede comprobar que dos soluciones independientes de la homogénea son $e^{-t},\ te^{-t}$. Para buscar una solución particular de la ecuación orginal tomamos:
+    Se puede comprobar que dos soluciones independientes de la homogénea son $e^{-t},\ te^{-t}$. Para buscar una solución particular de la ecuación original tomamos:
     $$
         x(t) = (\alpha + \beta t + \gamma t^2 + \delta t^3) e^{-t}
     $$
@@ -1114,7 +1114,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
     $$
     Nos gustaría saber que familias cumplen la propiedad anterior.
     \begin{enumerate}
-        \item $e^{\gamma t} pol(t)$, con pol(t) un polinomio de cualquier grado. Si $\gamma$ es una solución de intentar $e^{\gamma t}$ como solución a la homogénea, entonces tenemos que añadir tantos grados al polinomio como multiplicidad de $\gamma$ en la ecuación que resuelve. Como caso particular si $\gamma = 0$, nuestra expresión son sólo polinomios.
+        \item $e^{\gamma t} pol(t)$, con $pol(t)$ un polinomio de cualquier grado. Si $\gamma$ es una solución de intentar $e^{\gamma t}$ como solución a la homogénea, entonces tenemos que añadir tantos grados al polinomio como multiplicidad de $\gamma$ en la ecuación que resuelve. Como caso particular si $\gamma = 0$, nuestra expresión son sólo polinomios.
         \item $e^{\gamma t} (pol_1(t) \sin(\alpha t) + pol_2(t)\cos(\alpha t))$. Análogo con los complejos. %%TODO: Dijo Antonio que es irrelevante.
     \end{enumerate}
 \end{obs}
@@ -1137,7 +1137,7 @@ $$
 \begin{enumerate}
     \item Si se tiene una solución $x_1(t)$ de la homogénea  $(\mathcal{ECH}) \equiv \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = 0$ y $x_1(t) \neq 0\ \forall t \in [\alpha, \beta]$ se puede encontrar una segunda linealmente independiente de la primera, de la forma: $x_2(t) = u(t) x_1(t)$ con $u(t)$ apropiada.
 
-    \item $\mbf{x}_1$, $\mbf{x}_2$ linealmente independientes y soluciones de la homogénea (con $r(t) = 0$), se puede encontrar una solución particula r$\mbf{x}_p$ de $\mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t)$ de la forma:
+    \item $\mbf{x}_1$, $\mbf{x}_2$ linealmente independientes y soluciones de la homogénea (con $r(t) = 0$), se puede encontrar una solución particular $\mbf{x}_p$ de $\mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t)$ de la forma:
     $$\mbf{x}_p = u_1(t) x_1(t) + u_2(t)x_2(t)$$.
 \end{enumerate}
 \end{pro}
@@ -1239,7 +1239,7 @@ $$
     $$ entonces, $W(t) \neq 0\ \forall t\in[\alpha, \beta]$
 \end{pro}
 \begin{proof}
-    Demostraremos el contrarrecíproco, es decir, si $W(t_0) = 0$ en algun punto entonces $\mbf{x}_1, \mbf{x}_2$ son linealmente dependientes.\\\\
+    Demostraremos el contrarrecíproco, es decir, si $W(t_0) = 0$ en algún punto entonces $\mbf{x}_1, \mbf{x}_2$ son linealmente dependientes.\\\\
     Si $\exists t_0 \in [\alpha, \beta] : W(t_0) = 0$ entonces las columnas de
     $$
     \left[
@@ -1264,7 +1264,7 @@ $$
     \end{matrix}
     \right]
     $$
-    Entonces, $\mbf{x}_2$ y $c\mbf{x}_1$ satisfacen las mismas condiciones inciales y por unicidad de soluciones del PVI:
+    Entonces, $\mbf{x}_2$ y $c\mbf{x}_1$ satisfacen las mismas condiciones iniciales y por unicidad de soluciones del PVI:
     $$
         \begin{cases}
             \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = 0\\
@@ -1333,7 +1333,7 @@ Como comentarios a este desarrollo:
 \end{obs}
 \begin{eg}
     Sea $(1-x^2)\mbf{y}'' - 2x\mbf{y}' + 2\mbf{y} = 0$ con $x\in(-1,\ 1)$.\\%TODO: Pedir polinomios de Legendre
-    Es facil ver que $y_1(x) = x$ es solución. Vamos a encontrar todas la soluciones de la ecuación.
+    Es fácil ver que $y_1(x) = x$ es solución. Vamos a encontrar todas la soluciones de la ecuación.
     \begin{enumerate}
         \item Como es una ecuación homogénea de orden 2 basta encontrar $y_2(x)$ linealmente independiente de $\mbf{y}_1$.
         \item Buscamos $y_2(x) = u(x)\cdot y_1(x) = x \cdot u(x)$. Derivando obtenemos que:\\
