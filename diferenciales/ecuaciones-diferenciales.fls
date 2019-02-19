@@ -884,6 +884,9 @@ INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/txfonts/txbsyc.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/txfonts/txbexa.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/txfonts/txbexa.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/txfonts/txbexa.tfm
+INPUT ./tikzbuild/ecuaciones-diferenciales-figure3.md5
+OUTPUT ecuaciones-diferenciales.auxlock
+OUTPUT ecuaciones-diferenciales.auxlock
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe
