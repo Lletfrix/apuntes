@@ -221,7 +221,8 @@ Revisión del \today $ $ a las \currenttime.
 \input{input/0-notacion}
 \part{Primer parcial}
 \input{input/1-ecuaciones-1er-orden}
-
+\input{input/2-integracion-elemental}
+\input{input/3-sistemas-1er-orden-y-lineales-orden-sup}
 \part{Segundo parcial}
 
 \part{Tercer parcial}
@@ -238,16 +239,16 @@ Revisión del \today $ $ a las \currenttime.
 
 %%TODO por qué no podemos utilizar only= para hacer whitelisting en lugar de blacklisting? que alguien lo arregle parfavar
 \renewcommand{\listtheoremname}{Lista de definiciones}
-\listoftheorems[ignore={thm,ej,pro,cor,obs,lm,ex}]
+\listoftheorems[ignore={thm,eg,pro,cor,obs,lm,ex,th_ex}]
 
 \renewcommand{\listtheoremname}{Lista de teoremas}
-\listoftheorems[onlynamed,ignore={dfn,ej,pro,cor,obs,lm,ex}]
+\listoftheorems[onlynamed,ignore={dfn,eg,cor,obs,lm,ex,th_ex}]
 
 \renewcommand{\listtheoremname}{Lista de ejemplos}
-\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ex}]
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ex,th_ex}]
 
 \renewcommand{\listtheoremname}{Lista de ejercicios}
-\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ej}]
+\listoftheorems[ignore={dfn,thm,pro,cor,obs,lm,eg}]
 
 \printglossaries
 

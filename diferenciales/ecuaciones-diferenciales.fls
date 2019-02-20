@@ -633,6 +633,7 @@ INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/rm-lmbx7.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/rm-lmbx5.tfm
 INPUT ./input/1-ecuaciones-1er-orden.tex
 INPUT ./input/1-ecuaciones-1er-orden.tex
+INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.luc
 INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmromanslant10-bold.luc
 INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-italic.luc
 INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmromanslant8-regular.luc
@@ -762,7 +763,6 @@ INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman5-regular.
 INPUT ./tikzbuild/ecuaciones-diferenciales-figure0.md5
 OUTPUT ecuaciones-diferenciales.auxlock
 OUTPUT ecuaciones-diferenciales.auxlock
-INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.luc
 INPUT ./images/1-limiterecursos.png
 INPUT ./images/1-limiterecursos.png
 INPUT ./images/1-limiterecursos.png
@@ -830,6 +830,8 @@ INPUT ./images/1-ortogonalpolares2.png
 INPUT ./images/1-ortogonalpolares3.png
 INPUT ./images/1-ortogonalpolares3.png
 INPUT ./images/1-ortogonalpolares3.png
+INPUT ./input/2-integracion-elemental.tex
+INPUT ./input/2-integracion-elemental.tex
 INPUT ./images/1-espejo.png
 INPUT ./images/1-espejo.png
 INPUT ./images/1-espejo.png
@@ -851,6 +853,8 @@ INPUT ./images/1-ecuacion-exacta.png
 INPUT ./images/1-muelle.png
 INPUT ./images/1-muelle.png
 INPUT ./images/1-muelle.png
+INPUT ./input/3-sistemas-1er-orden-y-lineales-orden-sup.tex
+INPUT ./input/3-sistemas-1er-orden-y-lineales-orden-sup.tex
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/lmmib10.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/lmmib7.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/lmmib5.tfm
