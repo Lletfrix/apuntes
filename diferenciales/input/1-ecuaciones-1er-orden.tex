@@ -87,7 +87,7 @@ De este gráfico podemos deducir varias cosas. Para empezar, sabemos que $\mbf{x
     \textit{Sugerencia}: Considerar el problema de valor inicial con $x''(t_0) = 0$.
 \end{th_ex}
 
-\section{Método de separación de variables}
+\section{M\'{e}todo de separaci\'{o}n de variables}
 Esta sección trata sobre el primer método de resolución de ecuaciones diferenciales. Antes de definir el método formalmente vamos a ver un ejemplo.
 \begin{eg}[Resolución sencilla]
     Sea $\P \equiv \mbf{y'} = x\mbf{y}$. Halla las soluciones de la ecuación.\\
@@ -128,7 +128,7 @@ Vamos a generalizar el método por medio de la siguiente proposición.
         \item Si $h'(x) = 0 \implies h(x)$ constante en cada intervalo en que está definida (pues $\R$ es conexo). Si $h:\R \rightarrow \R$ entonces $h(x)$ es constante. Como $\mathcal{C}$ surge de integrar $0$ a la derecha de la ecuación, podemos afirmar que $\mathcal{C} = h(x)$ y por tanto constante.
     \end{itemize}
 \end{obs}
-\section{Significado geométrico de la ecuación diferencial ordinaria}
+\section{Significado geom\'{e}trico de la ecuaci\'{o}n diferencial ordinaria}
 Vamos a analizar una ecuación diferencial de forma gráfica para interpretarla geométricamente. Consideramos $\mbf{y'} = f(x, \mbf(y))$. Supongamos que $\mbf{y}$ tiene la gráfica de la figura \ref{img:1-siggeom}.
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
@@ -169,7 +169,7 @@ Si repetimos el procedimiento de determinar como son las pendientes (como acabam
     Esto no puede resolverse gráficamente y veremos como resolverlo de forma analítica más adelante.
 \end{eg}
 
-\section{Ecuaciones diferenciales y problemas geométricos}
+\section{Ecuaciones diferenciales y problemas geom\'{e}tricos}
 Gracias a la relación de la derivada con la tangencia de funciones, podemos plantear problemas geométricos en forma de ecuación diferencial.
 \subsection{Trayectorias ortogonales}
 De la recta tangente a un punto surge el concepto de recta normal a ese punto, que no es más que la recta perpendicular a la tangente y que pasa por dicho punto. Para ver como se relacionan estas dos rectas vamos a hacer un análisis simple. Diremos que dos curvas son ortogonales si en el punto de cruce las rectas tangentes a cada curva son perpendiculares entre sí.
@@ -334,7 +334,7 @@ Finalmente, de la expresión anterior hallamos la ecuación diferencial general 
 $$
     r' = -\frac{r^2}{h(r, \theta)}
 $$
-\section{Ecuaciones homogéneas de grado 0}
+\section{Ecuaciones homog\'{e}neas de grado 0}
 En esta sección daremos un breve método para resolver ecuaciones homogéneas de grado $0$.
 \begin{dfn}[Ecuación homogénea de grado k]
     Sea $f: \matbb{K} x \matbb{K} \longrightarrow \matbb{K}$, decimos que es \textbf{homogénea de grado k} $\iff f(\lambda x_1, \lambda x_2) = \lambda^k \cdot f(x_1, x_2)$
@@ -1458,3 +1458,37 @@ Como comentarios a este desarrollo:
     Como comentario, es más sencillo resolver las ecuaciones usando $e^{i \omega t},\ e^{-i \omega t}$ y luego separando la parte real e imaginaria.
 \end{obs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 20/02
+\begin{eg}[Oscilador armónico amortiguado]
+    Vamos a empezar considerando el muelle. En el oscilador armónico simple, teníamos $\mbf{x}'' = -\omega_0^2\mbf{x}$ (donde $-\omega_0^2 \mbf{x})$ era la fuerza de recuperación.\\
+    Ahora, vamos a considerar el caso en el que exista el rozamiento. Sabemos que la fuerza de rozamiento es proporcional a la velocidad (para velocidades no muy grandes) en dirección contraria al movimiento. Es decir, tenemos: $(\mathcal{ED}) \equiv \mbf{x}'' = -\omega_0^2\mbf{x} - \mu \mbf{x}' \implies \mbf{x}'' + \mu \mbf{x}' + \omega_0^2\mbf{x} = 0$, que es una ecuación lineal homogénea. Por tanto su solución general es de la forma:
+    $$
+        x(t) = c_1 \mbf{x}_1 + c_2 \mbf{x}_2\ : \mbf{x}_1, \mbf{x}_2\text{ son linealmente independientes.}
+    $$
+    Para hallar $\mbf{x}_1$, $\mbf{x}_2$ resolvemos las raíces del polinomio característico: $\lambda^2 + \mu \lambda + \omega_0^2 = 0$. Distinguimos distintos casos:\\
+    \begin{itemize}
+        \item Caso $\sfrac{\mu}{2} > \omega_0$\\\\
+        $$
+            \lambda = -\frac{\mu}{2} \pm \sqrt{\left(\frac{mu}{2}^2\right) - \omega_0^2} \implies
+            \begin{cases}
+                \mbf{x}_1 = \mbf{x}_+ = e^{\lambda_+ t}\\
+                \mbf{x}_2 = \mbf{x}_- = e^{\lambda_- t}
+            \end{cases} \text{ con } \lambda_- < \lambda_+ < 0
+        $$
+        Y entonces, $\mbf{x}_-, \mbf{x}_+ \to 0$ cuando $t \to \infty$.
+        \item Caso $\sfrac{\mu}{2} = \omega_0$\\\\
+        Tenemos una raíz doble y las soluciones son:
+        \begin{gather*}
+            \mbf{x}_1 = e^{-\sfrac{\mu}{2} t}\\
+            \mbf{x}_2 = t e^{-\sfrac{\mu}{2} t}
+        \end{gather*}
+        \item Caso $\sfrac{\mu}{2} < \omega_0$\\\\
+        $$
+            -\frac{\mu}{2} \pm i \sqrt{\omega_0^2 - \left(\frac{\mu}{2}\right)^2} = -\frac{\mu}{2} \pm i \omega_\mu
+        $$
+        y entonces, resolviendo la ecuación tenemos las soluciones:
+        \begin{gather*}
+            \mbf{x}_1 = e^{-\sfrac{\mu}{2} t} \cos(\omega_\mu t)\\
+            \mbf{x}_2 = e^{-\sfrac{\mu}{2} t} \sin(\omega_\mu t)
+        \end{gather*}
+    \end{itemize}
+\end{eg}
