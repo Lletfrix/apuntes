@@ -1,3 +1,4 @@
+% !TeX root = ../ecuaciones-diferenciales.tex
 
 \chapter{Sistemas lineales de primer orden y ecuaciones de orden superior}
 \section{Ecuaciones lineales de orden II}
@@ -8,7 +9,7 @@
         \begin{cases}
             \mbf{x}'' + p(t)\mbf{x}' + q(t)\mbf{x} = r(t),\ \forall t \in [a, b].\\
             x(t_0) = x_0\\
-            x'(t_1) = x_1\\
+            x'(t_0) = x_1\\
         \end{cases}
     $$
 \end{thm}
@@ -86,12 +87,12 @@ Vamos a enunciar ciertas \textbf{propiedades}.
             $$
                 \begin{cases}
                     \mbf{x}''+p(t)\mbf{x}'+q(t)\mbf{x}=0\\
-                    x(t_0)=1
+                    x(t_0)=1\\
                     x'(t_0)=0
                 \end{cases}
                 \begin{cases}
                     \mbf{x}''+p(t)\mbf{x}'+q(t)\mbf{x}=0\\
-                    x(t_0)=0
+                    x(t_0)=0\\
                     x'(t_0)=1
                 \end{cases}
             $$
@@ -140,7 +141,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
                 \mbf{x}_1 = e^{\mu t} \cos(\omega t) \\ \mbf{x}_2 = e^{\mu t} \sin(\omega t)
             \end{gather*}
             son soluciones y linealmente independientes.
-            \item $\lambda_1 = \lambda_2 \in \R$
+            \item $\lambda_1 = \lambda_2 \in \R \iff (a^2 - 4b = 0)$
             \begin{gather*}
                 x_1(t) = e^{\lambda_1 t} \\ x_2(t) = t e^{\lambda_1 t}
             \end{gather*} son solución y linealmente independientes.
@@ -192,7 +193,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
         x(t) = e^{-t}(t-\frac{t^2}{2}) \text{ es una solución particular.}
     $$
 \end{eg}
-\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+\mbf{x}=te^{-t}$]
+\begin{eg}[Ecuación lineal de orden 2: $\mbf{x}''+3\mbf{x}'+\mbf{x}=te^{-t}$]\label{eg:lin-ii-pol}
     En este caso, si intentamos que $x(t) = e^{\lambda t}$ sea solución de la homogénea $\mbf{x}'' + 2\mbf{x}' + \mbf{x} = 0$, tenemos que resolver para $\lambda^2 + 2\lambda + 1 = 0$, de donde obtenemos la solución doble: $\lambda = -1$.\\\\
     Se puede comprobar que dos soluciones independientes de la homogénea son $e^{-t},\ te^{-t}$. Para buscar una solución particular de la ecuación original tomamos:
     $$
@@ -200,7 +201,7 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
     $$
     De donde veremos que $\alpha + \beta t$ sobrarán. La idea subyacente es que tenemos que añadir tantos grados al polinomio $x(t)$ como la multiplicidad de las raíces.
 \end{eg}
-\begin{obs}
+\begin{obs}\label{obs:lin-ii-pol}
     Lo que hemos hecho para la resolución ha sido tomar:
     $$
         x(t) = e^{\gamma t} \cdot pol(t) \implies x'(t) \text{ es del mismo tipo que } e^{\gamma t} \cdot \hat{pol}(t)
@@ -211,6 +212,60 @@ Consideramos $\mbf{x}'' + a\mbf{x}' + b\mbf{x} = 0,\ \forall a,b \in \R$. Vamos 
         \item $e^{\gamma t} (pol_1(t) \sin(\alpha t) + pol_2(t)\cos(\alpha t))$. Análogo con los complejos. %%TODO: Dijo Antonio que es irrelevante.
     \end{enumerate}
 \end{obs}
+
+
+%Vamos a matizar ahora los resultados discutidos en el ejemplo \ref{eg:lin-ii-pol} y la observación \ref{obs:lin-ii-pol} para ecuaciones lineales con %coeficientes constantes de orden $> 2$.
+%
+%\begin{eg}[Ecuación $y^{(4)}-2y^{(3)}+4y^{(2)}+4y^{(1)}+3y = 0$]
+%    Sea $y^{(4)}-2y^{(3)}+4y^{(2)}+4y^{(1)}+3y = 0$. \\Vamos a probar como solución $e^{\lambda x} \implies \lambda^{4}-2\lambda^{3}+4\lambda^{2}+4\lambda+3 = 0$.\\
+%    En general, si tenemos:
+%    $$
+%        (\mathcal{ED}) \equiv a_n y^{(n)}- a_{n-1} y^{(n-1)}+ a_{n-2} y^{(n-2)}+\ldots + a_{1} y^{(1)}+ a_0 y = 0
+%    $$
+%    entonces, $e^{\lambda x}$ es solución $\iff a_n \lambda^{n}- a_{n-1} \lambda^{n-1}+ a_{n-2} \lambda^{n-2}+\ldots + a_{1} \lambda+ a_0 = 0$. Es decir, tenemos $n$ raíces contadas con multiplicidad.\\
+%    Si no tenemos multiplicidad, nuestras soluciones son:
+%    \begin{gather*}
+%        \text{Caso real: } y(x) = e^{\lambda x}\\
+%        \text{Caso complejo } \lambda = a + ib \implies y(x) = e^{ax} \cos(bx) \text{ y } y(x) = e^{ax}\sin(bx)
+%    \end{gather*}
+%    En caso de que tengamos multiplicidad $m > 1$, entonces:
+%    \begin{gather*}
+%        \text{Caso real: } y(x) = e^{\lambda x},\ x e^{\lambda x},\ x^2 e^{\lambda x}, \ldots,\ x^{m-1} e^{\lambda x}\\
+%        \text{Caso complejo } \lambda = a + ib \implies y(x) = e^{ax} \cos(bx) \text{ y } y(x) = e^{ax}\sin(bx),\ x e^{ax} \cos(bx) \text{ y } y(x) = x e^{ax}\sin(bx), \ldots,\ x^{m-1} e^{ax} \cos(bx) \text{ y } y(x) = x^{m-1} e^{ax}\sin(bx)
+%    \end{gather*}
+%    Para justificar esto, vamos a considerar que $D = \Dd{x}$, el operador de derivación. Es fácil demostrar que es un operador lineal.\\ Llamamos $P(D) = D^n + a_{n-1}D^{n-1} \ldots$, entonces podemos expresar nuestra ecuación $(\mathcal{ED})$ como $P(D)(y)$.\\\\
+%
+%    Veamos ciertas propiedades.\\
+%    \begin{enumerate}
+%        \item Como $D(e^{\lambda x}) = \lambda e^{\lambda x}$, entonces:
+%            $$
+%                P(D)(e^{\lambda x}) = P(\lambda)e^{\lambda x}
+%            $$ y por tanto:
+%            $$
+%                P(D)(e^{\lambda x}) = 0 \iff P(\lambda) = 0
+%            $$
+%        \item Si $P(\lambda) = 0$ y $\lambda$ es múltiple ($m \geq 2$) entonces $P(D)(xe^{\lambda x}) = 0$. Es decir, $xe^{\lambda x}$ también es solución de la ecuación.\\
+%        Esto es por que:
+%        \begin{itemize}
+%            \item P(D)(e^{\lambda x}) = P(\lambda)e^{\lambda x}
+%            \item El operador de derivación es conmutativo, es decir:
+%            $$
+%                \Dd{\lambda} (a D^k) = a D^{k} \Dd{\lambda}
+%            $$
+%            \item Por la propiedad anterior:
+%            $$
+%                \Dd{\lambda}(P(D)(e^{\lambda x})) = P(D) (\Dd{\lambda} (e^\lambda x)) = P(D)(xe^{\lambda x})
+%            $$
+%            \item Combinando el primer punto y el tercero:\\
+%            $$
+%                P(D) (xe^{\lambda x}) =
+%            $$
+%        \end{itemize}
+%
+%    \end{enumerate}
+%
+%
+%\end{eg}
 \subsection{Ecuaciones lineales de orden 2 con coeficientes no constantes.}
 
 Vamos a comentar algunos resultados para el caso general de ecuaciones lineales de orden 2. Es decir, para la ecuación:
