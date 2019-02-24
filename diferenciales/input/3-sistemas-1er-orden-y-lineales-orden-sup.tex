@@ -312,7 +312,7 @@ $$
     $$
     donde pedimos que
 
-    \begin{equation}\ref{eq:ecua-lin-cond-1}
+    \begin{equation}\label{eq:ecua-lin-cond-1}
         \mbf{u}_1' \mbf{x}_1 + \mbf{u}_2' \mbf{x}_2 = 0
     \end{equation}
     Además:
@@ -323,11 +323,11 @@ $$
     $$
         \mbf{x}'' + p(t) \mbf{x}' + q(t) \mbf{x} = \mbf{u}_1 ( \mbf{x}_1'' + p(t) \mbf{x}_1' + q(t) \mbf{x}_1) + \mbf{u}_2 ( \mbf{x}_2'' + p(t) \mbf{x}_2' + q(t) \mbf{x}_2)  + \mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2' = r(t)
     $$
-    Donde los dos primeros sumandos son nulos pues $\mbf{x}_1,\ \mbf{x}_2$ son soluciones de la homogénea, así hallamos la condición $\mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2' = r(t)$. Y por la condición que pedimos en \label{eq:ecua-lin-cond-1}, $\mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2'$ es solución de $x(t) = \mbf{u}_1 \mbf{x}_1 + \mbf{u}_2 \mbf{x}_2 \iff$ se resuelve el sistema:
+    Donde los dos primeros sumandos son nulos pues $\mbf{x}_1,\ \mbf{x}_2$ son soluciones de la homogénea, así hallamos la condición $\mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2' = r(t)$. Y por la condición que pedimos en \ref{eq:ecua-lin-cond-1}, $\mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2'$ es solución de $x(t) = \mbf{u}_1 \mbf{x}_1 + \mbf{u}_2 \mbf{x}_2 \iff$ se resuelve el sistema:
     $$
         \begin{cases}
             \mbf{u}_1' \mbf{x}_1 + \mbf{u}_2' \mbf{x}_2 = 0\\
-            \mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2 = r
+            \mbf{u}_1' \mbf{x}_1' + \mbf{u}_2' \mbf{x}_2 = r(t)
         \end{cases} \text{es decir }
         \left[
         \begin{matrix}
@@ -337,8 +337,8 @@ $$
         \right]
         \left[
         \begin{matrix}
-            u_1(t_0) & u_2(t_0)\\
-            u_1'(t_0) & u_2'(t_0)
+            u_1'(t_0)\\
+            u_2'(t_0)
         \end{matrix}
         \right] =
         \left[
