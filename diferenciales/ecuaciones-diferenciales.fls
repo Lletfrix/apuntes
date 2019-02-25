@@ -853,8 +853,8 @@ INPUT ./images/1-ecuacion-exacta.png
 INPUT ./images/1-muelle.png
 INPUT ./images/1-muelle.png
 INPUT ./images/1-muelle.png
-INPUT ./input/3-sistemas-1er-orden-y-lineales-orden-sup.tex
-INPUT ./input/3-sistemas-1er-orden-y-lineales-orden-sup.tex
+INPUT ./input/3-ecuaciones-lineales-orden-sup.tex
+INPUT ./input/3-ecuaciones-lineales-orden-sup.tex
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/lmmib10.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/lmmib7.tfm
 INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/lm/lmmib5.tfm
@@ -891,6 +891,8 @@ INPUT c:/texlive/2018/texmf-dist/fonts/tfm/public/txfonts/txbexa.tfm
 INPUT ./tikzbuild/ecuaciones-diferenciales-figure3.md5
 OUTPUT ecuaciones-diferenciales.auxlock
 OUTPUT ecuaciones-diferenciales.auxlock
+INPUT ./input/4-sistemas-lineales.tex
+INPUT ./input/4-sistemas-lineales.tex
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe

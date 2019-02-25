@@ -1,0 +1,148 @@
+% !TeX root = ../ecuaciones-diferenciales.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 25/02
+\chapter{Sistemas lineales de orden I}
+\section{Introducci\'{o}n a sistemas}
+En esta sección vamos a ver como resolver un sistema de ecuaciones diferenciales de orden I. Estos sistemas son del tipo:
+$$
+\begin{cases}
+    x' = f(t, x, y)\\
+    y' = g(t, x, y)
+\end{cases}
+$$
+y habitualmente los escribiremos:
+$$
+X' = F(t, X)
+$$ Donde:
+
+\begin{gather*}
+X(t) =
+\left(
+\begin{matrix}
+    x(t)\\
+    y(t)
+\end{matrix}
+\right)\\
+F(t, X) =
+\left(
+\begin{matrix}
+    f(t, x, y)\\
+    g(t, x, y)
+\end{matrix}
+\right)
+\end{gather*}
+
+\begin{eg}[Sistema lineal de orden I a partir de una ecuación de orden II]
+    Sea $x'' + \mu\cdot (1-x^2)x' + x = 0$, vamos a estudiarla como sistema.\\
+    Consideramos y = x'. Tenemos:
+    \begin{gather*}
+        X = \left(\begin{matrix}
+            x\\
+            y
+    \end{matrix}
+    \right) \\
+    x' = y = f(t, x, y) \\
+    y' = (x'') = -x -\mu (1-x^2)y = g(t, x, y)
+    \end{gather*}
+    entonces obtenemos el sistema:
+    $$\left(
+        \begin{matrix}
+            x\\
+            y
+        \end{matrix}\right)' =
+        \left(
+        \begin{matrix}
+            y \\
+            -x -\mu (1-x^2)y
+        \end{matrix}\right)
+    $$
+\end{eg}
+
+Como hemos visto, podemos transformar una ecuación diferencial de orden II en un sistema de ecuaciones de orden I. De hecho, podremos transformar cualquier EDO en un sistema de orden I.\\
+\begin{obs}
+    Cualquier sistema se puede convertir en un sistema autónomo, es decir, no depende de la variable $t$.\\
+    Sea nuestro sistema: $X' = F(t, X)$ con $X: (\alpha, \beta) \to \R^n$, $F:(\alpha, \beta) \times \Omega \subset \R^n \to \R^n$. Podemos tomar:
+    $$
+        Y = \left(\begin{matrix}
+            t\\
+            X
+    \end{matrix}\right),\ Y' = \left(\begin{matrix}
+        1\\
+        F(t, X)
+    \end{matrix}\right) = \left(\begin{matrix}
+        1\\
+        F(Y)
+    \end{matrix}\right) = G(Y)
+    $$
+    Y de esta forma hemos transformado nuestro sistema $X' = F(t, X)$ en uno autónomo $Y' = G(Y)$.
+\end{obs}
+Consideraremos a partir de ahora el sistema:
+$$
+    X' = \mathbb{A}(t) X + B(t)
+$$
+con $\mathbb{A} \in \R^{n\times n}$, y $X, B \in \R^{n}$
+\begin{thm}[Teorema de existencia, unicidad y estructura]
+    Sean $\mathbb{A} : [\alpha, \beta] \to \R^{n\times n}$ y $B : [\alpha, \beta] \to \R^n$ ambas continuas. Y sea $t_0 \in [\alpha, \beta]$, $X_0 \in\R^n$.Entonces:\\
+    \begin{enumerate}
+        \item Existe una solución $X(t)$ del PVI:
+        $$
+        \begin{cases}
+            X' = \mathbb{A}(t) X + B(t)\\
+            X(t_0) = X_0
+        \end{cases}
+        $$
+        es decir, $\exists X : [\alpha, \beta] \to \R^n$ que cumple el PVI y esa solución es única.
+
+        \item Para la ecuación homogénea asociada $(\mathcal{EDL}_h) \equiv X' = \mathbb{A}(t) \cdot X$:
+        \begin{itemize}
+            \item Existen $X_1(t) \ldots X_n(t)$ linealmente independientes, que son soluciones de $(\mathcal{EDL}_h)$ en $t \in [\alpha, \beta]$.
+            \item Si $X_1(t) \ldots X_n(t)$ son soluciones linealmente independientes de $(\mathcal{EDL}_h)$, entonces:
+            $$
+            X(t) \text{ es solución de } (\mathcal{EDL}_h) \text{ en } [\alpha, \beta] \iff \exists c_1, c_2, \ldots c_n \in \R : X(t) = c_1X_1(t) + \ldots + c_nX_n(t)
+            $$
+        \end{itemize}
+        \item Si $X_p(t)$ es una solución de $(\mathcal{EDL})$, entonces $X(t)$ es solución de $(\mathcal{EDL})$ (en $[\alpha, \beta]$) $\iff$
+        $$\exists c_1, \ldots, c_n \in \R : X = X_p + \sum_{j=1}^n c_jX_j$$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    Veamos la demostraciones de cada punto:\\
+    \begin{enumerate}
+        \item Lo veremos más adelante.
+        \item Elegimos $t_0 \in [\alpha, \beta]$. Sea $X_j(t)$ \textbf{la} solución del PVI con
+        $$
+            X_j(t_0) = \left[\begin{matrix}
+                0\\
+                \vdots\\
+                0\\
+                1\\
+                0\\
+                \vdots\\
+                0
+        \end{matrix}\right] = e_j \text{ vector j-ésimo de la base canónica.}
+        $$
+        Afirmamos que son linealmente independientes pues
+        $$
+            \sum c_j X_j(t) = 0\ \forall t \in [\alpha, \beta] \implies \sum c_jX_j(t_0) = 0 \implies c_i = 0 \forall i
+        $$
+        Entonces:\\
+        $X_1, \ldots, X_n$ son soluciones de $(\mathcal{EDL}_h)$ linealmente independientes. La implicación $(\impliedby)$ está demostrada, pues si $X = \sum c_j X_j$ entonces $X$ es solución. Vamos a ver la implicación $(\implies)$, que la resolveremos por reducción al absurdo.\\\\
+        Elegimos $t_0 \in [\alpha, \beta]$. Entonces $X_1(t_0) + \ldots + X_n(t_0)$ son linealmente independientes. Si no lo fueran, existirían $c_1, \ldots, c_n : \exists c_i \neq 0$ y que $c_1X_1(t_0) + \ldots c_n X_n(t_0) = 0$. Y esto haría que:
+        $$
+            c_1X_1(t) + \ldots c_nX_n(t)
+        $$ resuelve:
+        $$
+        \begin{cases}
+            X' = \A(t)X\\
+            X(t_0) = 0
+        \end{cases} \implies X(t) = 0 \text{ también es solución.}
+        $$
+        Por unicidad es una contradicción.\\\\
+        Además, si $X(t)$ es solución de $(\mathcal{EDL}_h)$, entonces acabamos de ver que $\exists c_1, \ldots, c_n$ tal que $X(t_0) = \sum c_jX_j(t_0)$ (donde $X_j$ forman una base de $\R^n$). Por unicidad:
+        $$
+            X(t) = \sum_{j=1}^n c_jX_j(t)\ \forall t\in[\alpha, \beta]
+        $$
+
+    \end{enumerate}
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 26/02

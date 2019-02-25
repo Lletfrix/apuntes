@@ -5,6 +5,45 @@
     \begin{itemize}
         \item $ \mathcal{P} \equiv f(x) = g(x)$, $\mathcal{P}$ es una ecuación.
         \item $\mbf{y} = f(x)$, $\mbf{y}$ es una variable dependiente.
-        \item $\dd{y}{x} = y' = y_x$, derivada de y respecto de x.
+        \item $\dd{y}{x} = y' = y_x$ es la derivada de y respecto de x.
+        \item $X, Y, Z, A, B, ...$ son vectores en $\R^n$ o funciones $:(\alpha, \beta) \to \R^n$
+        \item $\mathbb{A}, \mathbb{B}, \mathbb{C}$ son matrices (típicamente cuadradas $\R^n \times \R^n$) o funciones $:(\alpha, \beta) \to \R^n \times \R^n$.
+        \item Sea el sistema:
+        $$
+            \begin{cases}
+                x' = 2tx - e^ty + \sin(t)\\
+                y' = x - \cos(t) y
+            \end{cases}
+        $$
+        lo escribimos:
+        $$
+            \left[
+            \begin{matrix}
+                x\\
+                y
+            \end{matrix}\right]' =
+            \left[
+            \begin{matrix}
+                2t & -e^t\\
+                1 & -\cos(t)
+            \end{matrix}\right] \cdot
+            \left[
+            \begin{matrix}
+                x\\
+                y
+            \end{matrix}
+            \right]
+            +
+            \left[
+            \begin{matrix}
+                \sin(t)\\
+                0
+            \end{matrix}
+            \right]
+        $$
+        o de la misma forma:
+        $$
+        X' = \mathbb{A}(t) X + B(t)
+        $$
     \end{itemize}
 \end{multicols}
