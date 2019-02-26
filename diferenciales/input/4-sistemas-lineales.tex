@@ -75,12 +75,13 @@ Como hemos visto, podemos transformar una ecuación diferencial de orden II en u
     $$
     Y de esta forma hemos transformado nuestro sistema $X' = F(t, X)$ en uno autónomo $Y' = G(Y)$.
 \end{obs}
+\section{Unicidad, existencia y estructura de soluciones.}
 Consideraremos a partir de ahora el sistema:
 $$
     X' = \mathbb{A}(t) X + B(t)
 $$
 con $\mathbb{A} \in \R^{n\times n}$, y $X, B \in \R^{n}$
-\begin{thm}[Teorema de existencia, unicidad y estructura]
+\begin{thm}[Teorema de existencia, unicidad y estructura]\label{thm:uni-exi-estr}
     Sean $\mathbb{A} : [\alpha, \beta] \to \R^{n\times n}$ y $B : [\alpha, \beta] \to \R^n$ ambas continuas. Y sea $t_0 \in [\alpha, \beta]$, $X_0 \in\R^n$.Entonces:\\
     \begin{enumerate}
         \item Existe una solución $X(t)$ del PVI:
@@ -102,6 +103,7 @@ con $\mathbb{A} \in \R^{n\times n}$, y $X, B \in \R^{n}$
         \end{itemize}
         \item Si $X_p(t)$ es una solución de $(\mathcal{EDL})$, entonces $X(t)$ es solución de $(\mathcal{EDL})$ (en $[\alpha, \beta]$) $\iff$
         $$\exists c_1, \ldots, c_n \in \R : X = X_p + \sum_{j=1}^n c_jX_j$$
+        donde $\sum_{j=1}^n c_jX_j$ es la solución general de la homogénea.
     \end{enumerate}
 \end{thm}
 
@@ -142,7 +144,154 @@ con $\mathbb{A} \in \R^{n\times n}$, y $X, B \in \R^{n}$
         $$
             X(t) = \sum_{j=1}^n c_jX_j(t)\ \forall t\in[\alpha, \beta]
         $$
-
+        \item Vamos a ver ques si tenemos dos soluciones que resuelven el sistema, entonces la resta es la solución de la homogénea. Es decir, si $X(t)$ resuelve $X' = \A(t) + B(t)$, sea:
+        $$
+            Y(t) \equiv X(t) - X_p(t)
+        $$
+        entonces:
+        $$
+            Y' = X' - X_p' = (\A(t)X + B(t)) - (\A(t)X_p + B(t)) = \A(t)X - \A(t)X_p = \A(t)Y \implies
+            Y = c_1X_1 + \ldots c_nX_n
+        $$
     \end{enumerate}
 \end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 26/02
+\begin{obs}
+    El apartado 2 nos dice que el conjunto de soluciones de la $(\mathcal{EDL}_h)$ es un espacio vectorial de dimensión n.
+\end{obs}
+Durante la demostración del apartado 2 vimos aproximadamente el siguiente lema:
+\begin{pro}\label{pro:lema-wronskiano}
+    Sean $X_1(t) + X_2(t) + \ldots + X_n(t)$ solucion de la $(\mathcal{EDL}_h)$ son equivalentes:\\
+    \begin{enumerate}
+        \item $X_1, \ldots, X_n$ son linealmente independientes como funciones, es decir,
+        $$\sum c_j X_j (t) = 0 \text{ con } t \in [\alpha, \beta] \implies c_j = 0 \ \forall j$$
+        \item
+        $$
+            \exists t_0 \in [\alpha, \beta] : X_1(t_0), \ldots, X_n(t_0) \text{ son vectores linealmente independientes.}
+        $$
+        \item
+        $$
+            \forall t \in [\alpha, \beta], \text{ entonces } X_1(t), \ldots, X_n(t) \text{ son vectores linealmente independientes.}
+        $$
+    \end{enumerate}
+\end{pro}
+\begin{proof}
+    En la demostración del apartado 2 del teorema \ref{thm:uni-exi-estr} vimos que $1 \iff 2$ y $3$ se sigue sin dificultad.
+\end{proof}
+\begin{obs}
+    \begin{itemize}
+    \item El enunciado del lema sigue siendo cierto si hay $m \leq n$ soluciones con n la dimensión del espacio de soluciones.
+    \item $X_1(t_0) \ldots X_n(t_0)$ son linealmente independientes $\iff \det \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow} \neq 0$
+    \end{itemize}
+\end{obs}
+\begin{dfn}[Wronskiano]
+    El \textbf{wronskiano} de $X_1,  \ldots, X_n$ es la función:
+    $$
+        W(t) = \det \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow}
+    $$
+\end{dfn}
+Tras ver esta definición del wronskiano, lo que dice parte del lema \ref{pro:lema-wronskiano} es que:
+$$
+    W(t) \neq 0\ \forall t \in [\alpha, \beta] \iff \exists t_0 \in [\alpha, \beta] : W(t_0) \neq 0
+$$
+Más adelante veremos que $W(t)$ satisface la ecuación:
+\begin{gather*}
+    W'(t) = a(t) W(t)\ :\ t\in [\alpha, \beta]\\
+    a(t) = Traza(\A(t))
+\end{gather*}
+De ahí $W(t) = W(t_0) e^{\int_{t_0}^{t} a(s) ds}$ y se ve que $W(t) = 0$ ó $W(t) \neq 0\ \forall t\in [\alpha, \beta]$
+
+\section{Sistema lineal con coeficientes constantes.}
+
+Vamos a considerar sistemas lineales de ecuaciones diferenciales cuyos coeficientes no son una variable del problema.
+
+\begin{eg}[Sistema lineal con coeficientes constantes - Idea básica]
+    Vamos a considerar:
+    $$
+        X'(t) = \A X(t),\text{ con } \A_{n\times n} \text{ constante.}
+    $$
+    Procediendo de forma similar a como lo hacíamos en el caso de ecuaciones lineales de segundo orden, vamos a probar $X(t) = e^{\lambda t} V : V\in\R^{n},\ V \text{ constante}$ como solución.
+    Vamos a ver como hallamos $\lambda$ y $V$.\\\\
+    $$
+        X'(t) = \lambda e^{\lambda t} V \equiv \A X(t) = \A e^{\lambda t} V = e^{\lambda t} \A V
+    $$
+    por tanto:
+    $$
+        X' = \A X \iff e^{\lambda t}(\A V - \lambda V) = 0 \iff \A V = \lambda V
+    $$
+    es decir:
+    $$
+        V \text{ es autovector de } \A \text{ con autovalor } \lambda
+    $$
+\end{eg}
+
+\begin{eg}[Sistema lineal con matriz diagonalizable]
+    Sea
+    $$
+        X' = \mx{2 & 0 & -1 \\ 1 & 1 & -1 \\ 0 & 0 & 1} X
+    $$
+    entonces es fácil ver que los autovalores de $\A$ son $1,\ 1,\ 2$. Con sus correspondientes autovectores:
+    $$
+        V_1 = \mx{1 \\ 2 \\ 1},\ V_2 = \mx{1\\0\\1},\ V_3 = \mx{1\\1\\0}
+    $$
+    Con lo que tenemos tres soluciones:
+    \begin{gather*}
+        X_1(t) = e^t V_1\\
+        X_2(t) = e^t V_2\\
+        X_3(t) = e^{2t} V_3\\
+    \end{gather*}
+    que son base del espacio de soluciones de $X' = \A X$\\\\
+    Hemos podido hacer esto por que la matriz es diagonalizable, es decir
+    $$
+        \exists \B : \B^{-1}\A\B = \mx{1&0&0\\0&1&0\\0&0&2}
+    $$
+    donde la diagonal son los autovalores.
+\end{eg}
+\begin{eg}[Sistema lineal con matriz no diagonalizable]
+    Sea
+    $$
+        X' = \mx{2 & 1\\0&2} X = \A X
+    $$
+    De aquí hallamos que los autovalores son $2, 2$.
+    Entonces:
+    $$
+        \mx{2 & 1\\0&2} \mx{a \\ b} = 2 \mx{a \\ b}
+    $$
+    donde hallamos:
+    \begin{gather}
+        2a+b=2a\\
+        2b=2b\\
+        b=0
+    \end{gather}
+    Entonces hemos hallado un autovector:
+    $$
+        \mx{1\\0} \implies X_1(t) = e^{2t}\mx{1\\0}
+    $$
+    Para buscar otra solución intentamos:
+    $$X(t) = e^{2t} (C + tD)$$
+    donde $C$, $D \in \R^2$.
+    Entonces:
+    $$
+        X' = e^{2t}(2C + D + 2tD) \equiv \mx{2 & 1\\0&2} X = e^{2t}(\A C + t \A D)
+    $$
+    es decir, se necesita:
+    \begin{gather*}
+        \A D = 2 D \implies D = \mx{1\\0} \text{ por ejemplo.}\\
+        \A C = 2C + D
+    \end{gather*}
+    es decir, $(\A - 2I) C = D$ con $I$ la identidad. Tenemos:
+    $$
+    \mx{0 & 1\\0&0}\mx{a\\b} = \mx{1\\0} \implies b=1, \text{ vale cualquier valor para a.}
+    $$
+    entonces:
+    $$
+        \mx{a\\1} = a\mx{1\\0} + \mx{0\\1} \implies a = 0
+    $$
+    Por tanto podemos hallar $C = \mx{0\\1}$ y $D$ era $\mx{1\\0}$. Por tanto nuestras dos soluciones son:
+    \begin{gather*}
+        X_1(t) = e^{2t}\mx{1\\0}\\
+        X_2(t) = e^{2t}\left(\mx{0\\1} + t \mx{1\\0}\right)
+    \end{gather*}
+\end{eg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 27/02
