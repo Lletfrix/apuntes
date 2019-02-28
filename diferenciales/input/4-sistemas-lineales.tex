@@ -184,7 +184,7 @@ Durante la demostración del apartado 2 vimos aproximadamente el siguiente lema:
     \item $X_1(t_0) \ldots X_n(t_0)$ son linealmente independientes $\iff \det \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow} \neq 0$
     \end{itemize}
 \end{obs}
-\begin{dfn}[Wronskiano]
+\begin{dfn}[Wronskiano]\label{dfn:wronskiano}
     El \textbf{wronskiano} de $X_1,  \ldots, X_n$ es la función:
     $$
         W(t) = \det \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow}
@@ -205,7 +205,7 @@ De ahí $W(t) = W(t_0) e^{\int_{t_0}^{t} a(s) ds}$ y se ve que $W(t) = 0$ ó $W(
 
 Vamos a considerar sistemas lineales de ecuaciones diferenciales cuyos coeficientes no son una variable del problema.
 
-\begin{eg}[Sistema lineal con coeficientes constantes - Idea básica]
+\begin{eg}[Sistemas lineales con coeficientes constantes - Idea básica]
     Vamos a considerar:
     $$
         X'(t) = \A X(t),\text{ con } \A_{n\times n} \text{ constante.}
@@ -295,3 +295,152 @@ Vamos a considerar sistemas lineales de ecuaciones diferenciales cuyos coeficien
 \end{eg}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 27/02
+\section{Exponencial de una matriz}
+\begin{dfn}[Matriz fundamental]
+    Llamamos \textbf{matriz fundamental} a :
+   $$
+    F(t) = \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow}
+   $$
+   cuyo determinante es el wronskiano, según vimos en la definición \ref{dfn:wronskiano}.
+\end{dfn}
+\begin{obs}
+    Sea $(\mathcal{EL}_h) \equiv X' = \A X$ con $\A$ una matriz $d\times d$.\\
+    \begin{enumerate}
+        \item La solución general de $(\mathcal{EL}_h)$ es $\F(t) \cdot C$ con:
+        $$
+            C = \mx{c_1\\c_2\\\ldots\\c_n} = \sum_{j=1}^d c_jX_j(t)
+        $$
+        \item Esto vale para $X' = \A(t) X$. Por tanto, podemos afirmar que:
+        $$
+            \F'(t) = \A \F(t) \text{ con } \det(\F(t)) \neq 0\ \forall t\in \R
+        $$
+        es decir,
+        $$
+             \mx{\uparrow && \uparrow\\ X_1'(t_0) & \cdots & X_n'(t_0) \\ \downarrow && \downarrow} = \A  \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow} =  \mx{\uparrow && \uparrow\\ \A X_1(t_0) & \cdots & \A X_n(t_0) \\ \downarrow && \downarrow}
+        $$
+    \end{enumerate}
+\end{obs}
+
+En general, vamos a buscar una $\F$ especial; la que cumple que $\F(0) = I$. Vamos a ver que esta $\F$ es de la forma:
+$$
+    \F(t) = e^{t\A}
+$$
+Para esto, vamos a construir la exponencial de una matriz.\\\\
+Sea $\A \in \C^{d\times d}$. Vamos a intentar construir la exponencial de la misma forma que hace Taylor cuando trabajamos con escalares.
+\begin{pro}
+    La serie:
+    $$
+        \sum_{n=0}^\infty \frac{\A^n}{n!}
+    $$
+    converge (sea cual sea $\A$)
+\end{pro}
+\begin{proof}
+    Empezamos viendo ciertos aspectos.\\
+    \begin{enumerate}
+        \item Definimos:
+            $$
+            ||\A|| = \max_{x\neq0} \frac{||Ax||_2}{||x||_2} = \max_{||y||_2=1}||Ay||_2
+            $$
+            con $x, y \in \C^d$ y $||z||_2 = \sqrt{|z_1|^2+|z_2|^2+\ldots+|z_d|^2}$ la norma euclídea.\\
+            Se puede comprobar que lo que acabamos de definir es una norma y tiene una propiedad importante:
+            $$
+                ||\A \B|| \leq ||\A||||\B|| \text{ y en particular } ||\A^n|| \leq ||\A||^n
+            $$
+        \item Es fácil ver que:
+            $$
+                \left|\left|\sum_{n=0}^{\infty} \frac{\A^n}{n!}\right|\right| \leq \sum_{n=0}^{\infty} \frac{||\A||^n}{n!} \text{ y esta última converge.}
+            $$
+    \end{enumerate}
+    Entonces, $\sum_{n=0}^{\infty} \frac{\A^n}{n!}$ converge y:
+    $$
+        \left|\left|\sum_{n=0}^{\infty} \frac{\A^n}{n!}\right|\right| \leq \sum_{n=0}^{\infty} \frac{||\A||^n}{n!}
+    $$
+\end{proof}
+\begin{dfn}[Exponencial de una matriz]
+    Definimos la exponencial de una matriz $\A$ como:
+    $$
+        e^{\A} = \exp(\A) = \sum_{n=0}^{\infty} \frac{\A^n}{n!}
+    $$
+\end{dfn}
+Vamos a ver ciertas propiedades:\\
+\begin{pro}[Exponencial de una matriz - propiedades]
+\begin{enumerate}
+    \item Si $\A$ y $\B$ conmutan $(\A\B = \B\A)$ entonces:
+    $$
+        e^{\A+\B} = e^\A e^{\B}
+    $$
+    \item Si $\A$ es diagonal ($\diag(\lambda_1, \lambda_2,\ldots)$), entonces:
+    $$
+        e^\A = \diag(e^{\lambda_1}, e^{\lambda_2}, \ldots)
+    $$
+    \item Si $\A = \S \B \S^{-1}$, entonces:
+    $$
+        e^{\A} = \S e^{\B} \S^{-1}
+    $$
+    \item Si $\B$ es una matriz de bloques diagonales:
+    $$
+        \B = \mx{\B_1 & 0 & 0 & \cdots \\
+            0  & \B_2 & 0 & \cdots\\
+            0 & 0 & \B_3 & \cdots\\
+            \vdots & \vdots & \vdots & \ddots} \text{ con } \B_i \in \C^{m\times n}
+    $$
+    entonces:
+    $$
+        \B^n = \diag_b(\B_1^n, \B_2^n, \ldots, \B_m^n)
+    $$
+    y por tanto:
+    $$
+        e^{\B} = \diag_b(e^{\B_1},e^{\B_2},\ldots,e^{\B_n})
+    $$
+\end{enumerate}
+\end{pro}
+
+\begin{proof}
+    Vamos a demostrar cada propiedad:\\
+    \begin{enumerate}
+        \item $\A, \B$ conmutan entonces:
+        $$
+            (\A + \B)^m = \sum_{k=0}^m
+            \left(\begin{matrix}
+                m\\
+                k
+            \end{matrix} \right)
+            \A^k \B^{m-k}
+        $$
+        Por tanto:
+        $$
+            e^\A e^\B = \sum_{k=0}^{\infty}\frac{A^k}{k!} \cdot  \sum_{k=0}^{\infty}\frac{A^k}{k!} = (\cdots) = \sum_m^{\infty} \frac{1}{m!}(\A+\B)^m = e^{\A+\B}
+        $$
+        \item
+        $$
+            \mx{\lambda_1& &0\\
+                &\ddots&\\
+                0& &\lambda_d}^m =
+                \mx{\lambda_1^m&&0\\
+                    &\ddots&\\
+                    0&&\lambda_d^m}
+        $$
+        \item
+        \begin{gather*}
+                \A = \S \B \S^{-1}\\
+                \A^2 = \S \B \S^{-1}\S \B \S^{-1} = \S \B^2 \S^{-1}\\
+                \A^m = \S \B^m \S^{-1} \implies \sum \frac{\A^m}{m!} = \S \frac{\B^m}{m!} \S^{-1}
+        \end{gather*}
+        \item
+        $$
+            \mx{\B_1 & 0 \\
+                0 & \B_2} ^2 = \mx{\B_1^2 & 0 \\
+                    0 & \B_2^2}
+        $$
+    \end{enumerate}
+\end{proof}
+
+\begin{pro}
+    Sea $\A \in \C^{d\times d}$\\
+    $$
+        \Dd{t} e^{t\A} = \A e^{t\A} = e^{t\A} \A
+    $$
+\end{pro}
+\begin{proof}
+    A completar
+\end{proof}
