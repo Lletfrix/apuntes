@@ -4,7 +4,7 @@
 \section{Ecuaciones homog\'{e}neas de grado 0}
 En esta sección daremos un breve método para resolver ecuaciones homogéneas de grado $0$.
 \begin{dfn}[Ecuación homogénea de grado k]
-    Sea $f: \matbb{K} x \matbb{K} \longrightarrow \matbb{K}$, decimos que es \textbf{homogénea de grado k} $\iff f(\lambda x_1, \lambda x_2) = \lambda^k \cdot f(x_1, x_2)$
+    Sea $f: \mathbb{K} x \mathbb{K} \longrightarrow \mathbb{K}$, decimos que es \textbf{homogénea de grado k} $\iff f(\lambda x_1, \lambda x_2) = \lambda^k \cdot f(x_1, x_2)$
 \end{dfn}
 Nos interesarán especialmente las de grado $k=0$, es decir, aquellas en que $f(\lambda x_1, \lambda x_2) = f(x_1, x_2)$.\\\\
 Supongamos que tenemos la EDO $\mbf{y'} = f(x, \mbf{y})$, tenemos que $f(x, \mbf{y}) = f(x, \mbf{y} \cdot \sfrac{x}{x})$. Si $f$ es homogénea de grado 0, y tomamos $\lambda = x$ entonces, $f(x, \mbf{y} \cdot \sfrac{x}{x}) = f(\lambda, y \cdot \sfrac{\lambda}{x}) = \lambda^0 f(1, \sfrac{\mbf{y}}{x})$, es decir:
@@ -177,7 +177,7 @@ Lo que hemos hecho ha sido encontrar una solución de una ecuación del tipo $\m
 \end{eg}
 %%Considerar si añadir la primera parte de la clase del 05/02
 \section{Teoremas de existencia y unicidad}
-En la sección anterior hemos enunciado una proposición que denominamos de \texit{existencia y unicidad} para ecuaciones lineales de orden I. Nos gustaría dar condiciones más generales para saber si existen y son únicas ciertas soluciones.\\
+En la sección anterior hemos enunciado una proposición que denominamos de \textit{existencia y unicidad} para ecuaciones lineales de orden I. Nos gustaría dar condiciones más generales para saber si existen y son únicas ciertas soluciones.\\
 Consideraremos el PVI general:
 $$
     \begin{cases}
@@ -190,7 +190,7 @@ $$
         \exists L \in \R : |f_x(t, \mbf{x})| \leq L\ \forall t\in[a,b],\ \forall x\in R
     $$ entonces, el PVI tiene solución y es única.
 \end{thm}
-La demostración la veremos más adelante cuando consideremos el caso \texit{n-dimensional}.
+La demostración la veremos más adelante cuando consideremos el caso \textit{n-dimensional}.
 
 \begin{obs}
     Vamos a ver ciertos aspectos de este resultado.\\
@@ -366,7 +366,7 @@ Supongamos que tenemos una ecuación $y'(x) = -\frac{M(x,y)}{N(x,y)}$, es decir,
     $$
 \end{proof}
 \begin{obs}
-    Sabemos que una ecuación es exacta cuando $(M, N) = \Nabla g$, sea $\gamma$ cualquier curva tal que $\gamma : [a,b]\subset\R \longrightarrow \R^2$ en $\R^2$. Entonces:
+    Sabemos que una ecuación es exacta cuando $(M, N) = \nabla g$, sea $\gamma$ cualquier curva tal que $\gamma : [a,b]\subset\R \longrightarrow \R^2$ en $\R^2$. Entonces:
     $$
         \int_\gamma M\d x + N\d y = g(\gamma(b)) - g(\gamma(a))
     $$
@@ -427,7 +427,7 @@ de donde tendremos que calcular $\mu$. Como suele resultar difícil, habitualmen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 11/02
 Veamos un ejemplo de ecuación de factores integrantes
 \begin{eg}[Factores integrantes]
-    Sea $x\mbf{y}\ \d x + \mb{y}^2 \d y = 0$, esta claro que $M = x\mbf{y}$, $N = \mbf{y}^2$. Para ver si puede ser una ecuación exacta evaluamos si cumple la condición necesaria $M_y = N_x$, sin embargo las derivadas cruzadas son $M_y=x$ y $N_x = 0$ y por tanto no puede ser ecuación exacta.\\\\
+    Sea $x\mbf{y}\ \d x + \mbf{y}^2 \d y = 0$, esta claro que $M = x\mbf{y}$, $N = \mbf{y}^2$. Para ver si puede ser una ecuación exacta evaluamos si cumple la condición necesaria $M_y = N_x$, sin embargo las derivadas cruzadas son $M_y=x$ y $N_x = 0$ y por tanto no puede ser ecuación exacta.\\\\
     Nos preguntamos entonces por cual es su factor integrante. Para encontrarlo vamos a intentar que $\mu$ dependa solo de una variable (o de una combinación lineal, por ejemplo $z = x+y$).\\
     \begin{enumerate}
         \item \texttt{Intentamos que $\mu$ dependa de $x$.}\\\\
@@ -566,7 +566,7 @@ Como fuente de ejemplos para esta sección utilizaremos la segunda ley de Newton
         A priori no sabemos si estas son todas las soluciones. Podemos asegurar que sí con el teorema \ref{thm:exist-unic-ii} que se enuncia tras este ejemplo.\\\\
         Dados cualquier $y_0$, $y_1$ entonces:
         $$
-            \exist \alpha, \beta : \mbf{y}_{\alpha, \beta} = \alpha \sin (t) + \beta \cos (t)
+            \exists \alpha, \beta : \mbf{y}_{\alpha, \beta} = \alpha \sin (t) + \beta \cos (t)
         $$
         que cumplen:
         $$

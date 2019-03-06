@@ -27,6 +27,7 @@
 \usepackage{pgfplots}
 \usepackage{pdfpages}
 \usepackage{tikz}
+\usepackage{mathtools}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{shapes}
 \usetikzlibrary{decorations.text}
@@ -195,8 +196,10 @@ numbered=no
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\A}{\mathbb{A}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\J}{\mathbb{J}}
 \newcommand{\B}{\mathbb{B}}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\traza}{traza}
 \renewcommand{\P}{\mathcal{P}}
 \renewcommand{\S}{\mathbb{S}}
 \newcommand{\ZnZ}{\mathbb{Z}/n\mathbb{Z}}
@@ -206,7 +209,7 @@ numbered=no
 \newcommand{\gr}{\text{gr }}
 
 %%%% MATRICES
-\newcommand\mx[1]{\left[\begin{matrix}#1\end{matrix}\right]}
+\newcommand\mx[1]{\begin{bmatrix*}#1\end{bmatrix*}}
 
 \renewcommand\qedsymbol{$\diamondsuit$}
 

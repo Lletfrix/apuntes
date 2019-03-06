@@ -296,35 +296,6 @@ Vamos a considerar sistemas lineales de ecuaciones diferenciales cuyos coeficien
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 27/02
 \section{Exponencial de una matriz}
-\begin{dfn}[Matriz fundamental]
-    Llamamos \textbf{matriz fundamental} a :
-   $$
-    F(t) = \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow}
-   $$
-   cuyo determinante es el wronskiano, según vimos en la definición \ref{dfn:wronskiano}.
-\end{dfn}
-\begin{obs}
-    Sea $(\mathcal{EL}_h) \equiv X' = \A X$ con $\A$ una matriz $d\times d$.\\
-    \begin{enumerate}
-        \item La solución general de $(\mathcal{EL}_h)$ es $\F(t) \cdot C$ con:
-        $$
-            C = \mx{c_1\\c_2\\\ldots\\c_n} = \sum_{j=1}^d c_jX_j(t)
-        $$
-        \item Esto vale para $X' = \A(t) X$. Por tanto, podemos afirmar que:
-        $$
-            \F'(t) = \A \F(t) \text{ con } \det(\F(t)) \neq 0\ \forall t\in \R
-        $$
-        es decir,
-        $$
-             \mx{\uparrow && \uparrow\\ X_1'(t_0) & \cdots & X_n'(t_0) \\ \downarrow && \downarrow} = \A  \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow} =  \mx{\uparrow && \uparrow\\ \A X_1(t_0) & \cdots & \A X_n(t_0) \\ \downarrow && \downarrow}
-        $$
-    \end{enumerate}
-\end{obs}
-
-En general, vamos a buscar una $\F$ especial; la que cumple que $\F(0) = I$. Vamos a ver que esta $\F$ es de la forma:
-$$
-    \F(t) = e^{t\A}
-$$
 Para esto, vamos a construir la exponencial de una matriz.\\\\
 Sea $\A \in \C^{d\times d}$. Vamos a intentar construir la exponencial de la misma forma que hace Taylor cuando trabajamos con escalares.
 \begin{pro}
@@ -392,6 +363,14 @@ Vamos a ver ciertas propiedades:\\
     $$
         e^{\B} = \diag_b(e^{\B_1},e^{\B_2},\ldots,e^{\B_n})
     $$
+    \item
+        $$
+            e^{(t+s)\A} = e^{t\A}e^{s\A}
+        $$
+    \item
+        $$
+            e^{t\A} \text{ es invertible y su inversa es } e^{-t\A}
+        $$
 \end{enumerate}
 \end{pro}
 
@@ -432,6 +411,11 @@ Vamos a ver ciertas propiedades:\\
                 0 & \B_2} ^2 = \mx{\B_1^2 & 0 \\
                     0 & \B_2^2}
         $$
+        \item $t\A = s \A$ conmutan
+        \item Por la propiedad anterior:
+        $$
+            I = e^{0 \A} = e^{(t-t)A} = e^{t\A}e^{-t\A}
+        $$
     \end{enumerate}
 \end{proof}
 
@@ -443,4 +427,365 @@ Vamos a ver ciertas propiedades:\\
 \end{pro}
 \begin{proof}
     A completar
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 28/02
+\subsection{$e^{\A t}$ y la forma de Jordan}
+Diremos que una matriz $\A$ está expresada en forma canónica de Jordan cuando se encuentra expresada de la forma:
+$$
+    \A = \S \J \S^{-1}
+$$
+Donde $\J$ es una matriz de bloques, de la forma:
+$$
+\J = \mx{\J_1 & 0 & 0 & \cdots \\
+    0  & \J_2 & 0 & \cdots\\
+    0 & 0 & \J_3 & \cdots\\
+    \vdots & \vdots & \vdots & \ddots} \text{ con } \J_i \in \C^{m\times n}
+$$
+Vamos a ver la expresión en forma canónica de Jordan de $e^{\A t}$, con $\A =  \S \J \S^{-1}$.\\
+\begin{enumerate}
+    \item Como vimos en las propiedades de la exponencial matricial:
+    $$
+        e^{\A t} = \S e^{\J t} \S^{-1} = S \mx{t\J_1 & 0 & 0 & \cdots \\
+            0  & t\J_2 & 0 & \cdots\\
+            0 & 0 & t\J_3 & \cdots\\
+            \vdots & \vdots & \vdots & \ddots} \S^{-1}
+    $$
+    \item Si el bloque $\B = \J_i$ es de la forma: $\B = \diag(\lambda, \lambda, \ldots, \lambda)$ entonces:
+    $$
+        e^{t\B} = \diag(e^{t\lambda},e^{t\lambda},\ldots, e^{t\lambda}) = e^{t\lambda} I
+    $$
+    \item Si $\B = \J_i$ es de la forma:
+    $$
+    \mx{\lambda & 1 & 0  &\cdots & 0\\
+            0 & \lambda & 1  &\cdots & 0\\
+        \vdots & \vdots & \vdots & \ddots &\vdots\\
+        0 & 0 & 0 & \cdots & 1\\
+        0 & 0 & 0 & \cdots & \lambda\\
+    } \implies \B = \lambda I +\N
+    $$ con
+    $$
+        \N = \mx{0 & 1 & 0  &\cdots & 0\\
+                0 & 0 & 1  &\cdots & 0\\
+            \vdots & \vdots & \vdots & \ddots &\vdots\\
+            0 & 0 & 0 & \cdots & 1\\
+            0 & 0 & 0 & \cdots & 0\\
+        }
+    $$
+    y se puede comprobar que si $\N$ es $m\times m$ entonces
+    $$
+        \N^m = 0
+    $$
+    Por tanto, $$t\B = \lambda t I + t\N \implies e^{t\B} = e^{\lambda t I + t \N} = e^{\lambda t} I e^{t \N} =  e^{\lambda t} e^{t \N}$$
+    y a partir del desarrollo de la exponencial:
+    $$
+        e^{t\N} = \sum_{k=0}^{m-1} \frac{(t\N)^k}{k!}
+    $$
+    ya que los términos con $k \geq m$ son nulos pues $\N^k : k\geq m$ se anula.\\
+    Tenemos por tanto que:
+    $$
+        e^{t\B} = \mx{
+                        e^{\lambda t} & t e^{\lambda t} & \frac{t^2}{2!}e^{\lambda t} & \cdots\\
+                        0 & \ddots & t e^{\lambda t} & \frac{t^2}{2!}e^{\lambda t}\\
+                        0  & 0 & \ddots  & t e^{\lambda t}\\
+                        0 & 0 & 0 & e^{\lambda t}
+                    }
+    $$
+    %%Incluir recordatorio de aparición de bloques??
+\end{enumerate}
+
+\begin{eg}[Matriz de Jordan dada $\A$]
+    Sea $\A$ una matriz\\
+    $$
+        \A = \mx{
+                    0 & -1 & 0 & 0\\
+                    1 & -2 & 0 & 0\\
+                    1 & -1 &-1 & 0\\
+                    -8& 4 &  4 & 3
+                } \implies P(\lambda) = \det(\A - \lambda I)
+    $$
+    Tras calcular, obtenemos los autovalores:
+    \begin{gather*}
+        -1 \text{ triple}\\
+        3
+    \end{gather*}
+    y los autovectores: $\mx{0& 0& 0& -1}^T$ del autovalor $3$, y $\mx{1& 1& 0& 1}^T$, $\mx{1& 1& 1& 0}^T$ del autovalor $-1$. Es decir, necesitamos un autovalor generalizado para $-1$ pues solo tenemos $3$ autovectores.\\
+    Para ello, tenemos que calcular $(\A - \lambda I)^m$ con $m > 1$ y lo más próximo al numero de autovectores que nos faltan, es decir $m=2$. Como necesitamos generalizar para el autovalor $\lambda = -1$, entonces calculamos:
+    $$
+        (\A + I) ^2 = \mx{
+                            0 & 0 & 0 & 0\\
+                            0 & 0 & 0 & 0\\
+                            0 & 0 & 0 & 0\\
+                            -32 & 16 & 16 & 16\\
+                         }
+    $$
+    El autovector $v$ generalizado tendrá que cumplir:
+    $$
+        (\A+I)^2 v = 0 \text{ y } (\A+I)v \neq 0 \implies v = \mx{1 & 0 & 1 & 1}^T
+    $$
+    Con esto, hemos hallado $\J$ y $\S$:
+    $$
+        \J = \mx{
+                    -1 & 0 & 0 & 0\\
+                    0 & 3 & 0 & 0\\
+                    0 & 0 & -1 & 1\\
+                    0 & 0 & 0 & -1
+                }\ \ \ \S = \mx{\uparrow &\uparrow &\uparrow &\uparrow \\v_{-1} & v_{3} & v_{1} & v_{gen}\\ \downarrow & \downarrow & \downarrow & \downarrow} = \mx{1 & 0 & 1 & 1\\
+                                                                      1 & 0 & 1 & 0\\
+                                                                      0 & 0 & 1 & 1\\
+                                                                      1 & -1 & 0 & 1
+                                                                        }
+    $$
+    y finalmente:
+    $$
+        e^{t\A} = \S e^{t \J} \S^{-1}
+    $$
+\end{eg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase 04/03
+\section{Matriz fundamental}
+\begin{dfn}[Matriz fundamental]
+    Llamamos \textbf{matriz fundamental} a :
+   $$
+    F(t) = \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow}
+   $$
+   con $X_1, \ldots, X_n$ son soluciones linealmente independientes y cuyo determinante es el wronskiano, según vimos en la definición \ref{dfn:wronskiano}.
+\end{dfn}
+\begin{obs}
+    Sea $(\mathcal{EL}_h) \equiv X' = \A X$ con $\A$ una matriz $d\times d$. Sea $\F$ la matriz fundamental.\\
+    \begin{enumerate}
+        \item La solución general de $(\mathcal{EL}_h)$ es $\F(t) \cdot C$ con:\label{obs:sol-gen-fund}
+        $$
+            C = \mx{c_1\\c_2\\\ldots\\c_n} = \sum_{j=1}^d c_jX_j(t)
+        $$
+        \item Esto vale para $X' = \A(t) X$. Por tanto, podemos afirmar que:
+        $$
+            \F'(t) = \A \F(t) \text{ con } \det(\F(t)) \neq 0\ \forall t\in \R
+        $$
+        es decir,
+        $$
+             \mx{\uparrow && \uparrow\\ X_1'(t_0) & \cdots & X_n'(t_0) \\ \downarrow && \downarrow} = \A  \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_n(t_0) \\ \downarrow && \downarrow} =  \mx{\uparrow && \uparrow\\ \A X_1(t_0) & \cdots & \A X_n(t_0) \\ \downarrow && \downarrow}
+        $$
+    \end{enumerate}
+\end{obs}
+
+En general, vamos a buscar una $\F$ especial; la que cumple que $\F(0) = I$. Vamos a ver que esta $\F$ es de la forma:
+$$
+    \F(t) = e^{t\A}
+$$
+\begin{pro}[Matriz fundamental principal]
+    Sea $X' = \A X$, afirmamos que $e^{t\A}$ es una matriz fundamental que además cumple que su valor en $t=0$ es $I_{n}$.
+\end{pro}
+\begin{proof}
+    \begin{gather*}
+        \Dd{t} e^{t\A} = \A e^{t\A}\\
+        e^{0\A} = I ((e^{tA})^{-1} = e^{-t\A})
+    \end{gather*}
+\end{proof}
+A modo de recordatorio, hemos visto en \ref{obs:sol-gen-fund} que si $\F(t)$ es una matriz fundamental, la solución general de $X' = \A X$ es:
+$$
+    \F(t) \cdot C\ :\ C = \mx{c_1\\c_2\\\ldots\\c_n} = \sum_{j=1}^d c_jX_j(t)
+$$
+\begin{eg}[Cálculo de $e^\A t$, la matriz fundamental principal]
+    Podemos afrontar el cálculo de diversas formas:
+    \begin{itemize}
+        \item Pasando a forma canónica de Jordan. (Muy costoso).
+        \item Encontrar directamente las $X_1(t), \ldots, X_n(t)$ que forman $\A$. Es decir:
+        \begin{enumerate}
+            \item Se calculan los autovalores de $\A$, es decir, calcular los $\lambda_i$:
+                $$
+                    \det(\A-\lambda I) = 0
+                $$
+                La fórmula anterior también se denomina \textbf{polinomio característico} de la matriz $\A$.
+            \item Buscar tantas soluciones de $X'=\A X$ (con datos iniciales apropiados) como el tamaño de $\A$\\
+                En caso de que $\lambda$ sea un autovalor con multiplicidad $m$ necesitamos $m$ vectores linealmente independientes asociados a este autovalor. Encontramos todas las soluciones posibles de la forma:
+                $$
+                    e^{\lambda t} = V
+                $$
+                donde $V$ es el autovector de $\A$ con autovalor $\lambda$, luego si tenemos multiplicidad sobre $\lambda$, todas las soluciones posibles independiente de la anterior es de la forma: $e^{\lambda t} (V_1 + t V_2)$. Si es necesario se continua con $e^{\lambda t} (V_1 + tV_2 + t^2V_3)$ y así sucesivamente.
+        \end{enumerate}
+    \end{itemize}
+\end{eg}
+Vamos a ver distintos usos que podemos darle a la matriz: $e^{t\A}$.
+\begin{enumerate}
+    \item Se usa como solución del PVI:
+    $$
+        \begin{cases}
+            X' = \A X\\
+            X(t_0) = X_0
+        \end{cases}
+    $$
+    Donde la solución general como hemos visto es: $\F(t) C$, entonces:
+    $$
+        X(t) = e^{t\A} C \implies X_0 = X(t_0) = e^{t_0\A} C \implies C = (e^{t_0 \A})^{-1} X_0 = e^{-t_0\A} X_0 \text{ es decir,}
+    $$
+    $$
+        X(t) = e^{(t-t_0)\A} X_0
+    $$
+    \item Para encontrar una solución particular de $X' = \A X + B(t)$, por variación de las constantes:
+    $$
+        X(t) = e^{t\A} U(t) \implies X'(t) = (\Dd{t}e^{t\A})U(t) + e^{t\A} \Dd{t}U(t) = \A e^{t\A} U(t) + e^{t\A}U'(t) \text{ entonces}
+    $$
+    $$
+        \A X + B(t) = X'(t) = \A e^{t\A} U(t) + e^{t\A} U'(t) \implies e^{t\A}U'(t) = B(t)
+    $$
+    De esta implicación se sigue:
+    $$
+        U'(t) = e^{-t\A}B(t) \implies U(t) \text{ es una primitiva de } e^{-t\A}B(t)
+    $$
+    Por ejemplo:
+    $$
+        U(t) \int_{t_0}^t e^{-s\A}B(s)\d S
+    $$
+    Y por tanto, la solución particular sería:
+    $$
+        X(t) = e^{t \A}U(t) = e^{t\A} \int_{t_0}^t e^{-s\A}B(s)\d s
+    $$
+    \item La solución del PVI:
+    $$
+        \begin{cases}
+            X' = \A X\\
+            X(t_0) = X_0
+        \end{cases}
+    $$ es entonces:
+    $$
+        X(t) = e^{(t-t_0) \A}X_0 + e^{t\A} \int_{t_0}^t e^{-s\A}B(s)\d s
+    $$
+    \item Lo mismo se puede hacer para el caso general $X' = \A(t) X + B$.\\
+    Si $\F$ es matriz fundamental:
+    $$
+        \text{PVI}\equiv \begin{cases}
+            X' = \A X\\
+            X(t_0) = X_0
+        \end{cases}
+    $$
+    entonces:
+    \begin{gather}
+        X(t) = \F(t) C\\
+        X_0(t) = \F(t_0) C\\
+        C = \F^{-1}(t_0)X_0 \implies X(t) = \F(t) F(t_0)^{-1} X_0
+    \end{gather}
+    \item De la misma forma, la solución particular de $X = \A(t) X + B(t)$ es:
+    $$
+        \F'(t) = \int_{t_0}^{t} \F^{-1}(s) B(s) \d s
+    $$
+    y la solución del PVI es:
+    $$
+        X(t) = \F(t)\F^{-1}(t_0)X_0+\F(t)\int_{t_0}^{t} \F^{-1}(s) B(s) \d s
+    $$
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 05/03
+\begin{eg}[Cálculo de la matriz fundamental principal $e^{t\A}$]\label{eg:cal-sol-indep-lin-sis}
+    Sea:
+    $$
+        \A = \mx{2 & 0 & 0\\ 0 & 1 & -3\\0 & 3 & 7}
+    $$ para el sistema $X' = \A X$.
+    \begin{enumerate}
+        \item \texttt{Encontramos los autovalores:}\\
+        $$
+        0 = \det\mx{2-\lambda & 0 & 0\\ 0 & 1-\lambda & -3\\0 & 3 & 7-\lambda} \implies \lambda = 2, \lambda = 4 \text{ (doble)}
+        $$
+        \item \texttt{Encontramos los autovectores asociados:}\\
+        Para $\lambda = 2$, hallamos el autovector $\mx{1 & 0 & 0}^T$, por tanto:
+        $$
+            X_1(t) = e^{2t}\cdot \mx{1 \\ 0 \\ 0} \text{ es solución de $X' = \A X$}
+        $$
+        Para $\lambda = 4$, hallamos el autovector resolviendo $V$ para: $(\A - 4I) V = 0$. Obtenemos:
+        $$
+            X_2(t) = e^{4t}\mx{0 \\ 1 \\ -1}
+        $$
+        Pero $\lambda = 4$ solo contribuye una solución con autovectores, nos falta otra.
+        \item \texttt{Buscamos otras soluciones si es necesario:}\\
+        Planteamos una solución del tipo:
+        $$
+            X = e^{4t}(U_1 + t U_2) \text{ con } U_2 \neq 0 \text{ pues entonces $U_1 = V$}
+        $$
+        Calculamos $X'$:
+        $$
+            X' = e^{4t} (4 U_1 + U_2 + 4tU_2) = \A X = \A (e^{4t} (U_1 + t U_2))
+        $$
+        De esta igualdad se sigue:
+        $$
+            \begin{cases}
+                \A U_1 = 4 U_1 + U_2\\
+                \A U_2 = 4 U_2
+            \end{cases} \implies
+            \begin{cases}
+                (\A - 4 I) U_1 = U_2\\
+                (\A - 4 I) U_2 = 0
+            \end{cases}
+        $$
+        y como necesitamos que $U_2 \neq 0$, entonces buscamos $U_1$ que cumple:
+        $$
+            \begin{cases}
+                (\A - 4I)^2 U_1 = 0\\
+                (\A - 4I) U_1 \neq 0
+            \end{cases}
+        $$
+        Calculamos $(\A - 4I)^2$
+        $$
+            (\A - 4I)^2 = \mx{4 & 0 & 0 \\ 0 & 0 & 0\\ 0 & 0 & 0}
+        $$
+        Y entonces cualquier $U_1 = \mx{0 & a & b}^T$ cumple la primera ecuación. Como necesitamos que  $(\A - 4I) U_1 \neq 0$, obtenemos por ejemplo $U_1 = \mx{0 & 1 & 0}$.\\
+        Como ya hemos hallado $U_1$ calculamos $U_2 = (\A - 4I) U_1 = \mx{0 & -3 & 3}$ y con esto obtenemos:
+        $$
+            X_3(t) = e^{4 t} \left( \mx{0 \\ 1 \\ 0} + t \mx{0 \\ -3 \\ 3}\right) = \mx{0 \\ (1-3t) e^{4t} \\ 3t e^{4t}}
+        $$
+        \item \texttt{Calculamos la matriz fundamental $\F$}
+            $$
+                \mx{\uparrow && \uparrow\\ X_1(t_0) & X_2(t_0) & X_3(t_0) \\ \downarrow && \downarrow} =
+                \mx{e^{2t} & 0 & 0 \\ 0 & e^{4t} & (1-3t) e^{4t} \\ 0 & -e^{4t} & 3te^{4t}}
+            $$
+            Tendríamos que ver si $e^{t\A} = \F(t)$, que no es cierto pues $\F(0) \neq I$
+        \item \texttt{Corección de la matriz fundamental $\F$ para obtener la fundamental principal}
+            Como se verá en la proposición \ref{pro:fund-producto}, hay que encontrar $\B$ : $\F(0)\B = I \implies B = \F(0)^{-1}$, entonces:
+            $$
+                \B = \F{0}^{1} = \mx{1 & 0 & 0\\0 & 0 & -1 \\ 0 & -1 & 1}
+            $$
+            Y finalmente:
+            $$
+                e^{t\A} = \F(t)\B = \mx{e^{2t} & 0 & 0\\ 0 & (1-3t)e^{4t} & -3te^{4t} \\ 0 & 3te^{4t} & (1+3t)e^{4t}}
+            $$
+            Es fácil comprobar que esta última matriz es $I$ con $t=0$.
+    \end{enumerate}
+\end{eg}
+\begin{obs}
+    Si en el ejemplo \ref{eg:cal-sol-indep-lin-sis} estuviésemos en dimensión más alta buscaríamos todas las soluciones del tipo:
+    $$
+        e^{4t}(U_1 + tU_2) : U_2 \neq 0
+    $$
+    So no hay tantas soluciones a la ecuación anterior como multiplicidad del autovalor, buscamos el mayor número posible de la forma:
+    $$
+        e^{4t}(U_1 + tU_2 + \frac{t^2}{2!}U_3) : U_3 \neq 0
+    $$
+    y así sucesivamente.
+\end{obs}
+
+\begin{pro}[Matriz fundamental como producto de una fundamental y otra matriz]\label{pro:fund-producto}
+    Si $\F(t)$ es una matriz fundamental y $\B$ es invertible, entonces $\F(t) B$ también es una matriz fundamental.
+\end{pro}
+\begin{proof}
+    $$
+        (\F(t)\B)' = \F'(t)B = (\A \F(t)) \B = \A(\F(t) \B) \implies \text{las columnas de $\F(t)\B$ son soluciones}
+    $$
+    y además,
+    $$
+        \F(t_0) \text{ invertible} \implies \F(t_0)\B \text{ es invertible}
+    $$
+\end{proof}
+
+\begin{pro}[EDO que satisface el determinante de una matriz de soluciones]
+    Sea $X' = \A(t) X$ con $\A$ de tamaño $d \times d$.\\
+    Sean $X_1, \ldots, X_d$ soluciones no necesariamente linealmente independientes, $w(t) = \det\F$ con $\F(t)$:
+    $$
+        \F(t) =
+            \mx{\uparrow && \uparrow\\ X_1(t_0) & \cdots & X_d(t_0) \\ \downarrow && \downarrow}
+    $$
+    entonces, $w(t)$ satisface la EDO $w'(t) = a(t) w(t)$ donde $a(t) = \traza(\A(t))$.\\
+    Como consecuencia:
+    \begin{gather*}
+        w(t) = w(t_0) e^{\int_{t_0}^t a(s) \d s}\\
+        w(t) = 0 \text{ (en su intervalo de definición), o bien } w(t) \neq 0
+    \end{gather*}
+\end{pro}
+\begin{proof}
+    La demostración sigue de forma directa, desarrollando la derivada del $\det\F$ y sabiendo que $\F' = \A \F$. Terminamos hallando que $\Dd{t} \det \F = \left(\sum a_{ii}\right) w(t)$
 \end{proof}
