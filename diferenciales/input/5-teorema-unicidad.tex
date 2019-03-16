@@ -1,0 +1,613 @@
+% !TeX root = ../ecuaciones-diferenciales.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 06/03
+\chapter{Teorema general de existencia y unicidad}
+Vamos a considerar el PVI:
+$$
+    \begin{cases}
+        X' = F(t, X)\\
+        X(t_0) = X_0
+    \end{cases}
+$$
+Donde definimos $F$ como:
+$$
+    F: [a, b] \times \Omega \to \R^d
+$$
+donde $\Omega \in \R^d$ es abierto y $t_0 \in [a, b]$. Vamos a considerar entonces:
+$$
+    X(t) = X(t_0) + \int_{t_0}^t X'(s) \d s \text{ y si $X(t)$ cumple el PVI, entonces } X(t_0) + \int_{t_0}^t X'(s) = X(t_0) + \int_{t_0}^t F(s, X(s)) \d s \equiv G(X)(t)
+$$
+Entonces hay que resolver:
+$$
+    X = G(X) \text{ con $G :$ espacio de funciones $\to$ espacio de funciones}
+$$
+Intentamos:
+$$
+    \begin{cases}
+        X_0(t) = X_0\\
+        X_{n+1}(t) = G(X_n)(t)
+    \end{cases}
+$$
+Y nuestro objetivo es ver que $X_n$ converge a una función $X$, y además que:
+$$
+    X_n \to X \implies G(X_n) \to X \text{ es decir, } G \text{ es continua.}
+$$
+Para ello vamos a ver un par de secciones de recordatorio de análisis. Tras ello escribiremos ciertas propiedades previas para terminar por demostrar el teorema.
+\section{Espacio vectorial de funciones.}
+En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
+\begin{dfn}[Convergencia puntual y convergencia uniforme]
+    Sea $f_n : I \to \R$, $f: I \to \R$.\\
+    \begin{enumerate}
+        \item $f_n$ converge a $f$ puntualmente (o punto a punto) $\iff f_n(t) \to f(t)\ \forall t \in I$ cuando $n\to \infty$.
+        \item $f_n$ converge uniformemente a $f$ si y solo si:
+        $$
+            \forall \varepsilon > 0,\ \exists N \in \N : |f_n(t) - f(t)| < \varepsilon\ \forall t \in I\ \forall n \geq N
+        $$
+    \end{enumerate}
+\end{dfn}
+\begin{obs}
+    Algunos comentarios:\\
+    \begin{itemize}
+        \item En (1), la convergencia se puede expresar formalmente como:
+    $$
+        \forall \varepsilon > 0,\ \forall t \in I \exists N \in \N : |f_n(t) - f(t)| < \varepsilon\ \forall n \geq N
+    $$
+    La diferencia principal es que $N$ en (1) depende de $t$ y $ \varepsilon$, pero en (2) $N$ sólo depende de $\varepsilon$.
+        \item Claramente, $f_n \to_{unif} f \implies f_n \to_{pp} f$
+\end{itemize}
+\end{obs}
+\begin{eg}[Convergencia de una función]
+    Sea $f_n: [0, 1] \to \R$, $f_n(x) = 1+x^n$. Entonces:
+    $$
+        f_n(x) \to_{n \to \infty}
+        \begin{cases}
+            1 \text{ si } 0\geq x < 1 \\
+            2 \text{ si } x = 1
+        \end{cases} \equiv f
+    $$
+    Entonces es fácil ver que: $f_n \to_{pp} f$\\\\
+    Vamos a ver que $f_n \not\to_{unif} f$ en $[0, 1]$. Tenemos que hallar $N$ para que se cumpla: 
+    $$
+        |f_n(x) - f(x)| < \varepsilon, n\geq N
+    $$
+    Si $x < 1$
+    $$
+        |f_n(x) - f(x)| < \varepsilon = |x^n| < \varepsilon \iff n \log x < \log \varepsilon \text{ (digamos $\varepsilon < 1$) } \implies n > \frac{\log \varepsilon}{\log x}
+    $$
+    Cuando $x \to 1_-$, $\log x \to 0 \implies \frac{\log \varepsilon}{\log x} \to \infty$, entonces:
+    $$
+        N \geq \frac{\log \varepsilon}{\log x} \implies N \text{ tiene que depender de }x \implies N = \frac{\log \varepsilon}{\log x} + 1
+    $$
+    Sin embargo, se puede comprobar que $f_n \to_{unif} f$ en $[0, a]$ cpon $a < 1$, ya que basta tomar $N = \frac{\log \varepsilon}{\log a}$.
+\end{eg}
+\begin{obs}
+    Otra forma de expresar $f_n \to_{unif} f$ es la siguiente:
+    $$
+        |f_n(t) - f(t)| < \varepsilon\ \forall t \in I \text{ si } n \geq N
+    $$
+    Entonces, podemos hablar de:
+    $$
+        ||f_n - f||_{\infty} = \sup_{t\in I} |f_n(t) - f(t)| \leq \varepsilon
+    $$
+\end{obs}
+\begin{dfn}[Norma infinito]
+    Sea $g: I \to \R$. Llamamos \textbf{norma infinito} de $g$ al resultado:
+    $$
+        ||g||_{\infty} = \sup_{t\in I} |g(t)|
+    $$
+    que puede ser $+\infty$ si $g$ no está acotada.
+\end{dfn}
+\begin{pro}[Propiedades de $||\cdot||_\infty$]
+    La norma infinito tiene las siguientes propiedades:
+    \begin{enumerate}
+        \item
+        $$
+            ||f(t)||_{\infty} = 0 \iff f = 0\ \forall t \text{ en su dominio}
+        $$
+        \item
+        $$
+            ||\lambda f||_\infty = |\lambda| ||f||_\infty, \lambda \in \R
+        $$
+        \item
+        $$
+            ||f + g||_\infty \leq ||f||_\infty + ||g||_\infty
+        $$
+    \end{enumerate}
+\end{pro}
+\begin{proof}
+    (1), y (2) son directas, vamos a ver la demostración de (3).\\
+    $$
+        |f(t) + g(t)| \geq |f(t)| + |g(t)| \geq ||f||_\infty + ||g||_\infty \implies ||f + g||_\infty = \sup_{t \in I} |f(t) + g(t)| \geq ||f||_\infty + ||g||_\infty
+    $$
+\end{proof}
+\begin{obs}
+    De la demostración observamos que:
+    \begin{itemize}
+        \item $ +\infty + a = +\infty$
+        \item $ f_n \to_\infty f \iff ||f_n - f||_\infty \to 0 $
+    \end{itemize}
+\end{obs}
+\begin{eg}[Espacios de funciones]
+    Algunos espacios de funciones son:
+    \begin{enumerate}
+        \item
+        $$
+            B(I) = \left\{ g : I to \R, g \text{ acotada} \right\}
+        $$ es decir, $\exists L_g \in \R : |g(t)| < L_g\ \forall t \in I$\\
+        Entonces, $B(I)$ es un espacio vectorial y $||\cdot||_\infty$ es una norma en él.
+        %%%%TODO: AÑADIR ÚLTIMO EJEMPLO
+    \end{enumerate}
+\end{eg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 07/03
+
+%%TODO: Añadir dibujos
+\begin{eg}[Determinación de convergencia uniforme]
+    Sea $f_n$:
+    $$
+        f_n(x) = \frac{x}{1+n^2x} \text{ en $[0,1]$ }
+    $$
+    Vamos a ver si converge uniformemente a algo.
+    Reescribimos $f_n$ cuando $n \to \infty$:
+    $$
+        f_n(x) \to_{n \to \infty}
+        \begin{cases}
+            0 \text{ si } x = 0\\
+            0 \text{ si } x > 0
+        \end{cases}
+    $$
+    Por la definición, queremos ver si se cumple:
+    $$
+        \forall \varepsilon \exists N=N(\varepsilon) : |f_n(x) - f(x)| < \varepsilon\ \forall n \geq N,\ \forall x \in [0,1]
+    $$
+    Entonces, tenemos que hallar $N$ tal que:
+    $$
+        \left|  \frac{x}{1+n^2x} \right| < \varepsilon\ \forall n \geq N
+    $$
+    Distinguimos dos casos:
+    \begin{itemize}
+        \item Caso $0 \leq x < \varepsilon$:
+        $$
+            \frac{x}{1+n^2x} \leq x < \varepsilon
+        $$
+        \item Caso $\varepsilon \leq x \leq 1$:
+        $$
+            \frac{1}{1+nx^2} \leq \frac{1}{1+n^2x} \leq \frac{1}{1+n^2\varepsilon} < \varepsilon
+        $$
+        $$
+            \frac{1}{1+nx^2} < \varepsilon \iff n^2\varepsilon > \frac{1}{\varepsilon} - 1 \implies n \geq \sqrt{\frac{(\sfrac{1}{\varepsilon} - 1)}{\varepsilon}} = N(\varepsilon)
+        $$
+    \end{itemize}
+\end{eg}
+
+\begin{th_ex}
+    Resolver el ejemplo anterior hallando que $||f_n||_\infty \to 0$.
+\end{th_ex}
+
+\begin{pro}[Sucesión de funciones continuas]
+    Sean $f_n, f : I \to \R$, tal que $f_n \to_{unif} f$. Si $f_n$ es continua para todo $n \in \N$ entonces $f$ es continua.
+\end{pro}
+\begin{proof}
+    Sea $t_0 \in I$, queremos ver si $f$ es continua en $t_0$.\\
+    Decimos que $f$ es continua si:
+    $$
+        \forall \varepsilon > 0 \exists \delta > 0 : \text{ si } |t-t_0|_{t\in I} < \delta \implies |f(t)-f(t_0)| < \varepsilon
+    $$
+    Desarrollamos:
+    $$
+        |f(t) - f(t_0)| = |f(t) -f_n(t) + f_n(t) -f_n(t_0) + f_n(t_0) - f(t_0)| \leq |f(t) - f_n(t)| + |f_n(t_0) - f(t_0)| + |f_n(t) - f_n(t_0)|
+    $$
+    Como $f_n \to_{unif} f$, $\exists N : |f_n(t) - f_(t)| < \sfrac{\varepsilon}{3}$. Fijamos $n = N$, entonces:
+    \begin{gather}
+        |f(t) - f_n(t)| < \sfrac{\varepsilon}{3}\\
+        |f_n(t_0) - f(t_0)| < \sfrac{\varepsilon}{3}
+        |f_n(t) - f_n(t_0)| = |f_N(t) - f_N(t_0)|
+    \end{gather}
+    Como $f_N$ es continua:
+    $$
+        \exists \delta > 0 : |f_N(t) - f_N(t_0)| < \sfrac{\varepsilon}{3} \implies |f(t) - f(t_0)| \leq \frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3} = \varepsilon
+    $$
+\end{proof}
+\begin{cor}
+    $$
+        \begin{cases}
+            f_n \to_{pp} f\\
+            f_n \text{ continua } \forall n
+            f \text{ no continua}
+        \end{cases} \implies f_n \not\to_{unif} f
+    $$
+\end{cor}
+
+Sin embargo, todo este desarrollo requiere que conozcamos el límite de $f_n$ en caso de que converja. Vamos a ver como podemos comprobar que $f_n$ converge uniformemente sin conocer su (posible) límite.
+\begin{dfn}[Sucesión de Cauchy de funciones]
+    Sean $f_n : I \to \R$ son una sucesión de Cauchy para $||\cdot||_\infty \iff ||f_n - f_m||_\infty \to 0_{n,m \to \infty}$, es decir:
+    $$
+        \forall \varepsilon > 0 \exists N : ||f_n - f_m||_\infty < \varepsilon\ \forall n,m \geq N
+    $$
+\end{dfn}
+\begin{pro}[Sucesión de Cauchy y convergencia uniforme]\label{pro:cauchy-unif}
+    Si $\{f_n\}_{n\in\N}$ es una sucesión de Cauchy, entonces:
+    $$
+        \exists f : I \to R : f_n \to_{unif} f
+    $$
+\end{pro}
+\begin{proof}
+    Vamos a ver ciertas afirmaciones:
+    \begin{enumerate}
+        \item $f_n(x)$ converge $\forall x \in I$. Sea $x\in I$, entonces:
+        $$
+            |f_n(x) - f_m(x) | \leq \sup_{y\in I} |f_n(y) - f_m(y)| = ||f_n - f_m||_\infty
+        $$
+        Entonces para $x$ fijado, $\{f_n\}_{n\in\N}$ es una sucesión de Cauchy en $\R \implies f_n(x)$ converge a un punto de $\R$. Llamemos $f(x)$ a ese punto: $f : I \to \R$.
+        % TODO: Completar con mis fotos
+    \end{enumerate}
+\end{proof}
+\begin{th_ex}
+    El recíproco de la proposición \ref{pro:cauchy-unif} también es cierto. Demuéstralo.
+\end{th_ex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 11/03
+Debido a que hemos definido la norma $||\cdot||_\infty$, esto nos permite definir una distancia $\d(f, g) = || f -g || _\infty$. Y como hemos definido una norma para el espacio vectorial de funciones, entonces lo llamamos \textit{espacio vectorial normado} y tiene ciertas propiedades.
+\begin{pro}
+    El espacio vectorial de funciones $(C([a, b]), ||\cdot||_\infty$ es completo, es decir, toda sucesión de Cauchy converge a un elemento de ese espacio.
+\end{pro}
+\begin{proof}
+    Sea ${f_n}_{n\in N}$ una suciesión de funciones del espacio vectorial.
+    \begin{enumerate}
+        \item Cauchy $\implies$ converge uniformemente $( a f)$.
+        \item
+            $$
+                \begin{cases}
+                    f_n \text{ cont.}\\
+                    f_n \to_{unif} f
+                \end{cases} \implies f \text{ cont. (y $||f_n - f|| \to 0$)}
+            $$
+    \end{enumerate}
+\end{proof}
+\begin{pro}[Limite de la integral de una sucesión de funciones]
+    Sean $f_n,\ f :\ [a, b] \to \R$ integrables y tal que $f_n\to_{unif}f$ en $[a, b]$, entonces:
+    $$
+        \int_a^b f_n \to \int_a^b f
+    $$
+\end{pro}
+\begin{cor}
+    $$
+        \begin{cases}
+            f_n \in C_1([a,b])\\
+            f_n \to_{unif} f (\implies f\in C_1([a, b]))
+        \end{cases} \implies \int_a^b f_n \to \int_a^b f
+    $$
+\end{cor}
+\begin{proof}
+    $$
+        \left|\int_a^b f_n - \int_a^b f \right| = \left|\int_a^b (f_n-f) \right|  \leq \int_a^b |f_n(x) - f(x)| \d x \leq \int_a^b ||f_ n - f||_\infty = ||f_n - f||_\infty \cdot (b - a) \to 0
+    $$
+    Es decir, $$|f_n(x) - f(x)| < ||f_n - f||_\infty$$
+\end{proof}
+
+\section{Series de funciones}
+Como recordatorio:
+\begin{enumerate}
+    \item Sea $a_n \in \R$, $\sum a_n$ converge $\iff s_n = \sum_{m=0}^n a_m \iff \{s_n\} \text{ es de Cauchy} \iff \sum_{k=m}^n a_k \text{ converge a } 0$.
+    \item Sea $a_n \geq 0$, si:
+    $$
+        \exists \lim_{n \to \infty} \frac{a_{n+1}}{a_n} < 1 \implies \sum a_n \text{ converge}
+    $$
+\end{enumerate}
+Consideremos ahora $f_m : I \to \R$, y sea $S_n(x) = \sum_{k=1}^n f_k(x)$  entonces podemos definir:
+$$
+    \sum_{f_n} \to_{pp} g \implies  S_n(x)\to_{pp} g(x)\ \forall x \in I \text{ pues las sumas parciales convergen.}
+$$
+$$
+    \sum_{f_n} \to_{unif} g \implies S_n(x) \to_{unif} g(x)\ \forall x \in I.
+$$
+\begin{pro}[Criterio de Cauchy]
+    $$
+        \sum f_n \to_{unif} g \iff \{S_n\} \text{ es sucesión de Cauchy para $||\cdot||_\infty$}
+    $$
+\end{pro}
+\begin{proof}
+    Se deja al lector. No la vimos en clase.
+\end{proof}
+\begin{pro}[Criterio de Weierstrass]
+    Sea $f_n I \to \R$ y supongamos que $||f_n||_\infty \leq M_n \in \R$  y que $\sum_{n=1}^\infty < \infty$. Entonces:
+    $$
+        \sum f_n \text{ converge uniformemente en $I$ y su límite se denota } \sum_{n=1}^\infty f_n(x)
+    $$
+\end{pro}
+\begin{proof}
+    Partimos de:
+    $$
+        \sum f_n \to_{unif} g = S_n \to_{unif} g \text{ donde } S_n(x) = \sum_{k=1}^n f_k(x)
+    $$
+    además:
+    $$
+        S_n \to_{unif} g \iff \{S_n\} \text{ es Cauchy en $|| \cdot ||_\infty$, es decir } ||S_n - S_m || \to 0
+    $$
+    y como,
+    $$
+        S_n(x) - S_m(x) = \sum_{k=m+1}^n f_k(x)
+    $$
+    tomando $||\cdot||_\infty$:
+    $$
+        ||S_n(x) - S_m(x)||_\infty = ||\sum_{k=m+1}^n f_k(x)||_\infty \leq \sum_{k=m+1}^{n} ||f_k|| \leq \sum_{k=m+1}^{n} M_k \to 0 \text{ pues $M_k$ converge.}
+    $$
+\end{proof}
+\begin{eg}[Convergencia uniforme por el criterio de Weierstrass]
+    Sea $\{f_n\}_{n\in\N} = \sum_{n=1}^\infty x^n$, ¿converge uniformemente en $|x| \leq r < 1$?\\
+    $$
+        f_n(x) = x^n,\ I = [-r, r] \implies |x^n| \leq |x|^n \leq r^n
+    $$
+    Además, sabemos que $\sum r^n$ converge si $r<1$.
+    Por el criterio de Weierstrass:
+    $$
+        \sum x^n \text{ converge uniformemente en } |x| \leq r, \text{ como } S_n=\sum_{k=1}^n x^k \text{ es continua y } S_n(x) \to_{unif} \sum_{m=1}^\infty x^m
+    $$
+    entonces:
+    $$
+        f(x) = \sum_{m=1}^{\infty} x^m \text{ es continua en } I = [-r, r] \text{ y por tanto en } |x| < 1
+    $$
+\end{eg}
+
+\begin{eg}[Convergencia uniforme de la función Zeta de Riemann]
+    Sea $\sum_{n=1}^\infty \frac{1}{n^x}$, veamos que converge uniformemente en $x \geq a > 1$.
+    %%TODO: Completar. Pedir a Santorum.
+\end{eg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 12/03
+\begin{eg}[Convergencia de la serie $\sum_{n=1}^\infty \sfrac{\cos(3^n x)}{2^n}$]
+    Vamos a ver que converge uniformemente en $\R$.
+    $$
+        \left|\left|\frac{\cos(3^n x)}{2^n}\right|\right|_\infty = \frac{1}{2^n} \text{ y } \sum \frac{1}{2^n} < \infty
+    $$
+    entonces, por el criterio de Weierstrass la serie converge.\\
+    Como curiosidad, esta función fue el primer ejemplo de función continua pero no derivable en ningún punto. Se conoce como función de Weierstrass.
+\end{eg}
+\begin{pro}[De la convergencia uniforme de una función y su derivada]\label{pro:deriv-impl-con}
+    Sean $f_n : [a, b] \to \R$ con $f_n \in C^1$. Supongamos que:
+    $$
+        f_n' \to_{unif} g \text{ y que } \exists t_0 \in [a, b] : f_n(t_0) \text{ converge.}
+    $$
+    Entonces:
+    $$
+        \exists f : [a, b] \to \R \text{ con } f\in C^1\ :\
+        \begin{cases}
+            f_n \to_{unif} f\\
+            f' = g
+        \end{cases}
+    $$
+\end{pro}
+\begin{th_ex}
+    La demostración de la proposición \ref{pro:deriv-impl-con} se deja como ejercicio.
+\end{th_ex}
+\begin{eg}[Técnica habitual para probar convergencia uniforme de funciones]
+    Para comprobar que $f_n$ converge uniformemente a algo, se puede pasar a una serie de funciones (ya que tenemos más herramientas para probar convergencia de funciones):
+    \begin{gather*}
+        g_1 = f_1\\
+        g_2 = f_2-f_1\\
+        g_n = f_n - f_{n-1}
+    \end{gather*}
+    Entonces:
+    $$
+        f_n = \sum_{m=1}^n g_m \text{ es decir, } f_n \text{ converge uniformemente } \iff \sum g_m \text{ lo hace.}
+    $$
+
+\end{eg}
+
+\begin{obs}
+    Veamos ciertos aspectos de lo que hemos visto:
+    \begin{itemize}
+    \item Todo lo visto para funciones con valores en $\R$ es válido para funciones $I \to \C$ ($| \cdot |$ = módulo)\\
+    \item También para funciones $I \to \R^d$ e $I \to \C^d$. Si tenemos el vector:
+    $$
+        \mx{v_1\\v_2\\\vdots\\v_d} \implies |v| = \sum_{j=1}^d |v_j| \text{ (o cualquier otra norma)}
+    $$
+    \end{itemize}
+
+\end{obs}
+
+\section{Teorema de existencia y unicidad}
+Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un previo al teorema.\\
+\begin{dfn}[Función Lipschitz]
+    Sea $A \in \R^m, f: A \to \R^d$. Diremos que $f$ es \textbf{Lipschitz} $\iff$
+    $$
+        \exists L \in \R : |f(x) - f(y)| \implies L \cdot |x - y|\ \forall x,y \in A
+    $$
+    %%TODO: Incluir visualización con el cono?
+\end{dfn}
+\begin{obs}
+    Una función Lipschitz siempre es continua. Para verlo basta coger $\varepsilon = \sfrac{L}{\delta}$ en la definicion de continuidad.
+\end{obs}
+\begin{pro}[Derivadas parciales acotadas implica Lipschitz]
+    Sea $\Omega \in \R^m$ un abierto, $f:\Omega \to \R^d$ con $f \in C^1$.
+    \begin{enumerate}
+        \item Si $\Omega$ es convexo y $\exists C \in \R$ tal que:
+        $$
+            \left| \frac{\partial f_i}{\partial x_j} (x) \right| \leq C\ \forall x\in \Omega; \forall i = 1, \ldots, d; \forall j = 1, \ldots, m \implies f \text{ es Lipschitz.}
+        $$
+        \item Si $A \in \Omega$ es compacto y convexo, $f$ es Lipschitz en $A$.
+    \end{enumerate}
+\end{pro}
+\begin{proof}
+    Vamos a ver la demostración de la proposición:
+    \begin{enumerate}
+        \item
+    Como $\Omega$ es convexo, consideramos $\gamma: [0,1] \to \R^m$ con $\gamma(t) = x + t(y-x),\ 0\leq t\leq 1$.
+    $$
+        f(y) - f(x) = f(\gamma(1)) - f(\gamma(0)) = \int_0^1 \Dd{t} (f(\gamma(t))) = \int_0^1 \sum_{j=1}^m \frac{\partial f}{\partial x_j}(\gamma(t)) \gamma_j'(t) \d t
+    $$
+    Tomando valores absolutos llegamos a:
+    \begin{align*}
+        |f(x) - f(y)| &\leq \sum \int_0^1 \left(\left| \frac{\partial f}{\partial x_j} \gamma(t) \right| \cdot |y_j - x_y|\right) \d t\\
+                     (*) & \leq \int_0^1 C\cdot d \sum |y_j - x_j| \d t =  C\cdot d |y -x| = L |y-x|
+    \end{align*}
+    $(*)$ se cumple pues $\left|\sfrac{\partial f}{\partial x_j}\right| = \sum_{k=1}^d \left| \frac{\partial f_k}{\partial x_j} \right| \leq C\cdot d$ por hipótesis.
+    \item Igual que en 1, usando que al ser $A$ compacta y $\frac{\partial f_i}{\partial x}$ continua, $\exists C$ como en 1.
+\end{enumerate}
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 13/03
+\begin{cor}
+    Sea $\Omega \in \R^m$ abierto, $f: \Omega \to \R^d$ con $f \in C^1$. Entonces $f$ es \textit{localmente} Lipschitz, es decir, si $x_0 \in \Omega$ y $\bar{\B}(x_0, \delta) \in \Omega$, se tiene que $f$ es Lipschitz en $\bar{\B}(x_0, \delta)$.
+\end{cor}
+\begin{proof}
+    Sea $A = \bar{\B}(x_0, \delta)$ en un compacto, convexo en $\Omega$.
+\end{proof}
+\begin{obs}
+    Estos van a ser los casos que usemos pero:
+    \begin{enumerate}
+        \item $f(x) = |x|$ es Lipschitz en $\R$.
+        \item Si $f(x) = \int_0^x g(u) \d u$, con $g$ integrable y acotada en $[-a, a]$, es Lipschitz.
+        $$
+            |f(y)-g(y)| = \left|\int_x^y g(u) du\right| \leq ||g||_\infty |y-x|
+        $$
+    \end{enumerate}
+\end{obs}
+\subsection{Teorema de existencia y unicidad global}
+
+\begin{thm}[Unicidad y existencia global]
+    Sea $F: [a, b] \times \R^d \to \R^d$ continua, tal que:
+    $$
+        |F(t, X) - F(t, Y)| \leq L|X - Y|\ \forall t \in [a, b]
+    $$
+    es decir, $F$ es Lipschitz en $t\in[a, b]$. Sea $t_0 \in [a, b]$ u $X_0 \in \R^d$, entonces:
+    $$
+        \exists X:[a, b] \to \R^d \text{ con } X\in C^1 : \begin{cases}
+            X'(t) = F(t, X(t))\ \forall t\in [a, b]\\
+            X(t_0) = X_0
+        \end{cases}
+    $$ esa $X(t)$ es única.
+\end{thm}
+\begin{proof}
+    Dividiremos en la prueba en distintos pasos.\\
+    \begin{enumerate}
+        \item \label{proof:primera-parte-unic} Sea $h>0$, con $h < \sfrac{1}{L}$ ($Lh < 1$). Entonces, veremos que existe $X(t) \in C^1$ definida sobre $I = [t_0-h, t_0+h]\cap[a, b]$ y tal que:
+        $$
+            \begin{cases}
+                X' = F(t, X) \text{ en } I\\
+                X(t_0) = X_0
+            \end{cases}
+        $$
+
+        \begin{enumerate}
+        \item Definimos recursivamente:
+            $$
+                \begin{cases}
+                    X_0(t) = X_0,\ t\in[a, b]\\
+                    X_{n+1} = X_0 + \int_{t_0}^t F(s, X_n(s)) \d s,\ n \geq 0
+                \end{cases}
+            $$
+        \item Vamos a ver que $X_n$ es continua y está definida para todo $t \in [a, b]$ por inducción en n.\\
+            El caso base se cumple ($X_0$ es continua). Vamos a ver si es cierto para cualquier $n$.
+            \begin{gather*}
+                X_n \text{ continua } \implies F(s, X_n(s)) \text{ es continua por composicion de continuas } \implies \\
+                \implies \int_{t_0}^t F(s, X_n(s)) \d s \text{ continua } \implies X_{n+1} \text{ continua.}
+            \end{gather*}
+        \item \label{proof:ninf}Ahora vamos a ver que $\ninf{X_{n+1} - X_n} \leq (Lh)^n \ninf{X_1 - X_0}$ Por inducción:
+        $$
+            \text{Para $t \in I$, }
+            X_{n+1}(t) - X_n(t) = \int_{t_0}^t F(s, X_{n}(s)) \d s - \int_{t_0}^t F(s, X_{n-1}(s)) \d s
+        $$
+        entonces:
+        \begin{align*}
+            |X_{n+1}(t) - X_n(t)| &\leq \left|\int_{t_0}^t |F(s, X_{n}(s)) \d s - F(s, X_{n-1}(s))| \d s\right|\\
+            \text{($F$ es Lipschitz) }&\leq \left| \int_{t_0}^t |X_n(s) - X_{n-1}(s)| \right|\\
+            &\leq \left| \int_{t_0}^t L \ninf{X_n - X_{n-1}} \d s \right|
+        \end{align*}
+        Entonces:
+        $$
+            \left| \int_{t_0}^t L \ninf{X_n - X_{n-1}} \d s \right| = L \ninf{X_n - X_{n-1}} |t-t_0| \leq Lh \ninf{X_n - X_{n-1}}
+        $$
+        Tomando $\max_{t\in I}$, llegamos a $\ninf{X_{n+1} - X_n} \leq (Lh)^n \ninf{X_1 - X_0}$.
+        \item Veamos que $X_n^(t)$ converge uniformemente en $I$.\\
+        Sea $D_n = X_n - X_{n-1}$, entonces $X_n = X_0 + \sum_{i=1}^n D_i$. Por lo tanto $X_n$ converge $\iff \sum D_n$ lo hace.\\
+        Por \ref{proof:ninf}:
+        $$
+            \ninf{D_n} \leq (Lh)^{n-1} \ninf{D_1}
+        $$
+        Si $Lh < 1$ la serie $\sum (Lh)^k$ converge por el Criterio de Weierstrass. Por tanto:
+        $$
+            \sum D_n \text{ converge uniformemente en } I \implies X_n\to_{unif} X
+        $$
+        \item Veamos que $X(t) = X_0 + \int_{t_0}^t F(s, X(s)) \d s,\ t\in I$.\\
+        Pasamos al limite en:
+        $$
+            X_{n+1} = X_0 + \int_{t_0}^t F(s, X_{n}(s)) \d s
+        $$
+        Para ello necesitamos que ambos sumandos converjan uniformemente. Tenemos que ver:
+        $$
+            F(t, X(t)) \to_{unif} F(t, X(t))
+        $$
+        Es decir:
+        \begin{gather*}
+            |F(t, X(t)) - F(t, X_n(t))| \leq L |X(t) - X_n(t)| \leq L\ninf{X-X_n}\\
+            \ninf{F(\cdot, X(\cdot)) - F(\cdot, X_n(\cdot))} \leq L \ninf{X - X_n} \to 0 \implies\\
+            \implies F(t, X_n(t)) \to_{unif} F(t, X(t)) \implies \lim_{n\to \infty} \int_{t_0}^t F(s, X_n(s)) \d s = \int_{t_0}^t F(s, X(s)) \d s
+        \end{gather*}
+        Y por tanto:  $X(t) = X_0 + \int_{t_0}^t F(s, X(s)) \d s,\ t\in I$
+        \item Como $X(t) = X_0 + \int_{t_0}^t F(s, X(s)) \d s,\ t\in I$. Se cumple que:\\
+            \begin{itemize}
+                \item $X(t_0) = X_0 + 0$
+                \item $X'(t_0) = \left( \int_{t_0}^t F(s, X(s)) \d s \right) = F(t, X(t))$
+            \end{itemize}
+        \item Veamos que $X$ es única, es decir, que si $Y: I \to \R^d$, con $Y \in C^1$ satisface:
+        $$
+                \begin{cases}
+                    Y'(t) = F(t, Y(t)),\ t\in I\\
+                    Y(t_0) = X_0
+                \end{cases}
+        $$ entonces $X(t) = Y(t) \ \forall t \in I$\\
+        $$
+            \text{Como } Y(t) = X_0 + \int_{t_0}^t F(s, Y(s)) \d s \implies Y(t) - X(t) = \int_{t_0}^t [F(s, Y(s)) - F(s, X(s))] \d s
+        $$
+        Supongamos sin pérdida de generalidad que $t_0 < t$. Entonces:
+        %\begin{gather*}
+        %    | Y(t) - X(t) | &= \left| \int_{t_0}^t [F(s, Y(s)) - F(s, X(s))] \d s \right| \leq \int_{t_0}^t |F(s, Y(s)) - F(s, X(s))| \d s\\
+        %                    &\leq \int_{t_0}^t L |Y(s) - X(s)| \d s \leq L \int_{t_0}^t \ninf{Y - X} = L \ninf{Y - X} (t-t_0) \leq Lh \ninf{Y - X}
+        %\end{gather*}
+        Entonces:
+        $$
+            \ninf{Y-X} \leq Lh \ninf{Y-X}
+        $$
+        Pero $Lh < 1$, por tanto $\ninf{Y-X} = 0 \implies Y(t) = X(t)$. Es decir, nuestra solución es única
+    \end{enumerate}
+        \item La solución encontrada en \ref{proof:primera-parte-unic} se puede extender (\textit{prolongar}) a todo el intervalo $[a, b]$.
+        Supongamos que podemos extender la solución a $[\alpha, \beta]$ y ese $\beta$ es el máximo con esa propiedad, entonces vamos a ver que $\beta = b$.\\\\
+        Si $\beta < b$, sea $h = \sfrac{1}{2L}$, sea $\hat{t}_0 = \beta - \sfrac{h}{2}$ y $\hat{X}_0 = X(\hat{t}_0)$, por \ref{proof:primera-parte-unic} aplicado da una solución $\hat{X}$ definida en $[\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$.
+        Sea:
+        $$
+            X_{nueva}(t) =
+            \begin{cases}
+                X(t),\ t\leq \beta\\
+                \hat{X}(t),\ t\geq \hat{t}_0 - h
+        \end{cases}
+        $$
+        Como $X$ y $\hat{X}$ están definidas en todo $[\hat{t}_0 - h, \hat{t}_0 + h]$ y cumplen la EDO y $X(\hat{t}_0) = \hat{X}(\hat{t}_0)$, por la unicidad de  \ref{proof:primera-parte-unic}: $X(t) = \hat{X}(t) $ para $t \in [\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$.
+        Entonces $X_{nueva}$ es solución de la EDO hasta $\beta + \frac{h}{L}$ (o $\min(\beta + \sfrac{h}{2}, b)$), es decir, para $t < \beta$ usamos $X$ y para $\beta - \sfrac{h}{2} < t$ usamos $\hat{X}$. Entonces, con $X_{nueva}(t_0) = X_0 = X(t_0)$ lo que contradice nuestra hipóteis de $\beta < b$.\\
+        Para demostrar que podemos prolongar la solución también a $a$ se repite el argumento.
+        \item Hemos visto que la solución existe en todo el intervalo $[a, b]$. Vamos a ver también que tenemos unicidad en $[a, b]$.
+        \begin{enumerate}
+        \item C es no vacío:
+        $$C = \{t\in [a, b] : X(t) = Y(t)\}$$ entonces $C \neq \varnothing$ ya que $t_0\in C$.
+        \item C es cerrado en $[a, b]$:\\
+        Basta ver que si $t_n \in C\ \forall n$ y $t_n \to t$ entonces $t \in C$. Si $t_n \to t$
+        $$
+            X(t_n) = Y(t_n) \implies X(t) = Y(t) \implies t \in C \implies C \text{ es cerrado.}
+        $$
+        \item C es abierto en $[a, b]$:\\
+        Tenemos que ver que $\forall \bar{t}\in C \exists \delta > 0$ tal que $(\bar{t} - \delta, \bar{t} + \delta) \cap [a, b] \subset C$. Es decir:
+        $$
+            X(\bar{t}) = Y(\bar{t}) \text{ pues }\bar{t} \in C
+        $$
+        Además, $X, Y$ son soluciones de:
+        $$
+        \begin{cases}
+            Z' = F(t, Z)\\
+            Z(\bar{t}) = X(\bar{t}) = Y(\bar{t})
+        \end{cases}
+        $$
+        Por unicidad local en $[\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$, $X=Y$ en ese intervalo.
+        \item Veamos que $C$ es el total:\\
+        Como $C$ es abierto en $[a,b]$, cerrado en $[a, b]$,  $C \neq \varnothing$ y $[a, b]$ es conexo, entonces $C = [a, b]$.
+        \end{enumerate}
+    \end{enumerate}
+
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 14/03
