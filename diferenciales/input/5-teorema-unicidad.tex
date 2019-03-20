@@ -66,7 +66,7 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
         \end{cases} \equiv f
     $$
     Entonces es fácil ver que: $f_n \to_{pp} f$\\\\
-    Vamos a ver que $f_n \not\to_{unif} f$ en $[0, 1]$. Tenemos que hallar $N$ para que se cumpla: 
+    Vamos a ver que $f_n \not\to_{unif} f$ en $[0, 1]$. Tenemos que hallar $N$ para que se cumpla:
     $$
         |f_n(x) - f(x)| < \varepsilon, n\geq N
     $$
@@ -580,7 +580,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
         \end{cases}
         $$
         Como $X$ y $\hat{X}$ están definidas en todo $[\hat{t}_0 - h, \hat{t}_0 + h]$ y cumplen la EDO y $X(\hat{t}_0) = \hat{X}(\hat{t}_0)$, por la unicidad de  \ref{proof:primera-parte-unic}: $X(t) = \hat{X}(t) $ para $t \in [\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$.
-        Entonces $X_{nueva}$ es solución de la EDO hasta $\beta + \frac{h}{L}$ (o $\min(\beta + \sfrac{h}{2}, b)$), es decir, para $t < \beta$ usamos $X$ y para $\beta - \sfrac{h}{2} < t$ usamos $\hat{X}$. Entonces, con $X_{nueva}(t_0) = X_0 = X(t_0)$ lo que contradice nuestra hipóteis de $\beta < b$.\\
+        Entonces $X_{nueva}$ es solución de la EDO hasta $\beta + \frac{h}{L}$ (o $\min(\beta + \sfrac{h}{2}, b)$), es decir, para $t < \beta$ usamos $X$ y para $\beta - \sfrac{h}{2} < t$ usamos $\hat{X}$. Entonces, con $X_{nueva}(t_0) = X_0 = X(t_0)$ lo que contradice nuestra hipótesis de $\beta < b$.\\
         Para demostrar que podemos prolongar la solución también a $a$ se repite el argumento.
         \item Hemos visto que la solución existe en todo el intervalo $[a, b]$. Vamos a ver también que tenemos unicidad en $[a, b]$.
         \begin{enumerate}
@@ -611,3 +611,347 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
 
 \end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 14/03
+\begin{cor}
+    Sean $\A : [a, b]\to \R^{d\times d}$, $B : [a, b]\to\R^{d\times d}$ continuas, $t_0 \in [a, b]$, $X_0 \in \R^d$. Entonces existe una solución (y es única) $X : [a, b] \to \R^d$ de:
+    $$
+        \begin{cases}
+            X'(t) = \A(t) X(t) + B(t)\\
+            X(t_0) = X_0
+        \end{cases}
+    $$ %TODO: Sustituir las x de abajo por negrita
+    Además, si $p, q, r :[a, b] \to \R$, $t_0 \in [a, b]$, $x_0, y_0 \in \R$, entonces existe solución y es única $x : [a, b] \to R$ del problema de valores iniciales:
+    $$
+        \begin{cases}
+            x'' + p(t) x' + q(t) x = r(t),\ \forall t \in [a,b]\\
+            x(t_0) = x_0
+            x'(t_0) = y_0
+        \end{cases}
+    $$
+\end{cor}
+\begin{proof}
+    Sabemos que $X'(t) = F(t, X(t))$, $F(t, X) = \A(t) X +  B(t)$.
+    $$
+        \A(t) = \mx{a_{11}(t) & \cdots & a_{1d}(t)\\
+            \vdots &    \ldots & \vdots \\
+            a_{d1}(t) & \cdots & a_{dd}(t)}
+    $$
+    Como $a_{ij} : [a,b] \to \R$ es continua, entonces $F$ es continua. Queremos ver ahora que $F$ satisface una condicion de Lipschitz uniforme en t. Es decir, tenemos que ver que:
+    $$
+        \exists k : \sum_{j=1}^d |a_{ij}(t)| \leq k ,\ \forall t \in [a, b]
+    $$
+    Si la suma es una función continua en $[a, b] \implies$ f es acotada. Entonces:
+    $$
+        |F(t, Y) - F(t, X)| = |A(t) (Y - X)|
+    $$
+    Además:
+    $$
+        A(t)(Y-X) = \sum_{j=1}^d a_{ij}(Y_j - X_j)
+    $$
+    Por tanto:
+    $$
+     |F(t, Y) - F(t, X)| \leq \sum_{j=1}^d |a_{ij}(t)||Y_j-X_j| \leq \left(\sum_{j=1}^d |a_{ij}(t)|\right) |Y-X| \leq k |Y - X|
+    $$
+    Y por tanto, es Lipschitz y cumple las condiciones del teorema de existencia y unicidad.\\\\
+    En el caso de la EDO: $x'' + p(t) x' + q(t) x = r(t)$ entonces es como si tuviéramos el sistema:
+    $$
+        \mx{x\\y}' = \mx{0 & 1 \\ -q(t) & -p(t)} \mx{x\\y} + \mx{0\\r}
+    $$
+    Y por consecuencia de lo que acabamos de ver, tomando:
+    $$
+        \A(t) = \mx{0 & 1 \\ -q(t) & -p(t)} \text{ y } \B(t) = \mx{0\\r}
+    $$
+    Existe solución y es única.
+\end{proof}
+
+\begin{obs}
+    Aunque no lo hemos enunciado así, hemos demostrado:
+    $$
+        \exists ! X : I \to \R^d \text{ tal que } X(t) = X_0 + \int_{t_0}^t F(s, X(s)) \d s,\ t \in I
+    $$
+    Donde llamamos $I = [t_0 - h, t_0 + h] \cap [a, b]$ y $G(x) = X_0 + \int_{t_0}^t F(s, X(s)) \d s$\\
+    Con $G : \mathcal{C}(I) \text{ funciones continuas en } I \to C(I)$ y $G(X) = X$. Es decir, $G$ tiene un único \textbf{punto fijo}. Se puede ver usando:
+    $$
+        \ninf{G(X) - G(Y)} \leq \alpha \ninf{X - Y} \text{ con } \alpha = Lh < 1
+    $$
+\end{obs}
+
+\section{Teorema de existencia y unicidad local}
+
+\begin{thm}[Teorema de existencia y unicidad local]\label{thm:exist-unic-local}
+    Sea $\Omega \in \R^d$ abierto, $F:[a, b] \times \Omega \to \R^d$ continua y uniformemente Lipschitz en $t$, es decir:
+    $$
+        \exists L : |F(t, X) - F(t, Y)| \leq L |X - Y| \ \forall t \in [a, b],\ \forall X, Y \in \Omega
+    $$
+    Sean $t_0 \in [a, b]$, $X_0 \in \Omega$. Si $\delta$ es suficientemente pequeño, entonces:\\\\
+    Existe $X:I \to \Omega$, $I = [t_0 - \delta, t_0 + \delta] \cap [a, b]$ con $X \in C^1$, que cumple:
+    $$
+    \begin{cases}
+        X'(t) = F(t, X(t))\ \forall t \in I\\
+        X(t_0) = X_0
+    \end{cases}
+    $$
+    Y esa solución es única.
+\end{thm}
+\begin{proof}
+    La demostración es como en el caso $\Omega = \R^d$. Definimos:
+    $$
+        \begin{cases}
+            X_0(t) = X_0 \text{ y, recursivamente, }\\
+            X_n+1(t) = X_0 + \int_{t_0}^t F(s, X_n(s)) \d s
+        \end{cases}
+    $$
+    Para que las $X_n$ estén bien definidas hay que asegurarse de que $X_n(t) \in \Omega\ \forall t \in I$. Tenemos que ver cómo elegir $\delta$ para que eso ocurra.
+    \begin{enumerate}
+        \item
+        $$
+            \begin{cases}
+                \Omega \text{ abierto}\\
+                X_0 \in \Omega
+            \end{cases} \implies \exists r > 0 : \bar{\B}(X_0, r) \subset \Omega
+        $$
+        Como $[a, b] \times \bar{\B}(X_0, r)$ es compacto, y $\left. F \right|_{[a, b]\times\bar{\B}}$ es continua, es deicr, $\exists M(r) : |F(t, X)| \leq M$ si $t \in [a, b$ y $X \in  \bar{\B}(X_0, r)$
+        \item Si $\delta < \frac{r}{M}$ entonces:
+        $$
+            X_n(t) \in \bar{\B}(X_0, r) \text{ si } t\in I,\ n \in \N
+        $$
+        Se demuestra por inducción sobre $n$. Para $n=0$ tenemos $X_0(t) = X_0$ y por tanto se cumple. Veamos el paso inductivo.\\
+        \begin{gather*}
+            |X_{n+1}(t) - X_0 | = \left| \int_{t_0}^t F(s, X_n(s)) \d s \right| \leq \int_{t_0}^t |F(s, X_n(s))| \d s\\ \leq \int_{t_0}^t M\d s = M(t - t_0) \leq M \delta \leq r \implies \delta < \frac{r}{M}
+        \end{gather*}
+    \end{enumerate}
+    Con esto demostramos que las $X_n$ están bien definidas. Ahora simplemente se procede como en el caso global para demostrar convergencia, para lo que se necesita $L\delta < 1$. Es decir, vamos a necesitar que $\delta < \min (\sfrac{r}{M(r)},\ \sfrac{1}{L})$
+\end{proof}
+\begin{pro}[Regularidad de las soluciones]
+    Con las hipótesis del Teorema de existencia y unicidad local, si $F$ es $C^m ([a,b]\times\Omega)$ entonces:
+    $$
+        X \in C^{m+1}(I)
+    $$
+\end{pro}
+\begin{proof}
+    Por inducción sobre $m$:\\
+    Caso $m=1$ $\implies X$ es $C^2$.\\
+    $X$ es $C^1$ por la proposición. $X'(t) = F(t, X(t)) \implies X' \in C^1$ por la regla de la cadena, es decir, $X' \in C^1 \implies X \in C^2$. Se sigue la prueba recursivamente.
+\end{proof}
+
+\subsection{Prolongabilidad de soluciones}
+En el caso de existencia y unicidad global veíamos que si teníamos una solución definida en un intervalo $I$ podíamos extenderlo a todo un intervalo $[a, b]$ simplemente por unicidad de la solución. Vamos a ver que en el caso de existencia y unicidad local puede que no lleguemos a cubrir todo el intervalo $[a, b]$ debido a que el $\delta$ que define la bola abierta donde existe la solución no es fijo y puede ir haciéndose cada vez más pequeño.
+
+\begin{pro}[Intervalo máximo de existencia-unicidad local]
+    Con las misma hipótesis del teorema de existencia y unicidad local (véase el teorema \ref{thm:exist-unic-local}), existe un intervalo máximo en el que está definida la solución. Ese intervalo es uno de los siguientes tipos:
+    $$[a, b],\ [a,\beta),\ (\alpha, b],\ (\alpha, \beta)
+    $$
+    Donde $a \leq \alpha < \beta \leq b$.\\
+    Además, si es de la forma $*,\ \beta)$ entonces $\forall k \in \Omega$ compacto $\exists t_K < \beta$ tal que $X(t)\not \in K,\ t_K < t < \beta$. Algo similar pasa para los intervalos de la forma $(\alpha, *$
+\end{pro}
+\begin{obs}
+    En palabras más simples y menos precisas, el enunciado establece que:
+    $$
+        X(t) \to_{t\to\beta} \delta \Omega \text{ o } |X(t)| \to_{t\to\beta} \infty
+    $$
+\end{obs}
+\begin{eg}[No unicidad formalmente]
+    Retomando el ejemplo \ref{eg:no-unic}:
+    $$
+        \begin{cases}
+            \mbf{x}' = \mbf{x}^{sfrac{2}{3}}\\
+            x(0) = 0
+        \end{cases}
+    $$
+    Se ve que $F(t, \mbf{x})$ no es Lipschitz cerca del $0$, (en $0$ la derivada es $\infty$). De hecho podemos encontrar dos soluciones:
+    \begin{gather*}
+        x_1(t) = 0\\
+        x_2(t) = at^3,\ a \neq 0
+    \end{gather*}
+\end{eg}
+
+\begin{eg}[Existencia local e intervalo maximal]
+    Sea el PVI:
+    $$
+        \mbf{x}' = \mbf{x}^2,\ t\in[-1, 1]\\
+        x(0) = 1
+    $$
+    Resolviendo el PVI hallamos:
+    $$
+        x(t) = \frac{1}{1-t} \text{ que sólo existe si t < 1}
+    $$
+    Por tanto el intervalo de existencia es: $[-1, 1)$.\\\\
+    Vemos que si no nos restringiéramos inicialmente a $[a, b] = [-1, 1]$, está definida en $(-\infty, 1)$. Decimos que éste es su intervalo maximal.\\
+    Vemos que $F(t, \mbf{x})$ no es Lipschitz en $x\in\R$ pues $\frac{\partial F}{\partial x} = 2\mbf{x}$ no está acotada en $\R$, pero si en $[-A, A]$ para $A \in \R^+$. Es decir, es Lipschitz uniformemente en $t$ si la restringimos a $\R \times [-A, A]$ (la constante de Lipschitz es $L = 2A$).
+\end{eg}
+\begin{obs}
+    Para el caso autónomo se pueden tomar $[a, b]$ cada vez más grandes hasta que llenen $\R$.
+\end{obs}
+
+\begin{eg}[Aplicación del teorema de existencia y unicidad en $\mbf{x}'' = \cos(t\mbf{x})$]
+    Sea el PVI:
+    $$
+        \begin{cases}
+            \mbf{x''} = \cos(t\mbf{x})\\
+            x(0) = 0\\
+            x'(0) = 0
+        \end{cases}
+    $$
+    Pasamos a forma matricial:
+    $$
+        (y = x')\ \mx{x\\y}' = \mx{y\\ cos(tx)} = F(t, X)
+    $$
+    Entonces vamos a ver si podemos aplicar el teorema de existencia y unicidad:
+    $$
+        \frac{\partial F}{\partial y} = \mx{1\\0},\ \frac{\partial F}{\partial x} = \mx{0\\ -t\sin(tx)}
+    $$
+    Donde vemos que ambas derivadas parciales están acotadas si y sólo si $t$ lo está. Por tanto, en $[a, b] \times \R^2$, las derivadas parciales de $F$ con respecto a $x$ e $y$ están acotadas, lo que quiere decir que se puede utilizar el Teorema de existencia y unicidad global.
+    $$
+        \left| \frac{\partial F}{\partial y} \right| \leq 1,\ \left| \frac{\partial F}{\partial x} \leq \max(|a|, |b|)  \right|
+    $$
+    Por tanto, $\exists ! $ sol $ \in [a, b]$. Entonces, para $n \in N$ podemos definir:
+    $$
+        [a, b] = [-n, n] \implies \exists ! X_n: [-n, n] \to \R^2
+    $$
+    Además:
+    $$
+        \left. X_{n+1}\right|_{[-n, n]} = X_n \text{ por unicidad} \implies \exists ! X: \R \to \R^2
+    $$
+    Y por tanto existe solución $\forall t\in \R$ para el PVI.
+\end{eg}
+\begin{eg}[Existencia y unicidad de solución del péndulo simple]
+    La ecuación del péndulo simple (sin resistencia del aire) sigue el PVI:
+    $$
+        \begin{cases}
+            \theta'' = -\frac{g}{l} \sen \theta\text{, con $l$ la longitud del péndulo}\\
+            \theta(0) = \theta_0\\
+            \theta'(0) = v_0
+        \end{cases}
+    $$
+    Donde podemos ver que tiene solución en $t\in\R$ y es única. Pasando a sistema:
+    $$
+        \mx{\theta\\v}' = \mx{v\\-\frac{g}{l}\sen\theta} = F(t, \theta, v)
+    $$
+    Si hallamos sus derivadas parciales:
+    \begin{gather*}
+        \frac{\partial F}{\partial v} = \mx{1\\0}\\
+        \frac{\partial F}{\partial \theta} = \mx{0\\-\frac{g}{l}\cos\theta}
+    \end{gather*}
+    Donde ambas están acotadas en $[\theta, v]^T\in\R^2$ y por tanto existe solución y es única.
+\end{eg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 20/03
+\section{Dependencia de parámetros.} %%Nuevo tema?
+
+Consideremos una ecuación diferencial como: $X'(t) = F(t, X(t)),\ X(t_0) = \xi$, donde $X(t, \xi)$ es "la" solución para cada valor de $\xi$ (supondremos que se cumplen las hipótesis necesarias para asegurar existencia y unicidad).\\
+En ocasiones nos va a interesar saber si cuando se mueve $\xi$ ligeramente, la nueva solución es similar a la original o no.\\
+Por otro lado, podría ser que $F$ dependiera de un parámetro $\lambda$, es decir:
+$$
+    \begin{cases}
+        X'(t) = F(t, X(t), \lambda)\\
+        X(t_0) = \xi
+    \end{cases} \text{ con solución } X(t, \xi, \lambda)
+$$
+Nos volvemos a preguntar si cuando se mueve $\lambda$ ligeramente, la nueva solución es similar a la original o no.\\\\
+\begin{obs}
+    Podría parecer que en ambos casos la pregunta es la misma, pero existe un procedimiento para transformar la segunda en la primera de la siguiente manera, definiendo una $Y(t)$:
+    $$
+        Y(t) = \mx{X(t)\\\lambda} \implies Y' = \mx{X'\\0} = \mx{F(t, X, \lambda)\\0} = G(t, Y) \text{ y } Y(t_0) = \mx{\xi, \lambda}
+    $$
+\end{obs}
+Por último, supongamos que tenemos $\hat{F}(t, X) \approx F(t, X)$, donde $\hat{F}$ es una aproximación de $F$. Para cada función con su respectivo PVI hallaríamos una solución, ($\hat{X}$ resuelve $\hat{F}$ y $X$ resuelve $F$). Nos preguntamos entonces si $\hat{X} \approx X$.
+
+\begin{eg}[Motivación: aproximación del péndulo simple]
+    Sea $\theta''=-\frac{g}{l}\sen(\theta) = F$, aproximamos a través de $\hat{F} = -\frac{g}{l}$, con $|\theta| << 1$ y $\sin(\theta) \approx \theta$. Nos preguntamos si la solución de cada ecuación se parecen o no ya que resolver $\hat{F}$ es más sencillo que resolver $F$.
+\end{eg}
+
+La base del desarrollo formal de esta sección se basará en el siguiente lema.
+\begin{lm}[de Gronwal]
+    Sean $u,\ f\ g: [a, b] \to \R$ continuas, y $g \geq 0$. Supongamos que:
+    $$
+        u(t) \leq f(t) + \int_a^t g(s) u(s) \d s
+    $$
+    Entonces:
+    $$
+        u(t) \leq f(t) + \int_a^t f(s) g(s) e^{\int_s^t g(u) \d u} \d s
+    $$
+\end{lm}
+\begin{proof}
+    Sea $z(t) = \int_a^t g(s)\cdot u(s) \d s$, como $g$ y $u$ son continuas, $z'(t) = g(t)\cdot u(t)$, entonces por hipótesis:
+    $$
+        z'(t) \leq g(t) \cdot (f(t) + z(t)) = g\cdot f + g\cdot z \text{ ($g \geq 0$)}
+    $$
+    Sea $G(t)$ una primitiva de $g(t)$, es decir, $G'(t) = g(t)$ (por ejemplo, $G(t) = \int_a^t g(u) \d u$), entonces:
+    \begin{gather*}
+        z'(t) - g(t) \cdot z(t) \leq f(t) g(t) \\
+        e^{-G(t)} (z'(t) - g(t) \cdot z(t)) \leq f(t) g(t) e^{-G(t)}\\
+        \Dd{t} (e^{-G(t)} z(t) ) \leq f(t) g(t) e^{-G(t)} \implies \text{ (integrando entre $a$ y $t$) }\\
+        \int_a^t (e^{-G}z)' \d s \leq \int_a^t f(s)g(s)e^{-G(s)} \d s
+    \end{gather*}
+    Desarrollando la primera parte de la desigualdad:
+    $$
+    \left. (e^{-G(s)}z(s)) \right|_{s=a}^{s=t} = e^{-G(t)}z(t) - e^{-G(a)}z(a) = \text{ (como $z(a) = 0$ ) } e^{-G(t)}z(t)
+    $$
+    Es decir:
+    \begin{align*}
+        e^{-G(t)}z(t) &\leq \int_{a}^b f(s) g(s) e^{-G(s)} \d s \implies\\
+        z(t) &\leq e^{G(t)} \int_a^t f(s) g(s) e^{-G(s)} \d s\\
+        &= \int_a^t f(s) g(s) e^{G(t) - G(s)} \d s
+    \end{align*}
+    y como $G(t) - G(s) = \int_s^t G'(u) \d u = \int_s^t g(u) \d u$, es decir, $z(t) = \int_a^t f(s) g(s) e^{\int_s^t g(u) d(u)}$ basta observar que:
+    \begin{align*}
+        u(t) &\leq f(t) + \int_a^t g(s) u(s) \d s = f(t) + z(t)\\
+             &\leq f(t) + \int_a^t f(s) g(s) e^{\int_s^t g(u) d(u)}
+    \end{align*}
+\end{proof}
+\begin{obs}
+    Vamos a ver unos casos particulares:
+    \begin{enumerate}
+        \item $f = M$ constante.
+        $$
+            u(t) \leq M e^{\int_a^t g(s)} \d s
+        $$
+        \item $f = M$, $g = L$ constantes:
+        $$
+            u(t) \leq M e^{L(t-a)}
+        $$
+    \end{enumerate}
+\end{obs}
+\begin{pro}[Diferencia de soluciones de una ecuación. Cotas.]
+    Sea $\Omega$ abierto en $\R^d$, $F:[a, b] \times \Omega \to \R^d$ continua y tal que:
+    $$
+            |F(t, \xi) - F(t, \eta)| \leq  L |\xi - \eta| \text{ con } \xi, \eta \in \Omega,\ t\in[a, b],\ L\in \R,\ L > 0.
+    $$
+    Sean $X_1, X_2 :[a, b] \to \Omega$ y sean $\varepsilon_1, \varepsilon_2$ tal que:
+    $$
+        |X_j'(t) - F(t, X_j(t))| \leq \varepsilon_j \implies \ninf{X'_j - F(t, X_j)} \leq \varepsilon_j
+    $$
+    Entonces:
+    $$
+        |X_1(t) - X_2(t) | \leq |X_1(a) - X_2(a)| e^{L(t-a)} + (\varepsilon_1 + \varepsilon_2) \frac{e^{L(t-a) - 1}}{L}
+    $$
+\end{pro}
+\begin{proof}
+    Dividiremos la prueba en partes:
+    \begin{enumerate}
+        \item Sea $u(t) = |X_1(t) - X_2(t)|$, con:
+        \begin{gather*}
+            X_1(t) = X_1(a) + \int_a^t X_1'(s) \d s\\
+            X_2(t) = X_2(a) + \int_a^t X_2'(s) \d s
+        \end{gather*}
+        Como el valor absoluto de la integral es menor igual que la integral del valor absoluto, restando llegamos a que:
+        $$
+            u(t) \leq |X_1(a) - X_2(a)| + \int_a^t |X_1'(s) - X_2'(s)| \d s
+        $$
+        \item
+        \begin{align*}
+            |X_1' - X_2'| &\leq |X_1' - F(s, X_1)| + |X_2' - F(s, X_2)| + |F(s, X_1) - F(s, X_2)|\\
+            &\leq \varepsilon_1 + \varepsilon_2 + L|X_1 - X_2|
+        \end{align*}
+        \item Entonces:
+        \begin{align*}
+            u(t) &\leq |X_1(a) - X_2(a)| + \int_a^t (\varepsilon_1 + \varepsilon_2 + L u(s) ) \d s
+                 &\leq |X_1(a) - X_2(a)| + (\varepsilon_1 + \varepsilon_2)(t-a) + \int_a^t L u(s) \d s
+        \end{align*}
+        Entonces $u(t) \leq f(t) + \int_a^t g(s) u(s) \d s$.
+        \item Aplicando en $LG$:
+        $$
+            u(t) \leq f(t) + \int_a^t L f(s) e^{L(t-s)} \d s
+        $$
+        e integrando por partes llegamos a la estimación del enunciado.
+    \end{enumerate}
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 21/03

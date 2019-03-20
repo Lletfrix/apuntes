@@ -25,7 +25,7 @@ $$
 $$
 Para resolverlo, hallamos la solución general $x(t) = ae^{2t}$ y sustituimos la segunda ecuación. $x(0) = ae^{0} = 8 \implies a = 8$.
 
-\begin{eg}[No unicidad en soluciones informalmente]
+\begin{eg}[No unicidad en soluciones informalmente]\label{eg:no-unic}
     Consideramos $\P \equiv x'(t) = 3(x(t))^{\sfrac{2}{3}}.$, queremos hallar \textit{la} solución para $x(0)=0$.\\
     Empezamos hallando soluciones a la ecuación, en este caso $x(t) = t^3$ y $x(t) = 0$ resuelven la ecuación. Nuestro sistema sería:
     $$
@@ -285,20 +285,20 @@ $$
 \end{eg}
 
 \subsection{Trayectorias ortogonales en coordenadas polares}
-Veamos que al igual que encontramos una expresión para la trayectorias ortogonales en coordenadas rectangulares, también lo podemos hacer en coordenadas polares. En este caso partimos de una familia de curvas $fam_C$ descrita por la solución de una EDO $\mbf{r'} = h(\mbf{r}, \theta)$. ¿Cuál es la familia ortogonal $fam_{C^\perp}$?.\\\\
+Veamos que al igual que encontramos una expresión para la trayectorias ortogonales en coordenadas rectangulares, también lo podemos hacer en coordenadas polares. En este caso partimos de una familia de curvas $fam_C$ descrita por la solución de una EDO $\mbf{r'} = h(\mbf{r}, \vartheta)$. ¿Cuál es la familia ortogonal $fam_{C^\perp}$?.\\\\
 Para ello tenemos que empezar analizando la expresión de la tangente como ecuación.
 
 \begin{wrapfigure}{l}{.6\textwidth}
   \begin{center}
     \includegraphics{1-ortogonalpolares.png}
   \end{center}
-  \caption{Análisis de $\d r$ y $\d \theta$}\label{img:1-polort}
+  \caption{Análisis de $\d r$ y $\d \vartheta$}\label{img:1-polort}
 \end{wrapfigure}
-En la figura \ref{img:1-polort} hemos trazado una curva arbitraria $C$. Queremos hallar una ecuación diferencial que describa a la tangente en cierto punto $p = (r,\theta)$. Para ello, hallamos un nuevo punto $q = (r + \d r, \theta +\d \theta) \in C$. Se indica además la cirfumferencia $s$ de radio $r$ con centro en $0$, y la recta tangente $t$ al punto original $p$.\\\\
-Observamos que $s$ es perpendicular a las rectas que unen el origen con $p$ y $q$ ($\vec{0p}$ y $\vec{0q}$ respectivamente), ya que son trazadas desde el radio de la misma. Además, la intersección de $\vec{0q}$ con $s$ nos marca el punto $q' = (r, \theta +\d \theta)$. Finalmente, denominamos $\phi$ al ángulo del que queremos hallar la tangente.
+En la figura \ref{img:1-polort} hemos trazado una curva arbitraria $C$. Queremos hallar una ecuación diferencial que describa a la tangente en cierto punto $p = (r,\vartheta)$. Para ello, hallamos un nuevo punto $q = (r + \d r, \vartheta +\d \vartheta) \in C$. Se indica además la cirfumferencia $s$ de radio $r$ con centro en $0$, y la recta tangente $t$ al punto original $p$.\\\\
+Observamos que $s$ es perpendicular a las rectas que unen el origen con $p$ y $q$ ($\vec{0p}$ y $\vec{0q}$ respectivamente), ya que son trazadas desde el radio de la misma. Además, la intersección de $\vec{0q}$ con $s$ nos marca el punto $q' = (r, \vartheta +\d \vartheta)$. Finalmente, denominamos $\varphi$ al ángulo del que queremos hallar la tangente.
 
-El gráfico de la figura \ref{img:1-polort} está distorsionado. Tanto $\d r$ como $\d \theta$ son infinitesimales, es decir, extremadamente pequeños. Debido a ello podemos hacer distintas asunciones.\\\\
-Para comenzar, el arco de circunferencia que une $p$ y $q'$ tiene longitud $r\d \theta$ y podemos aproximarlo con un segmento que va a ser perpendicular a las rectas $\vec{0p}$ y $\vec{0q}$. Esto hará que $\vec{0p}$ y $\vec{0q}$ sean aproximadamente paralelas, pues comparten un mismo segmento perpendicular a ellas.\\ Además, podemos aproximar el arco de $C$ que une $p$ y $q$ con un segmento de $t$. Esto se ilustra en la figura \ref{img:1-polort2}.
+El gráfico de la figura \ref{img:1-polort} está distorsionado. Tanto $\d r$ como $\d \vartheta$ son infinitesimales, es decir, extremadamente pequeños. Debido a ello podemos hacer distintas asunciones.\\\\
+Para comenzar, el arco de circunferencia que une $p$ y $q'$ tiene longitud $r\d \vartheta$ y podemos aproximarlo con un segmento que va a ser perpendicular a las rectas $\vec{0p}$ y $\vec{0q}$. Esto hará que $\vec{0p}$ y $\vec{0q}$ sean aproximadamente paralelas, pues comparten un mismo segmento perpendicular a ellas.\\ Además, podemos aproximar el arco de $C$ que une $p$ y $q$ con un segmento de $t$. Esto se ilustra en la figura \ref{img:1-polort2}.
 
 \begin{wrapfigure}{r}{.5\textwidth}
   \begin{center}
@@ -307,12 +307,12 @@ Para comenzar, el arco de circunferencia que une $p$ y $q'$ tiene longitud $r\d 
   \caption{Aproximación por infinitesimales}\label{img:1-polort2}
 \end{wrapfigure}
 
-Como puede apreciarse en \ref{img:1-polort2}, el área sombreada se corresponde con un triángulo rectángulo en la aproximación, y de hecho tenemos descritos los catetos, lo que nos permite hallar $\tan\phi'$. Sin embargo, como hemos visto en la aproximación, ambas rectas perpendiculares a $ts$ son paralelas entre sí. Es fácil ver entonces que $\phi = \phi'$ y al describir $\tan\phi'$ hemos descrito $\tan\phi$.\\\\
+Como puede apreciarse en \ref{img:1-polort2}, el área sombreada se corresponde con un triángulo rectángulo en la aproximación, y de hecho tenemos descritos los catetos, lo que nos permite hallar $\tan\varphi'$. Sin embargo, como hemos visto en la aproximación, ambas rectas perpendiculares a $ts$ son paralelas entre sí. Es fácil ver entonces que $\varphi = \varphi'$ y al describir $\tan\varphi'$ hemos descrito $\tan\varphi$.\\\\
 Por tanto, podemos concluir que:
 $$
-\tan\phi = \frac{r\d \theta}{\d r} = r \frac{1}{\dd{r}{\theta}} = \frac{r}{r'}
+\tan\varphi = \frac{r\d \vartheta}{\d r} = r \frac{1}{\dd{r}{\vartheta}} = \frac{r}{r'}
 $$
-Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitraria en forma de ecuación diferencial $r' = h(r,\theta)$, podemos hallar $fam_{C^\perp}$ que buscábamos al comienzo de la sección. Para ello, vamos a considerar de nuevo una curva arbitraria $C$ y su perpendicular $C^\perp$. Nos interesa especialmente la relación que existe entre los ángulos de las rectas tangentes de cada curva.\\\\
+Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitraria en forma de ecuación diferencial $r' = h(r,\vartheta)$, podemos hallar $fam_{C^\perp}$ que buscábamos al comienzo de la sección. Para ello, vamos a considerar de nuevo una curva arbitraria $C$ y su perpendicular $C^\perp$. Nos interesa especialmente la relación que existe entre los ángulos de las rectas tangentes de cada curva.\\\\
 \begin{wrapfigure}{r}{.5\textwidth}
   \begin{center}
     \includegraphics[scale=1]{1-ortogonalpolares3.png}
@@ -320,17 +320,17 @@ Una vez hemos descrito la forma que tiene la tangente a una curva $C$ arbitraria
   \caption{Angulos entre curvas ortogonales}\label{img:1-polort3}
 \end{wrapfigure}
 
-En la figura \ref{img:1-polort3} se ilustra la relación que buscamos. Supongamos que las dos curvas se cortan en un punto $p = (r, \theta)$ y consideramos la recta $\vec{0p}$. Al igual que en la figura \ref{img:1-polort}, definimos $\phi_C$ como el ángulo existente entre $\vec{0p}$ y la curva $C$. Siguiendo el mismo procedimiento podemos definir $\phi_{C^\perp}$.\\
-Como por definición $C \perp C^{\perp}$, entonces el ángulo existente entre ellas es $\sfrac{\pi}{2}$, por tanto: $\phi_{C^\perp} = \sfrac{\pi}{2} + \phi_C$.\\\\
+En la figura \ref{img:1-polort3} se ilustra la relación que buscamos. Supongamos que las dos curvas se cortan en un punto $p = (r, \vartheta)$ y consideramos la recta $\vec{0p}$. Al igual que en la figura \ref{img:1-polort}, definimos $\varphi_C$ como el ángulo existente entre $\vec{0p}$ y la curva $C$. Siguiendo el mismo procedimiento podemos definir $\varphi_{C^\perp}$.\\
+Como por definición $C \perp C^{\perp}$, entonces el ángulo existente entre ellas es $\sfrac{\pi}{2}$, por tanto: $\varphi_{C^\perp} = \sfrac{\pi}{2} + \varphi_C$.\\\\
 Del caso en coordenadas rectangulares recordamos la ecuación:
 $$
-\tan(\phi_{C^\perp}) = -\frac{1}{ \tan(\phi_C)}
+\tan(\varphi_{C^\perp}) = -\frac{1}{ \tan(\varphi_C)}
 $$
-donde a la derecha de la ecuación figura todo lo relacionado con la curva original y a la izquierda lo relacionado con la curva tangente. Como hallamos antes que $\tan\alpha = \sfrac{r}{r'}$ para un ángulo $\alpha$ que describa a la recta tangente, de la misma forma $\tan(\phi_{C^\perp}) = \sfrac{r}{r'}$ describe a su recta tangente, que es ortogonal a la curva $C$ original.\\ Usando esto, la definición $r' = h(r, \theta)$ del comienzo de la sección y la ecuación anterior obtenemos:
+donde a la derecha de la ecuación figura todo lo relacionado con la curva original y a la izquierda lo relacionado con la curva tangente. Como hallamos antes que $\tan\alpha = \sfrac{r}{r'}$ para un ángulo $\alpha$ que describa a la recta tangente, de la misma forma $\tan(\varphi_{C^\perp}) = \sfrac{r}{r'}$ describe a su recta tangente, que es ortogonal a la curva $C$ original.\\ Usando esto, la definición $r' = h(r, \vartheta)$ del comienzo de la sección y la ecuación anterior obtenemos:
 $$
-\frac{r}{r'} = -\frac{1}{\sfrac{r}{r'}} = -\frac{1}{\sfrac{r}{h(r,\theta)}} \implies \frac{r}{r'} = -\frac{h(r,\theta)}{r}
+\frac{r}{r'} = -\frac{1}{\sfrac{r}{r'}} = -\frac{1}{\sfrac{r}{h(r,\vartheta)}} \implies \frac{r}{r'} = -\frac{h(r,\vartheta)}{r}
 $$
-Finalmente, de la expresión anterior hallamos la ecuación diferencial general para describir a $fam_{C^\perp}$ a partir de la función $h(r, \theta)$ que describe a $fam_C$:
+Finalmente, de la expresión anterior hallamos la ecuación diferencial general para describir a $fam_{C^\perp}$ a partir de la función $h(r, \vartheta)$ que describe a $fam_C$:
 $$
-    r' = -\frac{r^2}{h(r, \theta)}
+    r' = -\frac{r^2}{h(r, \vartheta)}
 $$
