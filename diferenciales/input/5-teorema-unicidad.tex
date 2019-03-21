@@ -910,7 +910,7 @@ La base del desarrollo formal de esta sección se basará en el siguiente lema.
         $$
     \end{enumerate}
 \end{obs}
-\begin{pro}[Diferencia de soluciones de una ecuación. Cotas.]
+\begin{pro}[Diferencia de soluciones de una ecuación. Cotas.]\ref{pro:dif-sol-cot}
     Sea $\Omega$ abierto en $\R^d$, $F:[a, b] \times \Omega \to \R^d$ continua y tal que:
     $$
             |F(t, \xi) - F(t, \eta)| \leq  L |\xi - \eta| \text{ con } \xi, \eta \in \Omega,\ t\in[a, b],\ L\in \R,\ L > 0.
@@ -955,3 +955,118 @@ La base del desarrollo formal de esta sección se basará en el siguiente lema.
     \end{enumerate}
 \end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 21/03
+\subsection{Algunas consecuencias de la diferencia acotada de soluciones.}
+
+Vamos a ver consecuencias de la proposición \label{pro:dif-sol-cot}.\\
+ Es claro que si $\varepsilon_1 = \varepsilon_2 = 0$ (es decir, son soluciones) y $X_1(a) = X_2(a)$ entonces $X_1 = X_2$ en $[a, b]$ (por unicidad).
+\begin{pro}[Dependencia continua de condiciones iniciales]
+    Sea $F$ que cumple las hipótesis de unicidad y existencia local. Sea $X(t, \xi)$ la solución (local) a:
+    $$
+        \begin{cases}
+            X'(t) = F(t, X(t)) \text{ para } (\xi \in \Omega)\\
+            X(a) = \xi
+        \end{cases}
+    $$
+    Supongamos que $\xi_0 \in \Omega$. Entonces:
+    \begin{enumerate}
+        \item Existen $r>0,\ \delta > 0$ tal que $\exists X(t, \xi)$ tal que:
+            $$
+                X(t, \xi) : [a,\ a+\delta ] \times \bar{B}(\xi_0, \sfrac{r}{2}) \to \bar{B}(\xi_0, r) \text{ es solución}
+            $$
+        \item
+        $$
+            |X(t, \xi) - X(t, \eta)| \leq |\xi - \eta| e^{L(t-a)} \text{ con } \eta,\xi \in \bar{B}(\xi_0, \sfrac{r}{2}),\ a\leq t\leq t+\delta
+        $$
+        \item Más generalmente, si $M$ es una cota superior de $|F(t, \xi)|$ con $(t,\xi) \in [a,b]\times\bar{B}(\xi_0, r)$ y $F$ es continua entonces:
+        $$
+            |X(t, \xi) - X(\bar{t}, \eta)| \leq M |t - \bar{t}| + |\xi - \eta| e^{L(\min(t,\bar{t})-a)}
+        $$
+        En particular, $X$ es continua en ambas variables y $C^1$ en $t$.
+    \end{enumerate}
+\end{pro}
+\begin{proof}
+    Demostraremos cada apartado:
+    \begin{enumerate}
+        \item Directo por el teorema de existencia y unicidad local.
+        \item Por la proposición \label{pro:dif-sol-cot} con $\varepsilon_1 = \varepsilon_2 = 0$ y $\xi = X_1(a)$, $\eta = X_2(a)$, entonces:
+        $$
+            X_1(t) = X(t, \xi)\ \ \ X_2(t) = X(t, \eta)
+        $$
+        \item Supongamos sin pérdida de generalidad que $t < \bar{t}$, entonces:
+        $$
+            |X(t, \xi) - X(\bar{t}, \eta)| \leq |X(t, \xi) - X(t, \eta)| + |X(t,\eta) - X(\bar{t}, \eta)|
+        $$
+        Donde
+        $$
+        |X(t, \xi) - X(t, \eta)| < |\xi - \eta| e^{L(t-a)}
+        $$
+        y además:
+        $$
+            |X(t,\eta) - X(\bar{t}, \eta)| = |\int_t^{\bar{t}} X'(s, \eta) \d s| \leq |\int_t^{\bar{t}} F(t, X(s, \eta)) \d s | \leq \int_t^{\bar{t}} |F(s, X(s, \eta)) \d s | \leq M(\bar{t} - t) = M|(t-\bar{t})|
+        $$
+        Y uniendo las dos desigualdades hallamos la desigualdad que queríamos demostrar.
+    \end{enumerate}
+\end{proof}
+\begin{cor}
+    Si $F = F(t, \xi, \lambda)$ es Lipschitz en $(\xi, \lambda)$, pasando al problema:
+    $$
+        \mx{X\\\lambda}' = \mx{X'\\ 0} = \mx{F\\0}
+    $$
+    y usando el resultado anterior, vemos que la solución de $X(t, \xi, \lambda)$ de:
+    $$
+        \begin{cases}
+            X' = F(t, X, \lambda)\\
+            X(a) = \xi
+        \end{cases}
+    $$
+    es continua en todas las variables.
+\end{cor}
+
+\begin{pro}
+    Sea $\hat{F} : [a, b] \times \Omega \to \R^d$ Lipschitz.\\
+    Sea $\hat{X}(t)$ la solución de:
+    $$
+        \begin{cases}
+            \hat{X}'(t) = \hat{F}(t, \hat{X}(t))\\
+            \hat{X}(a)=\xi_a
+        \end{cases}
+    $$
+    y $X$ la de:
+    $$
+    \begin{cases}
+        X'(t) = F(t, X(t))\\
+        X(a)=\xi_a
+    \end{cases}
+    $$
+    Supongamos que
+    $$
+        |\hat{F} (t, \hat{X}(t)) - F(t, \hat{X}(t))| \leq \varepsilon
+    $$
+    Entonces:
+    $$
+        |X(t) - \hat{X}(t)| \leq \varepsilon \frac{e^{L(t-a)}-1}{L}
+    $$
+\end{pro}
+\begin{proof}
+    Decimos que $\hat{X}$ es casi solución para $F$, es decir:
+    $$
+        |\hat{X}'(t) - F(t, \hat{X}(t))| \leq \varepsilon
+    $$
+    ya que:
+    \begin{gather*}
+        \hat{X}'(t) = \hat{F}(t, \hat{X}(t))\\
+        |\hat{X}'(t) - F(t, \hat{X}(t))| = |\hat{F} (t, \hat{X}(t)) - F(t, \hat{X}(t))| \leq \varepsilon \text{ por hipótesis}
+    \end{gather*}
+    Además, con:
+    $$
+        X_1 = X,\ X_2 = \hat{X},\ |X_1(a) - X_2(a)| = 0
+    $$
+    es decir,
+    $$
+        \varepsilon_1 = 0,\  \varepsilon_2 = \varepsilon, \text{ y } X_1(a) = X_2(a) = \xi_a
+    $$
+    Entonces:
+    $$
+        |X(t) - \hat{X}(t)| = |X_1(t) - X_2(t)| \leq \varepsilon \frac{e^{L(t-a)}-1}{L}
+    $$
+\end{proof}
