@@ -224,7 +224,7 @@ Sin embargo, todo este desarrollo requiere que conozcamos el límite de $f_n$ en
         \forall \varepsilon > 0 \exists N : ||f_n - f_m||_\infty < \varepsilon\ \forall n,m \geq N
     $$
 \end{dfn}
-\begin{pro}[Sucesión de Cauchy y convergencia uniforme]\label{pro:cauchy-unif}
+\begin{pro}[Sucesión de Cauchy y convergencia uniforme]\ref{pro:cauchy-unif}
     Si $\{f_n\}_{n\in\N}$ es una sucesión de Cauchy, entonces:
     $$
         \exists f : I \to R : f_n \to_{unif} f
@@ -242,7 +242,7 @@ Sin embargo, todo este desarrollo requiere que conozcamos el límite de $f_n$ en
     \end{enumerate}
 \end{proof}
 \begin{th_ex}
-    El recíproco de la proposición \ref{pro:cauchy-unif} también es cierto. Demuéstralo.
+    El recíproco de la proposición \label{pro:cauchy-unif} también es cierto. Demuéstralo.
 \end{th_ex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 11/03
 Debido a que hemos definido la norma $||\cdot||_\infty$, esto nos permite definir una distancia $\d(f, g) = || f -g || _\infty$. Y como hemos definido una norma para el espacio vectorial de funciones, entonces lo llamamos \textit{espacio vectorial normado} y tiene ciertas propiedades.
@@ -361,7 +361,7 @@ $$
     entonces, por el criterio de Weierstrass la serie converge.\\
     Como curiosidad, esta función fue el primer ejemplo de función continua pero no derivable en ningún punto. Se conoce como función de Weierstrass.
 \end{eg}
-\begin{pro}[De la convergencia uniforme de una función y su derivada]\label{pro:deriv-impl-con}
+\begin{pro}[De la convergencia uniforme de una función y su derivada]\ref{pro:deriv-impl-con}
     Sean $f_n : [a, b] \to \R$ con $f_n \in C^1$. Supongamos que:
     $$
         f_n' \to_{unif} g \text{ y que } \exists t_0 \in [a, b] : f_n(t_0) \text{ converge.}
@@ -376,7 +376,7 @@ $$
     $$
 \end{pro}
 \begin{th_ex}
-    La demostración de la proposición \ref{pro:deriv-impl-con} se deja como ejercicio.
+    La demostración de la proposición \label{pro:deriv-impl-con} se deja como ejercicio.
 \end{th_ex}
 \begin{eg}[Técnica habitual para probar convergencia uniforme de funciones]
     Para comprobar que $f_n$ converge uniformemente a algo, se puede pasar a una serie de funciones (ya que tenemos más herramientas para probar convergencia de funciones):
@@ -478,7 +478,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
 \begin{proof}
     Dividiremos en la prueba en distintos pasos.\\
     \begin{enumerate}
-        \item \label{proof:primera-parte-unic} Sea $h>0$, con $h < \sfrac{1}{L}$ ($Lh < 1$). Entonces, veremos que existe $X(t) \in C^1$ definida sobre $I = [t_0-h, t_0+h]\cap[a, b]$ y tal que:
+        \item \ref{proof:primera-parte-unic} Sea $h>0$, con $h < \sfrac{1}{L}$ ($Lh < 1$). Entonces, veremos que existe $X(t) \in C^1$ definida sobre $I = [t_0-h, t_0+h]\cap[a, b]$ y tal que:
         $$
             \begin{cases}
                 X' = F(t, X) \text{ en } I\\
@@ -500,7 +500,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
                 X_n \text{ continua } \implies F(s, X_n(s)) \text{ es continua por composicion de continuas } \implies \\
                 \implies \int_{t_0}^t F(s, X_n(s)) \d s \text{ continua } \implies X_{n+1} \text{ continua.}
             \end{gather*}
-        \item \label{proof:ninf}Ahora vamos a ver que $\ninf{X_{n+1} - X_n} \leq (Lh)^n \ninf{X_1 - X_0}$ Por inducción:
+        \item \ref{proof:ninf}Ahora vamos a ver que $\ninf{X_{n+1} - X_n} \leq (Lh)^n \ninf{X_1 - X_0}$ Por inducción:
         $$
             \text{Para $t \in I$, }
             X_{n+1}(t) - X_n(t) = \int_{t_0}^t F(s, X_{n}(s)) \d s - \int_{t_0}^t F(s, X_{n-1}(s)) \d s
@@ -518,7 +518,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
         Tomando $\max_{t\in I}$, llegamos a $\ninf{X_{n+1} - X_n} \leq (Lh)^n \ninf{X_1 - X_0}$.
         \item Veamos que $X_n^(t)$ converge uniformemente en $I$.\\
         Sea $D_n = X_n - X_{n-1}$, entonces $X_n = X_0 + \sum_{i=1}^n D_i$. Por lo tanto $X_n$ converge $\iff \sum D_n$ lo hace.\\
-        Por \ref{proof:ninf}:
+        Por \label{proof:ninf}:
         $$
             \ninf{D_n} \leq (Lh)^{n-1} \ninf{D_1}
         $$
@@ -568,9 +568,9 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
         $$
         Pero $Lh < 1$, por tanto $\ninf{Y-X} = 0 \implies Y(t) = X(t)$. Es decir, nuestra solución es única
     \end{enumerate}
-        \item La solución encontrada en \ref{proof:primera-parte-unic} se puede extender (\textit{prolongar}) a todo el intervalo $[a, b]$.
+        \item La solución encontrada en \label{proof:primera-parte-unic} se puede extender (\textit{prolongar}) a todo el intervalo $[a, b]$.
         Supongamos que podemos extender la solución a $[\alpha, \beta]$ y ese $\beta$ es el máximo con esa propiedad, entonces vamos a ver que $\beta = b$.\\\\
-        Si $\beta < b$, sea $h = \sfrac{1}{2L}$, sea $\hat{t}_0 = \beta - \sfrac{h}{2}$ y $\hat{X}_0 = X(\hat{t}_0)$, por \ref{proof:primera-parte-unic} aplicado da una solución $\hat{X}$ definida en $[\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$.
+        Si $\beta < b$, sea $h = \sfrac{1}{2L}$, sea $\hat{t}_0 = \beta - \sfrac{h}{2}$ y $\hat{X}_0 = X(\hat{t}_0)$, por \label{proof:primera-parte-unic} aplicado da una solución $\hat{X}$ definida en $[\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$.
         Sea:
         $$
             X_{nueva}(t) =
@@ -579,7 +579,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
                 \hat{X}(t),\ t\geq \hat{t}_0 - h
         \end{cases}
         $$
-        Como $X$ y $\hat{X}$ están definidas en todo $[\hat{t}_0 - h, \hat{t}_0 + h]$ y cumplen la EDO y $X(\hat{t}_0) = \hat{X}(\hat{t}_0)$, por la unicidad de  \ref{proof:primera-parte-unic}: $X(t) = \hat{X}(t) $ para $t \in [\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$.
+        Como $X$ y $\hat{X}$ están definidas en todo $[\hat{t}_0 - h, \hat{t}_0 + h]$ y cumplen la EDO y $X(\hat{t}_0) = \hat{X}(\hat{t}_0)$, por la unicidad de  \label{proof:primera-parte-unic}: $X(t) = \hat{X}(t) $ para $t \in [\hat{t}_0 - h, \hat{t}_0 + h] \cap[a, b]$.
         Entonces $X_{nueva}$ es solución de la EDO hasta $\beta + \frac{h}{L}$ (o $\min(\beta + \sfrac{h}{2}, b)$), es decir, para $t < \beta$ usamos $X$ y para $\beta - \sfrac{h}{2} < t$ usamos $\hat{X}$. Entonces, con $X_{nueva}(t_0) = X_0 = X(t_0)$ lo que contradice nuestra hipótesis de $\beta < b$.\\
         Para demostrar que podemos prolongar la solución también a $a$ se repite el argumento.
         \item Hemos visto que la solución existe en todo el intervalo $[a, b]$. Vamos a ver también que tenemos unicidad en $[a, b]$.
@@ -677,7 +677,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
 
 \section{Teorema de existencia y unicidad local}
 
-\begin{thm}[Teorema de existencia y unicidad local]\label{thm:exist-unic-local}
+\begin{thm}[Teorema de existencia y unicidad local]\ref{thm:exist-unic-local}
     Sea $\Omega \in \R^d$ abierto, $F:[a, b] \times \Omega \to \R^d$ continua y uniformemente Lipschitz en $t$, es decir:
     $$
         \exists L : |F(t, X) - F(t, Y)| \leq L |X - Y| \ \forall t \in [a, b],\ \forall X, Y \in \Omega
@@ -737,7 +737,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
 En el caso de existencia y unicidad global veíamos que si teníamos una solución definida en un intervalo $I$ podíamos extenderlo a todo un intervalo $[a, b]$ simplemente por unicidad de la solución. Vamos a ver que en el caso de existencia y unicidad local puede que no lleguemos a cubrir todo el intervalo $[a, b]$ debido a que el $\delta$ que define la bola abierta donde existe la solución no es fijo y puede ir haciéndose cada vez más pequeño.
 
 \begin{pro}[Intervalo máximo de existencia-unicidad local]
-    Con las misma hipótesis del teorema de existencia y unicidad local (véase el teorema \ref{thm:exist-unic-local}), existe un intervalo máximo en el que está definida la solución. Ese intervalo es uno de los siguientes tipos:
+    Con las misma hipótesis del teorema de existencia y unicidad local (véase el teorema \label{thm:exist-unic-local}), existe un intervalo máximo en el que está definida la solución. Ese intervalo es uno de los siguientes tipos:
     $$[a, b],\ [a,\beta),\ (\alpha, b],\ (\alpha, \beta)
     $$
     Donde $a \leq \alpha < \beta \leq b$.\\
@@ -750,7 +750,7 @@ En el caso de existencia y unicidad global veíamos que si teníamos una soluci�
     $$
 \end{obs}
 \begin{eg}[No unicidad formalmente]
-    Retomando el ejemplo \ref{eg:no-unic}:
+    Retomando el ejemplo \label{eg:no-unic}:
     $$
         \begin{cases}
             \mbf{x}' = \mbf{x}^{sfrac{2}{3}}\\
@@ -910,7 +910,7 @@ La base del desarrollo formal de esta sección se basará en el siguiente lema.
         $$
     \end{enumerate}
 \end{obs}
-\begin{pro}[Diferencia de soluciones de una ecuación. Cotas.]\ref{pro:dif-sol-cot}
+\begin{pro}[Diferencia de soluciones de una ecuación. Cotas.]\label{pro:dif-sol-cot}
     Sea $\Omega$ abierto en $\R^d$, $F:[a, b] \times \Omega \to \R^d$ continua y tal que:
     $$
             |F(t, \xi) - F(t, \eta)| \leq  L |\xi - \eta| \text{ con } \xi, \eta \in \Omega,\ t\in[a, b],\ L\in \R,\ L > 0.
@@ -957,7 +957,7 @@ La base del desarrollo formal de esta sección se basará en el siguiente lema.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 21/03
 \subsection{Algunas consecuencias de la diferencia acotada de soluciones.}
 
-Vamos a ver consecuencias de la proposición \label{pro:dif-sol-cot}.\\
+Vamos a ver consecuencias de la proposición \ref{pro:dif-sol-cot}.\\
  Es claro que si $\varepsilon_1 = \varepsilon_2 = 0$ (es decir, son soluciones) y $X_1(a) = X_2(a)$ entonces $X_1 = X_2$ en $[a, b]$ (por unicidad).
 \begin{pro}[Dependencia continua de condiciones iniciales]
     Sea $F$ que cumple las hipótesis de unicidad y existencia local. Sea $X(t, \xi)$ la solución (local) a:
@@ -988,7 +988,7 @@ Vamos a ver consecuencias de la proposición \label{pro:dif-sol-cot}.\\
     Demostraremos cada apartado:
     \begin{enumerate}
         \item Directo por el teorema de existencia y unicidad local.
-        \item Por la proposición \label{pro:dif-sol-cot} con $\varepsilon_1 = \varepsilon_2 = 0$ y $\xi = X_1(a)$, $\eta = X_2(a)$, entonces:
+        \item Por la proposición \ref{pro:dif-sol-cot} con $\varepsilon_1 = \varepsilon_2 = 0$ y $\xi = X_1(a)$, $\eta = X_2(a)$, entonces:
         $$
             X_1(t) = X(t, \xi)\ \ \ X_2(t) = X(t, \eta)
         $$
