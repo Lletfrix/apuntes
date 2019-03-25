@@ -817,14 +817,14 @@ En el caso de existencia y unicidad global veíamos que si teníamos una soluci�
     La ecuación del péndulo simple (sin resistencia del aire) sigue el PVI:
     $$
         \begin{cases}
-            \theta'' = -\frac{g}{l} \sen \theta\text{, con $l$ la longitud del péndulo}\\
+            \theta'' = -\frac{g}{l} \sin \theta\text{, con $l$ la longitud del péndulo}\\
             \theta(0) = \theta_0\\
             \theta'(0) = v_0
         \end{cases}
     $$
     Donde podemos ver que tiene solución en $t\in\R$ y es única. Pasando a sistema:
     $$
-        \mx{\theta\\v}' = \mx{v\\-\frac{g}{l}\sen\theta} = F(t, \theta, v)
+        \mx{\theta\\v}' = \mx{v\\-\frac{g}{l}\sin\theta} = F(t, \theta, v)
     $$
     Si hallamos sus derivadas parciales:
     \begin{gather*}
@@ -855,7 +855,7 @@ Nos volvemos a preguntar si cuando se mueve $\lambda$ ligeramente, la nueva solu
 Por último, supongamos que tenemos $\hat{F}(t, X) \approx F(t, X)$, donde $\hat{F}$ es una aproximación de $F$. Para cada función con su respectivo PVI hallaríamos una solución, ($\hat{X}$ resuelve $\hat{F}$ y $X$ resuelve $F$). Nos preguntamos entonces si $\hat{X} \approx X$.
 
 \begin{eg}[Motivación: aproximación del péndulo simple]
-    Sea $\theta''=-\frac{g}{l}\sen(\theta) = F$, aproximamos a través de $\hat{F} = -\frac{g}{l}$, con $|\theta| << 1$ y $\sin(\theta) \approx \theta$. Nos preguntamos si la solución de cada ecuación se parecen o no ya que resolver $\hat{F}$ es más sencillo que resolver $F$.
+    Sea $\theta''=-\frac{g}{l}\sin(\theta) = F$, aproximamos a través de $\hat{F} = -\frac{g}{l}$, con $|\theta| << 1$ y $\sin(\theta) \approx \theta$. Nos preguntamos si la solución de cada ecuación se parecen o no ya que resolver $\hat{F}$ es más sencillo que resolver $F$.
 \end{eg}
 
 La base del desarrollo formal de esta sección se basará en el siguiente lema.
@@ -1022,7 +1022,7 @@ Vamos a ver consecuencias de la proposición \ref{pro:dif-sol-cot}.\\
     es continua en todas las variables.
 \end{cor}
 
-\begin{pro}
+\begin{pro}[Cota de error en aproximación de soluciones]
     Sea $\hat{F} : [a, b] \times \Omega \to \R^d$ Lipschitz.\\
     Sea $\hat{X}(t)$ la solución de:
     $$
@@ -1044,8 +1044,9 @@ Vamos a ver consecuencias de la proposición \ref{pro:dif-sol-cot}.\\
     $$
     Entonces:
     $$
-        |X(t) - \hat{X}(t)| \leq \varepsilon \frac{e^{L(t-a)}-1}{L}
+        |X(t) - \hat{X}(t)| \leq \varepsilon \cdot \frac{e^{L(t-a)}-1}{L}
     $$
+     donde $L$ es la constante de Lipschitz de $F$
 \end{pro}
 \begin{proof}
     Decimos que $\hat{X}$ es casi solución para $F$, es decir:
@@ -1069,4 +1070,56 @@ Vamos a ver consecuencias de la proposición \ref{pro:dif-sol-cot}.\\
     $$
         |X(t) - \hat{X}(t)| = |X_1(t) - X_2(t)| \leq \varepsilon \frac{e^{L(t-a)}-1}{L}
     $$
+\end{proof}
+\begin{eg}[Péndulo simple. Aproximación de soluciones]
+    Sea la EDO $\theta'' = -\frac{g}{l}\sin(\theta)$ donde $l$ es la longitud del péndulo. Transformamos la ecuación a su forma matricial:
+    $$
+        \mx{\theta\\v}' = \mx{v\\-\frac{g}{l}\sin{\theta}} = F(\theta, v)
+    $$
+    Observamos que para $\theta$ pequeño, $\sin(\theta) \approx \theta$. Entonces construimos nuestro problema aproximado:
+    $$
+        \hat{\mathcal{P}} \equiv \theta''=-\frac{g}{l} \theta \leadsto \mx{\theta\\v}'=\mx{v\\-\frac{g}{l}\theta} = \hat{F}
+    $$
+    Este problema es más sencillo de resolver y hallamos que la solución a $\hat{\mathcal{P}}$ es:
+    \begin{gather*}
+        \hat{\theta}(t)=\theta_0\cos(\omega t) \text{ con }\omega = \sqrt{\frac{g}{l}}
+    \end{gather*}
+    Es decir, nuestra solución $\hat{X}$ es:
+    $$
+        \hat{X} = \mx{\hat{\theta}(t)\\ \hat{v}(t)} = \mx{\theta_0\cos(\omega t)\\-\omega \theta_0 \sin(\omega t)}
+    $$
+    Donde además, $|\theta(t)| \leq |\theta_0|$. Nos gustaría comparar entonces $F$ y $\hat{F}$ en la solución $\hat{X}$.
+    \begin{gather*}
+        |\hat{F}(\hat{\theta}(t), \hat{v}(t)) - F(\hat{\theta}(t), \hat{v}(t))| = \mx{0\\-\frac{g}{l}(\hat{\theta}(t) - \sin(\hat{\theta}(t)))}=\\
+        = \frac{g}{l} |\hat{\theta}(t) - \sin(\hat{\theta}(t))| \leq^{(*)} \frac{g}{l}\frac{|\hat{\theta}(t)|^3}{6}
+    \end{gather*}
+    \textit{(*)} este último paso se debe al lema \ref{lm:cota-seno}. Como $\theta - \sin\theta$ es impar, $|\theta-\sin\theta| = |\theta| - \sin(|\theta|) \leq \frac{|\theta|^3}{6}$\\\\
+    Entonces:
+    $$
+        |\hat{F}(\hat{\theta}(t), \hat{v}(t)) - F(\hat{\theta}(t), \hat{v}(t))| \leq \frac{g}{l} \cdot \frac{|\hat{\theta}|^3}{6} \leq \frac{g}{l} \cdot \frac{|\theta_0|^3}{6}
+    $$
+    Como consecuencia:
+    $$
+        |X(t) - \hat{X}(t)| \leq |\theta(t) - \hat{\theta(t)}| + |\theta'(t) - \hat{\theta}'(t)| \leq \frac{g}{l}\frac{|\theta_0|^3}{6} \cdot \frac{e^{Lt} - 1}{L}
+    $$
+    Nos faltaría encontrar el valor de $L$. Para ello desarrollamos:
+    $$
+        F = \mx{v\\-\frac{g}{l}\sin(\theta)},\ \frac{\partial F}{v} = \mx{1\\0},\ \frac{\partial F}{\theta} = \mx{0\\-\frac{g}{l}\cos(\theta)}
+    $$
+    Y de aquí, si $\left|\frac{\partial F_i}{\partial x_j}\right| \leq L$ en $[a, b]\times \Omega$ con $\Omega$ convexo entonces:
+    $|F(t, \xi) - F(t, \eta)| \leq L |\xi - \eta|$ con $\xi,\ \eta \in \Omega$, y de aquí obtenemos:
+    $$
+        L = \max\left(1, \frac{g}{l}\right)
+    $$
+
+\end{eg}
+
+\begin{lm}[Cota del seno de un ángulo positivo]\label{lm:cota-seno}
+    Si $\theta \geq 0$, entonces:
+    $$
+        \theta - \frac{\theta^3}{3!} \leq \sin(\theta) \leq \theta
+    $$
+\end{lm}
+\begin{proof}
+    Se deja al lector. Se basa en la serie de potencias del seno.
 \end{proof}
