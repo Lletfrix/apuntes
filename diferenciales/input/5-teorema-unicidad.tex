@@ -78,7 +78,7 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
     $$
         N \geq \frac{\log \varepsilon}{\log x} \implies N \text{ tiene que depender de }x \implies N = \frac{\log \varepsilon}{\log x} + 1
     $$
-    Sin embargo, se puede comprobar que $f_n \to_{unif} f$ en $[0, a]$ cpon $a < 1$, ya que basta tomar $N = \frac{\log \varepsilon}{\log a}$.
+    Sin embargo, se puede comprobar que $f_n \to_{unif} f$ en $[0, a]$ con $a < 1$, ya que basta tomar $N = \frac{\log \varepsilon}{\log a}$.
 \end{eg}
 \begin{obs}
     Otra forma de expresar $f_n \to_{unif} f$ es la siguiente:
@@ -171,10 +171,10 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
         $$
         \item Caso $\varepsilon \leq x \leq 1$:
         $$
-            \frac{1}{1+nx^2} \leq \frac{1}{1+n^2x} \leq \frac{1}{1+n^2\varepsilon} < \varepsilon
+            \frac{1}{1+n^2x} \leq \frac{1}{1+n^2\varepsilon} < \varepsilon
         $$
         $$
-            \frac{1}{1+nx^2} < \varepsilon \iff n^2\varepsilon > \frac{1}{\varepsilon} - 1 \implies n \geq \sqrt{\frac{(\sfrac{1}{\varepsilon} - 1)}{\varepsilon}} = N(\varepsilon)
+            \frac{1}{1+n^2x} < \varepsilon \iff n^2\varepsilon > \frac{1}{\varepsilon} - 1 \implies n \geq \sqrt{\frac{(\sfrac{1}{\varepsilon} - 1)}{\varepsilon}} = N(\varepsilon)
         $$
     \end{itemize}
 \end{eg}
@@ -414,7 +414,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
     %%TODO: Incluir visualización con el cono?
 \end{dfn}
 \begin{obs}
-    Una función Lipschitz siempre es continua. Para verlo basta coger $\varepsilon = \sfrac{L}{\delta}$ en la definicion de continuidad.
+    Una función Lipschitz siempre es continua. Para verlo basta coger $\varepsilon = \sfrac{L}{\delta}$ en la definición de continuidad.
 \end{obs}
 \begin{pro}[Derivadas parciales acotadas implica Lipschitz]
     Sea $\Omega \in \R^m$ un abierto, $f:\Omega \to \R^d$ con $f \in C^1$.
