@@ -294,10 +294,10 @@ Como recordatorio:
 \end{enumerate}
 Consideremos ahora $f_m : I \to \R$, y sea $S_n(x) = \sum_{k=1}^n f_k(x)$  entonces podemos definir:
 $$
-    \sum_{f_n} \to_{pp} g \implies  S_n(x)\to_{pp} g(x)\ \forall x \in I \text{ pues las sumas parciales convergen.}
+    \left(\sum f_n\right) \to_{pp} g \implies  S_n(x)\to_{pp} g(x)\ \forall x \in I \text{ pues las sumas parciales convergen.}
 $$
 $$
-    \sum_{f_n} \to_{unif} g \implies S_n(x) \to_{unif} g(x)\ \forall x \in I.
+    \left(\sum f_n\right) \to_{unif} g \implies S_n(x) \to_{unif} g(x)\ \forall x \in I.
 $$
 \begin{pro}[Criterio de Cauchy]
     $$
@@ -409,7 +409,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
 \begin{dfn}[Función Lipschitz]
     Sea $A \in \R^m, f: A \to \R^d$. Diremos que $f$ es \textbf{Lipschitz} $\iff$
     $$
-        \exists L \in \R : |f(x) - f(y)| \implies L \cdot |x - y|\ \forall x,y \in A
+        \exists L \in \R : |f(x) - f(y)| \leq L \cdot |x - y|\ \forall x,y \in A
     $$
     %%TODO: Incluir visualización con el cono?
 \end{dfn}
@@ -753,7 +753,7 @@ En el caso de existencia y unicidad global veíamos que si teníamos una soluci�
     Retomando el ejemplo \label{eg:no-unic}:
     $$
         \begin{cases}
-            \mbf{x}' = \mbf{x}^{sfrac{2}{3}}\\
+            \mbf{x}' = \mbf{x}^{\sfrac{2}{3}}\\
             x(0) = 0
         \end{cases}
     $$
