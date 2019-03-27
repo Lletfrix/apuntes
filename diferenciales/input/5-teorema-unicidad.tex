@@ -53,20 +53,20 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
         \forall \varepsilon > 0,\ \forall t \in I \exists N \in \N : |f_n(t) - f(t)| < \varepsilon\ \forall n \geq N
     $$
     La diferencia principal es que $N$ en (1) depende de $t$ y $ \varepsilon$, pero en (2) $N$ sólo depende de $\varepsilon$.
-        \item Claramente, $f_n \to_{unif} f \implies f_n \to_{pp} f$
+        \item Claramente, $f_n \xrightarrow[unif]{} f \implies f_n \xrightarrow[pp]{} f$
 \end{itemize}
 \end{obs}
 \begin{eg}[Convergencia de una función]
     Sea $f_n: [0, 1] \to \R$, $f_n(x) = 1+x^n$. Entonces:
     $$
-        f_n(x) \to_{n \to \infty}
+        f_n(x) \xrightarrow[n \to \infty]{}
         \begin{cases}
             1 \text{ si } 0\geq x < 1 \\
             2 \text{ si } x = 1
         \end{cases} \equiv f
     $$
-    Entonces es fácil ver que: $f_n \to_{pp} f$\\\\
-    Vamos a ver que $f_n \not\to_{unif} f$ en $[0, 1]$. Tenemos que hallar $N$ para que se cumpla:
+    Entonces es fácil ver que: $f_n \xrightarrow[pp]{} f$\\\\
+    Vamos a ver que $f_n \not\xrightarrow[unif]{} f$ en $[0, 1]$. Tenemos que hallar $N$ para que se cumpla:
     $$
         |f_n(x) - f(x)| < \varepsilon, n\geq N
     $$
@@ -78,10 +78,10 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
     $$
         N \geq \frac{\log \varepsilon}{\log x} \implies N \text{ tiene que depender de }x \implies N = \frac{\log \varepsilon}{\log x} + 1
     $$
-    Sin embargo, se puede comprobar que $f_n \to_{unif} f$ en $[0, a]$ con $a < 1$, ya que basta tomar $N = \frac{\log \varepsilon}{\log a}$.
+    Sin embargo, se puede comprobar que $f_n \xrightarrow[unif]{} f$ en $[0, a]$ con $a < 1$, ya que basta tomar $N = \frac{\log \varepsilon}{\log a}$.
 \end{eg}
 \begin{obs}
-    Otra forma de expresar $f_n \to_{unif} f$ es la siguiente:
+    Otra forma de expresar $f_n \xrightarrow[unif]{} f$ es la siguiente:
     $$
         |f_n(t) - f(t)| < \varepsilon\ \forall t \in I \text{ si } n \geq N
     $$
@@ -149,7 +149,7 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
     Vamos a ver si converge uniformemente a algo.
     Reescribimos $f_n$ cuando $n \to \infty$:
     $$
-        f_n(x) \to_{n \to \infty}
+        f_n(x) \xrightarrow[n \to \infty]{}
         \begin{cases}
             0 \text{ si } x = 0\\
             0 \text{ si } x > 0
@@ -184,7 +184,7 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
 \end{th_ex}
 
 \begin{pro}[Sucesión de funciones continuas]
-    Sean $f_n, f : I \to \R$, tal que $f_n \to_{unif} f$. Si $f_n$ es continua para todo $n \in \N$ entonces $f$ es continua.
+    Sean $f_n, f : I \to \R$, tal que $f_n \xrightarrow[unif]{} f$. Si $f_n$ es continua para todo $n \in \N$ entonces $f$ es continua.
 \end{pro}
 \begin{proof}
     Sea $t_0 \in I$, queremos ver si $f$ es continua en $t_0$.\\
@@ -196,7 +196,7 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
     $$
         |f(t) - f(t_0)| = |f(t) -f_n(t) + f_n(t) -f_n(t_0) + f_n(t_0) - f(t_0)| \leq |f(t) - f_n(t)| + |f_n(t_0) - f(t_0)| + |f_n(t) - f_n(t_0)|
     $$
-    Como $f_n \to_{unif} f$, $\exists N : |f_n(t) - f_(t)| < \sfrac{\varepsilon}{3}$. Fijamos $n = N$, entonces:
+    Como $f_n \xrightarrow[unif]{} f$, $\exists N : |f_n(t) - f_(t)| < \sfrac{\varepsilon}{3}$. Fijamos $n = N$, entonces:
     \begin{gather}
         |f(t) - f_n(t)| < \sfrac{\varepsilon}{3}\\
         |f_n(t_0) - f(t_0)| < \sfrac{\varepsilon}{3}
@@ -210,10 +210,10 @@ En esta sección vamos a hablar de funciones $f: I \to \R$ con $I \subset \R$.
 \begin{cor}
     $$
         \begin{cases}
-            f_n \to_{pp} f\\
+            f_n \xrightarrow[pp]{} f\\
             f_n \text{ continua } \forall n
             f \text{ no continua}
-        \end{cases} \implies f_n \not\to_{unif} f
+        \end{cases} \implies f_n \not\xrightarrow[unif]{} f
     $$
 \end{cor}
 
@@ -227,7 +227,7 @@ Sin embargo, todo este desarrollo requiere que conozcamos el límite de $f_n$ en
 \begin{pro}[Sucesión de Cauchy y convergencia uniforme]\ref{pro:cauchy-unif}
     Si $\{f_n\}_{n\in\N}$ es una sucesión de Cauchy, entonces:
     $$
-        \exists f : I \to R : f_n \to_{unif} f
+        \exists f : I \to R : f_n \xrightarrow[unif]{} f
     $$
 \end{pro}
 \begin{proof}
@@ -257,13 +257,13 @@ Debido a que hemos definido la norma $||\cdot||_\infty$, esto nos permite defini
             $$
                 \begin{cases}
                     f_n \text{ cont.}\\
-                    f_n \to_{unif} f
+                    f_n \xrightarrow[unif]{} f
                 \end{cases} \implies f \text{ cont. (y $||f_n - f|| \to 0$)}
             $$
     \end{enumerate}
 \end{proof}
 \begin{pro}[Limite de la integral de una sucesión de funciones]
-    Sean $f_n,\ f :\ [a, b] \to \R$ integrables y tal que $f_n\to_{unif}f$ en $[a, b]$, entonces:
+    Sean $f_n,\ f :\ [a, b] \to \R$ integrables y tal que $f_n\xrightarrow[unif]{}f$ en $[a, b]$, entonces:
     $$
         \int_a^b f_n \to \int_a^b f
     $$
@@ -272,7 +272,7 @@ Debido a que hemos definido la norma $||\cdot||_\infty$, esto nos permite defini
     $$
         \begin{cases}
             f_n \in C_1([a,b])\\
-            f_n \to_{unif} f (\implies f\in C_1([a, b]))
+            f_n \xrightarrow[unif]{} f (\implies f\in C_1([a, b]))
         \end{cases} \implies \int_a^b f_n \to \int_a^b f
     $$
 \end{cor}
@@ -294,14 +294,14 @@ Como recordatorio:
 \end{enumerate}
 Consideremos ahora $f_m : I \to \R$, y sea $S_n(x) = \sum_{k=1}^n f_k(x)$  entonces podemos definir:
 $$
-    \left(\sum f_n\right) \to_{pp} g \implies  S_n(x)\to_{pp} g(x)\ \forall x \in I \text{ pues las sumas parciales convergen.}
+    \left(\sum f_n\right) \xrightarrow[pp]{} g \implies  S_n(x)\xrightarrow[pp]{} g(x)\ \forall x \in I \text{ pues las sumas parciales convergen.}
 $$
 $$
-    \left(\sum f_n\right) \to_{unif} g \implies S_n(x) \to_{unif} g(x)\ \forall x \in I.
+    \left(\sum f_n\right) \xrightarrow[unif]{} g \implies S_n(x) \xrightarrow[unif]{} g(x)\ \forall x \in I.
 $$
 \begin{pro}[Criterio de Cauchy]
     $$
-        \sum f_n \to_{unif} g \iff \{S_n\} \text{ es sucesión de Cauchy para $||\cdot||_\infty$}
+        \sum f_n \xrightarrow[unif]{} g \iff \{S_n\} \text{ es sucesión de Cauchy para $||\cdot||_\infty$}
     $$
 \end{pro}
 \begin{proof}
@@ -316,11 +316,11 @@ $$
 \begin{proof}
     Partimos de:
     $$
-        \sum f_n \to_{unif} g = S_n \to_{unif} g \text{ donde } S_n(x) = \sum_{k=1}^n f_k(x)
+        \sum f_n \xrightarrow[unif]{} g = S_n \xrightarrow[unif]{} g \text{ donde } S_n(x) = \sum_{k=1}^n f_k(x)
     $$
     además:
     $$
-        S_n \to_{unif} g \iff \{S_n\} \text{ es Cauchy en $|| \cdot ||_\infty$, es decir } ||S_n - S_m || \to 0
+        S_n \xrightarrow[unif]{} g \iff \{S_n\} \text{ es Cauchy en $|| \cdot ||_\infty$, es decir } ||S_n - S_m || \to 0
     $$
     y como,
     $$
@@ -339,7 +339,7 @@ $$
     Además, sabemos que $\sum r^n$ converge si $r<1$.
     Por el criterio de Weierstrass:
     $$
-        \sum x^n \text{ converge uniformemente en } |x| \leq r, \text{ como } S_n=\sum_{k=1}^n x^k \text{ es continua y } S_n(x) \to_{unif} \sum_{m=1}^\infty x^m
+        \sum x^n \text{ converge uniformemente en } |x| \leq r, \text{ como } S_n=\sum_{k=1}^n x^k \text{ es continua y } S_n(x) \xrightarrow[unif]{} \sum_{m=1}^\infty x^m
     $$
     entonces:
     $$
@@ -364,13 +364,13 @@ $$
 \begin{pro}[De la convergencia uniforme de una función y su derivada]\ref{pro:deriv-impl-con}
     Sean $f_n : [a, b] \to \R$ con $f_n \in C^1$. Supongamos que:
     $$
-        f_n' \to_{unif} g \text{ y que } \exists t_0 \in [a, b] : f_n(t_0) \text{ converge.}
+        f_n' \xrightarrow[unif]{} g \text{ y que } \exists t_0 \in [a, b] : f_n(t_0) \text{ converge.}
     $$
     Entonces:
     $$
         \exists f : [a, b] \to \R \text{ con } f\in C^1\ :\
         \begin{cases}
-            f_n \to_{unif} f\\
+            f_n \xrightarrow[unif]{} f\\
             f' = g
         \end{cases}
     $$
@@ -524,7 +524,7 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
         $$
         Si $Lh < 1$ la serie $\sum (Lh)^k$ converge por el Criterio de Weierstrass. Por tanto:
         $$
-            \sum D_n \text{ converge uniformemente en } I \implies X_n\to_{unif} X
+            \sum D_n \text{ converge uniformemente en } I \implies X_n\xrightarrow[unif]{} X
         $$
         \item Veamos que $X(t) = X_0 + \int_{t_0}^t F(s, X(s)) \d s,\ t\in I$.\\
         Pasamos al limite en:
@@ -533,13 +533,13 @@ Vamos a ver enunciado preciso, demostración y algunos usos. Comenzamos con un p
         $$
         Para ello necesitamos que ambos sumandos converjan uniformemente. Tenemos que ver:
         $$
-            F(t, X(t)) \to_{unif} F(t, X(t))
+            F(t, X(t)) \xrightarrow[unif]{} F(t, X(t))
         $$
         Es decir:
         \begin{gather*}
             |F(t, X(t)) - F(t, X_n(t))| \leq L |X(t) - X_n(t)| \leq L\ninf{X-X_n}\\
             \ninf{F(\cdot, X(\cdot)) - F(\cdot, X_n(\cdot))} \leq L \ninf{X - X_n} \to 0 \implies\\
-            \implies F(t, X_n(t)) \to_{unif} F(t, X(t)) \implies \lim_{n\to \infty} \int_{t_0}^t F(s, X_n(s)) \d s = \int_{t_0}^t F(s, X(s)) \d s
+            \implies F(t, X_n(t)) \xrightarrow[unif]{} F(t, X(t)) \implies \lim_{n\to \infty} \int_{t_0}^t F(s, X_n(s)) \d s = \int_{t_0}^t F(s, X(s)) \d s
         \end{gather*}
         Y por tanto:  $X(t) = X_0 + \int_{t_0}^t F(s, X(s)) \d s,\ t\in I$
         \item Como $X(t) = X_0 + \int_{t_0}^t F(s, X(s)) \d s,\ t\in I$. Se cumple que:\\
@@ -746,7 +746,7 @@ En el caso de existencia y unicidad global veíamos que si teníamos una soluci�
 \begin{obs}
     En palabras más simples y menos precisas, el enunciado establece que:
     $$
-        X(t) \to_{t\to\beta} \delta \Omega \text{ o } |X(t)| \to_{t\to\beta} \infty
+        X(t) \xrightarrow[t\to\beta]{} \delta \Omega \text{ o } |X(t)| \xrightarrow[t\to\beta]{} \infty
     $$
 \end{obs}
 \begin{eg}[No unicidad formalmente]
