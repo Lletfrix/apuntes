@@ -1123,3 +1123,51 @@ Vamos a ver consecuencias de la proposición \ref{pro:dif-sol-cot}.\\
 \begin{proof}
     Se deja al lector. Se basa en la serie de potencias del seno.
 \end{proof}
+\subsection{Diferenciabilidad con respecto a par\'ametros y datos iniciales}
+Vamos a considerar $F(t, X, \lambda) : (a, b) \times \Omega \times \Delta \to \R^d$, con $\Omega$ un abierto de $\R^d$, $\Delta$ abierto en $\R^m$. Además, denominaremos $D_xF$ a la matriz de las derivadas parciales, donde cada elemento $(i,j)$ es de la forma:
+$
+    \frac{\partial F_i}{\partial x_j}
+$. De la misma forma $D_\lambda F$ es la matriz de derivadas parciales, donde cada elemento $(i, k)$ es de la forma:
+$
+    \frac{\partial F_i}{\partial \lambda_k}
+$.
+Además, sea $(t_0, \xi_0, \lambda_0)\in V$, supongamos que $F$ es continua y las derivadas parciales son continuas en $V$.
+\begin{thm}[Diferenciabilidad en ecuaciones de orden 1]
+    Si
+        $\exists \delta > 0 : \text{ si } |\xi - \xi_0| < \delta,\text{ y } |\lambda - \lambda_0| < \delta$ entonces existe una solución (que es única) del problema:
+        $$  \mathcal{P}_{\xi,\lambda}
+            \begin{cases}
+                    X'(t) = F(t, X(t), \lambda)\\
+                    X(t_0) = \xi
+            \end{cases} \text{ en } [t_0,\ t_0+\delta]
+        $$
+        Esa solución $X(t, \xi, \lambda)$ es $C^1$ y sus derivadas con respecto a $\lambda_k$ o $\xi_j$ satisfacen una EDO.\\\\
+        Por ejemplo, si $Y(t) = \frac{\partial X}{\partial \lambda_k}(t, \xi, \lambda)$, entonces $Y$ satisface:
+        $$
+            Y'(t) = D_xF(t, X(t, \xi, \lambda), \lambda) \cdot Y(t) + \frac{\partial F}{\partial \lambda_k}(t, X(t, \xi, \lambda), \lambda)
+        $$
+        Donde si :
+        $$
+            A(t) = D_xF(t, X(t, \xi, \lambda), \lambda),\text{ y } B(t) = \frac{\partial F}{\partial \lambda_k}(t, X(t, \xi, \lambda), \lambda)
+        $$
+        entonces reescribimos:
+        $$
+            Y'(t) = A(t)Y + B(t)
+        $$
+        Además, en términos de matrices si $M(t) = D_\lambda X(t, \xi, \lambda)$ entonces:
+        $$
+            \begin{cases}
+                M'(t) = A(t) M(t) + D_{\lambda}F(t, X(t, \xi, \lambda), \lambda)\\
+                M(t_0) = 0
+            \end{cases}
+        $$
+        y si $N(t) = DX$ entonces:
+        $$
+            \begin{cases}
+                N' = A(t) N\\
+                N(0) = I
+            \end{cases}
+        $$
+        %%TODO: ENTENDER EL EJEMPLO Y REDACTARLO MEJOR
+
+\end{thm}
