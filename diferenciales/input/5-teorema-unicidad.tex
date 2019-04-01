@@ -859,7 +859,7 @@ Por último, supongamos que tenemos $\hat{F}(t, X) \approx F(t, X)$, donde $\hat
 \end{eg}
 
 La base del desarrollo formal de esta sección se basará en el siguiente lema.
-\begin{lm}[de Gronwal]
+\begin{lm}[de Gronwall]
     Sean $u,\ f\ g: [a, b] \to \R$ continuas, y $g \geq 0$. Supongamos que:
     $$
         u(t) \leq f(t) + \int_a^t g(s) u(s) \d s
@@ -921,7 +921,7 @@ La base del desarrollo formal de esta sección se basará en el siguiente lema.
     $$
     Entonces:
     $$
-        |X_1(t) - X_2(t) | \leq |X_1(a) - X_2(a)| e^{L(t-a)} + (\varepsilon_1 + \varepsilon_2) \frac{e^{L(t-a) - 1}}{L}
+        |X_1(t) - X_2(t) | \leq |X_1(a) - X_2(a)| e^{L(t-a)} + (\varepsilon_1 + \varepsilon_2) \frac{e^{L(t-a)}-1}{L}
     $$
 \end{pro}
 \begin{proof}
