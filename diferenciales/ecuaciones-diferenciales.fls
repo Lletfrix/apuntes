@@ -1051,6 +1051,9 @@ INPUT C:/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-italic.l
 INPUT ./images/6-nodo-inestable.png
 INPUT ./images/6-nodo-inestable.png
 INPUT ./images/6-nodo-inestable.png
+INPUT ./images/6-nodo-inestable-original.png
+INPUT ./images/6-nodo-inestable-original.png
+INPUT ./images/6-nodo-inestable-original.png
 INPUT ./images/6-nodo-estable.png
 INPUT ./images/6-nodo-estable.png
 INPUT ./images/6-nodo-estable.png
@@ -1093,6 +1096,15 @@ INPUT ./images/6-conjunto-nivel.png
 INPUT ./images/6-tray-alej.png
 INPUT ./images/6-tray-alej.png
 INPUT ./images/6-tray-alej.png
+INPUT ./images/6-poincare-bendixson.png
+INPUT ./images/6-poincare-bendixson.png
+INPUT ./images/6-poincare-bendixson.png
+INPUT ./images/6-demo-bendixson.png
+INPUT ./images/6-demo-bendixson.png
+INPUT ./images/6-demo-bendixson.png
+INPUT ./images/6-obs-bendixson.png
+INPUT ./images/6-obs-bendixson.png
+INPUT ./images/6-obs-bendixson.png
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe
 INPUT ./ecuaciones-diferenciales.loe

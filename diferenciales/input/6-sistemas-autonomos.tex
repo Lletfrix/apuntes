@@ -418,7 +418,9 @@ Vamos a clasificarlo:
             \end{center}
             Si quisiéramos representarlas en las variables originales $x, y$ tendríamos que deshacer el cambio. $V_2$ es el autovector que corresponde al autovalor de mayor tamaño $|\lambda_2|$.\\\\
             Las trayectorias son tangentes a la recta de autovector con autovalor $\lambda_i$ con valor absoluto más bajo, en este caso $\lambda_1$.
-            %%TODO: Añadir representación gráfica
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{6-nodo-inestable-original.png}
+            \end{center}
             \item $\lambda_2 < \lambda_1 < 0$.
             El desarrollo del apartado anterior nos sirve para este caso también, es decir, las trayectorias siguen siendo:
             $$
@@ -634,6 +636,7 @@ $$
 \begin{th_ex}
     Prueba analíticamente que las trayectorias del ejemplo anterior son curvas cerradas.
 \end{th_ex}
+\pagebreak
 \begin{eg}[Sistemas con centro en sistema lineal pero espirales en el original]\label{eg:centr-esp}
     Sean los sistemas:
     $$
@@ -664,7 +667,7 @@ $$
 \begin{obs}
     Como hemos visto, en los ejemplos \ref{eg:centr-esp} y \ref{eg:centr-centr} hallábamos un centro en el sistema lineal pero se puede transformar en espirales o seguir siendo un centro en el sistema original.
 \end{obs}
-\pagebreak %%XXX: This might fuck up later
+%\pagebreak %%XXX: This might fuck up later
 \begin{eg}[Sistema de poblaciones competitivas con limitación de recursos compartidos.]
     Sea el sistema:
     $$
@@ -891,7 +894,7 @@ En caso de tener $E_x f + E_y g \leq 0$ estaríamos en el caso de la proposició
 \begin{obs}
     Veamos algunas observaciones sobre el ejemplo anterior:\\
     \begin{enumerate}
-        \item Si el comportamiento se corresponde con: %%TODO: Añadir dibujo
+        \item Si el comportamiento se corresponde con:
             \begin{center}
                 \includegraphics{6-tray-alej.png}
             \end{center}
@@ -910,9 +913,9 @@ $$
         y' = g(x, y)
     \end{cases} \text{ con } f, g \in C^1 \text{ en una bola abierta de } \R^2
 $$
-\begin{pro}[Criterio de Bendixson]\label{pro:bendixson}
+\begin{thm}[Criterio de Bendixson]\label{pro:bendixson}
     Sea $\Omega \in \R^2$ es abierto, conexo y simplemente conexo. Si $(f_x + g_y)(x, y) \neq 0\ \forall (x, y) \in \Omega$, entonces no existe ninguna trayectoria cerrada de $\mathcal{S}$ que esté completamente contida en $\Omega$.
-\end{pro}
+\end{thm}
 \begin{proof}
     Vamos a demostrarlo por reducción al absurdo. Supongamos que existe dicha trayectoria $C = (x(t), y(t))$ cerrada y por tanto, una solución periódica. $C$ tiene que ser una curva cerrada simple, y por estar definida en $\R^2$ define una región $R$ en su interior.
     \begin{enumerate}
@@ -959,7 +962,7 @@ $$
     son las mismas.\\
     Eso quiere decir que en las condiciones del criterio, si $\exists h \in C^1$ que no se anula en $\Omega$ y $(hf)_x + (hf)_y$ tampoco se anula, y por tanto el sistema no tiene trayectorias cerradas contenidas en $\Omega$.
 \end{obs}
-\begin{pro}[Poincaré - Bendixson]\label{pro:poincare-bendixson}
+\begin{thm}[Poincaré - Bendixson]\label{pro:poincare-bendixson}
     Sean $f, g \in C^1(\Omega)$, $\Omega$ dominio región en $\R^2$ abierto y conexo. Sea el sistema:
     $$
         \mathcal{S} =
@@ -985,13 +988,19 @@ $$
                 \item $C$ converge en espiral a una trayectoria cerrada (que se denomina ciclo límite)
             \end{itemize}
     \end{enumerate}
-\end{pro}
+    \begin{center}
+        \includegraphics{6-poincare-bendixson.png}
+    \end{center}
+\end{thm}
 \begin{proof}
     Vamos a ver la idea subyacente en la demostración en ambos resultados, la demostración escapa de los contenidos del curso.
     \begin{itemize}
         \item Siguiendo las figuras, $V$ es tangente a $C$ pues es una solución del sistema. Podemos ver como cambia la dirección del vector $V$ conforme recorremos la curva. Si llevamos el vector $V$ al origen vemos que ha completado una vuelta.\\\\
-        Si ahora tomamos una curva cerrada cualquiera dentro de $C$, ahora no tiene por que ser tangente a la nueva curva, pues no tiene por qué ser solución del sistema. Sin embargo, si lo llevamos al origen volvemos a ver que el vector a lo largo de la nueva curva completa una vuelta.\\\\
+        Si ahora tomamos una curva cerrada cualquiera dentro de $C$, ahora no tiene por que ser tangente a la nueva curva, pues no tiene por qué ser solución del sistema. Sin embargo, si lo llevamos al origen volvemos a ver que el vector a lo largo de la nueva curva completa una vuelta.\\
         Si vamos reduciendo la longitud de la curva cerrada, acabamos llegando a un punto crítico, pues no existe una dirección definida para dicho punto ya que a lo largo de la curva el vector sigue dando una vuelta.
+        \begin{center}
+            \includegraphics{6-demo-bendixson.png}
+        \end{center}
         \item El candidato a trayectoria cerrada del segundo resultado es:
         $$
             L = \{ q \in R : \exists t_k \to \infty tq\ (x(t_k), y(t_k)) \to q \}
@@ -1000,8 +1009,10 @@ $$
     \end{itemize}
 \end{proof}
 \begin{obs}
-    Vamos a ver una forma habitual de aplicar el segundo resultado de \ref{pro:poincare-bendixson}.\\\\
-    Vamos a buscar una region $R$ tal que el vector $V = \mx{f \\ g}$ que nos indica hacia donde se mueven las trayectorias, tal que el vector $V$ siempre apunte hacia \textit{dentro} de la region $R$.
+    Una forma habitual de aplicar el segundo resultado de \ref{pro:poincare-bendixson} es buscar una region $R$ tal que el vector $V = \mx{f \\ g}$ que nos indica hacia donde se mueven las trayectorias, siempre apunte hacia \textit{dentro} de la region $R$.
+    \begin{center}
+        \includegraphics{6-obs-bendixson.png}
+    \end{center}
 \end{obs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 06/05
 \begin{eg}
@@ -1062,3 +1073,7 @@ $$
     Por tanto, los puntos críticos en $(r, \theta)$ son $(\pm 1, n \pi)$, que corresponden a $(-1, 0)$ y $(1, 0)$ en $(x, y)$. A estos añadimos el origen que puede ser un punto crítico en $(x, y)$ ya que el análisis en polares puede eliminarlo.
 
 \end{eg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 08/05
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 09/05
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 13/05?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Clase del 14/05?
