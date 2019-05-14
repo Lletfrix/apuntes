@@ -760,15 +760,17 @@ Para realizar este análisis, vamos a intentar encontrar una función $E(x, y)$ 
         \item $E(x, y) = \mx{x & y} \mx{\alpha & \beta \\ \beta & \gamma} \mx{x \\ y}$, es definida positiva si la matriz $2 \times 2$ lo es.
     \end{enumerate}
 \end{obs}
-Las funciones de \textit{energías} que comentábamos anteriormente son las funciones definidas positivamente para $p$. Además, la \textit{energía} se mantiene o decrece en las trayectorias. ¿En que se convierte esta idea?\\\\
-$$
+\begin{dfn}[Función de energía]\label{dfn:energia}
+    Las funciones de \textit{energías} que comentábamos anteriormente son las funciones definidas positivamente para $p$. Además, la \textit{energía} se mantiene o decrece en las trayectorias. ¿En que se convierte esta idea?\\\\
+    $$
     \text{Sea } e(t) = E(x(t), y(t))
-$$
-Diremos que la energía se mantiene o decrece si: $\Dd{t} e(t) \leq 0$. Por tanto, desarrollando con la regla de la cadena obtenemos:
-$$
+    $$
+    Diremos que la energía se mantiene o decrece si: $\Dd{t} e(t) \leq 0$. Por tanto, desarrollando con la regla de la cadena obtenemos:
+    $$
     \dd{e}{t} = E_x(x(t), y(t)) x'(t) + E_y(x(t), y(t)) y'(t) = (E_x f + E_y g) (x(t) + y(t)) \leq 0
-$$
-Y para que esto se cumpla basta que $E_x f + E_y g \leq 0$ para cualquier punto $(x, y)$ cerca de $p$.
+    $$
+    Y para que esto se cumpla basta que $E_x f + E_y g \leq 0$ para cualquier punto $(x, y)$ cerca de $p$.
+\end{dfn}
 
 \begin{pro}[Estabilidad]\label{pro:establ}
     Si existe $E$ una función definida positiva en $p$, y además $E_x f + E_y g$ es semidefinida negativa en $p$ con $(E \in C^2)$, entonces $p$ es \textbf{estable} para $\mathcal{S}$.\\\\
@@ -806,10 +808,10 @@ Y para que esto se cumpla basta que $E_x f + E_y g \leq 0$ para cualquier punto 
         Y como hemos visto que $e(t) \geq m$ y $e(t) < m$, entonces tenemos una contradicción lo hemos probado.
     \end{enumerate}
 \end{proof}
-\begin{dfn}[Función de Lyapunov débil]\label{pro:establ-asin}
+\begin{dfn}[Función de Lyapunov débil]
     Una función como $E$ en la proposición \ref{pro:establ} se denomina \textbf{función de Lyapunov débil} para un sistema $\mathcal{S}$ (como al comienzo de la sección) en $p$.
 \end{dfn}
-\begin{pro}[Estabilidad asintóica]
+\begin{pro}[Estabilidad asintóica]\label{pro:establ-asin}
     Si en las hipótesis del resultado de la proposición \ref{pro:establ} cambiamos $E_x f + E_y g$ semidefinida negativa por definida negativa entonces $p$ es asintóticamente estable, es decir:
     $$
         \exists \delta_0  (x(t_0), y(t_0)) \in \B(p, \delta_0) \implies (x(t), y(t)) \text{ converge a $p$ cuando } t \to +\infty
@@ -838,8 +840,25 @@ Y para que esto se cumpla basta que $E_x f + E_y g \leq 0$ para cualquier punto 
     Una funcion $E$ como en la proposición \ref{pro:establ-asin} se llama \textbf{función de Lyapunov fuerte}
 \end{dfn}
 \subsection{Interpretación geométrica}
-%% TODO: Añadir dibujos del 25/04
-
+Vamos a intentar dar una interpretación geométrica de las proposiciones anteriores para visualizar la estabilidad de un punto crítico.
+Volvamos a considerar:
+$$
+\mathcal{S} =
+\begin{cases}
+    x' = f(x, y)\\
+    y' = g(x, y)
+\end{cases}
+$$
+Sea $E : \R^2 \to R$ una función de $energ\'ia^{\ref{dfn:energia}}$ (es decir, con derivada no positiva), y sea $\mathcal{C} \equiv \{(x, y) : E(x, y) = h\}$ un conjunto de nivel de la misma. Además, es trivial ver que $\nabla E$ es normal al conjunto de nivel. Sabemos por su definición que $E_x f + E_y g \leq 0$, que en forma matricial:
+$$
+    E_x f + E_y g = \mx{f\\g}\mx{E_x\\E_y} = \mx{f\\g} \nabla E \leq 0
+$$
+Además, recordemos que si $V = \mx{f\\g}$, entonces $V$ es tangente a una solución del sistema (por ser el vector formado por $x', y'$).\\
+Ahora supongamos como en la proposición \ref{pro:establ} que $E_x f + E_y g < 0 $. Por tanto, sabemos que $V \cdot \nabla E  < 0$, lo que quiere decir que todos los vectores $V$ de $\mathcal{C}$ apuntan al interior del conjunto, pues de lo contrario el producto escalar debería ser positivo (el ángulo comprendido entre $\nabla E$ y $V$ sería menor que $\sfrac{\pi}{2}$). Como todos los $V$ asociados a los puntos $p \in \mathcal{C}$ apuntan al interior del conjunto y son tangentes a las trayectorias, éstas van a ir adentrándose en el conjunto $\mathcal{C}$, convergiendo a $p$ y siendo entonces $p$ un punto estable.\\
+\begin{center}
+    \includegraphics[width=\textwidth]{6-conjunto-nivel.png}
+\end{center}
+En caso de tener $E_x f + E_y g \leq 0$ estaríamos en el caso de la proposición \ref{pro:establ-asin}. En este caso $V$ puede apuntar hacia dentro del conjunto $\mathcal{C}$ o puede ser tangente a él. En cualquier caso nunca va a alejarse del conjunto y decimos entonces que es asintóticamente estable. Diremos que una trayectoria está en la cuenca de atracción de $p$ si alguno de sus puntos se encuentra en $\mathcal{C}$.
 \begin{th_ex}
     Usando las mismas ideas, en especial que $e(t) = e(t_0) + \int_{t_0}^t \dd{e}{t}(s) \d s$, donde $\dd{e}{t} = E_x f + E_y g$, demostrar que si suponemos que $E$ está definida en todo $\R^2$ y cumple las hipótesis de la proposición \ref{pro:establ-asin} y además $E(q) \to +\infty$ entonces todas las trayectorias convergen a $p$.
 \end{th_ex}
@@ -873,8 +892,11 @@ Y para que esto se cumpla basta que $E_x f + E_y g \leq 0$ para cualquier punto 
     Veamos algunas observaciones sobre el ejemplo anterior:\\
     \begin{enumerate}
         \item Si el comportamiento se corresponde con: %%TODO: Añadir dibujo
+            \begin{center}
+                \includegraphics{6-tray-alej.png}
+            \end{center}
              el punto es inestable. Es decir:\\
-             Si $E$ es definida positiva en $p$ y $E_x f + E_y g$ definida positiva en $p$ entonces $<\nabla E, V> > 0$ lo que implica que las trayectorias se alejan.\\\\
+             Si $E$ es definida positiva en $p$ y $E_x f + E_y g$ definida positiva en $p$ entonces $\nabla E \cdot V > 0$ lo que implica que las trayectorias se alejan.\\\\
              Sin embargo, esto es pedir demasiado para que el punto sea inestable, de hecho, lo anterior solo recoge el caso del nodo inestable, donde todas las trayectorias se alejan del punto. Bastaría pedir que $E \in C^1$ y que $E_x f + E_y g > 0$ en $\R$.
         \item Si existe una curva cerrada simple tal que $V = \mx{f\\ g}$ apunta hacia dentro, entonces las trayectorias permanecen en la región delimitada por la curva.
     \end{enumerate}
@@ -1028,7 +1050,7 @@ $$
         \theta' = r^2 \sin^2(\theta) + (r^2\cos^2(\theta) -1 )^2
     $$
     Se deja como ejercicio escribir el sistema en función de las variables $(x, y)$. Recordemos que $rr' = xx' + yy'$ y $r^2\theta' = xy' - yx'$.
-    \texttt{Análisis de puntos críticos ignorando el origen}\\\\
+    \\\\\texttt{Análisis de puntos críticos ignorando el origen}\\
     Como analizamos en coordenadas polares ignoramos el origen. Los puntos críticos son los que hacen que $r' = 0,\ \theta' = 0$. Vemos fácilmente que del factor de $r'$: $(1-r^2)$, hallamos los puntos $(1, \theta)$ y $(-1, \theta)$. Faltaría ver cuando se anula $\theta'$ es decir:
     $$
         r^2 \sin^2(\theta) + (r^2\cos^2(\theta) -1 )^2 = 0 \leadsto
