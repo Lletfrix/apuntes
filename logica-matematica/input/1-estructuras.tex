@@ -1,0 +1,129 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Estructuras y lenguajes de primer orden}
+\section{Introducción}
+\begin{dfn}[Estructura]\label{dfn:estructura}
+    Una \textbf{estructura} (de primer orden) $\mtc{A}$ consta de un conjunto no vacío $A$ (universo) y un conjunto de funciones, relaciones y elementos del universo.
+\end{dfn}
+Puede parecer una definición algo abstracta, así que vamos a ver algunos ejemplos:
+\begin{eg}[Estructuras. Ejemplos]
+    \begin{itemize}
+        \item $ \mtc{G} = \gen{G, \cdot, 1} $
+        \item $ R = \gen{\R,\  +,\  -,\  \cdot,\  0,\  1,\  \leq} $
+        \item $ R_* = \gen{\R,\  +,\  -,\  \cdot,\  0,\  1,\ \left. \sin \right|_{[0, 1]},\  \exp}$
+    \end{itemize}
+\end{eg}
+
+\begin{dfn}[Lenguaje]\label{dfn:lenguaje}
+    Un \textbf{lenguaje} (de primer orden) consta de:\\
+    \begin{itemize}
+        \item Para cada $n \in \N^*$ un conjunto $\mtc{F}_n$ de símbolos de funciones n-arias.
+        \item Para cada $m \in \N^*$ un conjunto $\mtc{R}_m$ de símbolos de relaciones m-arias.
+        \item Un conjunto $\mtc{C}$ de constantes.
+    \end{itemize}
+    Además de conjuntos de símbolos lógicos, variables $\{v_i\}_{i\in \N}$, cuantificadores $(\exists,\ \forall)$, conectores $(\land, \lor, \iff, \implies)$, símbolos de igualdad $=$, y paréntesis $()$. No se suelen especificar en la declaración del lenguaje.
+\end{dfn}
+
+\begin{eg}[Lenguajes. Ejemplos]\label{eg:lenguajes}
+    \begin{itemize}
+        \item $L = \left\{\ast,\ e\right\}$
+        \item $L = \left\{\cdot,\ 1\right\}$
+        \item $L = \left\{+,\ 0\right\}$
+        \item $L = \left\{\cdot,\ ^{-1},\ 1\right\}$
+    \end{itemize}
+    Además, para hablar del comportamiento de los reales vamos a usar el lenguaje:
+    $$
+        L = \left\{+,\ -,\ \cdot,\ 0,\ 1,\ \leq \right\}
+    $$
+    Es importante destacar que cuando escribimos $+$ en la declaración del lenguaje no nos referimos a la función: $+: \R^2 \to \R$ si no a un símbolo que luego interpretamos como tal función en la estructura.
+\end{eg}
+
+\section{L-estructuras}
+\begin{dfn}[L-estructura]
+    Dado un lenguaje \textsuperscript{\ref{dfn:lenguaje}} $L$, una \textbf{L-estructura} $\mtc{A}$ o una \textbf{interpretaci\'on de L} consta de:
+    \begin{itemize}
+        \item un universo $A \neq \varnothing$
+        \item una función n-aria $f^\mtc{A} : A^n \to A$ para cada símbolo de función $f \in \mtc{F}_n$
+        \item una relación m-aria $R^\mtc{A} \subseteq A^m$ para cada símbolo de relación $R \in \mtc{R}_m$
+        \item un elemento $e^\mtc{A}\in A$ para cada constante $c \in \mtc{C}$.
+    \end{itemize}
+\end{dfn}
+
+\begin{nota}
+    En la definición anterior:\\
+    $L = \mtc{F} \cup \mtc{R} \cup \mtc{C}$ (lenguaje), $\mtc{F}=\bigcup_{n\in \N^*} \mtc{F}_n$ (símbolos de función), $\mtc{R}=\bigcup_{m\in \N^*} \mtc{R}_m$ (símbolos de relación), $\mtc{C}$ constantes.\\
+    Además, para cada símbolo $s\in L$, $s^\mtc{A}$ es la interpretación de $s$ a $\mtc{A}$.
+\end{nota}
+
+\begin{eg}[L-estructura. Ejemplos]
+    \begin{itemize}
+        \item $R = \gen{\R,\ +^R,\ -^R,\ \cdot^R,\ \leq^R,\ 0^R,\ 1^R}$ (interpretación del lenguaje de los reales con el universo $\R$).
+        \item $\mtc{A} = \gen{A,\ +^\mtc{A},\ -^\mtc{A},\ \cdot^\mtc{A},\ \leq^\mtc{A},\ 0^\mtc{A},\ 1^\mtc{A}}$.
+        $$
+            +,\ -,\ \cdot \in \mtc{F}_2 \implies +^\mtc{A},\ -^\mtc{A},\ \cdot^\mtc{A}: A^2 \to A
+        $$
+        $$
+            \leq \in R_2 \implies \leq^\mtc{A} \in A^2;\ \ \ \ \ 0, 1 \in \mtc{C} \implies 0^\mtc{A}, 1^{\mtc{A}} \in A
+        $$
+    \end{itemize}
+\end{eg}
+
+\begin{obs}
+    Podríamos intentar interpretar el lenguaje de los reales del ejemplo \ref{eg:lenguajes} con el universo $A = \C$, sin embargo, aunque podemos interpretar $+, -, \cdot, 0$ y $1$ de la forma habitual, no existe una interpretación de $\leq$ en $\C$.
+\end{obs}
+
+\begin{eg}[Lenguajes comunes]
+    \begin{itemize}
+        \item $L_\varnothing = \{\}$. Es el \textit{lenguaje vacío}, sigue teniendo símbolos generales. Sirve para expresar propiedades tales como: \textit{Existen tres elementos} ($\exists x_1, x_2, x_3$).
+        \item $L_< = \{<\}$. Lenguaje para \textit{conjuntos ordenados}. Con $<\ \in R_2$.
+        \item $L_{grupos} = \{+, -, 0\}$ (aditivo), $\{\cdot, ^{-1}, 1\}$ (multiplicativo). Lenguaje para \textit{grupos}. Con $+,\cdot\ \in \mtc{F}_2$; $-, ^{-1}\ \in \mtc{F}_1$; $0, 1 \in \mtc{C}$.
+        \item $L_{cuerpos} = \{+, -, \cdot, 0, 1\}$. Lenguaje para \textit{cuerpos}.
+        \item $L_{aritm\'etica} = \{+, \cdot, 0, 1, \leq\}$. Lenguaje para la \textit{aritmética}. También podemos considerar añadir otro símbolo de función $S$, cuya interpretación natural sería la función \textit{sucesor}.
+        \item $L_{conj} = \{\in\}$. Lenguaje para \textit{conjuntos}. Todo se puede escribir con este lenguaje.
+    \end{itemize}
+\end{eg}
+
+\subsection{Subestructuras}
+\begin{dfn}[Subestructura de una L-estructura]
+    Sean $\mtc{B}, \mtc{A}$ L-estructuras (con universos $B$ y $A$ respectivamente), decimos que $\mtc{A}$ es una subestructura de $\mtc{B}$ ($\mtc{A} \subseteq \mtc{B}$) si:
+    \begin{itemize}
+        \item $f^\mtc{A} = \left. f^\mtc{B} \right|_{A^n}$ para cada $f \in \mtc{F}_n$.
+        \item $R^\mtc{A} = R^\mtc{B} \cap A^m$ para cada $R \in R_m$.
+        \item $C^\mtc{A} = C^\mtc{B}$
+        \item $A \subseteq B$
+    \end{itemize}
+\end{dfn}
+\begin{eg}[Subestructuras. Ejemplos]
+    Sean los lenguajes: $L_1 = \{+, 0\}$, $L_2 = \{+, -, 0\}$. Vamos a considerar las $L_1$-estructuras:
+    $$
+        W = \gen{\N, +^W, 0^W};\ Z = \gen{\Z, +^Z, 0^Z}
+    $$
+    Donde es fácil ver que se cumplen las condiciones de subestructura y podemos afirmar que $W \subseteq Z$. Sin embargo, si consideramos las $L_2$-estructuras:
+    $$
+        W' = \gen{\N, +^{W'}, -^{W'}, 0};\ Z' = \gen{\Z, +^{Z'}, -^{Z'}, 0}
+    $$
+    Vamos a dar una definición de $-^{W'}$ ya que el opuesto no está bien definido en $\N$. $-^{W'}: n \to 0$. Con esta interpretación es fácil ver que no se cumple que $-^{W'} = \left. f^{Z'} \right|_{\N}$ ya que:
+    $$
+        -^{W'}(2) = 0 \text{ y sin embargo } -^{Z'}(2)=-2
+    $$
+\end{eg}
+\begin{obs}
+    Consideremos el lenguaje $L_< = \{<\}$ de conjuntos ordenados, y las L-estructuras $\mtc{A} = \gen{A, <}$, $\mtc{B} = \gen{B, <}$ (que sólo tienen una relación). Es fácil ver que:
+    $$
+        \mtc{A} \subseteq \mtc{B} \iff A \subseteq B \text{ (suponemos $<^\mtc{A} = <^\mtc{B} \cap\ A^2$)}
+    $$
+\end{obs}
+
+\section{Homomorfismos}
+\begin{dfn}[Homomorfismo y monomorfismo]
+    Sean $\mtc{A}$, $\mtc{B}$ L-estructuras y $\varphi: A \to B$ una función, decimos que $\varphi: \mtc{A} \to \mtc{B}$ es un \textbf{homomorfismo} de $\mtc{A}$ en $\mtc{B}$ si:
+    \begin{enumerate}
+        \item $\forall a_1, \ldots, a_n \in A$ se cumple: $\varphi(f^\mtc{A}(a_1, \ldots, a_n)) = f^\mtc{B}(\varphi(a_1), \ldots, \varphi(a_n))$
+        \item $\forall a_1, \ldots, a_n \in A$ se cumple: $(a_1, \ldots, a_m) \in R^\mtc{A} \implies (\varphi(a_1), \ldots, \varphi(a_m) \in \mtc{B})$
+        \item $\forall c \in \mtc{C}$ se cumple: $\varphi(c^\mtc{A}) = c^\mtc{B}$
+    \end{enumerate}
+    Además, si la segunda condición resulta ser necesaria y suficiente, $\varphi$ es un \textbf{monomorfismo}.
+\end{dfn}
+\begin{eg}[Ejemplo de monomorfismo]
+    Sean $\mtc{A} = \gen{A, +, 0}$, $\mtc{B} = \gen{B, +, 0}$ y $\varphi(a+b) = \varphi(a) + \varphi(b);\ \varphi(0)=0$. Es fácil ver que $\varphi$ es un homomorfismo. Además, la única relación es la igualdad (que existe aunque no se especifique) y como $\varphi(a) = \varphi(b) \iff a = b$ estamos ante un monomorfismo.
+\end{eg}

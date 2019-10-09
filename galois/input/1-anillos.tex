@@ -1,0 +1,503 @@
+% !TeX root = ../galois.tex
+
+\chapter{Anillos, polinomios y cuerpos}
+
+\section{Anillos}
+
+A lo largo de este curso se supondrán conocidos los contenidos de la asignatura \textit{Estructuras Algebraicas}, se pueden encontrar unos apuntes de los mismos en: \url{https://github.com/knifecake/apuntes/raw/master/ea/apuntes-ea.pdf}.
+
+\begin{dfn}[Anillo]
+	Un \textbf{anillo} es una terna $(A, +, \cdot)$ donde $+: A \times A \to A$ es una operación a la que llamamos suma, $\cdot: A \times A \to A$ es otra operación a la que llamamos producto y se verifican las siguientes propiedades
+	\begin{enumerate}
+		\item El par $(A, +)$ es un grupo abeliano
+		\item El producto $\cdot$ es asociativo
+		\item Se cumplen las propiedades distributivas:
+		\begin{align}
+			\forall a, b , c \in A,\ a\cdot (b + c) = a\cdot b + a \cdot c \\
+			\forall a, b , c \in A,\ (a + b) \cdot c = a\cdot c + b \cdot c
+		\end{align}
+	\end{enumerate}
+\end{dfn}
+
+Con la operación $+$ tenemos las siguientes propiedades
+\begin{enumerate}
+	\item Asociatividad: $(a+b)+c = a+(b+c)$
+	\item Elemento neutro aditivo: $\exists! \0 \in A \mid \0+a = a$
+	\item Elemento inverso aditivo: $\forall a \in A, \exists -a \in A \mid a + (-a) = \0$
+	\item Conmutatividad aditiva: $\forall a, b \in A,\ a+b = b+a$
+\end{enumerate}
+
+Con la operación $\cdot$ tenemos las siguientes propiedades
+\begin{enumerate}
+	\item Asociatividad: $a\cdot (b \cdot c) = (a \cdot b) \cdot c$
+	\item No siempre existe el neutro multiplicativo: $\1 \in A \mid a\cdot 1 = 1 \cdot a = a$
+	\item No siempre el producto es conmutativo.
+	\item No siempre existe inverso multiplicativo: $\inv{a} \mid a\cdot \inv{a} = \1$
+	\item No siembre se da la conmutatividad multiplicativa: $a \cdot b = b\cdot a$
+\end{enumerate}
+
+\begin{pro}[Producto con 0 en anillos]
+	$\forall a \in A,\ a\cdot \0 = \0$
+\end{pro}
+
+\begin{proof}
+	$a \cdot \0 = a \cdot(\0 + \0) = a\cdot \0 + a\cdot \0 \implies \0 = a\cdot \0$
+\end{proof}
+
+Además, a lo largo de este curso vamos a referirnos únicamente a los anillos conmutativos con unidad (o unitario), que cumplen las siguientes definiciones.
+
+\begin{dfn}[Anillo con unidad o anillo unitario]
+	Sea $(A, +, \cdot)$ un anillo. Decimos que es un anillo con unidad o un \textbf{anillo unitario} si tiene elemento neutro multiplicativo, es decir, si $\exists \1 \in A \mid \forall a \in A, \1 a = a \1 = a$.
+\end{dfn}
+
+\begin{dfn}[Anillo conmutativo]
+    Sea $(A, +, \cdot)$ un anillo. Decimos que es un \textbf{anillo conmutativo} si se cumple que:
+    $$
+        r\cdot s = s\cdot r,\ \forall r,s \in A
+    $$
+\end{dfn}
+
+\begin{eg}[Ejemplos de anillos]
+    $\Z$, $\Q$, $\R$ y $\C$ con la suma y producto usual verifican todas las definiciones de anillo, anillo conmutativo y anillo unitario.
+\end{eg}
+
+Vamos a considerar además el concepto de anillo de polinomios:
+\begin{dfn}[Anillo de polinomios]
+    Sea $R$ un anillo, definimos el \textbf{anillo de polinomios} $R[x]$ como:
+    $$
+        R[x] = \left\{ \sum_{i > 0}^{n} a_i \cdot x^i \mid a_i \in R,\ n \in \N \right\}
+    $$
+    Es fácil ver que $R[x]$ es un anillo pues la suma y el producto son transitivas y asociativas.
+\end{dfn}
+\begin{obs}
+    Vamos a considerar algunas definiciones y convenciones menores.\\
+    \begin{enumerate}
+        \item Sea $p \in R[x]$, $p$ es un polinomio y escribimos:
+        $$
+            p(x) = a_0 + a_1 x + \ldots + a_n x^n
+        $$
+        Donde llamamos \textit{coeficientes} del polinomio a los $a_i$.
+        \item Sea $p \in R[x] = \sum_{i > 0} a_i x^i$, denominamos grado de $p$ a:
+        $$
+            \delta(p) = \max \left\{ i \mid a_i \neq 0 \right\}
+        $$
+        \item Sea $p \in R[x] = a_0 + a_1 x + \ldots + a_n x^n$, llamamos \textit{coeficiente director} al coeficiente del término de mayor grado ($a_n$).
+        \item  Sea $p \in R[x] = a_0 + a_1 x + \ldots + a_n x^n$, llamamos \textit{termino independiente} al coeficiente libre ($a_0$).
+        \item Sea $p \in R[x]$ con todos los coeficientes nulos, entonces $p$ es el \textit{polinomio cero}.
+        $$
+            0 = \sum_{i > 0} 0 \cdot x^n
+        $$
+        Por convención, $\delta(0) = -\infty$.
+    \end{enumerate}
+\end{obs}
+
+\begin{dfn}[Polinomio mónico]
+    Sea $R[x]$ un anillo de polinomios, decimos que $p \in R[x]$ es \textbf{mónico} si y sólo si su \textit{término director} es $1$.
+\end{dfn}
+
+\begin{dfn}[Divisor de cero]
+    Sea $R$ un anillo, decimos que $r \in R$ es un \textbf{divisor de cero} si satisface:
+    $$
+        \exists s \in R,\ s\neq 0\ :\ r\cdot s = \0
+    $$
+\end{dfn}
+\begin{dfn}[Unidad de un anillo]
+    Sea $R$ un anillo, decimos que $r \in R$ es una \textbf{unidad} si satisface:
+    $$
+        \exists s \in R\ :\ r\cdot s = \1
+    $$
+    Decimos entonces que $r \in \uds{R}$, con $\uds{R} = \left\{a \mid a\text{ es una unidad}\right\}$
+\end{dfn}
+
+\begin{dfn}[Dominio de integridad]
+    Sea $R$ un anillo, $R$ es un \textbf{dominio de integridad} si no tiene divisores de $\0$.
+\end{dfn}
+
+\section{Cuerpos}
+
+\begin{dfn}[Cuerpo]
+    Sea $(A, +, \cdot)$ un anillo conmutativo con unidad. Diremos que $A$ es un cuerpo si $A^{\times} = A\setminus \{\0\}$ es cerrado por la segunda operación (el \textit{producto}).
+\end{dfn}
+
+\begin{obs} $ $
+    \begin{itemize}
+        \item $R$ es un cuerpo si $\uds{R} = R$.
+        \item $\1 \in \uds{R}$, para todo $R$ anillo unitario.
+    \end{itemize}
+\end{obs}
+
+\begin{pro}[Cuerpo y dominio de integridad]\label{pro:cuerpoDI}
+    Sea $R$ un cuerpo, entonces $R$ es un dominio de integridad.
+\end{pro}
+\begin{proof}
+    Vamos a ver que $R$ no tiene divisores de $\0$. Sea $r \in R^{\times} = R\setminus \{\0\}$, supongamos $\exists s \in R^{\times}$ tal que:
+    $$
+        r \cdot s = 0
+    $$
+    Como $r \in \uds{R} = R^{\times}$ pues $R$ es un cuerpo, entonces, $\exists t \in R$ tal que $t\cdot r = r\cdot t = \1$. Por tanto:
+    $$
+        \0 = t \cdot (r \cdot s) = (t \cdot r) \cdot s = \1 \cdot s = s
+    $$
+    Y $s = \0$ contradice la hipótesis. Concluimos con que $\not \exists r, s \in R$ tal que $r \cdot s = \0$
+\end{proof}
+
+\begin{pro}[Dominio de integridad en anillos de polinomios]
+    Sea $R$ un anillo. Si $R$ es un dominio de integridad, entonces $R[x]$ es un dominio de integridad.
+\end{pro}
+\begin{proof}
+    Sean $f, g \in R[x]^{\times}$, y $a_m, b_k$ sus términos directores respectivamente. Como $R$ es un dominio de integridad, $a_m \cdot b_k \neq \0$, que coincide con el término director de $f \cdot g$ y no es nulo. Por tanto, $R[x]$ es un dominio de integridad.
+\end{proof}
+
+\begin{pro}[Propiedad de cuerpo en anillos de polinomios]
+    $R[x]$ nunca es un cuerpo.
+\end{pro}
+\begin{proof}
+    Solo hay que comprobar que aunque $f(x) = x \in R[x]$, $f(x) \notin \uds(R[x])$. Y por tanto $\uds(R[x]) \neq R[x]$, lo que nos dice que $R[x]$ no es un cuerpo.
+\end{proof}
+
+\begin{pro}[Unidades en anillos de polinomios]
+    Sea $R$ un anillo, si $R$ es un dominio de integridad, entonces $\uds{R} = \uds{R[x]}$.
+\end{pro}
+
+\begin{obs}
+    Podemos definir anillos como \textit{extensión} de otros, al igual que hicimos con los anillos de polinomios:\\
+    \begin{itemize}
+        \item $\Z[\sqrt{d}] = \left\{a + b\sqrt{d} \mid a,b \in \Z \right\}$, con $d \neq e^2,\ \forall e \in \Z$ es un anillo y un dominio de integridad, pero no es un cuerpo.
+        \item $\Q[\sqrt{d}] = \left\{a + b\sqrt{d} \mid a,b \in \Q \right\}$, con $d \neq e^2,\ \forall e \in \Z$ es un cuerpo. Decimos que $\left\{ 1, \sqrt{d} \right\}$ es una $\Q$-base de $\Q[\sqrt{d}]$, pues todos los elementos de $\Q[\sqrt{d}]$ se pueden expresar como combinación lineal de los elementos de la $\Q$-base.
+    \end{itemize}
+\end{obs}
+
+\begin{dfn}[Subanillo]
+    Sea $R$ un anillo, $S \subseteq R$, $\1 \in S$. Decimos que $S$ es un \textbf{subanillo} si:
+    \begin{itemize}
+        \item $S$ es cerrado por suma y producto.
+        \item Todo elemento tiene opuesto, es decir, $\forall a \in S, \exists b \in S\ :\ a + b = \0$.
+    \end{itemize}
+\end{dfn}
+
+\begin{dfn}[Subcuerpo]
+    Sean $R$ un cuerpo, $S \subseteq R$. Decimos que $S$ es un \textbf{subcuerpo} si:
+    \begin{itemize}
+        \item $S$ es un subanillo de $R$
+        \item Todo elemento no nulo tiene inverso, es decir, $\forall a \in S^{\times}, \exists b \in S^{\times}\ :\ a \cdot b = \1$
+    \end{itemize}
+\end{dfn}
+
+\begin{eg}[Ejemplos de subanillos y subcuerpos]$ $
+    \begin{itemize}
+        \item $\Z$ es subanillo de $\Q$
+        \item $\Q$ es subcuerpo de $\R$ y $\C$
+        \item $\Z[\sqrt{d}]$ es subanillo de $\Q[\sqrt{d}]$
+    \end{itemize}
+\end{eg}
+
+\section{Ideales}
+
+\begin{dfn}[Ideal]
+    Sea $R$ un anillo, e $I \subseteq S$. $I$ es un \textbf{ideal} si:
+    \begin{enumerate}
+        \item $\forall a, b \in I,\ a - b \in I$
+        \item $\forall r \in R,\ \forall a \in I$ se satisface: $r\cdot a \in I$
+    \end{enumerate}
+    Los ideales triviales son $\{\0\}$ y $R$.
+\end{dfn}
+
+\begin{obs}
+    Sea $R$ un anillo, denotamos al ideal generado por $a \in R$ como:
+    $$
+        \gen{a}
+    $$
+\end{obs}
+
+\begin{pro}[Ideal propio]
+    Sea $R$ un anillo, $I$ un ideal:
+    $$
+        I \subsetneq R \iff \1 \in I \iff I \cap \uds{R} \neq \varnothing
+    $$
+\end{pro}
+
+\begin{obs}
+    Sea $R$ un anillo, $I \leq R$ un ideal:
+    $$
+        I \leq R \iff I \cap \uds{R} = \varnothing
+    $$
+    $$
+        I = R \iff I \cap \uds{R} \neq \varnothing
+    $$
+\end{obs}
+
+
+\begin{pro}[Ideales y cuerpos]
+    Sea $R$ un cuerpo, y sea $I$ un ideal de $R$ (escribimos $I \leq R$), entonces $I = \{\0\}$ o $I = R$, ($I$ es impropio).\\
+    El recíproco también es cierto.
+\end{pro}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item $\left( \implies \right)$
+        $$
+            R \text{ cuerpo} \implies \uds{R} = R^{\times} \implies I = \uds{R} \cup \{\0\} \text{ o trivialmente } I = \{\0\}
+        $$
+        \item $\left( \Longleftarrow \right)$\\
+        Sea $a \in R^{\times}$, $a \in \gen{a} \leq R$
+        $$
+            \{\0\} \neq I = \gen{a},\text{ entonces } I = R \implies \exists u \in I \cap \uds{R} \neq \varnothing \implies u \in \gen{a} \implies u = a\cdot r, \text{ con } r \in R
+        $$
+        y por tanto:
+        $$
+            1 = u \cdot u^{-1} = a \cdot r \cdot u^{-1} \implies a \in \uds{R} \implies R \text{ es un cuerpo}
+        $$
+    \end{itemize}
+\end{proof}
+
+\begin{eg}[Ejemplos de ideales]$ $
+    \begin{enumerate}
+        \item $n\Z \leq \Z$
+        \item $I = \left\{ f \in \Z[x] \mid \text{el termino independiente de f es par} \right\}$
+    \end{enumerate}
+\end{eg}
+
+\begin{dfn}[Ideal principal]
+    Sea $R$ un anillo, $a \in R$ un elemento. El ideal generado por $a$:
+    $$
+        \gen{a} = \left\{a\cdot r \mid r \in R\right\} = aR
+    $$
+    se denomina \textbf{ideal principal} generado por $a$.
+\end{dfn}
+
+\begin{pro}[Propiedades de ideales] Sea $ R $ un anillo e $ I \leq R $ un ideal.
+    \begin{enumerate}
+        \item Sean $I, J \leq R$ ideales, entonces $I+J = \left\{a+b \mid a \in I,\ b \in J\right\} \leq R$ es un ideal.
+        \item Sea $\mbf{a} \in \R^n$, entonces $I = \gen{\mbf{a}} = \left\{ a_1r_1 + \cdots + a_nr_n \mid r_i \in R \right\} \leq R$ es un ideal.
+        \item $\quo{R}{I} = \left\{r + I \mid r \in R\right\}$ es un anillo.
+        \item \label{pro:correspondencia}(Teorema de correspondencia) Existe una biyección de la forma:
+        \begin{align*}
+            \{J \leq R \mid I \subseteq J \subseteq R\} &\longrightarrow \{\quo{J}{I} \leq \quo{R}{I}\}\\
+             J \appad{80mu} &\longmapsto \appad{4mu} \{r + I \mid r \in J\}
+        \end{align*}
+    \end{enumerate}
+\end{pro}
+
+\begin{obs}
+    En particular, si en $R$ todo ideal es principal e $I \leq R$, en $\quo{R}{I}$ todo ideal es principal.
+\end{obs}
+
+\begin{ex}[H1.5]
+    Sea $n$ un número natural. Prueba que $\Z_n = \ZnZ$ es un cuerpo si y sólo si $n$ es primo.\\\\
+    \begin{itemize}
+        \item $\left(\ \Longleftarrow\ \right)$\\\\
+        $ n $ primo $ \implies \forall k:\ 0 < k < n \text{ se cumple que } \mathrm{mcd}(k, n) = 1$, y por Bezout:
+        $$
+            1 = ka + nb,\ \text{ con } a, b \in \Z
+        $$
+        Donde el término $nb \equiv 0$ en $\ZnZ$ y por tanto queda $1 = ka$, lo que quiere decir que $k$ es el inverso de $a$ en $\ZnZ$.
+        \item $\left(\implies\right)$\\\\
+        Partimos de que $\ZnZ$ es cuerpo, por la proposición \ref{pro:cuerpoDI} sabemos que $\ZnZ$ es un dominio de integridad. Supongamos $n$ no primo, entonces $n = a\cdot b$, entonces:
+        $$
+            n \equiv \0 (\mathrm{mod}\ n) \implies \0 = (a + n\Z)(b + n\Z)
+        $$
+        Pero es imposible, ya que $a$ y $b$ serían divisores de $\0$ pero estamos en un dominio de integridad. Por tanto, $n$ es necesariamente primo.
+    \end{itemize}
+\end{ex}
+
+\begin{ex}[H1.12]
+    ¿Cuántos elementos tiene el anillo $\quo{\Z[i]}{\gen{2i}}$?¿Se trata de un cuerpo?\\\\
+    Comenzamos escribiendo los conjuntos que forman parte del cociente:
+    $$
+        \Z[i] = \setdef{a + bi \mid a, b \in \Z}
+    $$
+    $$
+        \gen{2i} = \gen{2} = 2\Z[i] = \setdef{2(a+bi) \mid a,b \in \Z} = (2\Z)[i] = \setdef{a + bi \mid a, b \in 2\Z}
+    $$
+    El conjunto cociente es por tanto:
+    $$
+        \quo{\Z[i]}{\gen{2i}} = \quo{\Z[i]}{2\Z[i]} = \left\{ a+bi + 2\Z[i] \mid a, b \in \Z \right\}
+    $$
+    Donde se tiene que:
+    $$
+        a + bi + 2\Z[i] = a_1 + b_1i + 2\Z[i] \iff a-a_1 \in 2\Z \text{ y } b-b_1 \in 2\Z \iff \setdef{a+bi+2\Z[i] \mid a, b \in \setdef{0, 1}} = \setdef{0, 1, i, 1+i}
+    $$
+    De esta forma vemos que el anillo tiene $4$ elementos y además no es un cuerpo ya que $i$ no tiene inverso.
+\end{ex}
+
+\begin{dfn}[Ideal primo]
+    Sea $R$ un anillo e $I \leq R$ un ideal, diremos que $I$ es un \textbf{ideal primo} si:
+    $$
+        a\cdot b \in I \implies a \in I \text{ ó } b \in I
+    $$
+\end{dfn}
+
+\begin{dfn}[Ideal maximal]
+    Sea $R$ un anillo e $I \leq R$ un ideal, diremos que $I$ es un \textbf{ideal maximal} si:
+    $$
+        I \subseteq J \leq R \implies J = I \text { ó } J = R
+    $$
+\end{dfn}
+\begin{thm}[Cociente de ideales primos y maximales]
+    Sea $R$ un anillo, $I \leq R$ un ideal:\\
+    \begin{enumerate}
+        \item $I$ es primo $\iff \quo{R}{I}$ es un dominio de integridad.
+        \item $I$ es maximal $\iff \quo{R}{I}$ es un cuerpo.
+        \item $I$ ideal maximal $\implies$ $I$ ideal primo.
+    \end{enumerate}
+\end{thm}
+\begin{proof}$ $
+    \begin{enumerate}
+        \item Se deja como ejercicio. Es directa usando definiciones.
+        \item $I$ es maximal $\iff \quo{R}{I}$ no tiene ideales propios (por el teorema de correspondencia \ref{pro:correspondencia}). Y ya sabemos que $\quo{R}{I}$ no tiene ideales propios $\iff \quo{R}{I}$ es un cuerpo.
+        \item Se sique de los apartados anteriores junto a la proposición $\ref{pro:cuerpoDI}$ que nos dice que un cuerpo es un dominio de integridad.
+    \end{enumerate}
+\end{proof}
+
+\section{Homomorfismos}
+
+\begin{dfn}[Homomorfismo de anillos]
+    Sean $R, S$ anillos, $\varphi: R \to S$ es un \textbf{homomorfismo de anillos} si:\\
+    \begin{enumerate}
+        \item $\varphi$ es homomorfismo de grupos, es decir, $\varphi(0) = 0$ y $\varphi(a - b) = \varphi(a) - \varphi(b)$.
+        \item $\varphi(1) = 1$.
+        \item $\varphi(ab) = \varphi(a)\varphi(b)$.
+    \end{enumerate}
+\end{dfn}
+
+\begin{obs}$ $
+    \begin{itemize}
+        \item $\ker{\varphi} = \setdef{a \in R \mid \varphi(a) = 0} \leq R$.
+        \item $\varphi(R) \subseteq S $ es un subanillo. (No es ideal en general).
+        \item $\varphi$ sobreyectiva, es decir, $\varphi$ es un epimorfismo $\iff \varphi(R) = S$.
+    \end{itemize}
+\end{obs}
+
+\begin{obs}
+    Si $R$ y $S$ son cuerpos y $\varphi: R \to S$ es un homomorfismo de anillos, llamaremos a $\varphi$ homomorfismo de cuerpos. Además $\varphi$ es inyectivo pues:
+    $$
+        1 \notin \ker{\varphi} \leq R \text{ cuerpo} \implies \ker{\varphi} = 0
+    $$
+\end{obs}
+
+\begin{eg}[Proyección canónica]
+    Sea $R$ un anillo, $I \leq R$ un ideal, es fácil ver que $\pi: R \to \quo{R}{I};\ r \mapsto r + I$ es un epimorfismo de anillos con $\ker{\pi} = I$.
+\end{eg}
+
+\begin{obs}
+    $$\quo{R}{\ker{\varphi}} = \quo{R}{I}$$
+\end{obs}
+
+\begin{thm}[Teorema de isomorfía]
+    Sea $\varphi: R \to S$ un homomorfismo de anillos, se tiene que:
+
+    \begin{align*}
+        \bar{\varphi}: \quo{R}{\ker \varphi} &\longrightarrow \varphi(S)\\
+        r + \ker \varphi &\longmapsto \bar{\varphi}(r + \ker \varphi) = \varphi(r)
+    \end{align*}
+    es un isomorfismo de anillos.
+\end{thm}
+
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{obs}
+    Sea $\pi$ la proyección canónica, $\bar{\pi} = id_{\quo{R}{I}}$
+\end{obs}
+
+
+\begin{ex}[H1.14]
+    Demuestra que si $\varphi: R \to S$ es un homomorfismo de anillos y $a \in \uds{R}$, entonces $\varphi(a) \in \uds(S)$. ¿Es cierto el recíproco?.\\\\
+    Si $a \in \uds{R}$, tntonces $\exists b \in R$ tal que $\1 = a\cdot b$. Por tanto:
+    $$
+        \1 = \varphi(\1) = \varphi(a \cdot b) = \varphi(a) \cdot \varphi(b) \implies \varphi(a) \in \uds(S)
+    $$
+    El recíproco solo es cierto si $\varphi$ es un isomorfismo, pero en general no. Como contraejemplo consideramos el homomorfismo identidad $\iota : \Z \to \Q;\ a \mapsto a$. Es fácil ver que es un homomorfismo de anillos, sin embargo: $\iota(2) = (2)$ pero $\iota(2) \in \uds{\Q}$ y $2 \notin \uds{\Z}$.
+\end{ex}
+
+\begin{ex}[H1.16]
+    Demuestra que:
+    \begin{enumerate}
+        \item No existe ningún homomorfismo de anillos $\varphi: \Q \to \Z_p$ para $p \in \Z$ primo.
+        \item No existe ningún homomorfismo de anillos $\varphi: \R \to \Q$.
+    \end{enumerate}
+    Solución:
+    \begin{enumerate}
+        \item Sea $\varphi: \Q \to \Z_p;\ \1 \mapsto \1 + p\Z$.
+        $$
+            \varphi(p) = \varphi\left(\sum_1^p 1 \right) = \sum_1^p (\1 + p\Z) = p + p\Z = 0.
+        $$
+        y como $p \in \uds{\Q}$, es imposible que la imagen de una unidad no sea otra por medio de un homomorfismo, por tanto, dicho homomorfismo no existe.
+        \item Sea $\varphi: \R \to \Q;\ \sqrt{2} \mapsto a$
+        $$
+            2 = \varphi(1 + 1) = \varphi(2) = \varphi(\sqrt{2}^2) = \varphi(\sqrt{2})^2 = a^2,\ a \in \Q
+        $$
+        que es una contradicción pues no existe dicho $a$, con lo que no existe el homomorfismo.
+    \end{enumerate}
+\end{ex}
+
+\begin{ex}[H1.21]
+    Fijado un entero $n \in \Z$ con $n \geq 2$, demuestra que el anillo cociente $\quo{\Z[x]}{n\Z[x]}$ es isomorfo a $\Z_n[x]$. Conclute que el ideal $n\Z[x]$ es primo si y sólo si $n$ es un número primo.\\\\
+    Vamos a dar una guía de como proceder con el ejercicio:
+    $$
+        \text{Sea } \varphi: \Z[x] \to \Z_n[x];\ (a_0 + \ldots + a_n x^n) \mapsto (\bar{a_0} + \ldots + \bar{a_n} x^n)
+    $$
+    donde $\bar{a_i} = a_i + n\Z \in \quo{\Z}{n\Z}$.
+    \begin{itemize}
+        \item Comprobar que $\varphi$ es un homomorfismo de anillos.
+        \item Comprobar que $\varphi$ es sobreyectiva.
+        \item Ver que $\ker \varphi = n\Z[x]$.
+        \item Aplicar el teorema de isomorfía.
+    \end{itemize}
+\end{ex}
+
+\begin{eg}[Homomorfismo de evaluación]
+    Sea $R$ un anillo, $a \in R$.
+    \begin{align*}
+        \mathcal{E}_a : R[x] &\longleftarrow R\\
+                     f(x) &\longmapsto f(a)
+    \end{align*}
+    es un homomorfismo de anillos sobreyectivo.
+\end{eg}
+
+\begin{obs}
+    Si $R = K$ es un cuerpo:
+    $$
+        \quo{K[x]}{\ker \mathcal{E}_a} \isom K \implies \ker\mathcal{E}_a \text{ es maximal.}
+    $$
+\end{obs}
+
+\section{Anillos de polinomios}
+
+\begin{pro}[Algoritmo de la división]
+    Sea $R$ un anillo, $f, g \in R[x]^{\times}$ polinomios con coeficientes en $R$. Si el coeficiente director de $g$ es una unidad de $R$, entonces $\exists d,r \in R[x]$ únicos tales que:
+    $$
+        f = g \cdot d + r \text{ con } \delta(r) < \delta(g)
+    $$
+    Diremos que $g \divides f$ si $r = \0$.
+\end{pro}
+\begin{dfn}[Raíz de un polinomio]
+    Sea $R$ un anillo, $f \in R[x]^{\times}$ un polinomio, decimos que $a \in R$ es una \textbf{raíz} de $f$ si $\mathcal{E}_a(f) = f(a) = \0$
+\end{dfn}
+\begin{cor}[Ruffini]\label{cor:ruffini}
+    Sea $R$ un anillo, $f \in R[x]^{\times}$ un polinomio:
+    $$
+        a \text{ es raíz de } f \iff f(x) = (x-a)\cdot g(x)
+    $$
+\end{cor}
+\begin{proof}$ $
+    \begin{itemize}
+        \item $\left(\  \Longleftarrow\ \right)$
+        $$
+            \mathcal{E}_a(f) = \mathcal{E}_a(x-a) \cdot \mathcal{E}_a(g) = \0
+        $$
+        \item $(\implies)$
+        $$
+            f(x) = (x - a)\cdot d(x) + r(x);\ \delta(r) \leq \delta(x-a) \implies r \in R;\ f(a) = r = 0 \implies g(x) = d(x)
+        $$
+    \end{itemize}
+\end{proof}
+
+\begin{eg}[Uso de Ruffini]
+    Sea $f(x) = x^2 + x + 1$, $f(x) \in \Z_3[x]$.\\ Es fácil ver que $f(1) = 0$, según Ruffini (corolario \ref{cor:ruffini}) $(x-1) \divides f$. Y es cierto, de hecho: $f(x) = (x - 1)(x - 1)$.
+\end{eg}
+
+\begin{thm}[Raíces y dominio de integridad]
+    Sea $R$ un dominio de integridad, $f \in R[x]^{\times}$ un polinomio y $\alpha_1, \ldots, \alpha_n$ raíces distintas de $f$, entonces $n \leq \delta(f)$.
+\end{thm}

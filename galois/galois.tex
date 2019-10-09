@@ -1,0 +1,271 @@
+\documentclass{book}
+
+\usepackage[utf8]{inputenc}  % para que funcionen las tildes
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{letltxmacro}
+\LetLtxMacro\amsproof\proof
+\LetLtxMacro\amsendproof\endproof
+\usepackage{txfonts}
+\usepackage{lmodern}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{thmtools, thm-restate}
+\usepackage{datetime} % para la hora de compilación
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage[spanish,es-noquoting]{babel} % es-noquoting es para que funcione tikz
+\usepackage{mathabx} % para \divides
+\usepackage{centernot} % para \centernot\inculdes
+\usepackage{wrapfig}
+\usepackage{multicol}
+\usepackage{subcaption}
+\usepackage{xfrac}
+\usepackage{glossaries}
+\usepackage{standalone}
+\usepackage{pgfmath}
+\usepackage{pgfplots}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{positioning}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=./tikzbuild/]
+\tikzexternalize % activate!
+
+\AtBeginDocument{%
+  \LetLtxMacro\proof\amsproof
+  \LetLtxMacro\endproof\amsendproof
+}
+
+\definecolor{coolblack}{rgb}{0.0, 0.18, 0.39}
+%\usepackage[a6paper,margin=5mm]{geometry}
+\usepackage[a4paper, top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+
+%\setlength{\parindent}{0pt}
+\usepackage{parskip}
+
+\usepackage{hyperref}
+
+% ESTILOS DE DEFINICIONES Y TEOREMAS
+\declaretheoremstyle[
+	bodyfont=\normalfont,
+	shaded={
+		margin=8pt,
+		bgcolor=White,
+		rulecolor=Black,
+		rulewidth=1pt
+}]{mythm}
+
+\declaretheoremstyle[
+	bodyfont=\normalfont,
+	shaded={
+		margin=1em,
+		bgcolor={rgb}{0.9,0.9,0.9}
+}]{mydfn}
+
+\declaretheoremstyle[
+bodyfont=\normalfont,
+spacebelow=1em,
+spaceabove=1em,
+]{myej}
+
+\declaretheoremstyle[
+bodyfont=\normalfont,
+spacebelow=1em,
+spaceabove=1em,
+shaded={
+    margin=8pt,
+    bgcolor=White,
+    rulecolor=coolblack,
+    rulewidth=1pt
+}]{thej}
+
+\declaretheoremstyle[
+bodyfont=\normalfont,
+spacebelow=1em,
+spaceabove=1em,
+thmbox=M
+]{myeg}
+
+% DEFINICIONES DE ENTORNOS DE TEOREMAS
+\declaretheorem[
+	name=Teorema,
+	refname={teorema,teoremas},
+	Refname={Teorema,Teoremas},
+	style=mythm
+]{thm}
+
+\declaretheorem[
+	name=Corolario,
+	refname={corolario,corolarios},
+	Refname={Corolario,Corolarios},
+	style=myej
+]{cor}
+
+\declaretheorem[
+	name=Proposici\'{o}n,
+	refname={proposici\'{o}n,proposiciones},
+	Refname={Proposici\'{o}n, Proposiciones},
+	sharenumber=thm,
+	style=myej
+]{pro}
+
+\declaretheorem[
+name=Lema,
+refname={lema,lemas},
+Refname={Lema, Lemas},
+sharenumber=thm,
+style=myej
+]{lm}
+
+%\newtheorem*{cor}{Corolario}
+\newtheorem*{lem}{Lema}
+
+\declaretheorem[
+	name=Definici\'{o}n,
+	refname={definici\'{o}n,definiciones},
+	Refname={Definici\'{o}n,Definiciones},
+	style=mydfn
+]{dfn}
+
+\declaretheorem[
+name=Ejercicio,
+refname={ejercicio,ejercicios},
+Refname={Ejercicio,Ejercicios},
+style=myej,
+numbered=no
+]{ex}
+
+\declaretheorem[
+name=Ejercicio propuesto,
+refname={ejercicio,ejercicios},
+Refname={Ejercicio,Ejercicios},
+style=thej,
+]{th_ex}
+
+\declaretheorem[
+name=Ejemplo,
+refname={ejemplo,ejemplos},
+Refname={Ejemplo,Ejemplos},
+style=myeg
+]{eg}
+
+\declaretheorem[
+name=Observaci\'{o}n,
+refname={observaci\'{o}n,observaciones},
+Refname={Observaci\'{o}n,Observaciones},
+style=myej,
+numbered=no
+]{obs}
+
+\makeglossaries
+\newglossaryentry{di}{name={DI},description={Dominio de integridad (ver \autoref{dfn:dominiointegridad})}}
+\newglossaryentry{dip}{name={DIP},description={Dominio de ideales principales (ver \autoref{dfn:dominioidealesprincipales})}}
+\newglossaryentry{dfu}{name={DFU},description={Dominio de factorización única (ver \autoref{dfn:dfu})}}
+\newglossaryentry{de}{name={DE},description={Dominio euclídeo (ver \autoref{dfn:de})}}
+
+
+%\setcounter{chapter}{-1}
+%COMANDOS ÚTILES PARA DERIVADAS
+\AtBeginDocument{\renewcommand{\d}{\mathrm{d}}}
+\newcommand{\Dd}[1]{\frac{\mathrm{d}}{\mathrm{d}#1}}
+\newcommand{\dd}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+% COMANDOS ÚTILES PARA LA TEORÍA DE GRUPOS
+%\newcommand{\normsub}{\mathbin{\triangleleft}}
+\newcommand{\normsub}{\lhd}
+\newcommand{\uds}[1]{\mathcal{U}(#1)}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\ima}{\text{Im }}
+\newcommand{\isom}{\simeq}
+\newcommand{\autom}[1]{\text{Aut}(#1)}
+\newcommand{\gen}[1]{\langle#1\rangle}
+\newcommand{\biy}[1]{\text{Biy}(#1)}
+\newcommand{\quo}[2]{{\left.\raisebox{.2em}{$#1$}\middle/\raisebox{-.2em}{$#2$}\right.}}
+\newcommand{\appad}[1]{\mathrel{\mkern#1}}
+\newcommand{\setdef}[1]{\left\{#1\right\}}
+%\DeclareMathSymbol{\varprod}{\mathop}{largesymbolsA}{16}
+
+\newcommand{\hr}{\rule{\textwidth}{.4pt}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\B}{\mathbb{B}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\traza}{traza}
+\renewcommand{\P}{\mathcal{P}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\ZnZ}{\quo{\Z}{n\Z}}
+\newcommand{\ZmZ}{\quo{\Z}{m\Z}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\gr}{\text{gr }}
+\newcommand\ninf[1]{\left|\left|#1\right|\right|_\infty}
+
+%%%% MATRICES
+\newcommand\mx[1]{\begin{bmatrix*}#1\end{bmatrix*}}
+
+\renewcommand\qedsymbol{$\diamondsuit$}
+
+\title{Apuntes de Ecuaciones Diferenciales}
+\author{Rafael S\'{a}nchez S\'{a}nchez}
+\begin{document}
+\begin{titlepage}
+	\includepdf{portada.pdf}
+\end{titlepage}
+
+
+Revisión del \today $ $ a las \currenttime.
+
+\begin{center}
+
+\end{center}
+
+\tableofcontents
+\part{Primer parcial}
+\input{input/1-anillos}
+
+\part{Apéndices}
+
+%\renewcommand{\chaptername}{Apéndice}
+%\renewcommand{\thechapter}{\Alph{chapter}}
+%\setcounter{chapter}{0}
+
+%\input{input/a-ejercicios}
+
+%\renewcommand{\chaptername}{Apéndice}
+%\renewcommand{\thechapter}{\Alph{chapter}}
+%\setcounter{chapter}{0}
+
+%\input{input/a-ejercicios}
+
+\chapter{\'{I}ndices}
+
+%%TODO por qué no podemos utilizar only= para hacer whitelisting en lugar de blacklisting? que alguien lo arregle parfavar
+\renewcommand{\listtheoremname}{Lista de definiciones}
+\listoftheorems[ignore={thm,eg,pro,cor,obs,lm,ex,th_ex}]
+
+\renewcommand{\listtheoremname}{Lista de teoremas}
+\listoftheorems[onlynamed,ignore={dfn,eg,cor,obs,ex,th_ex}]
+
+\renewcommand{\listtheoremname}{Lista de ejemplos}
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ex,th_ex}]
+
+\renewcommand{\listtheoremname}{Lista de ejercicios}
+\listoftheorems[ignore={dfn,thm,pro,cor,obs,lm,eg}]
+
+\printglossaries
+
+\bibliographystyle{alpha}
+
+\end{document}
