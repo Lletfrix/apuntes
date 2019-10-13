@@ -113,8 +113,6 @@ Vamos a considerar además el concepto de anillo de polinomios:
     Sea $R$ un anillo, $R$ es un \textbf{dominio de integridad} si no tiene divisores de $\0$.
 \end{dfn}
 
-\section{Cuerpos}
-
 \begin{dfn}[Cuerpo]
     Sea $(A, +, \cdot)$ un anillo conmutativo con unidad. Diremos que $A$ es un cuerpo si $A^{\times} = A\setminus \{\0\}$ es cerrado por la segunda operación (el \textit{producto}).
 \end{dfn}
@@ -333,7 +331,7 @@ Vamos a considerar además el concepto de anillo de polinomios:
         I \subseteq J \leq R \implies J = I \text { ó } J = R
     $$
 \end{dfn}
-\begin{thm}[Cociente de ideales primos y maximales]
+\begin{thm}[Cociente de ideales primos y maximales]\label{thm:cocienteideales}
     Sea $R$ un anillo, $I \leq R$ un ideal:\\
     \begin{enumerate}
         \item $I$ es primo $\iff \quo{R}{I}$ es un dominio de integridad.
@@ -383,12 +381,12 @@ Vamos a considerar además el concepto de anillo de polinomios:
     $$\quo{R}{\ker{\varphi}} = \quo{R}{I}$$
 \end{obs}
 
-\begin{thm}[Teorema de isomorfía]
+\begin{thm}[Primer teorema de isomorfía]\label{thm:1erisomorfia}
     Sea $\varphi: R \to S$ un homomorfismo de anillos, se tiene que:
 
     \begin{align*}
-        \bar{\varphi}: \quo{R}{\ker \varphi} &\longrightarrow \varphi(S)\\
-        r + \ker \varphi &\longmapsto \bar{\varphi}(r + \ker \varphi) = \varphi(r)
+        \overline{\varphi}: \quo{R}{\ker \varphi} &\longrightarrow \varphi(S)\\
+        r + \ker \varphi &\longmapsto \overline{\varphi}(r + \ker \varphi) = \varphi(r)
     \end{align*}
     es un isomorfismo de anillos.
 \end{thm}
@@ -398,7 +396,7 @@ Vamos a considerar además el concepto de anillo de polinomios:
 \end{proof}
 
 \begin{obs}
-    Sea $\pi$ la proyección canónica, $\bar{\pi} = id_{\quo{R}{I}}$
+    Sea $\pi$ la proyección canónica, $\overline{\pi} = id_{\quo{R}{I}}$
 \end{obs}
 
 
@@ -436,9 +434,9 @@ Vamos a considerar además el concepto de anillo de polinomios:
     Fijado un entero $n \in \Z$ con $n \geq 2$, demuestra que el anillo cociente $\quo{\Z[x]}{n\Z[x]}$ es isomorfo a $\Z_n[x]$. Conclute que el ideal $n\Z[x]$ es primo si y sólo si $n$ es un número primo.\\\\
     Vamos a dar una guía de como proceder con el ejercicio:
     $$
-        \text{Sea } \varphi: \Z[x] \to \Z_n[x];\ (a_0 + \ldots + a_n x^n) \mapsto (\bar{a_0} + \ldots + \bar{a_n} x^n)
+        \text{Sea } \varphi: \Z[x] \to \Z_n[x];\ (a_0 + \ldots + a_n x^n) \mapsto (\overline{a_0} + \ldots + \overline{a_n} x^n)
     $$
-    donde $\bar{a_i} = a_i + n\Z \in \quo{\Z}{n\Z}$.
+    donde $\overline{a_i} = a_i + n\Z \in \quo{\Z}{n\Z}$.
     \begin{itemize}
         \item Comprobar que $\varphi$ es un homomorfismo de anillos.
         \item Comprobar que $\varphi$ es sobreyectiva.
@@ -501,3 +499,460 @@ Vamos a considerar además el concepto de anillo de polinomios:
 \begin{thm}[Raíces y dominio de integridad]
     Sea $R$ un dominio de integridad, $f \in R[x]^{\times}$ un polinomio y $\alpha_1, \ldots, \alpha_n$ raíces distintas de $f$, entonces $n \leq \delta(f)$.
 \end{thm}
+
+\begin{proof}
+    Vamos a probarlo por inducción sobre $\delta(f)$
+    \begin{itemize}
+        \item Caso base: $\delta(f) = 1$. Entonces $f(x) = ax + b$. Sea $\alpha_1$ raíz de $f(x)$, entonces $a \alpha_1 = - b$. Si $\alpha_2$ es raíz de $f$, entonces $a \alpha_2 = -b \implies a \alpha_1 = a \alpha_2 \implies a (\alpha_1 - \alpha_2) = 0$ y como $a \neq 0$ y $R$ es dominio de integridad $\alpha_1 - \alpha_2 = 0 \implies \alpha_1 = \alpha_2$
+
+        \item $\delta(f) = m > 1$. Sea $\alpha_1$ raíz de $f$, por Ruffini $f(x) = (x - \alpha_1) d(x)$. Por hipótesis, $\alpha_2 \ldots \alpha_n$ son raíces de $f$ distintas de $\alpha_1$, por lo que necesariamente $d(\alpha_i) = 0\ \forall i \in [2, n]$. Por la hipótesis de inducción $n - 1 \leq \delta(d) = \delta(f) - 1 \implies n \leq \delta(f)$
+    \end{itemize}
+\end{proof}
+
+\begin{obs}
+    La hipótesis de que $R$ sea un dominio integridad es necesaria. Se puede comprobar que en $\Z_8[x]$, el polinomio $f(x) = x^2 - 1$ con $\delta(f) = 2$, tiene $4$ raíces: $\overline 1, \overline 3, \overline 5, \overline 7$. Sin embargo, no supondrá un problema a lo largo del curso ya que trabajaremos con cuerpos.
+\end{obs}
+
+\begin{ex}[H1.27]
+    Demuestra que si $K$ es un cuerpo finito y $f, g \in K[x]$ tales que $f(a) = g(a)$ para todo $a \in K$, entonces $f = g$. ¿Qué ocurre si $K$ es finito?.\\\\
+
+    Supongamos $h = f - g \in K[x]$. Entonces $ h(a) = 0\ \forall a \in K$ con $K[x]$ un cuerpo infinito implica necesariamente que $h = 0$ y por tanto $f = g$.\\
+    Si $K$ es finito, por ejemplo $K = \Z_p = \{\overline 0, \overline 1, \ldots, \overline{p-1}\}$ con $p$ un primo, consideramos el polinomio $f(x) = x^p - x$. En este caso $f(x) \neq 0$ pero se anula en todo elemento de $\Z_p$ ya que $a^p \equiv a \mod p$ por el pequeño teorema de Fermat.
+\end{ex}
+
+\begin{thm}[Pequeño teorema de Fermat]
+    Si $p$ es un número primo, entonces, para cada número natural $a$, con $a > 0$, $a^p \equiv a \mod p$.
+\end{thm}
+
+\begin{thm}[Ideales principales]
+    Sea $K$ un cuerpo, $I \leq K[x]$ un ideal tal que $I \neq \setdef{0}$, entonces existe un $p \in K[x]$ tal que $I = \gen{p}$.
+\end{thm}
+
+\begin{proof}
+    Sea $p \in I$ con el menor grado finito posible, es decir, sea $0 \neq g \in I \implies \delta(g) \geq \delta(p)\ \forall g \in I$. Entonces por el algoritmo de la division, para $f \in I$, $f = pd + r$, con $d, r \in K[x]$ y $\delta(r) \leq \delta(p) \implies r \in I$. Por la elección de $p$, la única opción es que $ r = 0 $ entonces $f = pd \implies f \in \gen{p}$.
+\end{proof}
+
+\begin{ex}[H1.25]
+    Hallar un generador de $I = \gen{x^3 + 1, x^2 + 1}$ en $\Z_2[x]$.\\\\
+
+    Basta observar que en $\Z_2[x]$, $(x^2 + 1) = (x + 1)^2$ y $(x^3 + 1) = (x + 1) \cdot (x^2 + x + 1)$, por tanto, $I = \gen{x + 1}$.
+\end{ex}
+
+\begin{dfn}[Dominio de ideales principales]
+    Un anillo $R$ en el que todo ideal es principal y es un dominio de integridad se llama \textbf{dominio de ideales principales} (o DIP para abreviar).
+\end{dfn}
+
+\begin{dfn}[Elemento irreducible]
+    Sea $R$ un anillo y $a \neq 0 \in \uds{R}$, decimos que $a$ es \textbf{irreducible} si $a = b \cdot c \implies$ tiene que ocurrir que $b\in \uds{R}$ o que $c \in \uds{R}$
+\end{dfn}
+
+\begin{thm}[Irreducibilidad en DIP]
+    Sea $R$ un dominio de ideales principales, entonces:
+    $$
+        a \in R \text{ irreducible } \iff \gen{a} \text{ es maximal.}
+    $$
+\end{thm}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item [$\implies$] Sea $\gen{a} \subseteq J \leq R$, con $J = \gen{b}$. Si $J \neq R$ entonces $b \notin \uds{R}$. Falta ver que $\gen{a} = \gen{b}$. Como $\gen{a} \subseteq \gen{b}$, $a = b \cdot c$ con $c \in R$. Además como $b \notin \uds{R}$ y $a$ es irreducible, entonces $c \in \uds{R}$ y con ello $\gen{a} = \gen{b c} = \gen{b}$.
+
+        \item[$\ \Longleftarrow \ $] Sabemos que $\gen{a} \leq R$ es maximal. Sea $a = bc$ con $b, c \in R$, entonces:
+        $$
+            \gen{a} \subseteq \gen{b} \leq R \implies \text{ o bien } (\gen{a} = \gen{b} \implies c \in \uds{R}) \text{ o bien } (\gen{b} = R \implies b \in \uds{R})
+        $$
+        y por tanto $a$ es irreducible.
+    \end{itemize}
+\end{proof}
+
+\begin{cor}\label{cor:irreduciblecociente}
+    Sea $0 \neq f \in K[x]$, con $K$ un cuerpo.
+    $$
+        f \text{ es irreducible } \iff \quo{K[x]}{\gen{f}} \text{ es un cuerpo}.
+    $$
+\end{cor}
+
+\begin{proof}
+    La prueba es directa sabiendo que $K[x]$ es un DIP, el teorema anterior y el teorema \ref{thm:cocienteideales}.
+\end{proof}
+
+\begin{obs}
+    $f \in K[x]$ es irreducible si $\delta(f) > 1$ y $f \neq gh$ con $g, h \in K[x]$, $\delta(g) < \delta(f)$ y $\delta(h) < \delta(f)$.
+\end{obs}
+
+\begin{obs}
+    En $K[x]$ los polinomios de grado $1$ son irreducibles por definición. Los de grado $2$ y grado $3$ son irreducibles $\iff$ no tienen raíces en $K$ (por Ruffini).
+\end{obs}
+
+\begin{cor}[Euclides]
+    Sea $0 \neq f \in K[x]$ irreducible, si $f \divides gh$ entonces $f\divides g$ o $f \divides h$.
+\end{cor}
+
+\begin{proof}
+    $$
+        f \text{ irreducible} \implies \gen{f} \text{ es maximal} \implies \gen{f} \text{ es primo}.
+    $$
+    Por definición de ideal primo:
+    $$
+        f \divides gh \iff gh \in \gen{f} \iff g \in \gen{f} \lor h \in \gen{f}
+    $$
+\end{proof}
+
+\begin{eg}
+    Este corolario nos permite construir cuerpos finitos distintos a los $\F_p$.\\
+    $E = \quo{\F_2[x]}{\gen{x^2+x+1}}$ es un cuerpo. Veamos su caracterización.
+    \begin{itemize}
+        \item Primero comprobamos que $f(x) = x^2 + x + 1 \in \F_2[x]$ es irreducible. Como es un polinomio de grado $2$, es irreducible si no tiene raíces en $\F_2$, y es cierto ya que $f(0) = f(1) = 1$.
+        \item Los elementos de $E$ son de la forma: $g + \gen{f}$, y además $g + \gen{f} \neq 0$ en $E \iff g \notin \gen{f}$.\\
+        $g = fq + r$, $\delta(r) < \delta(f) = 2$ y como $g$ no es múltiplo, $0 \leq \delta(r) \leq 2$.\\
+        $g + \gen{f} = r + fq + \gen{f} = r + \gen{f}$. Por tanto, todo elemento en $E$ tiene un representante con grado  menor a $2$.
+    \end{itemize}
+    Y por tanto:
+    $$
+        E = \setdef{a + bx + \gen{f} \mid a, b \in \F_2} \implies E = \setdef{0, 1, x, x+1}
+    $$
+\end{eg}
+
+\begin{thm}[Máximo común divisor]
+    Sean $K$ cuerpo, $0 \neq f, g \in K[x]$ polinomios, existe un único polinomio mónico $d \in K[x]$ tal que:
+    $$
+        \gen{f} + \gen{g} = \gen{d} \text{ es decir, } \exists a,b \in K[x] :\ d = af + bg
+    $$
+    Además, $d \divides f$ y $d \divides g$ y si $\exists :\ e \divides f$ y $e \divides g \implies e \divides d$ en $K[x]$.
+    Denotamos al polinomio $d$ por $mcd_K(f, g)$.
+\end{thm}
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{pro}[Máximo común divisor en subcuerpos]
+    Sean $E, K \subseteq E$ cuerpos, y $0 \neq f, g \in K[x]$ polinomios.
+    $$
+        mcd_K(f, g) = mcd_E(f, g)
+    $$
+\end{pro}
+
+\begin{proof}
+    Sea $d = mcd_K(f, g)$, $e = mcd_E(f, g)$. Entonces, $d = af + bg$ en $K[x] \subseteq E[x] \implies e\divides d $ en $E[x]$. Como $d\divides f$ y $d \divides g$ en $K[x]$ (y en particular también en $E[x]$), entonces $d \divides e$ en $E[x]$. Por tanto:
+    $$
+        (d \divides e) \land( e \divides d) \land \text{ e, d mónicos} \implies e=d \in K[x]
+    $$
+\end{proof}
+
+\begin{cor}
+    Sea $0 \neq f, g \in K[x]$ con $f$ irreducible.\\
+    \begin{enumerate}
+        \item $mcd(f, g) = 1$ o $f \divides g$.
+        \item Si tenemos $K \subseteq E$, y $f, g$ tienen una raíz común en $E$, entonces $f \divides g$ en $K[x]$.
+    \end{enumerate}
+\end{cor}
+
+\begin{proof}$ $
+    \begin{enumerate}
+        \item Si $d = mcd(f, g) \neq 1 \implies \delta(d) > 1 \implies f = ad \implies d = a \cdot f,\ a \in K^\times$. Sea $b \in K[x]$, $g = b\cdot d = b a f \implies f \divides g$.
+        \item Sea $a \in E$ la raíz común, por Ruffini $(x - a) \divides f, g$ en $E[x] \implies mcd_E(f, g) = mcd_K(f, g) > \implies f \divides g$.
+    \end{enumerate}
+\end{proof}
+
+\begin{cor}[Descripción de $\uds{\quo{K[x]}{\gen{f}}}$]
+    Sea $0 \neq f \in K[x]$, $R = \quo{K[x]}{\gen{f}}$. Entonces:
+    $$
+        \bar g = g + \gen{f} \in \uds{R} \iff mcd(f, g)=1
+    $$
+    Es decir, $\exists a, b \in K[x]$ tal que $1 = af + bg$ y por tanto $(g + \gen{f})^{-1} = b + \gen{g}$.
+\end{cor}
+
+\begin{ex}[H1.24]
+    Sea $p \in \Q[x]$ dado por $p(x) = (x^2+1)(x^4+2x+2)$. Escribimos $R = \quo{\Q[x]}{\gen{p}}$ y $\bar f = f + \gen{p}$.
+    \begin{enumerate}
+        \item Describe los ideales en $R$. ¿Es $R$ un cuerpo?.
+        \item Decide justificadamente si $\bar x$ y $\overline{x+1}$ son divisores de cero en $R$.
+        \item Decide si $\bar x$ y $\overline{x+1}$ son elementos invertibles en $R$ y, en caso afirmativo, encuentra sus inversos.
+    \end{enumerate}
+
+    El primer apartado se resuelve por el teorema de correspondencia.\\
+    En el segundo apartado tenemos que ver que $mcd(x, p) = 1 = mcd(x+1, p)$. Con ello vemos que $\bar x$ y $\overline{x+1} \in \uds{R}$ y por tanto no pueden ser divisores de cero.\\
+    En el tercer apartado faltaría calcular los inversos con la identidad de Bezout.
+\end{ex}
+
+\begin{pro}[Cociente de cuerpo e ideal de polinomio irreducible]
+    Sea $K$ un cuerpo, $f \in K[x]$ irreducible, $\quo{K[x]}{\gen{f}}$ es un cuerpo.
+\end{pro}
+\begin{proof}
+    Ver el corolario \ref{cor:irreduciblecociente}.
+\end{proof}
+\begin{thm}[Factorización única]
+    Sea $K[x]$ un dominio de factorización única (DFU), sea $0 \neq f \in K[x]$, de la forma:
+    $$
+        f(x) = ap_1(x) \cdot \cdots \cdot p_r(x),\ a\in K^\times,\ p_i \text{ irreducibles mónicos no necesariamente distintos}
+    $$
+    entonces la expresión es única (salvo el orden de los factores).
+\end{thm}
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\section{Criterios de irreducibilidad}
+
+\begin{lm}[de Gauss]
+    Sea $f(x) \in \Z[x]$ un polinomio con $\delta(f) \leq 2$, entonces:
+    $$
+        f(x) \text{ irreducible en } \Z[x] \implies f(x) \text{ irreducible en } \Q(x)
+    $$
+\end{lm}
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+
+\begin{lm}[Reducción módulo $p$]
+    Sea $f$ un polinomio entero mónico, y $\varphi_p: \Z[x] \to \Z_p[x]$; $\sum a_jx^d \mapsto \sum \overline{a_j}x^d$. Si existe algún primo $p$ de forma que $\varphi_p(f)$ es irreducible en $\Z_p[x]$, entonces $f$ es irreducible en $\Z[x]$.
+\end{lm}
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{ex}[H1.34 (c)]
+    Demuestra que $f(x) = x^3+x+1$ es irreducible en $\Q[x]$.\\\\
+    Usamos reducción módulo $p$ con $p = 2$.
+    $$
+        f(0) = 1,\ f(1) = 1
+    $$
+    Como es un polinomio de grado $3$ sin raíces, es irreducible en $\Z_2[x]$ y por tanto es reducible en $\Q[x]$.
+\end{ex}
+
+\begin{thm}[Criterio de Einsestein]
+    Sea $f(x) = a_0 + a_1 x + \ldots + a_n x^n \in \Z[x]$. Si existe un primo $p$ tal que:
+    \begin{enumerate}
+        \item $p \not \divides a_n$.
+        \item $p^2 \not \divides a_0$.
+        \item $p \divides a_i,\ \forall i \in \setdef{0, \ldots, n-1} $.
+    \end{enumerate}
+    Entonces $f$ es irreducible en $\Q[x]$.
+\end{thm}
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{pro}[Raíces racionales de un polinomio]\label{pro:raicesracionales}
+    Sea $f(x) = a_0 + a_1 x + \ldots + a_n x^n \in \Z[x]$. Si $\frac{r}{s} \in \Q$ con $mcd(r, s)=1$ es una raíz de $f$, entonces: $s \divides a_n$ y $r \divides a_0$. En particular, si $f \in \Z[x]$ es mónico, las raíces racionales están contenidas en los enteros.
+\end{pro}
+\begin{proof}
+    \begin{align*}
+        0 &= f(\frac{r}{s}) = a_0 + a_1 \frac{r}{s} + \ldots + a_n \frac{r^n}{s^n}\\
+        0 &= a_0 s^n + a_1 r s^{n-1} + \ldots + a_n r^n \\
+        -a_0 s^n &= a_1 r s^{n-1} + \ldots + a_n r^n = r (s^{n-1} a_1 + \ldots + a_n r^{n-1}) \implies r \divides a_0 s^n \implies r \divides a_0\\
+        -a_n r^n &= s (a_0 s^{n-1} + \ldots + a_{n-1}r^{n-1}) \implies s \divides a_n r^n \implies s \divides a_n
+    \end{align*}
+\end{proof}
+
+\begin{eg}[Irreducibilidad cuando fallan otros criterios]
+    ¿Es $x^3 + x + 6$ irreducible en $\Q[x]$?.\\\\
+    Si intentamos comprobarlo con el criterio de Einsestein o por reducción módulo $p$ no llegamos a nada. Podemos utilizar la proposición \ref{pro:raicesracionales} para hallar que las únicas raíces racionales del polinomio son los divisores de $6$, es decir, $\setdef{\pm 1, \pm 2, \pm 3, \pm 6}$ y si evaluamos el polinomio en los posibles valores ninguno resulta $0$. Por tanto, es un polinomio de grado $3$ sin raíces y entonces es irreducible en $\Q[x]$.
+\end{eg}
+
+\begin{lm}[Irreducibilidad evaluando en $x+a$]\label{lema:irreducibilidadeval}
+    Sea $f \in K[x]$ ($K$ cuerpo), $a \in K$.
+    $$
+        f(x) \text{ irreducible} \iff f(x+a) \text{ irreducible}
+    $$
+\end{lm}
+\begin{proof}
+    La demostración se sigue de demostrar que $\varphi_a: K[x] \to K[x]$; $f(x) \mapsto f(x+a)$ es un isomorfismo de anillos (cuerpos).
+\end{proof}
+
+\begin{thm}[Irreducibilidad de polinomios ciclotómicos]
+    Sea $p$ primo, $\Phi_p(x) = x^{p-1} + \ldots + x + 1$ es irreducible en $\Q[x]$.
+\end{thm}
+\begin{proof}
+    Partimos de $(x-1)\Phi_p(x) = x^p - 1$. Aplicamos el lema \ref{lema:irreducibilidadeval} con $a = 1$. Tenemos por tanto:
+    $x \Phi(x+1) = (x+1)^p - 1$. Desarrollando con el binomio de newton llegamos a la expresión:
+    $$
+        \Phi(x+1) = x^{p-1} + \binom{p}{1} x^{p-2} + \ldots + \binom{p}{p-1}
+    $$
+    Ahora aplicamos Einsestein para el primo $p$, donde vemos que $p \divides \binom{p}{i}$ y $p^2 \not \divides \binom{p}{p-1} = p$, por lo que $\Phi_p(x+1)$ es irreducible y también lo es $\Phi_p(x)$.
+\end{proof}
+
+\subsection{Raices múltiples e irreducibilidad}
+
+\begin{dfn}[Raíz múltiple]
+    Sea $0 \neq f(x) \in K[x]$ un polinomio, $a \in K$ un raíz de f, existe un $m \in \N > 0$ tal que $f(x) = (x - a)^m g(x)$ con $g(a) \neq 0$ aplicando Ruffini y siendo $K[x]$ un DFU.\\
+    Decimos que $a$ es \textbf{raíz múltiple} s i $m > 1$.
+\end{dfn}
+
+\begin{dfn}[Derivada formal]
+    Sea $f(x) = a_0 + a_1 x + \ldots a_n x^n \in K[x]\setminus K$. Se define $f'(x) = a_1 + 2a_2 x + \ldots n a_n x^{n-1} \in K[x]$ como \textbf{derivada formal}. Si $f \in K$, $f'(x) = 0$.
+\end{dfn}
+
+\begin{pro}[Propiedades de derivada formal]
+    Sean $f, g \in K[x]$
+    \begin{enumerate}
+        \item $(f + g)' = f' + g'$; $(af)' = a\cdot f',\ \forall a \in K$.
+        \item $(fg)' = f' \cdot g + f \cdot g'$.
+        \item Si $f(x) = (x - a)^m,\ m\geq 1$ entonces $f'(x) = m(x - a)^{m-1}$.
+    \end{enumerate}
+\end{pro}
+
+\begin{pro}[Raíz de derivadas]
+    Sean $K \subseteq E$ un subcuerpo, $f(x), f'(x) \in K[x]$ polinomios,  $a \in E$ una raíz múltiple (con multiplicidad $m$) de $f$, entonces:
+    $$
+        f(a) = f'(a) = 0 \iff m > 1
+    $$
+\end{pro}
+\begin{proof}
+    En ambos supuestos: $f(x) = (x - a)^m g(x)$, con $m \geq 1$, $g(a) = 0$ y $f'(x) = m (x - a)^{m-1} g(x) + (x-a)^{m} \cdot g'(x)$.
+    \begin{itemize}
+        \item[$\implies$] $m > 1 \implies m-1 \geq 1$ y $(f(a) = f'(a) = 0)$.
+        \item[$\ \Longleftarrow\ $] $0 = f'(a) = m \cdot 0^{m-1} \cdot g(a) \implies m > 1$. ($g(a) \neq 0$).
+        Si tuvieramos $m = 1$ entonces $f'(x) = g(x) + (x-a) g'(x)$, con lo que llegaríamos a $0 = f'(a) = g(a) \neq 0$ lo que es imposible y la desigualdad es necesariamente estricta.
+    \end{itemize}
+\end{proof}
+
+\begin{thm}[Irreducibilidad y raíces múltiples]
+    Sea $K \subseteq E$ un subcuerpo, $f(x) \in K[x]$ un polinomio con $f'(x) \neq 0$.
+    \begin{enumerate}
+        \item $mcd(f, f') = 1 \implies f$ no tiene raíces múltiples en $E$.
+        \item Si $f$ es irreducible, entonces $f$ no tiene raíces múltiples en $E$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}$ $
+    \begin{enumerate}
+        \item $mcd(f, f') = 1 \implies \exists g, h \in K[x]:\ 1 = fg + hf'$. Por reducción al absurdo, si supones que un cierto $a \in E$ es raíz múltiple de f, entonces $f(a) = f'(a) = 0$ y llegaríamos a $1 = 0$.
+        \item Como $f, f' \neq 0$ y $f$ es irreducible, por el lema de Euclides o bien son coprimos o bien $f \divides f'$. Si $f \divides f'$, entonces $\delta(f) < \delta(f')$ pero $\delta(f') = \delta(f) - 1$ y llegamos a una contradicción, por tanto $mcd(f, f')=1$ ya que son coprimos.
+    \end{enumerate}
+\end{proof}
+
+\begin{ex}[H1.30 (parte)]
+    Enumera los polinomios irreducibles en $\F_2$ de grado 1, 2, y 3.\\\\
+    \begin{itemize}
+        \item[$\delta(f) = 1$] $f(x) = x$, $f(x) = x + 1$.
+        \item[$\delta(f) = 2$] $f(x) = x^2 + x + 1$.
+        \item[$\delta(f) = 3$] $f(x) = x^3 + x^2 + 1$, $f(x) = x^3 + x + 1$.
+    \end{itemize}
+\end{ex}
+
+
+\begin{ex}[H1.35]
+    Discute la irreducibilidad de $f(x) = x^5 + 11 x^2 + 15$ en $\Q[x]$.\\\\
+
+    Vamos a ver que es irreducible por medio de reducción módulo $p$ con $p = 2$. $\varphi_2(f) = f_2(x) = x^5 + x^2 + 1$.
+    \begin{enumerate}
+        \item Vemos que no tiene raíces: $f_2(0) = 1$, $f_2(1) = 1$. Por tanto, no existe una forma de factorizarlo en un producto de dos polinomios de grado $1$ y grado $4$.
+        \item Faltaría ver que no se puede factorizar en un producto de polinomios de grado $2$ y grado $3$. Si fuera posible:
+        $f_2(x) = g(x) \cdot h(x)$. Además, $g$ y $h$ han de ser irreducibles ya que no existe un polinomio de grado $1$ en sus factores. Con el ejercicio anterior, basta ver que $f_2(x)$ no es el resultado de multiplicar los posibles polinomios irreducibles de grados $2$ y $3$.
+        $$
+            (x^2 + x + 1)(x^3 + x^2 + 1) \neq f_2(x) \neq (x^2 + x + 1)(x^3 + x + 1)
+        $$
+    \end{enumerate}
+\end{ex}
+
+\begin{ex}[H1.39]
+    Factoriza $x^4 -1$ como producto de irreducibles mónicos en: $\Q[x]$, $\R[x]$, $\C[x]$, $\F_2[x]$ y $\F_3[x]$.\\\\
+    \begin{itemize}
+        \item $\R[x]$ y $\Q[x]$: $x^4 - 1 = (x - 1)(x + 1)(x^2 + 1)$.
+        \item $\C[x]$: $x^4 - 1 = (x - 1)(x + 1)(x - i)(x + i)$.
+        \item $\F_2[x]$: Como $f'(x) = 0$, $1$ es una raíz con multiplicidad $4$, y por tanto $x^4 - 1 = (x-1)^4$.
+        \item $\F_3[x]$: $f'(x) = 4x = x \in \F_3[x] \implies $ las raíces son simples. Se pueden comprobar a mano y obtenemos $x^4 - 1 = (x-1)(x-2)(x^2+1)$.
+    \end{itemize}
+\end{ex}
+
+\section{Cuerpos}
+\begin{dfn}[Cuerpo primo]
+    Sea $K$ un cuerpo, $\mathcal{A} = \setdef{L \subseteq K \text{ subcuerpos}}$. Sea $F = \bigcap_{L \in \mathcal{A}} L$, es un subcuerpo de $K$ (se puede comprobar). Llamamos a $F$ el \textbf{cuerpo primo} de $K$, y tiene la característica de ser el menor subcuerpo contenido en $K$, es decir, si $E \subseteq K$ y $E \subseteq F$, entonces $E = F$.
+\end{dfn}
+
+\begin{thm}[Isomorfías del cuerpo primo]
+    Sea $K$ un cuerpo y $F$ su cuerpo primo, entonces $F$ es isomorfo a:
+    \begin{itemize}
+        \item $\Q \iff \sum_1^n \1 \neq 0 \forall n \in \Z^\times$
+        \item $\F_p \iff \sum_1^n \1 = \0 \iff p \divides n$ para algún primo $p$.
+    \end{itemize}
+\end{thm}
+
+\begin{obs}
+    Vamos a abreviar $\sum_1^n \1$ por $n \1$, donde $\1 \in F$ y $n \in \Z^\times$.
+\end{obs}
+
+\begin{proof}
+    Consideramos el homomorfismo $\alpha: \Z \to F$; $n \mapsto n \1$. Si $I = \ker(\alpha) = \setdef{0} \iff n \1 \neq \0\ \forall n \in \Z^\times$, $\alpha$ se puede extender a  $\tilde\alpha: \Q \to F$; $\frac{n}{m} \mapsto (n \1) \cdot (m \1)^{-1}$.\\
+
+    Tenemos que comprobar que $\tilde\alpha$ está bien definida. Partimos de $\frac{n}{m} = \frac{a}{b} \in \Q$:
+    \begin{align*}
+        nb = ma &\implies \alpha(nb) = \alpha(ma) \implies \left(n \1\right)\left(b \1\right) = \left(m \1\right)\left(a \1\right) \implies (*)\\
+        (*) &\implies \left(n \1\right)\left(m \1\right)^{-1} = \left(a \1\right)\left(b \1\right)^{-1} \implies \tilde\alpha\left(\frac{n}{m}\right) = \tilde\alpha\left(\frac{a}{b}\right)
+    \end{align*}
+
+    Concluimos con que $\tilde\alpha$ está bien definida y es un homomorfismo de grupos inyectivo. Por el primer teorema de isomorfía (teorema \ref{thm:1erisomorfia}):
+    $$
+        \tilde\alpha(\Q) \subseteq F \subseteq K \text{ donde además } \tilde\alpha(\Q) \isom \Q
+    $$
+    y por la definición de cuerpo primo: $\Q \isom \tilde\alpha(\Q) = F$.\\\\
+
+    Consideremos ahora el caso en que $I = \ker(\alpha) \neq \setdef{0} \iff (\alpha(n) = 0 \iff p \divides n)$. Entonces, existe $p$ primo tal que $I = \gen{p}$.\\
+    Como $\Z$ es un dominio de ideales principales, e $I \leq \Z$, existe $0 \neq m \in \Z$ que cumple $I = \gen{m} = m\Z$. Supongamos $m = a \cdot b$, entonces $0 = \alpha(m) = \alpha(a) \alpha(b) \implies \alpha(a) = 0 \text{ ó } \alpha(b) = 0 \implies a \text{ ó } b \in \gen{m} \implies m\divides a \text{ ó } m \divides b \implies m = p $ primo.\\
+
+    Entonces, de nuevo por el primer teorema de isomorfía:
+    $$
+        \quo{\Z}{\ker(\alpha)} = \quo{\Z}{p\Z} = \F_p \isom \alpha(\Z) \subseteq F \subseteq K
+    $$
+    y por la definición de cuerpo primo: $\F_p \isom \alpha(\Z) = F$
+\end{proof}
+
+\begin{dfn}[Característica de un cuerpo]
+    Sea $K$ un cuerpo y $F$ su cuerpo primo, decimos que su \textbf{característica} $\car{K}$, es $\car{K} = 0$ si $F \isom \Q$ y $\car{K} = p$ si $F \isom \F_p$.
+\end{dfn}
+
+\begin{ex}[H1.40]
+    Sean $K$ y $E$ dos cuerpos de distinta característica, demuestra que no existe $\varphi: K \to E$ tal que $\varphi$ sea un homomorfismo de cuerpos.\\\\
+
+    Supongamos $\car{E}=0$ y $\car{K} = p > 0$. Entonces:
+    $$
+        \0 = \varphi(p \1) = p \varphi(\1) = p \1 \neq 0 \text{(en E)}
+    $$
+    Faltaría ver el caso en que $\car{E} = p \neq q = \car{K}$ con $p, q$ primos:
+    $$
+        \0 = \varphi(q \1) = q \varphi(\1) = q \1 \neq 0 \text{(en E)}
+    $$
+    Con lo que llegamos a una contradicción en ambos casos, y no existe dicho homomorfismo.
+\end{ex}
+
+\begin{obs}
+    En un cuerpo de característica $p$, $(a \pm b)^p = a^p \pm b^p$.
+\end{obs}
+
+\begin{dfn}[Cuerpo perfecto]
+    Sea $K$ un cuerpo de característica $p$, y el monomorfismo $Frob: K \to K$; $a \mapsto a^p$. Decimos que $K$ es \textbf{perfecto} si $Frob$ es sobreyectivo, es decir, $Frob$ es un isomorfismo de cuerpos.
+\end{dfn}
+
+\begin{pro}[Endomorfismo y cuerpo primo]
+    Sea $K$ un cuerpo, $F$ su cuerpo primo y $\sigma: K \to K$ un endomorfismo de cuerpos, entonces;
+    $$
+        \sigma(a) = a,\ \forall a \in F
+    $$
+\end{pro}
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{ex}[H1.42 (parte)]
+    Si $n > 0$ no es un cuadrado, demuestra que:
+    \begin{enumerate}
+        \item $\F_3[\xi] = \setdef{a + b\xi \mid a, b \in \F_3,\ \xi^2 = -1}$ es un cuerpo.
+        \item No existe un homomorfismo de anillos $\varphi: \Q[i] \to \Q[\sqrt{2}]$.
+    \end{enumerate}
+
+    $ $\\\\
+    \begin{enumerate}
+        \item Sea el polinomio $f(x) = x^2 + 1$, de forma que $f(\xi) = 0$. Otra forma de describir $\F_3[\xi]$ es:
+        $$
+            \F_3[\xi] = \setdef{a + b\xi \mid a, b \in \F_3,\ f(\xi) = 0} \isom \quo{\F_3[x]}{\gen{f(x)}}
+        $$
+        por lo que es un cuerpo ya que $x^2+1$ es irreducible en $\F_3[x]$ al no tener raíces.
+        \item El problema surge de la imagen de $i$. $\varphi(i)$ será de la forma: $a + b \sqrt{2}$, y entonces:
+        $$
+            -1 = \varphi(-1) = \varphi(i^2) = (a + b \sqrt{2})^2 = a^2 + 2b^2 + 2ab\sqrt{2}
+        $$
+        de donde podría deducirse que $\sqrt{2} \in \Q$ y es imposible. Por tanto no existe dicho homomorfismo.
+    \end{enumerate}
+\end{ex}
