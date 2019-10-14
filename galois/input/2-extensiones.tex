@@ -248,3 +248,66 @@ En ocasiones querremos saber como extender un isomorfismo de cuerpos a una exten
 
     $$a, b \in E \text{ son raíces de } p \iff \exists \text{ un isomorfismo } \theta: K(a) \to K(b) \text{ tal que } \theta(a) = b \text{ y } \theta(k) = k\ \forall k \in K$$
 \end{cor}
+
+\begin{ex}[H2.4 (parte)]
+    Halla el grado y base de las siguientes extensiones de cuerpos:
+    \begin{enumerate}
+        \item $\Q(\sqrt{2}, \sqrt{3}, i)/\Q$.\\
+        Consideramos $L = \Q(\sqrt{2}, \sqrt{3}) = \Q(\sqrt{2} + \sqrt{3})$ cuerpo intermedio, y además, $\Q(\sqrt{2}, \sqrt{3}, i) = L(i)$. $i$ es raíz del polinomio $x^2 + 1$ qque no tiene raíces en $L$ y por tanto, $x^2 + 1 = Irr(L, i)$. Por el teorema \ref{thm:elemalg}, $|\Q(\sqrt{2}, \sqrt{3}, i):\Q| = 2 = \delta(Irr(L, i))$.\\
+
+        Además, $|L:\Q| = 4$ por el ejercicio 1 de la hoja 2. Por el teorema \ref{thm:transgr}, $|\Q(\sqrt{2}, \sqrt{3}, i) : \Q| = |L(i):L|\cdot|L:\Q| = 8$. Una vez sabemos el grado, podemos encontrar una $\Q$-base:
+        $$
+            \setdef{1, \sqrt{2}, \sqrt{3}, \sqrt{6}, \sqrt{2} i, \sqrt{3} i, \sqrt{6} i}
+        $$
+        $$
+            \setdef{1, \alpha, \alpha^2, \alpha^3, i, \alpha i, \alpha^2 i, \alpha^3 i}
+        $$
+
+        \item $\Q(\sqrt[4]{2})/\Q(\sqrt{2})$.\\
+        $\alpha = \sqrt[4]{2}$ es raíz de $x^2 - \sqrt{2} \in \Q(\sqrt{2})[x]$, y es irreducible porque no tiene raíces en $Q(\sqrt{2})$, (se prueba por reducción al absurdo).\\
+        Por tanto: $|\Q(\sqrt[4]{2}):\Q(\sqrt{2})| = 2$ y una base:
+        $$
+            \setdef{1, \sqrt[4]{2}}
+        $$
+
+        \item $\Q(\sqrt{1+\sqrt 3})/\Q$.\\
+        Consideramos el cuerpo intermedio $L = \Q(\sqrt{3})$. Es fácil ver que $|L/\Q| = 2$. Falta encontrar el grado de $|\Q(\sqrt{1+\sqrt 3})/L|$. Sea $\alpha = \sqrt{1 + \sqrt 3}$, $\alpha$ es raíz de $x^2 - (1+\sqrt 3)$, que se puede demostrar que es irreducible en $L$. Por tanto, por el teorema \ref{thm:transgr}, $|\Q(\sqrt{1+\sqrt 3}):\Q| = 4$, y la base:
+        $$
+            \setdef{1, \sqrt 3, \sqrt{1 + \sqrt 3}, \sqrt 3 \sqrt{1 + \sqrt 3}}
+        $$
+    \end{enumerate}
+\end{ex}
+
+\begin{ex}[H2.5]
+    Halla grado y base de $\F_7(t) / \F_7(t^2)$. Halla la expresión de $t^{-1}$ y $(t+1)^{-1}$ en la base que has hallado.\\\\
+
+    Consideramos en polinomio $x^2 - t^2 \in F(t^2)[x]$, donde $t$ es una raíz y $\pm t \notin \F_7(t^2)$. Se puede demostrar por reducción al absurdo que el polinomio $x^2 - t^2$ es irreducible. Por tanto, por el teorema \ref{thm:elemalg}, $|\F_7(t) / \F_7(t^2)| = 2$.\\
+    Una $\F_7(t^2)$-base de $\F_7(t)$ es: $\setdef{1, t}$.\\
+
+    Vamos a expresar ahora los elementos que se nos piden. Consideramos $t = f(t)$, $f(x) = x$.
+    $$
+        x^2 - t^2 = 0,\ x \cdot x = t^2 \implies x \cdot \frac{1}{t^2} \cdot x = 1\text{, que evaluando en $t$: } t \cdot \left(\frac{1}{t^2} \cdot t\right) = 1
+    $$
+    Con ello, hemos hallado el inverso de $t$. Para hallar el inverso de $t+1$ procedemos de forma parecida. Consideramos $f(x) = x + 1$.
+    Vemos que $mcd(f(x), x^2 - t^2) = 1$. Procediendo con el algoritmo de división de polinomios, podemos expresar:
+    $$
+        x^2 - t^2 = f(x) (x - 1) + (1 - t^2) \implies (x^2 - t^2) + f(x)(1-x) = 1-t^2 \in \F_7(t^2)
+    $$
+    Entonces:
+    $$
+        \frac{1}{1 - t^2} (x^2 - t^2) + f(x) \frac{1-x}{1-t^2} = 1
+    $$
+    Evaluando en $t$:
+    $$
+        f(t)\frac{1-t}{1-t^2} = 1 \implies (t+1)^{-1} = \frac{1}{1-t^2} \cdot 1 + \frac{1}{t^2 - 1} t
+    $$
+\end{ex}
+
+\begin{ex}[H2.10]
+    Sea $E/K$ una extensión, $\alpha \in E$ algebraico sobre $K$ y $L$ un subcuerpo intermedio. Prueba que $q(x) = Irr(L, \alpha) \divides Irr(K, \alpha) = p(x)$.\\\\
+
+    $p(x) \in K[x] \subseteq L[x]$, entonces $p(x)$ tambien es un polinomio de $L[x]$. Como $p(\alpha) = 0$, por el teorema del elemento algebraico, (teorema \ref{thm:elemalg}) $q(x) \divides p(x)$. Y entonces:
+    $$
+        |L(\alpha):L| = \delta(q(x)) \leq \delta(p(x)) = |K(\alpha):K|
+    $$
+\end{ex}
