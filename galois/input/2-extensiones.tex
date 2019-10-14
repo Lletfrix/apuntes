@@ -1,0 +1,250 @@
+% !TeX root = ../galois.tex
+
+\chapter{Extensiones de cuerpos}
+
+\section{Grados de cuerpos}
+
+\begin{dfn}[Extensión]
+    Sean $K, E$ cuerpos, decimos que $E$ es una \textbf{extensión} de $K$ (denotado por $E/K$) si $K$ es un subcuerpo de $E$.
+\end{dfn}
+
+\begin{eg}[Extensiones]$ $
+    \begin{itemize}
+        \item $\C/\Q$
+        \item $\R/\Q$
+        \item $\C/\R$
+        \item $\Q[\sqrt{n}]/\Q$ con $n \neq$ de un cuadrado perfecto.
+    \end{itemize}
+\end{eg}
+
+\begin{pro}[Extensión como espacio vectorial]
+    Si $E$ es una extensión de $K$, entonces $E$ es un espacio vectorial sobre $K$.
+\end{pro}
+\begin{proof}
+    Basta interpretar el producto por escalares $\cdot: K \times E \to E$ como la restricción del producto sobre $E \times E$ a $K$. La suma está bien definida por ser $E$ un grupo abeliano con la suma.
+\end{proof}
+
+\begin{dfn}[Grado de una extensión]
+    Sea $E/K$ una extensión, el grado de la extensión es $|E:K| = \dim_K E$, que coincide con la dimensión del espacio vectorial que define $E$ sobre $K$.
+\end{dfn}
+
+\begin{dfn}[Extensión finita]
+    Sea $E/K$ una extensión, es \textbf{finita} si y sólo si $\exists \setdef{a_1, \ldots, a_n} \subseteq E$ tales que forman una $K$-base. Es equivalente a decir que $\dim_K E = n < \infty$.
+\end{dfn}
+
+\begin{lm}[Extensión de grado 1]
+    Sea $E/K$ una extensión:
+    $$
+        |E:K| = 1 \iff E = K
+    $$
+\end{lm}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item[$\implies$] Si $|E:K| = \1$, entonces $\exists e \in E$ tal que $\setdef{e}$ es una $K$-base. Por tanto: $\1 = k \cdot e$ con $k \in K \implies e = k^{-1} \implies e \in K \implies E = K$.
+        \item[$\ \Longleftarrow \ $] $\setdef{\1}$ es $K$-base de $K$. $\dim_K K = 1 = |K:K|$.
+    \end{itemize}
+\end{proof}
+
+\begin{thm}[Transitividad de grados]\label{thm:transgr} % 2.1
+    Sea una extensión $E/K$ y un subcuerpo $L$ intermedio $K \subseteq L \subseteq E$, entonces la extensión $E/K$ es finita si y sólo si $|E:L| < \infty,\ \land |L:K| < \infty$, y en tal caso: $|E:K| = |E:L|\cdot |L:K|$.
+\end{thm}
+
+\begin{proof}
+    Supongamos $\dim_K E = r < \infty$, y $\setdef{e_1, \ldots, e_r}$ una $K$-base de $E$, entonces $\setdef{e_1, \ldots, e_r}$ es un $L$-sistema generador de $E \implies E/L$ es finita.\\
+    Como $K \subseteq L \subseteq E$, $L$ es un $K$-subespacio vectorial de $E$, en particular $\dim_K L \leq dim_K E < \infty$. Si $E/L$ y $L/K$ son finitas, cogemos $\setdef{b_1, \ldots, b_m}$ una $L$-base de $E$ y $\setdef{a_1, \ldots, a_n}$ una $K$-base de $E$.\\
+    Queremos ver que $\setdef{a_ib_j \mid 1 \leq i \leq n,\ 1 \leq j \leq m}$ es una $K$-base de $E$ (en particular con esto habremos probado que $|E:K| = |E:L|\cdot |L:K|$). Sabemos que:
+    $$
+        x \in E, x = \sum_{j=1}^m l_j b_j,\ l_j \in L
+    $$
+    pero además
+    $$
+        l_j = \sum_{i = 1}^{n} k_{ij} a_i,\ k_{ij} \in K \implies x = \sum_{1 \leq i \leq n,\ 1 \leq j \leq m} k_{ij}a_ib_j,\ k_{ij} \in K
+    $$
+    Faltaría ver que $\setdef{a_ib_j}$ es $K$-libre.
+    $$
+        \sum_{1 \leq n,\ 1 \leq i\leq j \leq m} k_{ij}a_ib_j = 0 \implies \sum_j l_j b_j = 0 \implies l_j = 0 \implies \sum_i k_{ij}a_i = 0 \implies k_{ij} = 0 \forall i \forall j
+    $$
+\end{proof}
+
+\begin{dfn}[Menor subanillo y subcuerpo]Sea $E/K$ una extensión y sea $a \in E$.
+    \begin{itemize}
+        \item Denotaremos por $K[a]$ al \textbf{menor subanillo} de $E$ que contiene a $K$ y a $a \in E$. Se puede probar que $K[a] = \setdef{f(a) \forall f \in K[x]}$.
+        \item Denotaremos por $K(a)$ al \textbf{menor subcuerpo} de $E$ que contiene a $K$ y a $a \in E$. Se puede probar que $K(a) = \setdef{\frac{f(a)}{g(a)} \forall f,g \in K[x] \mid g(a) \neq 0}$.
+    \end{itemize}
+\end{dfn}
+
+\begin{eg}$ $
+    \begin{itemize}
+        \item $\Q[\sqrt{n}] = \setdef{a + \sqrt{n} \mid a, b\in \Q}$. En este caso $\Q[\sqrt{n}] = \Q(n)$.
+        \item $X \subseteq E$, $K(X)$ es el menor subcuerpo de $E$ que contiene a $K$ y a $X$. $K(X)$ se obtiene al \textit{adjuntar} $X$ a $K$.
+    \end{itemize}
+\end{eg}
+
+\begin{obs}
+    En general $K[a] \subseteq K(a)$, pero hay en casos en los que la igualdad no se cumple.
+\end{obs}
+
+\begin{dfn}[Extensión simple]
+    Sea $E/K$ una extensión, es \textbf{simple} si $\exists a \in E$ tal que $E = K(a)$.
+\end{dfn}
+
+\begin{eg}[Extensión simple]$ $
+    \begin{itemize}
+        \item $\C/\R$, ya que $\C = \R(i)$.
+        \item Con $p\neq q$ primos, $\Q(\sqrt{p}, \sqrt{q})$ es simple, ya que se puede demostrar que $\Q(\sqrt{p}, \sqrt{q}) = \Q(\sqrt{p} + \sqrt{q})$.
+    \end{itemize}
+\end{eg}
+
+\begin{pro}[Dimensión de un cuerpo finito]
+    Sea $K$ un cuerpo finito, entonces $|K| = p^n$ con $p$ primo.
+\end{pro}
+
+\begin{proof}
+    Sea $K$ un cuerpo y $F$ su cuerpo primo, sabemos que $F$ es isomorfo a algún $\F_p$ con $p$ un primo. Además, $K/F$ es una extensión. Y como $K$ es subespacio vectorial $|K:F| = \dim_F K = n$. Entonces $K \isom F^n \implies |K| = |F|^n = p^n$.
+\end{proof}
+
+\section{Extensiones algebraicas y trascendentes}
+
+\begin{dfn}[Extensión algebraica. Extensión trascendente]
+    Sea $E/K$ una extensión.
+    \begin{itemize}
+        \item Sea $a \in E$, $a$ es \textit{algebraico} si $\exists f(x) \neq 0 \in K[x]:\ f(a) = 0$. $E/K$ es una \textbf{extensión algebraica} si todo $a \in E$ es algebraico sobre $E$.
+        \item Sea $a \in E$, $a$ es \textit{trascendente} si no es algebraico. $E/K$ es una \textbf{extensión trascendente} si existe $a \in E$ trascendente sobre $E$.
+    \end{itemize}
+\end{dfn}
+
+\begin{eg}[Extensiones algebraicas y trascendentes]$ $
+    \begin{itemize}
+        \item $K/K$ es algebraica. Todo elemento de $K$ es raíz de $x - k \in K[x]$.
+        \item $\Q(\sqrt{n})/\Q$ es algebraica.
+        \item $\R/\Q$ es trascendente. $e$ y $\pi$ son trascendentes.
+        \item Sea $K[t]$ un dominio de integridad- Podemos construir su cuerpo de fracciones:
+        $$
+            K(t) = \setdef{\frac{f(t)}{g(t)} \mid f,g \in K[t],\ g(t) \neq 0}
+        $$
+        Entonces $K(t)/K$ es trascendente. ($t$ siempre es trascendente).
+    \end{itemize}
+\end{eg}
+
+\begin{pro}[Extensiones y cuerpos intermedios]
+    Sea $E/K$ una extensión y $K \subseteq L\subseteq E$ un cuerpo intermedio:
+    \begin{enumerate}
+        \item $E/K$ es algebraica $\iff L/K$ y $E/L$ son algebraicas.
+        \item Si $E/L$ es trascendente, entonces $E/K$ es trascendente.
+    \end{enumerate}
+\end{pro}
+
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{thm}[Extensiones finitas y algebraicas]\label{thm:finitaalgebraica} %2.2
+    Toda extensión finita es algebraica.
+\end{thm}
+\begin{proof}
+    Sea $E/K$ una extensión, $a \in E$, queremos ver que es raíz de $0 \neq f(x) \in K[x]$. Suponemos $|E : K| = n$ con un $K$-sistema: $\setdef{1, a_1, \ldots, a^{n-1}} \subseteq E$ con $n$ elementos. Entonces, el sistema puede ser:
+    \begin{itemize}
+        \item [$K$-ligado] Existen $k_i \in K$ no todos nulos tales que $k_0 + k_1a + \ldots + k_{n-1}a^{n-1} = 0$, entonces $a$ es raíz de $f(x) = k_0 + \ldots + k_{n-1}x^{n-1}$.
+        \item [$K$-libre] Como $\dim_K E = n$, $\setdef{1, a_1, \ldots, a^{n-1}, a^n}$ es $K$-ligado, y de nuevo, $a$ es raíz de $f(x) = k_0 + \ldots + k_{n-1}x^{n-1} + k_n x^n$.
+    \end{itemize}
+\end{proof}
+
+\section{Teorema del elemento algebraico}
+
+\begin{thm}[Teorema del elemento algebraico]\label{thm:elemalg} %2.3
+    Sea $E/K$ una extensión, $a \in E$ un elemento algebraico sobre $K$.
+    \begin{enumerate}
+        \item Existe un único polinomio irreducible mónico $p \in K[x]$ tal que $p(a) = 0$.
+        \item Si $q \in K[x]$ y $q(a) = 0$, entonces $p \divides q$.
+        \item $K(a) = \setdef{f(a) \mid f \in K[x]} = K[a]$.
+        \item Si $\delta(p) = n$, entonces $\setdef{1, a, \ldots, a^{n-1}}$ es una $K$-base de $K(a)$. En particular, $|K(a) : K| = \delta(p)$ y $K(a) = \setdef{k_0 + k_1 a +\ldots + k_{n-1} a^{n-1} \mid k_i \in K}$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    ($\cdots$) (Es muy tarde ahora mismo para pasar esto a limpio, que alguien me mate por favor.) % TODO
+\end{proof}
+
+\begin{dfn}[Polinomio mínimo]
+    Sea $E/K$ una extensión y $a\in E$ algebraico sobre $K$, al único polinomio mónico e irreducible $p \in K[x]$ dado por el teorema \ref{thm:elemalg} se le llama \textbf{polinomio mínimo} o \textbf{polinomio irreducible} de $a$ sobre $K$ y escribimos $p = Irr(K, a)$.
+\end{dfn}
+
+\begin{obs}
+    Sea $b = k_0 + \ldots + k_{n-1} a^{n-1} \in K(a)$, ¿cómo se expresa $b^{-1}$ en la misma base?\\
+    Consideramos $f(x) = k_0 + \ldots + k_{n-1}x^{n-1} \in K[x]$, con $f(a) = b \neq 0$ y $\delta(f) \leq \delta(p)$, siendo $p$ el polinomio irreducible. Entonces $mcd(f, g) = 1$. Por la identidad de Bezout:
+    $$
+        \exists h, g \in K[x]:\ 1 = fh + gp \implies \text{ (evaluando en $a$)} 1 = f(a)h(a) + g(a)p(a) \implies 1 = f(a)h(a) = b h(a) \implies b^{-1} = h(a)
+    $$
+\end{obs}
+
+\begin{eg}[Ejercicio tipo]
+    ($\cdots$) (Es aún más tarde. \url{https://www.youtube.com/watch?v=I_6Gej1m4SU}) % TODO
+\end{eg}
+
+\begin{thm}[Extensión por varios elementos algebraicos]\label{thm:extalg} %2.4
+    Sea $E/K$ una extensión, y sea $\mbf{a} = (a_1, \ldots, a_n)$ con $a_i \in E$ algebraicos sobre $K$, entonces $K(\mbf{a})/K$ es finita. En particular, $K(\mbf{a})/K$ es algebraica.
+\end{thm}
+
+\begin{proof}
+    Por inducción sobre $n$. Si $n=1$ por el teorema del elemento algebraico (teorema \ref{thm:elemalg}) sabemos que $|K(a_1)/K| = \delta(Irr(K, a_1)) < \infty$.\\
+    Veamos el caso $n>1$. Sea $L = K(a_1, \ldots, a_{n-1})$, entonces $K(\mbf{a}) = L(a_n)$. Por la hipótesis de inducción $L/K$ es finita, por el teorema \ref{thm:elemalg} $L(a_n)/L$ es finita y por tanto, por el teorema de transitividad de grados (teorema \ref{thm:transgr}) $L(a_n)/K$ es finita, donde $L(a_n)$ era $K(\mbf{a})$. La segunda parte se sigue directamente aplicando el teorema \ref{thm:finitaalgebraica}.
+\end{proof}
+
+\begin{ex}[H2.7]
+    Dada $E/K$ una extensión, prueba que $L = \setdef{e \in E \mid e \text{ es algebraico sobre } K} \supseteq K $ es un cuerpo. Sea $\A \subset \C$ los elementos algebraicos sobre $\Q$, prueba que $\A/\Q$ es una extensión de grado infinito\\
+    Sean $a, b \in L$ cualesquiera, entonces $a, b \in K(a, b)^\times$ y por el teorema \ref{thm:extalg} $K(a,b)/K$ es algebraica. Como $a \pm b$ y $ab^{\pm 1} \in K(a, b)$, entonces son algebraicos sobre $K \implies (a \pm b), (ab^{\pm 1}) \in L$, con lo que es cerrado por ambas operaciones y $L$ es un cuerpo.\\
+    Por la primera parte del ejercicio, sabemos que $\Q \subseteq \A \subseteq \C$ es un subcuerpo intermedio, de $\C/\Q$, y por definición $\A/\Q$ es algebraica.\\
+    Por el criterio de Einsestein (teorema \ref{thm:Einsestein}), para cada $n \in \N^\times$, $x^n - 2$ es irreducible en $\Q[x]$. $\sqrt[\leftroot{-3}\uproot{3}n]{2}$ es solución por tanto es algebraico y por el teorema \ref{thm:elemalg} $|\Q(\sqrt[\leftroot{-3}\uproot{3}n]{2})/\Q|=n$.\\
+    Como podemos hacerlo $\forall n \in \N^\times$, hemos comprobado que $\A/\Q$ es no finita.
+\end{ex}
+
+\begin{ex}[H2.6]
+    ($\cdots$) (Yep. \url{https://www.youtube.com/watch?v=pwSsT8IU0WE})
+\end{ex}
+
+\section{Isomorfismos de cuerpos}
+
+Ya definimos qué es un homomorfismo de cuerpos en la sección \ref{section:homomorfismos}. En esta sección vamos a ampliar los conocimientos cuando aplicamos los homomorfismos específicamente a cuerpos.
+
+\begin{obs}
+    Si $\car{E} \neq \car{K}$ entonces: $Hom(E, K) = \varnothing = Hom(K, E)$, con $Hom(X, Y) = \setdef{\varphi: X \to Y \mid \varphi \text{ es un homomorfismo de cuerpos}}$. Además, si $K$ es finito, $End(K) = Aut(K)$ (conjunto de endomorfismos y automorfismos respectivamente), pero en general: $End(K) \subsetneq Aut(K)$. %TODO: ¿ esta bien la dirección ?
+\end{obs}
+
+\begin{obs}
+    Sea $\varphi \in End(K)$ y $F$ es el cuerpo primo de $K$, entonces $\varphi(a) = a,\ \forall a \in F$. De forma más general, si $\varphi \in Hom(E, K)$ y $E, K$ tienen el mismo cuerpo primo, $\varphi(a) = a$, por ejemplo:
+    $Aut(\F_p) = \setdef{id}$, $Aut(\Q) = \setdef{id}$.
+\end{obs}
+
+En ocasiones querremos saber como extender un isomorfismo de cuerpos a una extensión de dichos cuerpos. Vamos a ver un lema y un teorema.
+
+\begin{lm}[Restricción de un isomorfismo de cuerpos]
+    Sea $E_1/K_1$ una extensión, $\theta: E_1 \to E_2$ un isomorfismo de cuerpos, y sea $K_2 = \theta(K_1)$, entonces:
+    \begin{enumerate}
+        \item $E_2/K_2$ es una extensión y $|E_1:K_1| = |E_2:K_2|$.
+        \item Sean $a_1, \ldots, a_n \in E_1$. $\theta(K_1(a_1, \ldots, a_n)) = K_2(\theta(a_1), \ldots, \theta(a_n))$.
+        \item $\theta$ se extiende a un isomorfismo de anillos $\theta: K_1[x] \to K_2[x]$, aplicando $\theta$ individualmente a cada coeficiente del polinomio.
+    \end{enumerate}
+\end{lm}
+
+\begin{proof}
+    Como ejercicio.
+\end{proof}
+
+\begin{thm}[Extensión de un isomorfismo de cuerpos] % 2.5
+    Sean $E_1/K_1$, $E_2/K_2$ extensiones, $\sigma: K_1 \to K_2$ un isomorfismo de cuerpos, $p_1$ irreducible en $K_1$, $p_2$ irreducible en $K_2$, y $a_1$ y $a_2$ raíces de los polinomios respectivamente, entonces:
+    $$
+        \sigma \text{ se extiende a } \theta \iff \left.\theta\right|_{K_1} = \sigma
+    $$
+    Donde $\theta: K_1(a_1) \to K_2(a_2)$ tal que $\theta(a_1) = a_2$.
+\end{thm}
+
+\begin{proof}
+    A completar.
+\end{proof}
+
+\begin{cor} % 2.6, 2.7
+    Sea $E/K$ una extensión, $p \in K[x]$ irreducible, entonces:\\
+
+    $$a, b \in E \text{ son raíces de } p \iff \exists \text{ un isomorfismo } \theta: K(a) \to K(b) \text{ tal que } \theta(a) = b \text{ y } \theta(k) = k\ \forall k \in K$$
+\end{cor}
