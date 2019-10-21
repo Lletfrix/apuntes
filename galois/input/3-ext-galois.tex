@@ -1,0 +1,122 @@
+% !TeX root = ../galois.tex
+
+\chapter{Extensiones de Galois}
+
+\section{Cuerpos de escisión}
+
+\begin{dfn}[Escisión de un polinomio]
+    Sea $f \in K[x]$, $K$ cuerpo, decimos que $f$ se \textbf{escinde} si $\exists a, a_i\in K$ si:
+    $$
+        f(x) = a(x - a_1) \ldots (x - a_n)
+    $$
+\end{dfn}
+
+\begin{obs}
+    Si $f(x) \in K[x]$, $\delta f = 1$, entonces $f$ se escinde en $K$.
+    $$
+        f(x) = ax + b = a \left(x - \left(- \frac{b}{a}\right)\right),\ \ \ a, -\frac{b}{a} \in K
+    $$
+\end{obs}
+
+\begin{obs}
+    Si $f \in K[x]$, se escinde en $E$, sea $E/K$ una extensión:
+    $$
+        f(x) = a (x - a_i) \ldots (x - a_n) \in E[x]
+    $$
+    Entonces las raíces de $f$ en cualquier extensión de $E$ son $a_1, \ldots, a_n$
+\end{obs}
+
+\begin{dfn}[Cuerpo de escisión]
+Sea $f \in K[x]$, entonces $E$ es un cuerpo de escisión de $f$ sobre $K$ si:
+    \begin{itemize}
+        \item $E/K$ es una extensión.
+        \item $f$ se escinde en $E$.
+        \item Si $f$ se escinde en $L$, con $L$ un cuerpo intermedio $K \subseteq L \subseteq E$, entonces $L=E$, es decir, $E = K(f)$. (Es el menor subcuerpo con la propiedad de que $f$ se escinda en él).
+    \end{itemize}
+\end{dfn}
+
+\begin{eg}
+    $x^2 + 1$ se escinde en $\C$ pero su cuerpo de escisión es $\Q(i)$.
+\end{eg}
+
+\begin{obs}
+    Si $f \in K[x]$ se escinde en $E$, entonces $E$ tiene todas las raíces de $f$. Para construir su cuerpo de escisión basta adjuntar todas las raíces al cuerpo sobre el que está definido:
+    $$
+        f(x) = a (x - a_1) \ldots (x - a_n) \in E[x], \text{ entonces su cuerpo de escisión es } K(f) = K(a_1, \ldots, a_n)
+    $$
+\end{obs}
+
+\begin{lm}[Escisión de polinomios no constantes]\label{lm:3.1}
+    Sea $K$ un cuerpo:\\
+    \begin{enumerate}
+        \item Si $f \in K[x]$ no constante se escinde en $K$ si y sólo si todos los polinomios en la descomposición en términos de factores irreducibles tienen grado $1$.
+        \item Si $f \in K[x]$ no constante que se escinde en $K$ y sea $p \in K[x]$ tal que $p \divides f$, entonces $p$ se escinde en $K$.
+    \end{enumerate}
+\end{lm}
+
+\begin{proof}
+    La demostración se deja como ejercicio.
+\end{proof}
+
+\begin{lm}[Cuerpos de escisión y cuerpos intermedios]\label{lm:3.2}
+    Sean $E/L$ y $L/K$ extensiones, y $f \in K[x]$ un polinomio no constante. Si $E$ es el cuerpo de escisión de $f$ sobre $K$, entonces $E$ es el cuerpo de escisión de $f$ sobre $L$.
+\end{lm}
+
+\begin{proof}
+    Como $E = K(f)$, tenemos que $f(x) = a (x - a_1) \ldots (x - a_n) \in E[x]$ y $E = K(a_1, \ldots, a_n)$. Además, $f \in K[x] \subseteq L[x]$. Si el cuerpo de escisión de $f$ sobre $L$ es $E'$, fácilmente llegamos a que $E' = L(f) \subseteq E$ y por tanto: $E = E'$ ya que $E$ era el menor cuerpo de escisión de $f$ sobre $K$.
+\end{proof}
+
+Si $f$ es un polinomio sobre $\Q[x]$ de grado $n$, \textit{sabemos} que $\exists \alpha_i \in \C$ con $i \in \setdef{1, \ldots n}$ tal que $f(x) = a (x - \alpha_1) \ldots (x - \alpha_n)$, y hemos visto para calcular su cuerpo de escisión basta con adjuntar las raíces de $f$, es decir, $\Q(f) = \Q(\alpha_1, \ldots, \alpha_n)$.\\
+
+Vamos a ver resultados para generalizar este proceso.
+
+\begin{lm}[Existencia de extensión que contiene a una raíz]\label{lm:3.3}
+    Sea $p \in K[x]$ un polinomio irreducible, entonces existe $E/K$ tal que $p$ tiene una raíz en $E$.
+\end{lm}
+
+\begin{proof}
+    Sea $L = \quo{K[x]}{\gen{p}}$, ya vimos que $L$ es un cuerpo por ser $p$ irreducible. Además se puede comprobar que:
+    $$
+        \bar x = x + \gen{p} \in L \text{ es raíz de } \bar p \in \bar K[y]
+    $$
+    Donde $\bar p = \overline{a_0} + \ldots + \overline{a_n}x^n$ y $K \isom \bar K = \setdef{\bar K \mid k \in K}$.
+
+    Hay que comprobar que $\bar K \subseteq L$. Tras ello, habría que ver que $L = \bar K(\bar x)$.
+\end{proof}
+
+\begin{thm}[Existencia de cuerpos de escisión]\label{thm:3.4}
+    Sea $K$ un cuerpo, $f \in K[x]$ un polinomio no constante. Entonces existe un cuerpo de escisión $E$ de $f$ sobre $K$.
+\end{thm}
+
+\begin{proof}
+    Basta construir una extensión en la que $f$ se escinda. La demostración sigue por inducción sobre $\delta(f)$.
+    \begin{itemize}
+        \item[$\delta(f) = 1$] Entonces por el lema \ref{lm:3.1}, $K$ es un cuerpo de escisión de $f$ sobre $K$.
+        \item[$\delta(f)>1$] Sea $p \divides f$ un factor irreducible de $f$ en $K[x]$, por el lema \ref{lm:3.3}, sabemos que existe $E/K$ en la que $p$ tiene una raíz $\alpha \in E$, en particular $f(\alpha) = 0$ y por Ruffini:
+        $$
+            f(x) = (x - \alpha) g(x),\text{ con } g(x) \in K(\alpha)[x]
+        $$
+        Como $1 \leq \delta(g) \leq \delta(f) - 1 \leq \delta(f)$, por inducción sabemos que existe un cuerpo de escisión $L$ de $g$ sobre $K(\alpha)$. Si $\alpha_1, \ldots \alpha_n \in L$ son las raíces de $g$, entonces:
+        $$
+            L = K(\alpha)(\alpha_1, \ldots \alpha_n) = K(\alpha, \alpha_1, \ldots, \alpha_n)
+        $$
+        y por tanto $f(x) = (x - \alpha) g(x) = (x - \alpha) p (x - \alpha_1) \ldots (x - \alpha_n) \in L[x]$, así que $f$ se escinde sobre $L$, y de hecho $L$ es un cuerpo de escisión de $f$ sobre $K$.
+    \end{itemize}
+\end{proof}
+
+\begin{ex}[Cálculo del cuerpo de escisión]
+    Describir el cuerpo de escisión de $f(x) = x^4 - 4x^2 + 2$ sobre $\Q$.\\\\
+    Comenzamos hallando las raíces, que resulta fácil pues $f(x) = 0$ es una ecuación bicuadrática. Tenemos entonces las raíces:
+    $$
+        \alpha = \sqrt{2 + \sqrt 2},\ \beta = \sqrt{2 - \sqrt{2}},\ -\alpha,\ -\beta
+    $$
+    De donde vemos que $f$ se escinde en $R$ ya que todas las raíces son reales. Para ver su cuerpo de escisión vamos a adjuntar las raíces a $\Q$.
+    $$
+        E = \Q(\alpha,  \beta, -\alpha, -\beta) = \Q(\alpha, \beta)
+    $$
+    Sin embargo, podemos reducirlo aún más si vemos que $\Q(\alpha, \beta) = \Q(\beta)$.
+    $$
+        \alpha\beta = \sqrt{(2 + \sqrt 2)(2 - \sqrt 2)} = \sqrt 2,\ \alpha^{-1} = \left(\frac{\beta}{\sqrt 2}\right) \in \Q(\alpha) \implies \beta = \frac{\beta}{\sqrt 2} \cdot \sqrt 2 \in \Q(\alpha)
+    $$
+    Con lo que el cuerpo de escisión es: $\Q(\sqrt{2 + \sqrt 2})$.
+\end{ex}
