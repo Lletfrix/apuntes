@@ -1,0 +1,338 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Términos y fórmulas de un lenguaje}
+
+\section{Introducción}
+
+Con los elementos de un lenguaje podemos definir sucesiones finitas de símbolos del lenguaje. Pueden ser:
+\begin{itemize}
+    \item \textbf{Términos}. Que pueden ser \textit{fuonciones} o \textit{elementos}.
+    \item \textbf{Fórmulas}. Que pueden ser \textit{propiedades} o \textit{subconjuntos} de un universo.
+\end{itemize}
+
+\section{Términos}
+\begin{dfn}[Términos de un lenguaje]
+    Sea $L$ un lenguaje, y $M(L)$ el conjunto de palabras (sucesiones finitas de elementos de $L$). El conjunto de \textbf{términos} de $L$, $\ter(L)$, es el menor subconjunto de $M(L)$ que contiene a las constantes, variables y es cerrado para cada función $n$-aria $f \in \mtc F_n$ con $n \in \N$, es decir:
+    $$
+        \text{si } t_1, \ldots, t_n \in \ter(L) \implies f t_0 t_1 \ldots t_n \in \ter(L)
+    $$
+\end{dfn}
+
+\begin{eg}[Ejemplos de términos]$ $
+    \begin{itemize}
+        \item $L = \sdf{+, -, \cdot, 0, 1}$.\\
+        Son términos:
+        \begin{itemize}
+            \item $+ v_0 v_1$
+            \item $0$
+            \item $+ + v_0 v_1 + 1\ v_2$
+        \end{itemize}
+        \item $L = \sdf{\cdot, 1}$.\\
+        Son términos:
+        \begin{itemize}
+            \item $v_0$
+            \item $1$
+            \item $\cdot v_0 v_1$
+            \item $\cdot \cdot v_0 v_1 1$
+        \end{itemize}
+    \end{itemize}
+\end{eg}
+
+\begin{obs}
+    Si consideramos el lenguaje $L = \sdf{+, -, 0, 1}$, vemos que también pertenecen al conjunto de términos los siguientes:
+    $$
+        0, 1, + 1\ 1, + + 1\ 1\ 1, + + 1\ 1 + 1\ 1, \ldots
+    $$
+    Y por tanto vemos que los enteros son \textit{términos abreviados} del lenguaje. ($2 \equiv + 1\ 1$).
+\end{obs}
+
+\begin{obs}[Notación]
+    Durante el curso usaremos:
+    \begin{itemize}
+        \item $x, y, z$ para referirnos a variables $\sdf{v_i}_{i\in \N}$.
+        \item $a, b, c$ para referirnos a elementos del universo de una estructura.
+        \item $t(x_1, \ldots, x_n)$ para referirnos a un término $t \in \ter(L)$ donde aparecen algunas variables $x_1, \ldots, x_n$. Esto es una abreviatura, formalmente $t \in M(L)$ pero $t(x_1, \ldots, x_n) \notin M(L)$
+    \end{itemize}
+\end{obs}
+
+\begin{dfn}[Función asociada a un término]
+    Sea $t \in \ter(L)$, y $\mtc A$ una $L$-estructura, la \textbf{función asociada} al término $t$ es $t^\mtc A$, donde distinguimos ciertos casos:
+    \begin{enumerate}
+        \item Si $t$ es $t(x_1, \ldots, x_n)$, entonces $t^\mtc A: A^n \to A;\ (a_1,\ldots, a_n) \mapsto t^\mtc A (a_1, \ldots, a_n)$.
+        \item Si $t$ es $x_i$, entonces $t^\mtc A(a_1, \ldots, a_n) = a_i$.
+        \item Si $t$ es $c$, entonces $t^\mtc A(a_1, \ldots, a_n) = c^\mtc A$.
+        \item Si $t$ es $f t_1 \ldots t_m$, entonces $t^\mtc A(a_1, \ldots, a_n) = f^\mtc A(t_1^\mtc A(a_1, \ldots, a_n), \ldots, t_m^\mtc A(a_1, \ldots, a_n))$.
+    \end{enumerate}
+\end{dfn}
+
+\begin{obs}
+    Se $t \in \ter(L)$ no tiene variables, entonces $t^\mtc A: A^n \to A$ es una función constante para cualquier $n$, es decir:
+    $$
+        t = t(x_1, x_2) = \cdots = t(x_1, \ldots, x_n)
+    $$
+\end{obs}
+
+\begin{eg}[Ejemplo de funciones asociadas a términos]
+    \begin{itemize}
+        \item Sea $t: 1 + (1 + 1) \in \ter(L)$, y $\mtc Q = \gen{\Q, +, -, \cdot, 0, 1}$, si consideramos $t$ como $t(x_1, \ldots, x_n)$, entonces:
+        $$
+            t^\mtc Q: \Q^3 \to \Q;\ (a, b, c) \mapsto 3.
+        $$
+        \item Sea $t: 1 + x \in \ter(L)$, y $\mtc Q = \gen{\Q, +, -, \cdot, 0, 1}$, si consideramos $t$ como $t(x)$, entonces:
+        $$
+            t^\mtc Q: \Q \to \Q;\ 2 \mapsto 3;\ a \mapsto 1 + a
+        $$
+        Y además, si consideramos que $t$ es $t(x, y)$, entonces:
+        $$
+            t^\mtc Q: \Q^2 \to \Q;\ (2, 5) \mapsto 3;\ (a, b) \mapsto 1 + a
+        $$
+        \item Sea el lenguaje $L_\R = \sdf{+, -, \cdot, 0, 1} \cup \sdf{c_r}_{r\in \R}$, y sea $t: (x \cdot x) + (c_2 \cdot y) + (x \cdot y)$ (recordamos que $c_2$ se interpreta en $\mtc R_\R$ como $2 \in \R$), entonces la función asociada a $t(x, y)$ en la estructura $\mtc R_\R$ es:
+        $$
+            t^{\mtc R_\R}: \R^2 \to \R;\ (a, b) \mapsto (a \cdot a) + (c_2^{\mtc R_\R} \cdot b) + (a \cdot b) = a^2 + 2b + ab
+        $$
+    \end{itemize}
+\end{eg}
+
+\subsection{Sustitución}
+
+\begin{dfn}[Término sustituido]
+Sea el término $t: t(x_1, \ldots, x_n) \in \ter(L)$. Y sean $m$ términos en los que pueden aparecer las variables $x_1, \ldots, x_n$, $s_1: s_1(x_1, \ldots, x_n), \ldots, s_m: s_m(x_1, \ldots, x_n) \in \ter(L)$ con $m \leq n$.\\\\
+Denotamos por $t(\quo{s_1}{x_1}, \ldots, \quo{s_m}{x_m})$ al \textbf{término sustituido}.
+\end{dfn}
+
+\begin{eg}[Sustitución en un término]
+    Sean los términos $t: x + y$, $s: x + 1$, el término sustituido $t(\quo{s}{x})$ es:
+    $$
+        t(\quo{s}{x}) = (x + 1) + y
+    $$
+\end{eg}
+
+\begin{pro}[Sustitución]
+    Sean $x, y_1, \ldots, y_m \in V$ variables distintas, y $t: t(x, y_1, \ldots, y_m)$, $s: s(x, y_1, \ldots, y_m) \in \ter(L)$ términos, entonces $\forall (a, \mbf b) \in A^{m+1}$ se tiene que:
+    $$
+        \text{ la función asociada a $t(\quo{s}{x})$, } (t(\quo{s}{x}))^{\mtc A} \text{ evaluada en } (a, \mbf b) = t^\mtc A (s^\mtc A (a, \mbf b), \mbf b)
+    $$
+\end{pro}
+\begin{proof}
+    Para demostrarlo vamos a ver las equivalencias en una tabla:
+    \begin{center}
+        \begin{table}[ht]
+            \centering
+            \begin{tabular}{||c||c||c||c||}
+                \hline
+                $t$                & $t^\mtc A(s^\mtc A(a, \mbf b), \mbf b)$ & $t(s/x)$     & $t(s/x)^\mtc A (a, \mbf b)$ \\ \hline \hline
+                $x$                & $s^\mtc A (a, \mbf b)$                  & $s$          & $s^\mtc A (a, \mbf b)$      \\
+                $y_i$              & $b_i$                                   & $y_i$        & $b_i$                       \\
+                $c$                & $c^\mtc A$                              & $c$          & $c^\mtc A$                  \\
+                $f t_1 \ldots t_n$ & (\star)                                 & (\star\star) & (\star\star\star)           \\ \hline
+            \end{tabular}
+        \end{table}
+    \end{center}
+
+    \begin{itemize}
+        \item[(\star)]
+        $$
+            f^\mtc A (t_1^\mtc A(s^\mtc A(a, \mbf b), \mbf b)), \ldots, t_n^\mtc A(s^\mtc A(a, \mbf b), \mbf b))
+        $$
+        \item[(\star\star)]
+        $$
+            f^\mtc A (t_1^\mtc A(s^\mtc A(a, \mbf b), \mbf b)), \ldots, t_n^\mtc A(s^\mtc A(a, \mbf b), \mbf b))
+        $$
+        \item[(\star\star\star)]
+        $$
+            f^\mtc A (t_1^\mtc A(s^\mtc A(a, \mbf b), \mbf b)), \ldots, t_n^\mtc A(s^\mtc A(a, \mbf b), \mbf b))
+        $$
+    \end{itemize}
+    y como podemos observar, en todos las filas coinciden la segunda y la cuarta columna, con lo que hemos demostrado que son equivalentes.
+\end{proof}
+
+\subsection{Estructura generada por un subgrupo}
+
+Sea $\mtc G = \gen{G, \cdot, ^-1, 1}$ un grupo, $L = \sdf{\cdot, ^-1, 1}$ un lenguaje y $S \subseteq G$ un subgrupo. Consideramos los $s_1, \ldots, s_n$ elementos del subgrupo $S$, podemos expresar la estructura asociada como:
+$$
+    s_1^{m_1}, \ldots, s_n^{m_n} = (x_1^{m_1}, \ldots, x_n^{m_n})^{\mtc G} (s_1, \ldots, s_n)
+$$
+Donde definimos $x_i^{m_i}$ como: $x_i \cdot (x_i \cdot \cdots (x_i \cdot x_i)))\ldots))$ (el producto de $x_i$ $m_i$ veces).\\\\
+
+\begin{obs}
+    Va a ser util definir ciertas abreviaturas para la expresión de los términos:
+    \begin{itemize}
+        \item $^{-1} t_i$ se abrevia por $t_i^{-1}$.
+        \item $\cdot t_1 t_2$ se abrevia por $t_1 \cdot t_2$.
+        \item $x_i^0$ se abrevia por $1$.
+    \end{itemize}
+
+\end{obs}
+
+Una vez establecidas las abreviaturas, podemos definir la estructura generada por un subgrupo.
+
+\begin{dfn}[Estructura generada por un subgrupo]
+    Sea $\mtc G$ un grupo (como el definido anteriormente), y $S \subseteq G$, la \textbf{estructura generada} por el \textbf{subgrupo} $S$ es:
+    $$
+        \gen{S} = \sdf{t^\mtc G(s_1, \ldots, s_n) \mid t \in \ter(L),\ n \in \N,\ s_i \in S}
+    $$
+\end{dfn}
+
+De esta noción surge la definición de subestructura generada por un conjunto.
+
+\begin{pro}[Subestructura generada por un conjunto]
+    Sea $L$ un lenguaje, $\mtc A$ una $L$-estructura, y $X \subseteq A$ un subconjunto. Si $X \neq \varnothing$ o en $L$ hay al menos una constante, el conjunto:
+    $$
+        \gen X_{\mtc A} = \sdf{t^\mtc A (a_1,\ldots, a_n) \mid t\in \ter(L); a_1,\ldots,a_n \in X \text{ con } n\in\N}
+    $$
+    es la mínima subestructura de $\mtc A$ que contiene a $X$.
+\end{pro}
+
+\begin{proof}
+    Completar.
+\end{proof}
+
+\section{F\'ormulas}
+
+Sea $L$ un lenguaje, $L = \sdf{f, \ldots, R, \ldots, c, \ldots}$ además del conjunto de variables $V = \sdf{v_i}_{i \in \N}$ y conectores lógicos: $=, \neg, \then, \forall$. En la sección anterior caracterizamos el conjunto de \textit{términos} del lenguaje. Ahora vamos a caracterizar las \textit{fórmulas}.
+
+\begin{dfn}[Fórmulas de un lenguaje]
+    Sea $L$ un lenguaje. El conjunto de $L$-fórmulas, $\for(L)$, es el mínimo subconjunto de $M(L)$ (palabras de $L$) que contiene a \textit{fórmulas atómicas} y es cerrado por $\neg, \then$ y $\forall v_i$ para cada $i \in \N$.\\
+
+    Las \textit{fórmulas atómicas} pueden ser de dos tipos:
+    \begin{itemize}
+        \item $= t_1 t_2$ con $t_1, t_2 \in \ter(L)$.
+        \item $R t_1 \ldots t_m$, para todo $t_i \in \ter(L)$ y $R \in \mtc R_m$.
+    \end{itemize}
+\end{dfn}
+
+\begin{obs}
+    Sean $F, G \in \for(L)$, entonces como $\for(L)$ es cerrado para los operadores lógicos:
+    $$
+        \neg F, \then F G\ (F \then G),\ \forall v_i F \text{ también son fórmulas de L}
+    $$
+    El resto de conectores lógicos los usamos como abreviaturas de $\neg, \then, \forall$. Por ejemplo:
+    \begin{itemize}
+        \item $F \lor G$ como abreviatura de $\neg F \then G$.
+        \item $\exists v_i$ como abreviatura de $\neg \forall v_i \neq F$.
+    \end{itemize}
+\end{obs}
+
+\begin{eg}[Ejemplos de fórmulas]
+    Sea $L = \sdf{+, -, \cdot, 0, 1, \leq}$  y consideramos los términos abreviados de $L$: $t_1: 3x_1+2$, $t_2: x_1-x_3$, $t_3: y^2-2x+1$.
+    \begin{itemize}
+        \item $3x_1 + 2 = x_1 - x_3$, es una fórmula atómica abreviada ($= t_1 t_2$).
+        \item $3x_1 + 2 \leq x_1 - x_3$, es una fórmula atómica abreviada ($\leq t_1 t_2$).
+        \item $\forall x \exists y\ x\leq y$, es una fórmula abreviada.
+        \item $\exists y\ x \leq y$, es una fórmula abreviada ($\neg \forall v_0\ \neg \leq v_0 v_1$).
+        \item $\exists y\ y^2-2x+1 = 0$.
+    \end{itemize}
+\end{eg}
+
+\begin{dfn}[Subfórmula]
+    Una \textbf{subfórmula} $G$ de un fórmula $F \in \for(L)$ es una fórmula que aparece en $F$.
+\end{dfn}
+
+\begin{eg}[Ejemplos de subfórmulas]
+    Sea $F \in \for(L), F: \forall x\ \exists y\ x\leq y$, las subfórmulas que aparecen en $F$ son:
+    $$
+        \forall x\ \exists y\ x\leq y,\ \exists y\ x\leq y,\ x\leq y
+    $$
+\end{eg}
+
+\begin{eg}[Árbol de decisión de una fórmula]
+    Sea $F \in  \for(L)$, $F: (\exists x\ x\leq 1) \lor (\forall y\ y+1=3)$. Podemos representar su árbol de decisión, cuyos nodos son las subfórmulas de $F$.\\
+    \begin{center}
+        \begin{tikzpicture}
+            %\tikzset{edge from parent/.style={draw,edge from parent path={(\tikzparentnode.south)-- +(0,-8pt)-| (\tikzchildnode)}}}
+            \Tree [.$$(\exists x\ x\leq 1)\lor (\forall y\ y+1=3)$$
+            [.$$(\exists x\ x\leq 1)$$
+            [.$$\exists x$$ ]
+            [.$$x\leq 1$$ ] ]
+            [.$$(\forall y\ y+1=3)$$
+            [.$$\forall y$$ ]
+            [.$$y+1=3$$ ] ] ]
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+
+\subsection{Variables libres y ligadas}
+Sea $F \in \for(L)$ una fórmula en la que aparecen algunas variables, éstas pueden aparecer asociadas, libres o ligadas. Antes de dar una definición veamos un ejemplo.
+
+\begin{eg}[Ejemplos de tipos de variables]
+    \begin{itemize}
+        \item La fórmula $\forall x\ 0\leq x$ expresa \textit{$0$ es mínimo}. En esta fórmula, $x$ aparece dos veces, la primera está \textit{asociada} al operador, y la segunda es una \textit{variable ligada}
+        \item Consideramos la fórmula: $(\forall x\ 0\leq x) \lor x = 3$. En ella $x$ aparece tres veces, la primera está \textit{asociada} al operador, y la segunda es una \textit{variable ligada} y la última es una \textit{aparición libre}.
+    \end{itemize}
+\end{eg}
+
+\begin{dfn}[Aparición de una variable. Tipos]
+    Sea $L$ un lenguaje, $F \in \for(L)$ una fórmula y $x\in V$ una variable.
+    \begin{enumerate}
+        \item Decimos que $x$ \textbf{aparece} en $F$ si $x$ es algunos de los símbolos de $F$.
+        \item Una aparición de $x$ en $F$ está \textbf{asociada} a $\forall$ si la aparición va precedida de $\forall$.
+        \item Una aparición de $x$ en $F$ es \textbf{ligada} si $x$ aparece en una subfórmula $G$ de $F$ tal que $\forall x G$ es una subfórmula de $F$.
+        \item Una aparición de $x$ en $F$ es \textbf{libre} si no está \textit{asociada} a $\forall$ y no es \textit{ligada}.
+    \end{enumerate}
+\end{dfn}
+
+\begin{obs}[Notación]
+    Sea $F \in \for(L)$, escribimos $F(x_1, \ldots, x_n)$ si las variables \textit{libres} de $F$ están en $\sdf{x_1, \ldots, x_n}$. Por ejemplo:
+    \begin{itemize}
+        \item $F(x): \exists y\ x = 2y$, expresa \textit{x es par}.
+        \item Podemos incluso sustituir variables libres por otros términos, si $s$ es $x+1$ entonces:
+        $$
+            F(\quo{s}{x}): \exists y\ x+1=2y, \text{ que expresa \textit{x+1 es par}}
+        $$
+        Sin embargo, hay sustituciones que aunque sintácticamente podemos hacerlas, no tienen sentido semánticamente, por ejemplo:
+        $$
+            F(\quo{y}{x}): \exists y\ y=2y, \text{ que no expresa \textit{y es par}}
+        $$
+    \end{itemize}
+\end{obs}
+
+\begin{dfn}[Variable sustituible]
+    Sea $L$ un lenguaje, $F \in \for(L)$, $x \in V$, $s \in \ter(L)$.
+    \begin{enumerate}
+        \item $x$ es \textbf{sustituible} por $s$ en $F$ si no hay una aparición libre de $x$ en una subfórmula de $F$ de la forma $\forall y G$ donde $y$ es una variable de $s$.
+        \item Si $x$ es \textit{sustituible} por $s$ en $F$, $F(\quo{s}{x})$ o $F[\quo{s}{x}]$ denota la fórmula obtenida de $F$ sustiyendo \textit{simultanemante} las apariciones \textit{libres} de $x$ por $s$.
+    \end{enumerate}
+\end{dfn}
+
+\begin{eg}[Ejemplos de sustitución en fórmulas]$ $
+    \begin{itemize}
+        \item Sea $F: \forall y\ x = z$, $x \in V$ y $s: x+1 \in \ter(L)$.\\
+        $$
+            F[\quo{s}{x}]: \forall y\ x+1 = z
+        $$
+        \item Sea $F: (\exists x\ x=z) \lor (x+y=1)$, $x \in V$ y $s: y+1 \in \ter(L)$.\\
+        $$
+            F[\quo{y+1}{x}]: (\exists x\ x=z) \lor (y+1+y=1)
+        $$
+    \end{itemize}
+\end{eg}
+
+\begin{obs}
+    Si $s \in \ter(L)$ no tiene variables, entonces se puede sustituir en cualquier variable en cualquier fórmula.
+\end{obs}
+
+\begin{dfn}[Cierre universal]
+    Sea $F \in \for(L)$, un \textbf{cierre universal} de $F$ es una fórmula obtenida precediendo a $F$ con $\forall x_1 \ldots \forall x_n$ si $F$ es $F(x_1, \ldots, x_n)$.
+\end{dfn}
+
+\begin{eg}[Ejemplo de cierre universal]
+    Sea $F: x \leq 2$, cierres universales de $F$ pueden ser: $\forall x\ x\leq 2$, $\forall x \forall y \forall z\ x \leq 2$.
+\end{eg}
+
+\begin{dfn}[Enunciado]
+    Una fórmula se llama \textbf{enunciado} (o fórmula cerrada) si no tiene variables libres.
+\end{dfn}
+
+\begin{obs}
+    Los cierres universales de fórmulas son enunciados.
+\end{obs}
+
+\begin{dfn}[Fórmula existencial]
+    Una fórmula abreviada es \textbf{existencial} si es de la forma $\exists x_1 \ldots \exists x_n F$ con $F$ sin cuantificadores.
+\end{dfn}
+\begin{eg}[Ejemplo de fórmula existencial]
+    Una fórmula existencial puede tener variables libres. Por ejemplo:
+    $$
+        F(z):  \exists x_1 \exists x_2\ (x_1 = x_2 \lor x_1 + 3 = z)
+    $$
+\end{eg}

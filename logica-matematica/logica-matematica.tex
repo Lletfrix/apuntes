@@ -28,6 +28,8 @@
 \usepackage{pdfpages}
 \usepackage{tikz}
 \usepackage{mathtools}
+\usepackage{tikz-qtree}
+
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{shapes}
 \usetikzlibrary{decorations.text}
@@ -217,11 +219,22 @@ numbered=no
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\gr}{\text{gr }}
 \newcommand\ninf[1]{\left|\left|#1\right|\right|_\infty}
+\newcommand{\sdf}[1]{\left\{#1\right\}}
 
+%% LOGICA
+\newcommand{\bicond}{\leftrightarrow}
+\newcommand{\then}{\rightarrow}
+\newcommand{\ter}{\mathrm{Ter}}
+\newcommand{\for}{\mathrm{For}}
+\newcommand{\sbn}{\mathrm{SBN}}
+\newcommand{\model}{\mathrm{Mod}}
+\newcommand{\te}{\mathrm{te}}
+\newcommand{\quo}[2]{{\left.\raisebox{.2em}{$#1$}\middle/\raisebox{-.2em}{$#2$}\right.}}
 %%%% MATRICES
 \newcommand\mx[1]{\begin{bmatrix*}#1\end{bmatrix*}}
 
 \renewcommand\qedsymbol{$\diamondsuit$}
+\setcounter{MaxMatrixCols}{20}
 
 \title{Apuntes de L\'ogica M\'atematica}
 \author{Rafael S\'{a}nchez S\'{a}nchez}
@@ -240,6 +253,10 @@ Revisión del \today $ $ a las \currenttime.
 \tableofcontents
 \part{Sintaxis y sem\'antica de primer orden}
 \input{input/1-estructuras}
+\input{input/2-terminos}
+\input{input/3-satisfaccion}
+\input{input/4-tautologias}
+\input{input/5-consecuencia-semantica}
 \part{Ap\'{e}ndices}
 
 %\renewcommand{\chaptername}{Apéndice}

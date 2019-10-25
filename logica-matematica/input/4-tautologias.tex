@@ -1,0 +1,93 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Tautologías}
+
+Recordemos los valores de verdad de algunas construcciones con $P, Q$ variables proposicionales.\\
+\begin{center}
+    \begin{table}[ht]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+    $P$ & $Q$ & $P \lor Q$ & $P \then Q$ & $P \then P$ \\ \hline
+    1   & 1   & 1          & 1           & 1           \\
+    1   & 0   & 1          & 0           & 1           \\
+    0   & 1   & 1          & 1           & 1           \\
+    0   & 0   & 0          & 1           & 1
+    \end{tabular}
+    \end{table}
+\end{center}
+
+El hecho de que en las implicaciones sólo haya un valor falso nos será de utilidad para construir \textit{tautologías}.
+
+\begin{dfn}[Formulas básica]
+    Sea $L$ un lenguaje, una \textbf{formula básica} de $L$ es una formula o \textit{atómica} o de la forma: $\forall x G$ con $G \in \for(L)$.
+\end{dfn}
+
+\begin{dfn}[Subfórmulas básicas necesarias]
+    Sea $L$ un lenguaje, $F \in \for(L)$, el conjunto de \textbf{subfórmulas básicas necesarias} de $F$, $\sbn(F)$ es:
+    \begin{itemize}
+        \item Si $F$ es básica: $\sbn(F) = \sdf{F}$.
+        \item Si $F$ es $\neg G$: $\sbn(F) = \sbn(G)$.
+        \item Si $F$ es $G \then H$: $\sbn(F) = \sbn(G) \bigcup \sbn(H)$.
+    \end{itemize}
+\end{dfn}
+
+\begin{obs}
+    Toda fórmula se obtiene de subfórmulas básicas necesarias usando $\neg$ y $\then$.
+\end{obs}
+
+\begin{dfn}[Distribución de valores de verdad]
+    Sea $L$ un lenguaje.
+    Una \textbf{distribución de valores de verdad} (d.v.v.) de $L$ es una aplicación:
+    $$
+        \delta: \sdf{F \in \for(L) \mid F \text{ es básica}} \to \sdf{0, 1}
+    $$
+\end{dfn}
+
+\begin{dfn}[Tautología]
+    Una \textbf{tautología} de $L$ es una fórmula $F \in \for(L)$ tal que $\bar \delta(F) = 1, \forall \delta$ (con $\delta$ una d.v.v. ) donde $\bar \delta$ es la única aplicación $\bar\delta: F \to \sdf{0, 1}$ que extiende a $\delta$ y satisface:
+    \begin{itemize}
+        \item $\bar\delta(\neg G) = 1$ si $\bar\delta(G) = 0$ y $\bar\delta(\neg G) = 0$ si $\bar\delta(G) = 1$
+        \item $\bar\delta(G \then H) = 0$ si $\bar\delta(G) = 0 \land \bar\delta(H) = 1$ y $\bar\delta(G \then H) = 1$ en el resto de casos.
+    \end{itemize}
+\end{dfn}
+
+\begin{dfn}[Fórmulas tautológicamente equivalentes]
+    Sea $L$ un lenguaje, $F, G \in \for(L)$ fórmulas de $L$. Decimos que $F$ y $G$ son \textbf{tautológicamente equivalentes} si:
+    $$
+        F \bicond G \text{ es una tautología.}
+    $$
+\end{dfn}
+
+\begin{obs}
+    Para fórmulas abreviadas tomamos $\exists x G$ como fórmula básica también.
+\end{obs}
+
+\begin{eg}[Comprobación de dos fórmulas tautológicamente equivalentes]
+    Sean las fórmulas $G: F_1 \then (F_2 \then F_3)$ y $H: (F_1 \land F_2) \then F_3$. Vamos a ver que $G$ y $H$ son tautológicamente equivalentes.\\\\
+    Tenemos que comprobar que $G \bicond H$ es una tautología. Es decir, $G \then H$ y $H \then G$ son tautologías. Supondremos que no lo son y al asignar los valores de verdad correspondientes llegaremos a una contradicción.\\
+    $$
+    \begin{matrix}
+        F_1 & \then & (F_2 & \then & F_3) & \then & (F_1 & \land & F_2) & \then & F_3 \\
+            & \mbf 1&      &       &      &\mbf 0 &      &       &      &\mbf 0 &     \\
+            &   1   &      &       &      &   0   &      &\mbf 1   &      &    0  &\mbf 0  \\
+            &   1   &      &       &      &   0   &\mbf 1   &   1   &\mbf 1   &    0  &  0  \\
+    \mbf 1   &   1   &\mbf 1  &       &\mbf 0   &   0   &  1   &   1   &  1   &    0  &  0  \\
+         1   & \mbf 0&   1  &\mbf 0   &  0   &   0   &  1   &   1   &  1   &    0  &  0  \\
+    \end{matrix}
+    $$
+    Se marcan en negrita las deducciones en cada paso (fila). Podemos ver que llegamos a una contradicción en el valor de verdad de la primera implicación, con lo que la expresión es una tautología. Se procede de forma análoga para el recíproco.
+\end{eg}
+
+\begin{pro}[Tautologías y fórmulas válidas]\label{pro:1.3}
+    Sea $L$ un lenguaje. Las tautologías de $L$ son fórmulas válidas de $L$.
+\end{pro}
+\begin{proof}
+    A completar. %% TODO: Página 18, día 01/10/2019
+\end{proof}
+
+\begin{obs}
+    La propiedad de ser tautología es puramente sintáctica.\\
+    $$
+        \forall x F \then F \text{ no es una tautología.}
+    $$
+\end{obs}

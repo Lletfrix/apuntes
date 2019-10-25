@@ -21,7 +21,7 @@ Puede parecer una definición algo abstracta, así que vamos a ver algunos ejemp
         \item Para cada $m \in \N^*$ un conjunto $\mtc{R}_m$ de símbolos de relaciones m-arias.
         \item Un conjunto $\mtc{C}$ de constantes.
     \end{itemize}
-    Además de conjuntos de símbolos lógicos, variables $\{v_i\}_{i\in \N}$, cuantificadores $(\exists,\ \forall)$, conectores $(\land, \lor, \iff, \implies)$, símbolos de igualdad $=$, y paréntesis $()$. No se suelen especificar en la declaración del lenguaje.
+    Además de conjuntos de símbolos lógicos, variables $V = \{v_i\}_{i\in \N}$, cuantificadores $(\exists,\ \forall)$, conectores $(\land, \lor, \bicond, \then)$, símbolos de igualdad $=$, y paréntesis $()$. No se suelen especificar en la declaración del lenguaje.
 \end{dfn}
 
 \begin{eg}[Lenguajes. Ejemplos]\label{eg:lenguajes}
@@ -127,3 +127,43 @@ Puede parecer una definición algo abstracta, así que vamos a ver algunos ejemp
 \begin{eg}[Ejemplo de monomorfismo]
     Sean $\mtc{A} = \gen{A, +, 0}$, $\mtc{B} = \gen{B, +, 0}$ y $\varphi(a+b) = \varphi(a) + \varphi(b);\ \varphi(0)=0$. Es fácil ver que $\varphi$ es un homomorfismo. Además, la única relación es la igualdad (que existe aunque no se especifique) y como $\varphi(a) = \varphi(b) \iff a = b$ estamos ante un monomorfismo.
 \end{eg}
+
+\section{Lenguaje asociado a una estructura}
+
+En ocasiones vamos a querer considerar lenguajes que contengan elementos interpretados de una estructura.
+
+\begin{dfn}[Lenguaje asociado a una estructura. Extensión de un lenguaje]
+    Sea $L$ un lenguaje, $\mtc A$ una $L$-estructura, decimos que $L_{A} = L \cup \sdf{c_a}_{a \in A} $ es el \textbf{lenguaje asociado} a la \textbf{estructura} $\mtc A$.\\\\
+    Diremos que $L_A$ es una \textbf{extensión} de $L$. En general, $L'$ es una \textbf{extensión} de $L$ (aunque no indiquemos a que estructura está asociado).
+\end{dfn}
+
+\begin{eg}[Ejemplo de extensión de un lenguaje]
+    Sea el lenguaje $L = \sdf{\leq}$ y $W = \gen{\N, \leq}$ una $L$-estructura, $L_\N = \sdf{\leq, \sdf{c_n}_{n \in \N}} = \sdf{\leq, 0, 1, 2, \ldots}$ es una extensión de $L$.
+\end{eg}
+
+\begin{dfn}[Expansión de una estructura]
+    Sea $\mtc A$ una $L$-estructura, y $\mtc A'$ una $L'$-estructura, decimos que $\mtc A'$ es una expansión de $\mtc A$ (o análogamente, $\mtc A$ es un reducto de $\mtc A'$) si:
+    \begin{enumerate}
+        \item $A' = A$
+        \item $s^{\mtc A'} = s^A \forall s \in L$
+    \end{enumerate}
+\end{dfn}
+
+\begin{eg}[Ejemplo de expansión de una estructura]
+    Se consideran las estructuras: $\mtc R_1 = \gen{\R, +}$ y $\mtc R_2 = \gen{\R, +, \cdot}$. Entonces $\mtc R_2$ es una expansión de $\mtc R_1$, o análogamente $\mtc R_1$ es un reducto de $\mtc R_2$.
+\end{eg}
+
+\begin{obs}
+    Sea $L$ un lenguaje con constantes, $\mtc A = \gen{A, f^\mtc A, \ldots, R^\mtc A, \ldots, c^\mtc A, \ldots}$ una $L$-estructura y $L_A$ una extensión de $L$ asociada a $\mtc A$. Podemos considerar la $L_A$-estructura $\mtc A_A$ como la expansión de $\mtc A$ al lenguaje $L_A$:
+    $$
+        \mtc A_A = \gen{A, \ldots, f^{\mtc A_A}, \ldots, R^{\mtc A_A}, c^{\mtc A_A}, \sdf{c_a}^{\mtc A_A}_{a \in A}}
+    $$
+    Con la interpretación $f^{\mtc A_A} = f^\mtc A$, $R^{\mtc A_A} = R^\mtc A$, $c_a^{\mtc A_A} = a$.
+    Donde dos constantes distintas (sintácticamente) pueden ser interpretadas de la misma forma. Veamos un ejemplo:\\\\
+
+    Sea $L = \sdf{\leq, 0}$ un lenguaje, $\mtc N = \gen{\N, \leq, 0^\mtc N}$ una $L$-estructura y $L_\N = \sdf{\leq, 0} \cup \sdf{c_n}_{n \in \N}$ una extensión de $L$, entonces:
+    $$
+        \mtc N_\N = \gen{\N, \leq, 0^{\mtc N_\N}, c_0^{\mtc N_\N}, c_1^{\mtc N_\N}, \ldots}
+    $$
+    y en $\mtc N_\N$ las constantes: $0^{\mtc N_\N}$ y $c_0^{\mtc N_\N}$ tienen la misma interpretación, el valor $0 \in \N$, aún siendo constantes distintas.
+\end{obs}

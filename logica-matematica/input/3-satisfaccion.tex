@@ -1,0 +1,189 @@
+% !TeX root = ../logica-matematica.tex
+\chapter{Relación de satisfacción.}
+
+En esta sección vamos a hablar de la satisfacibilidad de fórmulas en distintas estructuras. Como ejemplo introductorio, sea $L = \sdf{\leq}$ un lenguaje, $\mtc Z = \gen{\Z, \leq}$, $\mtc N = \gen{\N, \leq}$ $L$-estructuras y $E: \forall x\ 0 \leq x$ una $L$-fórmula.\\
+Vemos que se cumple (formalmente, se \textit{satisface}) en $\mtc N$ pero no en $\mtc Z$, ya que $-1 \in \Z$ no satisface $E$ en $\mtc Z$.
+
+\section{Satisfacibilidad}
+
+\begin{dfn}[Satisfacibilidad de una fórmula]
+    Sea $L$ un lenguaje, $\mtc A$ una $L$-estructura, $F(x_1, \ldots, x_n) \in \for(L)$, $\mbf a = (a_1, \ldots, a_n) \in A^n$ y $\mbf x = (x_1, \ldots, x_n)$. Decimos que $a$ \textbf{satisface} $F$ en $\mtc A$ ($\mtc A \vDash F(\mbf a)$), o $\mtc A$ satisface $F$ cuando a la variable $\mbf x$ se le asigna el valor $\mbf a$, o $F(\mbf a)$ se satisface en $\mtc A$ si:
+
+    \begin{itemize}
+        \item Si $F$ es $R t_1 \ldots t_l$ y $(t_1^\mtc A(\mbf a), \ldots, t_l^\mtc A(\mbf a)) \in \mtc R^\mtc A$.
+        \item Si $F$ es $\neg G$ y $\mtc A \nvDash G(\mbf a)$.
+        \item Si $F$ es $G \then H$ y si $\mtc A \vDash G(\mbf a)$ entonces $\mtc A \vDash H(\mbf a)$.
+        \item Si $F$ es $\forall v G$ con $v \neq x_i$, $G(v, x_2, \ldots, x_n)$ y $\forall d \in A$ se tiene que: $\mtc A \vDash G(d, \mbf a)$, es decir $\forall d \in A$, $\mtc A \vDash G(d, a_2, \ldots, a_n)$.
+    \end{itemize}
+\end{dfn}
+
+\begin{eg}[Ejemplo de relación de satisfacción]
+    Sea $L = \sdf{+, -, \cdot, 0, 1, <}$ y $\mtc R = \gen{\R, +, -, \cdot, 0, 1, <}$. Sea $F: \exists x (x < 2 \land 4 < x^2)$ una fórmula abreviada, ¿existe $(a, b) \in \R^2$ tales que $\mtc R \vDash F(a, b)$?\\
+
+    $F$ sin abreviar sería:
+    $$
+        F: \neg \forall x\ (x < 2 \then \neg 4 < x^2)
+    $$
+    Entonces tenemos:
+    \begin{align*}
+        \mtc R \vDash F(a, b) &\iff \mtc R \nvDash \forall x (x < 2 \then \neg 4 < x^2)(a, b)\\
+                               &\iff\exists d \in \R,\  \mtc R \nvDash \forall x (x < 2 \then \neg 4 < x^2)(d, b)\\
+                               &\iff \exists d \in \R,\ \mtc R \vDash (x < 2)(d, b) \text{ y } \mtc R \nvDash(\neg 4 < x^2)(d, b)\\
+                               &\iff \exists d \in \R,\ d < 2 \text{ y } \mtc R \vDash (4 < x^2)(d, b)\\
+                               &\iff \exists d \in \R,\ d < 2 \text{ y } 4 < d^2; \text{ se satisface tomando $d = -3 \in \R$}
+    \end{align*}
+    Con lo que concluimos que: $\mtc R \vDash F(-3, b)$.
+\end{eg}
+
+\begin{pro}[$\vDash$ solo depende de las variables libres]\label{pro:1.1}
+    Sea $L$ un lenguaje, $\mbf x = (x_1, \ldots, x_n)$ e $\mbf y = (y_1, \ldots, y_m)$, con $x_i, y_i \in V$ $x_i \neq y_i$. Sean $F \in \for(L)$, $F(\mbf x, \mbf y)$ y $\mtc A$ una $L$-estructura; entonces para todo $\mbf a = (a_1, \ldots, a_n) \in A^n$:
+    $$
+        \mtc A \vDash F(\mbf a) \iff \text{ existe } \mbf b \in A^m : \mtc A \vDash F(\mbf a, \mbf b) \iff \forall \mbf b \in A^m \mtc A \vDash F(\mbf a, \mbf b)
+    $$
+\end{pro}
+
+\begin{proof}
+    A completar. %% TODO: Página: 13, día 26/09/2019
+\end{proof}
+
+\begin{dfn}[Satisfacibilidad de un enunciado]
+    Sea $E \in \for(L)$ un enunciado (sin variables libres), $\mtc A$ una $L$-estructura. Decimos que $\mtc A$ \textbf{satisface} $E$, o $E$ es verdadero en $\mtc A$, o $E$ se satisface en $\mtc A$ si al considerar $E$ como $E(y)$ se tiene que:
+    $$
+        \mtc A \vDash E(b) \text{ para todo (algún) } b\in A
+    $$
+    Lo escribimos como $\mtc A \vDash E$
+\end{dfn}
+
+\begin{obs}
+    En la definición hablamos de que el enunciado se satisfaga para algún $b \in A$ o todo $b \in A$. Esto es equivalente ya que siendo $E$ un enunciado:
+    $$
+        \exists b \in A,\ \mtc A \vDash E(b) \iff \forall b \in A,\ \mtc A \vDash E(b) \text{ por la proposición } \ref{pro:1.1}
+    $$
+\end{obs}
+
+\subsection{Validez de fórmulas}
+
+\begin{dfn}[Fórmula válida]
+    Sea $L$ un lenguaje:
+    \begin{enumerate}
+        \item Sea $F$ un enunciado de $L$, decimos que $F$ es una \textbf{fórmula válida} si $\mtc A \vDash F$ para toda $L$-estructura $\mtc A$.
+        \item Sea $G \in \for(L)$, $G$ es una fórmula válida si $G$ es $G(x_1, \ldots, x_n)$ y $\forall x_1 \ldots x_n G$ es un enunciado válido.
+    \end{enumerate}
+\end{dfn}
+
+\section{Conjuntos definibles}
+
+\begin{dfn}[Conjunto definible]
+    Sea $L$ un lenguaje, $\mtc A$ una $L$-estructura:
+    \begin{itemize}
+        \item Un conjunto $X \subseteq A^n$ para algún $n$ es \textbf{definible} (en $\mtc A$) si existe una fórmula $F(x_1, \ldots x_n) \in \for(L)$ tal que:
+        $$
+            X = \sdf{\mbf a \in A^n \mid \mtc A \vDash F(\mbf a)}
+        $$
+        \item Un conjunto $X \subseteq A^n$ para algún $n$ es \textbf{definible con parámetros} si existe una fórmula $F(x_1, \ldots x_n) \in \for(L_A)$ tal que:
+        $$
+            X = \sdf{\mbf a \in A^n \mid \mtc A_A \vDash F(\mbf a)}
+        $$
+    \end{itemize}
+\end{dfn}
+
+\begin{eg}[Ejemplos de conjuntos definibles]$ $
+    Sea $L = \sdf{+, -, \cdot, 0, 1}$, $\mtc C = \gen{\C, +, -, \cdot, 0, 1}$. Sea $f(x_1, \ldots, x_n) \in \C[x_1, \ldots, x_n]$, entonces:
+    \begin{enumerate}
+        \item
+        $$
+            X = \sdf{\mbf a \in \C^n \mid f(\mbf a) = 0} \text{ es un conjunto definible con parámetros}
+        $$
+        La fórmula $F$ sería, $F(x_1, \ldots, x_n): f(x_1, \ldots, x_n) = 0$ con $F \in \for(L_\C)$.
+
+        \item $$X = \sdf{(a, b) \in \C^2 \mid a\cdot b = 1} \text{ es definible en $\mtc C$ sin parámetros}$$
+
+        \item ¿Es $\sdf{-\sqrt 2, \sqrt 2}$ definible en $\mtc \C$? Sí, la fórmula (abreviada) que lo define es $x^2 = 2$. ($ = \cdot\ x\ x\ +\ 1\ 1$).
+    \end{enumerate}
+\end{eg}
+
+\begin{obs}
+    Si permitimos parámetros, cualquier subconjunto finito de $\C^n$ es definible. Sea el conjunto:
+    $$
+        X = \sdf{(a_{11}, \ldots, a_{1n}), \ldots, (a_{m1}, \ldots, a_{mn})} \text{ con } a_{ij} \in \C
+    $$
+    En el caso $m = 1$, basta considerar la fórmula $F: x_1 = a_{11} \land x_2 = a_{12} \land \cdots \land x_n = a_{1n}$.\\
+    En el caso general, $F_i(x_1, \ldots, x_n): x_1 = a_{i1} \land x_2 = a_{i2} \land \cdots \land x_n = a_{in} \in \for(L_a)$. Con esto definimos $X$ como:
+    $$
+        X = \sdf{\mbf b = (b_1, \ldots, b_m) \in \C^n \mid \mtc C \vDash (F_1 \lor \cdots F_m)(\mbf b)}
+    $$
+\end{obs}
+
+\begin{eg}
+    Sea $L = \sdf{S, +, \cdot, 0, <}$ y $\mtc N = \gen{\N, S, +, \cdot, 0, <}$. Podemos definir el conjunto de números pares naturales. Consideramos la $L$-fórmula:
+    $$
+        \text{ $x$ es par }: \exists y\ (x = y + y)
+    $$
+    entonces, definimos el conjunto $X$ de naturales pares como:
+    $$
+        X = \sdf{ m \in \N \mid \N \vDash (\exists y\ (x = y + y))(m)}
+    $$
+\end{eg}
+
+\begin{obs}
+    Sea $\mtc R$ el cuerpo de los reales. Sea $F: y = 0$, $G: x = 0$, con $F(x, y)$ y $G(x, y)$. Se consideran los conjuntos:
+    \begin{align*}
+        X_1 &= \sdf{(a, b) \in \R^2 \mid \mtc R \vDash F(a, b)}\\
+        X_2 &= \sdf{(a, b) \in \R^2 \mid \mtc R \vDash G(a, b)}
+    \end{align*}
+    Entonces $X_1 \bigcup X_2$ es definible mediante $F \lor G$.
+\end{obs}
+
+\begin{pro}[Caracterización de las operaciones de conjuntos]
+    Sea $L$ un lenguaje, $\mtc A$ una $L$-estructura, $X, Y \subseteq A^n$ definibles mediante $F(x_1, \ldots, x_n)$ y $G(x_1, \ldots, x_m)$ respectivamente. Entonces:
+    \begin{itemize}
+        \item $ X \bigcup Y$ es definible mediante $F \lor G$.
+        \item $ X \bigcap Y$ es definible mediante $F \land G$.
+        \item $A^n \setminus X$ es definible mediante $\neg F$.
+        \item Sea $Z$ la proyección de $X$ en las primeras $n - 1$ coordenadas:
+        $$
+            Z = \sdf{(a_1, \ldots, a_{n-1}) \in A^{n-1} \mid \text{ existe } b\in A:\ (a_1, \ldots, a_{n-1}, b) \in X}
+        $$
+        es decir,
+        $$
+            Z = \sdf{(a_1, \ldots, a_{n-1}) \in A^{n-1} \mid \mtc A \vDash (\exists x_n F)(a_1, \ldots, a_{n-1})}
+        $$
+        \item Sea $W \subseteq A^m$ definible mediante $H(x_1, \ldots, x_m)$.
+        $$
+            X \times W \subseteq A^{n+m} \text{ es definible}
+        $$
+        Vamos a necesitar una fórmula de la forma $F \land H$, sin embargo, eso definiría la intersección. Notamos que $H': H(\quo{y_1}{x_1}, \ldots, \quo{y_m}{x_m})$ también define $W$. Con ello obtenemos que:
+        $$
+            X \times W = \sdf{(\mbf a, \mbf b) \in A^{n+m} \mid \mtc A \vDash (F \land H')(\mbf a, \mbf b)}
+        $$
+    \end{itemize}
+\end{pro}
+\begin{proof}
+    Son propiedades que no se han demostrado en clase.
+\end{proof}
+
+\begin{pro}[Satisfacibilidad de una sustitución]\label{pro:1.2}
+    Sea $L$ un lenguaje, $s \in \ter(L)$ con $s$ siendo $s(x, y_1, \ldots, y_m)$ e $y_i$ que aparece en $s$. Sea $F \in \for(L)$, $F$ es $F(x, y_1, \ldots, y_m, z_1, \ldots, z_l)$ con $(z_j \neq y_i)$, tal que $x$ es sustituible por $s$ en $F$. (Es decir, no hay subfórmulas de $F$ de la forma $\forall y_i G$ con $x$ libre en $F$).\\\\
+    Entonces para toda $L$-estructura $\mtc A$ y $(a, \mbf b, \mbf c) \in A^{1+m+l}$ se tiene que:
+    $$
+        \mtc A \vDash F(\quo{s}{x})(a, \mbf b, \mbf c) \iff \mtc A \vDash F(s^\mtc A(a, \mbf b), \mbf b, \mbf c)
+    $$
+\end{pro}
+
+\begin{proof}
+    A completar. %%TODO: Página 16, día 30/09/2019
+\end{proof}
+
+\begin{cor}[a la proposición \ref{pro:1.2}. Cambio de nombre a una variable ligada.]
+    Sea $L$ un lenguaje, $F(x, \mbf z) \in \for(L)$, $y \in V$ que no aparece en $F$. Entonces para toda $L$-estructura $\mtc A$ y $\mbf \in A^m$:
+    $$
+        \mtc A \vDash \forall y (F(\quo{y}{x}))(\mbf b) \iff \mtc A \vDash (\forall x F)(\mbf b)
+    $$
+    En particular si $F$ es $F(x)$:
+    $$
+        \forall y\ F(\quo{y}{x}) \bicond \forall x\ F \text{, es válida.}
+    $$
+\end{cor}
+\begin{proof}
+    A completar. %%TODO: Página 17, día 01/10/2019
+\end{proof}

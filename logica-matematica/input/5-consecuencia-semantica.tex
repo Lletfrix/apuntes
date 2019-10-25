@@ -1,0 +1,90 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Consecuencia semántica}
+
+\begin{dfn}[$L$-teoría]
+    Sea $L$ un lenguaje. Una \textbf{$L$-teoría} es un conjunto de \textit{enunciados} de $L$ (no tiene por qué ser finito).
+\end{dfn}
+
+\begin{eg}[Ejemplos de $L$-teorías]
+    \begin{enumerate}
+        \item Sea $L = \sdf{\cdot, 1}$ el lenguaje de grupos. Sean $G_1, G_2, G_3$ los axiomas de grupos. $T = \sdf{G_1, G_2, G_3}$ es una $L$-teoría.
+        \item GADST: (grupos abelianos divisibles sin torsión). Sea $L = \sdf{+, 0}$ y las propiedades:
+            \begin{itemize}
+                \item $G_1: +$ es asociativa.
+                \item $G_2: 0$ es el neutro.
+                \item $G_3: \forall x \exists y\ x+y = 0$.
+                \item $G_4: \forall x \forall y\ x+y=y+x$.
+                \item $G_{5n}: \forall x \exists y\ x = n \cdot y$ ($n$-divisible). $n \cdot y$ abrevia $\sum_1^n y$.
+                \item $G_{6n}: \forall\ x (n\cdot x = 0 \then x = 0)$
+            \end{itemize}
+            Entonces GADST $= \sdf{G_1, G_2, G_3, G_3} \bigcup \sdf{G_{5n}}_{n>1,\ n \in \N} \bigcup \sdf{G_{6n}}_{n>1,\ n \in \N}$.
+        \item $\sdf{\forall x\ x \neq x}$ y $\sdf{F \land \neg F}$ son teorías, aunque sean \textit{incoherentes}.
+    \end{enumerate}
+\end{eg}
+
+\begin{dfn}[Modelo]
+    Sea $L$ un lenguaje, $T$ una $L$-teoría. Un \textbf{modelo} de $T$ es una $L$-estructura $\mtc A$ tal que:
+    $$
+        \mtc A \vDash F \text{ para toda } F \in T \text{ y se escribe } \mtc A \vDash T
+    $$
+\end{dfn}
+
+\begin{eg}[Ejemplos de modelos]
+    \begin{enumerate}
+        \item $T_{\text{grupos}}$ en $L = \sdf{\cdot, 1}$, sea $\mtc G$ una $L$-estructura. $\mtc G$ es un modelo de $T_{\text{grupos}} \iff \mtc G$ es un grupo.
+        \item $\mtc A \vDash$ GADST $\iff \mtc A$ es un grupo abeliano divisible sin torsión.
+        \item $\sdf{\forall x\ x \neq x}$ y $\sdf{F \land \neg F}$ no tienen modelos.
+    \end{enumerate}
+\end{eg}
+
+\begin{obs}[Notación]
+    $\model(T)$ designa la clase de todos los modelos de $T$.
+\end{obs}
+
+\begin{obs}
+    Sean $T_1, T_2$ teorías, si $T_1 \subseteq T_2$ entonces $\model(T_2) \subseteq \model(T_1)$.
+\end{obs}
+
+\begin{dfn}[Teoría de una estructura]
+    Sea $\mtc A$ una $L$-estructura, una \textbf{teoría} de $\mtc A$ es el conjunto:
+    $$
+        \te(\mtc A) = \sdf{F \in \for(L) \mid F \text{ es un enunciado y } \mtc A \vDash F}
+    $$
+\end{dfn}
+
+\begin{obs}$ $
+    \begin{itemize}
+        \item Sea $F$ un enunciado. $\mtc A \vDash F$ establece una relación semántica entre un objeto semántico $\mtc A$ y otro sintáctico $F$.
+        \item Sea $T$ una $L$-teoría (objeto sintáctico), también escribimos $\mtc A \vDash T$.
+    \end{itemize}
+\end{obs}
+
+\begin{dfn}[Consecuencia semántica]
+    Sea $L$ un lenguaje, $T$ una $L$-teoría, y $F$ un $L$-enunciado. $F$ es \textbf{consecuencia semántica} de $T$ ($T \vDash F$) si $\mtc A \vDash F$ para toda estructura $\mtc A$ tal que $\mtc A \vDash T$.
+\end{dfn}
+
+\begin{obs}$ $
+    \begin{itemize}
+        \item Si $T = \varnothing$, escribiremos $\vDash F$.
+        \item Sea $G \in \for(L)$, $G$ es consecuencia semántica de $T$ ($T \vDash G$) si $T \vDash F$ para algún (o todo) cierre universal $F$ de $G$.
+        $$
+            T \vDash \forall x_1 \ldots \forall x_n\ G \implies T \vDash G
+        $$
+    \end{itemize}
+\end{obs}
+
+%% TODO: Agregar ejemplos página 20, día 07/10/2019
+
+\begin{dfn}[Fórmulas equivalentes respecto de una teoría]
+    Sea $L$ un lenguaje, $T$ una $L$-teoría, $F_1, F_2 \in \for(L)$. Diremos que $F_1$ y $F_2$ son \textbf{equivalentes respecto de $T$} si:
+    $$
+        T \vDash \forall x_1 \ldots \forall x_n\ (F_1 \bicond F_2)
+    $$
+\end{dfn}
+
+%% TODO: Agregar ejemplo página 21, día 07/10/2019
+
+\begin{obs}
+    Si $F_1, F_2 \in \for(L)$ son equivalentes con respecto a $T$, entonces $F_1$ y $F_2$ definen el mismo conjunto en cualquier modelo de $T$.
+\end{obs}

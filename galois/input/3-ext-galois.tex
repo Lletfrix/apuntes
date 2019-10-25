@@ -70,7 +70,7 @@ Si $f$ es un polinomio sobre $\Q[x]$ de grado $n$, \textit{sabemos} que $\exists
 
 Vamos a ver resultados para generalizar este proceso.
 
-\begin{lm}[Existencia de extensión que contiene a una raíz]\label{lm:3.3}
+\begin{lm}[Lema de Kronecker]\label{lm:3.3}
     Sea $p \in K[x]$ un polinomio irreducible, entonces existe $E/K$ tal que $p$ tiene una raíz en $E$.
 \end{lm}
 
@@ -120,3 +120,137 @@ Vamos a ver resultados para generalizar este proceso.
     $$
     Con lo que el cuerpo de escisión es: $\Q(\sqrt{2 + \sqrt 2})$.
 \end{ex}
+
+\begin{obs}
+    Si $E = K(f)$, entonces $E/K$ es finita por el teorema \ref{thm:extalg}. Anteriormente, vimos que si $f \in K[x]$, entonces existe un cuerpo de escisión de $f$ sobre $K$.\\
+    Sea $p$ un polinomio irreducible tal que $p \divides f$ y $\delta p > 1$, entonces consideramos $\quo{K[x]}{\gen{p}}$ y en ese cuerpo hay una raíz de $p$ (que también es raíz de $f$), y después aplicamos inducción.
+\end{obs}
+
+\begin{thm}\label{thm:3.5}
+    Sea $K_1, K_2$ cuerpos, y $\sigma: K_1 \to K_2$ un isomorfismo de cuerpos. Sea $f_1 \in K_1[x]$ no constante y $\delta(f_1) = f_2$.\\ Supongamos que $E_i$ son cuerpos de escisión de $f_1$ sobre $K_i$ con $i \in \setdef{1, 2}$. Entonces existe un isomorfismo $\tau: E_1 \to E_2$ que extiende a $\sigma$, es decir, $\left. \tau \right|_{K_1} = \sigma$.
+\end{thm}
+
+\begin{proof}
+    Pedir a Santorum.
+\end{proof}
+
+\begin{cor}[Unicidad de los cuerpos de escisión]
+    Sea $K$ un cuerpo y $f \in K[x]$ no constante. Si $E_1$ y $E_2$ son cuerpos de escisión de $f$ sobre $K$ entonces $\exists \tau$ un isomorfismo $\tau: E_1 \to E_2$ tal que $\tau(a) = a$ $\forall a \in K$.
+\end{cor}
+\begin{proof}
+    Basta tomar $\sigma = id_K$ en el teorema \ref{thm:3.5}.
+\end{proof}
+
+%% TODO: COMPLETAR EL DIA 22/10
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 24/10
+
+\begin{lm}[Normalidad de extensiones en cuerpos intermedios]\label{lm:3.7}
+    $K \subseteq L \subseteq E$ extensiones, entonces:
+    $$
+        E/K \text{ normal } \implies E/L \text{ normal.}
+    $$
+\end{lm}
+
+\begin{proof}
+    Es consecuencia directa del lema \ref{lm:3.2} y de la definición.
+\end{proof}
+
+
+\begin{cor}[al teorema \ref{thm:3.5}]
+    Sea $E/K$ una extensión normal, $K \subseteq M_1, M_2 \subseteq E$ con $M_1, M_2$ cuerpos intermedios.\\\\
+    Si existe un isomorfismo $\sigma: M_1 \to M_2$ que fija a $K$, es decir, $\sigma(a) = a,\ \forall a \in K$, entonces $\sigma$ se extiende a un isomorfismo $\tau: E \to E$ ($\left. \tau \right|_{M_1} = \sigma$).
+\end{cor}
+\begin{proof}
+    Sea $E = K(f)$ con $f \in K[x]$ no constante. En particular por el lema \ref{lm:3.2}, $E = M_1(f) = M_2(f)$. Como $\sigma(f) = f$, el resultado se sigue del teorema \ref{thm:3.5}.
+\end{proof}
+\begin{obs}
+    La hipótesis $\sigma(a) = a,\ \forall a \in K$ es necesaria. La idea es que sin esta hipótesis:
+    $$
+        E = M_1(f) = M_2(f)
+    $$
+    pero no sabríamos si $E = M_2(\sigma(f))$.
+\end{obs}
+
+\begin{thm}[Condición necesaria y suficiente para la normalidad de una extensión]\label{thm:3.9}
+    Sea $E/K$ una extensión finita, $E/K$ es normal si y sólo si todo polinomio $p \in K[x]$ irreducible con una raíz en $E$ se escinde en $E$.
+\end{thm}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item[$\ \Longleftarrow\ $] Sabemos que $E/K$ es finita, digamos $|E:K| = n$, podemos tomar una $K$-base $\sdf{a_1, \ldots, a_n}$. En particular $E=K(a_1, \ldots, a_n)$.\\
+        Como $E/K$ es finita, por el teorema \ref{thm:2.2}, los $a_i$ en son algebraicos sobre $K$. Sea $p_i = Irr(k, a_i) \in K[x]$, por hipótesis cada $p_i$ se escinde en $E$.\\
+
+        Tomamos $f = \prod_{i=1}^{n} p_i \in K[x]$ se escinde en $E$. De hecho, $E = K(f)$. De esta forma hemos probado que:
+        $$
+            K(f) \subseteq E = K(a_1, \ldots, a_n) \subseteq K(f)
+        $$
+        \item[$\implies$] Ahora partimos de que $E/K$ es finita y normal. Entonces $\exists f \in K[x]$ tal que $E = K(f)$.\\
+        De hecho, si $f(x) = c(x - b_1) \ldots (x-b_n) \in E[x]$, $E = K(b_1, \ldots, b_n)$.\\
+        Sea $p\in K[x]$ irreducible con una raíz $a\in E$, por Ruffini (corolario \ref{cor:ruffini}) $p(x) = (x-a)g(x)\in E[x]$. Además, por el teorema \ref{thm:3.4}, existe $M/E$ un cuerpo de escisión de $p$ sobre $E$, por tanto:
+        $$
+            p(x) = d(x-d_1) \cdot \ldots \cdot (x-d_r), \text{ podemos suponer que $a = d_1$}
+        $$
+        Dado $d_i$ con $i > 1$, queremos ver que $d_i \in E$. Llamemos $b = d_i$ para algún $i$. Como $a$ y $b$ son raíces de $p \in K[x]$ irreducible, por el teorema \ref{thm:2.5} $\exists \sigma: K(a) \to K(b)$ tal que $\sigma(k) = k,\ \forall k \in K$.
+
+        %
+        %\sigma: K(a) --------> K(b)
+        %         ^              ^
+        %         |              |
+        %         v              v
+        %id:      K  --------->  K
+
+        Como $K(a) \subseteq E$, en particular $E = K(a)(f)$. Por otro lado $K(b)(f) = E(b)$. Las raíces de $f$ en $E(b)$ son $b_1, \ldots, b_m$, así que:
+        $$
+            K(b)(f) = K(b)(b_1, \ldots, b_m) = K(b_1, \ldots, b_m) = E(b)
+        $$
+        Por el teorema \ref{thm:3.5} existe un isomorfismo $\tau: E \to E(b)$ que extiende a $\sigma$.
+        %
+        %\tau:  E=K(a)(f) ----> E(b) = K(b)(f)
+        %         |              |
+        %         |              |
+        %\sigma: K(a) --------> K(b)
+        %         ^              ^
+        %         |              |
+        %         v              v
+        %id:      K  --------->  K
+
+        Por el ejercicio $H2.15$, $|E:K| = |E(b):K|$ y $|K(a):K| = |K(b):K|$. Además $|E:K(a)| = |E(b):K(b)|$.
+        Por tanto:
+        $$
+            |E:K| = |E:K(a)||K(a):K| = |E(b):K(b)||K(b):K| = |E(b):K| = |E(b):E||E:K| \text{ usando el teorema \ref{thm:transgr}.}
+        $$
+        Con lo que concluimos:
+        $$
+            |E(b):E| = 1 \implies E(b) = E \implies b\in E
+        $$
+    \end{itemize}
+\end{proof}
+
+
+\begin{ex}[H3.5]
+    Decide si son normales las siguientes extensiones:
+    \begin{enumerate}
+        \item $\Q(\sqrt{5}i)/\Q$.\\\\
+
+        Es normal ya que $\Q(\sqrt{5}i) = \Q(x^2+5)$ es el cuerpo de escisión de $x^2+5$.
+        \item $\Q(\sqrt{5})/\Q$.\\\\
+
+        Es normal ya que $\Q(\sqrt{5})/\Q = \Q(x^2-5)$ es el cuerpo de escisión de $x^2-5$.
+
+        \item $\Q(\sqrt[4]{5}/\Q)$.\\\\
+
+        No es normal. Sabemos que $\Q(\sqrt[4]{5})/\Q$ es finita, y como $p(x) = x^4 - 5$ es irreducible en $\Q[x]$, tiene una raíz en $\Q(\sqrt[4]{5})$ pero no escinde, por la caracterización de normalidad (teorema \ref{thm:3.9}), concluimos con que $\Q(\sqrt[4]{5})/\Q$ no es normal.
+    \end{enumerate}
+\end{ex}
+
+\begin{ex}[H3.6]
+    Demuestra que $\Q(\sqrt[3]{2})/\Q$ no es normal. Encuentra una extensión normal que contenga $\Q(\sqrt[3]{2})$ como subcuerpo.\\\\
+
+    Sabemos que no es normal porque sea $p(x) = x^3 - 2 \in \Q[x]$, se puede comprobar que $p(x)$ es irreducible y tiene una raíz en $\Q(\sqrt[3]{2})$ pero no se escinde. Por tanto, por el teorema \ref{thm:3.9}, el cuerpo no es normal.\\
+    Una extensión normal que contiene a $\Q(\sqrt[3]{2})$ puede ser $\Q(\sqrt[3]{2}, \omega)$ con $\omega \in \C,\ o(\omega) = 3$.
+\end{ex}
+
+\begin{obs}
+    Si $E/K$ es normal y $f\in K[x]$ no necesariamente irreducible que tiene una raíz en $E$, $f$ no tiene por que escindirse.
+\end{obs}
