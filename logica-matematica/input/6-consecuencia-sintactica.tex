@@ -1,0 +1,161 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Consecuencia sintáctica}
+
+Hemos visto que sea $F$ un enunciado de un lenguaje $L$, $\mtc A$ una $L$-estructura y $T$ una $L$-teoría, hemos definido relaciones semánticas, tanto entre objetos semánticos y sintácticos ($\mtc A \vDash F$) como entre objetos puramente sintácticos ($T \vDash F$).\\
+En este bloque vamos a introducir la \textit{consecuencia sintática}, una relación sintáctica entre objetos sintácticos ($T \vdash F$).
+
+\section{Sistema formal. Axiomas}
+\begin{dfn}[Sistema formal]
+    Nos referimos por \textbf{sistema formal} al conjunto $SF = \sdf{L, Ax, RDec, T}$ donde:
+    \begin{itemize}
+        \item $L$ es un lenguaje.
+        \item $Ax$ es un conjunto de axiomas.
+        \item $RDec$ es un conjunto de reglas de deducción que nos permiten obtener expresiones del lenguaje a partir de otras.
+        \item $T$ es un conjunto de teoremas, expresiones del lenguaje que se deducen a partir de los axiomas utilizando las reglas de deducción.
+    \end{itemize}
+\end{dfn}
+
+En nuestro curso, nuestro $SF$ consta de:
+\begin{itemize}
+    \item $L$ un lenguaje de primer orden.
+    \item $Ax$ un conjunto con dos tipos de axiomas, lógicos y específicos de una $L$-teoría.
+    \item $RDec$ un conjunto con dos reglas de deducción. \textit{Modus Ponens} (deducir $G$ de $F \then G$ y $F$), y \textit{Generalización} (deducir $\forall x\ F$ de $F$).
+\end{itemize}
+
+\begin{dfn}[Axiomas lógicos]$ $
+    \begin{enumerate}
+        \item[(I)] \textsc{Tautologías}
+        \item[(II)] \textsc{Axiomas de cuantificadores}
+        \begin{itemize}
+            \item[(2.1)] Axioma de $\forall$:
+            $$
+                \forall v\ (F \then G) \then (F \then \forall v\ G)
+            $$
+            con $F, G \in \for(L)$ y $v \in V$ que no aparece libre.
+            \item[(2.2)] Axioma de sustitución:
+            $$
+                \forall v\ F \then F(\quo{t}{v})
+            $$
+            con $F \in \for(L)$, $t \in \ter(L)$, $v \in V$.
+        \end{itemize}
+        \item[(III)] \textsc{Axiomas de igualdad}
+        \begin{itemize}
+            \item[(3.1)] Variables:
+            $$
+                x = x,\ x\in V
+            $$
+            \item[(3.2)] Funciones:
+            $$
+                x_1 = y_1 \then \cdots \then x_n = y_n \then f x_1 \ldots x_n = f y_1 \ldots y_n
+            $$
+            con $x_i, y_i \in V$, $f$ un símbolo de función $n$-aria.
+            \item[(3.3)] Relaciones:
+            $$
+                x_1 = y_1 \then \cdots \then x_m = y_m \then R x_1 \ldots x_m = R y_1 \ldots y_m
+            $$
+            con $x_i, y_i \in V$, $R$ un símbolo de relación $m$-aria.
+        \end{itemize}
+    \end{enumerate}
+\end{dfn}
+
+\begin{pro}[Consecuencia semántica y consecuencia sintáctica]
+    Sea $L$ un lenguaje, $F \in \for(L)$ un enunciado y $T$ una $L$-teoría: $T \vdash F \iff T \vDash F$.
+\end{pro}
+
+\section{Demostración formal}
+\begin{dfn}[Demostración]
+    Una \textbf{demostración} de $F \in \for(L)$ en una $L$-teoría $T$ es una secuencia finita de fórmulas de $L$ ($F_1, \ldots, F_n$) tal que $F_n$ es $F$ y donde para cada $i$ con $1 \leq i \leq n$:
+    \begin{itemize}
+        \item $F_i$ es un axioma lógico, ó
+        \item $F_i$ se obtiene de $F_j, F_k$ donde $F_k$ es $F_j \then F_i$ mediante \textit{Modus Ponens}, ó
+        \item $F_i$ se obtiene de $F_j$ mediante \textit{Generalización}, es decir, $F_i$ es $\forall v\ F_j$ para $v \in V$.
+    \end{itemize}
+\end{dfn}
+
+\begin{dfn}[Teorema. Consecuencia sintáctica]
+    Un \textbf{teorema} de una $L$-teoría $T$ es una fórmula $F \in \for(L)$, para la que existe una demostración de $F$ en $T$. Decimos que $F$ es un \textbf{teorema} de $T$, o $F$ es una \textbf{consecuencia sintática} de $T$. ($T \vdash F$).
+\end{dfn}
+
+\begin{obs}
+    Si $(F_1, \ldots, F_n)$ es una demostración de $F$ en $T$, entonces $(F_1, \ldots, F_i)$ es una demostración de $F_i$ en $T$.
+\end{obs}
+
+\begin{dfn}[Longitud de una demostración]
+    Si $(F_1, \ldots, F_n)$ es una demostración de $F$ en $T$, $n$ es la \textbf{longitud de la demostración}.
+\end{dfn}
+
+\begin{obs}$ $
+    \begin{itemize}
+        \item Los axiomas lógicos y los elementos de $T$ tienen demostraciones de longitud $1$.
+        \item Si $T = \varnothing$ y $T \vdash F$ se dice que $F$ es un teorema del lenguaje $L$.
+    \end{itemize}
+\end{obs}
+
+%% TODO: Añadir ejemplos de demostraciones (MUCHOS), empiezan en la página 23, día 10/10/2019
+
+\begin{obs}[Ayudas para demostraciones]$ $
+    \begin{itemize}
+        \item Para demostrar $H_1 \bicond H_2$ basta demostrar $H_1 \then H_2$ y $H_2 \then H_1$. Luego se obtiene la fórmula original por tautologías.
+        \item Para demostrar $H_1 \then \forall x\ H_2$ (con $x$ no libre en $H_1$) basta demostrar $H_1 \then H_2$. Se obtiene con generalización y el axioma de $\forall$.
+        \item Para demostrar $\forall x \forall y\ F \bicond \forall y \forall x$ basta demostrar: $\forall x \forall y\ F \then \forall x\ F$ y $\forall y \forall x\ F \then \forall y\ F$.
+    \end{itemize}
+\end{obs}
+
+\begin{dfn}[Demostración abreviada]
+    Una \textbf{demostración abreviada} de $F \in \for(L)$ en $T$ tiene la misma definición que \textit{demostración} excepto que ahora consideramos las consecuencias semánticas de $T$ como parte de $T$.
+\end{dfn}
+
+\begin{obs}
+    Una demostración abreviada de $F$ en $T$ es una demostración de $F$ en $T' = T \bigcup T_0$ donde $T_0 \subseteq \sdf{G \in \for(L) \mid T \vdash G}$.\\
+
+    Dada una demostración abreviada de $F$ en $T$, se puede dar una demostración de $F$ en $T$. Sustituyendo en las líneas de la demostración de $F$ en $T \bigcup T_0$ cada $F_i$ teorema de $T$ por una demostración de $F_i$.
+\end{obs}
+
+\begin{pro}[$=$ como relación de equivalencia]\label{pro:2.1}
+    Las fórmulas que expresan que $=$ es una relación de equivalencia son teoremas del lenguaje.
+    \begin{enumerate}
+        \item $\vdash x = x$.
+        \item $\vdash x = y \then y = x$.
+        \item $\vdash x = y \land y = z \then x = z$.
+    \end{enumerate}
+\end{pro}
+\begin{proof}
+    A completar. %% TODO: Página 27, día 15/10
+\end{proof}
+
+\section{Coherencia de teorías}
+\begin{dfn}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría. Decimos que $T$ es \textbf{incoherente} si existe $F \in \for(L)$ tal que $T \vdash F \land \neg F$. $T$ es \textbf{coherente} si no es \textit{incoherente}.
+\end{dfn}
+
+\begin{pro}[Caracterización de teorías incoherentes]\label{pro:2.3}
+    Sea $L$ un lenguaje, $T$ una $L-teoría$. Las siguientes propiedades son equivalentes:
+    \begin{enumerate}
+        \item $T$ es incoherente.
+        \item Existe $F \in \for(L)$ tal que $T \vdash \neg F$ y $T \vdash F$.
+        \item Para toda $F \in \for(L)$ $T \vdash F$.
+    \end{enumerate}
+\end{pro}
+\begin{proof}$ $
+    \begin{itemize}
+        \item[$(1 \implies 2)$] Sea $T$ incoherente, por definición, $\exists F \in \for(L)$ tal que $T \vdash F \land \neg F$.
+        Entonces:
+        \begin{align*}
+            &F1:\ F \land \neg F & (T \vdash)\\
+            &F2:\ F \land \neg F \then F & (taut.)\\
+            &F3:\ F \land \neg F \then \neg F & (taut.)\\
+            &F4:\ F & (MP(2, 1))\\
+            &F5:\ \neg F & (MP(3, 1))
+        \end{align*}
+    \end{itemize}
+    \item[$(2 \implies 3)$] Sea $G \in \for(L)$
+        \begin{align*}
+            &F1:\ F \then \neg F \then G & (taut.)\\
+            &F2:\ F                      & (T \vdash)\\
+            &F3:\ \neg F                 & (T \vdash)\\
+            &F4:\ \neg F \then G         & (MP(1, 2))\\
+            &F5:\ G                      & (MP(4, 3))
+        \end{align*}
+    \item[$(3 \implies 2)$] Partimos de $\forall F \in \for(L)$, $T \vdash F$. Como $F \land \neg F \in \for(L)$ entonces $T \vdash F \land \neg F$.
+\end{proof}

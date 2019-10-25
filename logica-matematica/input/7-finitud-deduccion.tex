@@ -1,0 +1,27 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Teoremas de Finitud y de la Deducci\'on.}
+
+\section{Teorema de finitud}
+
+\begin{thm}[Teorema de finitud]\label{thm:tf}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría y $F \in \for(L)$ una fórmula. Si $T \vdash F$ entonces existe $T_0 \subseteq T$ finito tal que $T_0 \vdash F$.
+\end{thm}
+
+\begin{cor}[Corolario primero al teorema \ref{thm:tf}]
+    Si para $T_0 \subseteq T$, $T_0$ es coherente, entonces $T$ es coherente.
+\end{cor}
+
+\begin{cor}[Corolario segundo al teorema \ref{thm:tf}. Unión de teorías coherentes]
+    Sea $L$ un lenguaje, sea $\sdf{T_i, i\in I}$ una familia de $L$-teorías, tal que $\forall i, j\in I$, $T_i \subseteq T_j$ o $T_j \subseteq T_i$. Si $T_i$ es coherente, $\forall i \in I$, entonces $\bigcup_{i\in I} T_i$ es una $L$-teoría coherente.
+\end{cor}
+
+\section{Teorema de la deducci\'on}
+
+\begin{thm}[Teorema de la deducción]
+    Sea $L$ un lenguaje, $T$ una $L$-teoría, $F$ un enunciado de $L$ y $G \in \for(L)$. Si $T \bigcup \sdf{F} \vdash G$ entonces $T \vdash F \then G$.
+\end{thm}
+
+\begin{proof}
+    A completar. %%TODO: Página 29, día 17/10/2019
+\end{proof}
