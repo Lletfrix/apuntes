@@ -114,7 +114,7 @@ Vamos a ver resultados para generalizar este proceso.
     $$
         E = \Q(\alpha,  \beta, -\alpha, -\beta) = \Q(\alpha, \beta)
     $$
-    Sin embargo, podemos reducirlo aún más si vemos que $\Q(\alpha, \beta) = \Q(\beta)$.
+    Sin embargo, podemos reducirlo aún más si vemos que $\Q(\alpha, \beta) = \Q(\alpha)$.
     $$
         \alpha\beta = \sqrt{(2 + \sqrt 2)(2 - \sqrt 2)} = \sqrt 2,\ \alpha^{-1} = \left(\frac{\beta}{\sqrt 2}\right) \in \Q(\alpha) \implies \beta = \frac{\beta}{\sqrt 2} \cdot \sqrt 2 \in \Q(\alpha)
     $$
@@ -131,7 +131,7 @@ Vamos a ver resultados para generalizar este proceso.
 \end{thm}
 
 \begin{proof}
-    Pedir a Santorum.
+    Pedir a Santorum. %% TODO
 \end{proof}
 
 \begin{cor}[Unicidad de los cuerpos de escisión]
@@ -193,7 +193,7 @@ Vamos a ver resultados para generalizar este proceso.
         $$
         Dado $d_i$ con $i > 1$, queremos ver que $d_i \in E$. Llamemos $b = d_i$ para algún $i$. Como $a$ y $b$ son raíces de $p \in K[x]$ irreducible, por el teorema \ref{thm:2.5} $\exists \sigma: K(a) \to K(b)$ tal que $\sigma(k) = k,\ \forall k \in K$.
 
-        %
+        %TODO
         %\sigma: K(a) --------> K(b)
         %         ^              ^
         %         |              |
@@ -205,7 +205,7 @@ Vamos a ver resultados para generalizar este proceso.
             K(b)(f) = K(b)(b_1, \ldots, b_m) = K(b_1, \ldots, b_m) = E(b)
         $$
         Por el teorema \ref{thm:3.5} existe un isomorfismo $\tau: E \to E(b)$ que extiende a $\sigma$.
-        %
+        %TODO
         %\tau:  E=K(a)(f) ----> E(b) = K(b)(f)
         %         |              |
         %         |              |
@@ -254,3 +254,285 @@ Vamos a ver resultados para generalizar este proceso.
 \begin{obs}
     Si $E/K$ es normal y $f\in K[x]$ no necesariamente irreducible que tiene una raíz en $E$, $f$ no tiene por que escindirse.
 \end{obs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 28/10
+\section{El grupo de Galois de una extensi\'on}
+
+\subsection{Acción de un grupo}
+
+Vamos a ver un repaso de algunos conceptos de la acción de un grupo sobre un conjunto.
+
+\begin{dfn}[Acción de un grupo]
+    Una \textbf{acción} de un grupo $(G, \star)$ sobre un conjunto $X$ es una aplicación: $\phi: G \times X \to X$ que cumple:
+    \begin{enumerate}
+        \item $ \forall x \in X,\ \phi(e, x) = x$ donde $e$ es el elemento neutro del grupo.
+        \item $ \forall x \in X,\ g, h \in G,\ \phi(g \star h, x) = \phi(g, \phi(h \star x))$
+    \end{enumerate}
+\end{dfn}
+\begin{obs}$ $
+    \begin{itemize}
+        \item El cumplimiento de las dos condiciones hace que la aplicación $\phi(g, \cdot): X \to X$ sea biyectiva para cada $g \in G$. Con esto se puede dar una definición alternativa de la acción de un grupo:
+        $$
+            \phi: G \to \sdf{\text{funciones biyectivas } X \to X}
+        $$
+        \item Una notación alternativa usada para las acciones es:
+        $$
+            (g, x) \mapsto x \cdot g
+        $$
+        Con lo que las dos condiciones se reescriben como:
+        \begin{enumerate}
+            \item $x \cdot e = x$, con $e$ el neutro del grupo.
+            \item $(x \cdot g) \cdot h = x \cdot (g \cdot h),\ \forall g,h \in G,\ x \in X$
+        \end{enumerate}
+    \end{itemize}
+\end{obs}
+
+\begin{pro}[Una acción es un homomorfismo]
+    Sea $(G, \cdot)$ un grupo, $\Omega \neq \varnothing$ un conjunto. Si $G$ actúa sobre $\Omega$ (lo denotamos por $\Omega^{\actar G}$), la aplicación:
+    $$
+        \rho: G \to S_{\Omega};\ g \mapsto f \circ g: \Omega \to \Omega;\ \omega \mapsto \omega \cdot g
+    $$
+    es un homomorfismo de grupos, en particular $\ker(\rho) \normsub G$. Y tenemos que:
+    $$
+        \quo{G}{\ker \rho} \isom \rho(G) \leq S_{\Omega}
+    $$
+    Recíprocamente, todo homomorfismo $\rho: G \to S_\Omega $ define una acción de $G$ en $S_\Omega$.
+\end{pro}
+
+Además, sea $(G, \cdot)$ un grupo, $\Omega \neq \varnothing$ un conjunto. Si $G$ actúa sobre $\Omega$ ($\Omega^{\actar G}$), entonces define una relación binaria de equivalencia (r.b.e) de la forma:
+$$
+    \omega \sim \omega' \iff \exists g \in G:\ \omega \cdot g = \omega'
+$$
+Las clases de equivalencia definidas por esta relación se denominan $G$-órbitas.
+
+\begin{dfn}[$G$-órbita de un elemento de un conjunto]
+    Sea $G$ un grupo, la \textbf{órbita} de un elemento $\omega$ de un conjunto $\Omega$ es la clase de equivalencia:
+    $$
+        \omega^G = \theta_\omega = \sdf{\omega \cdot g \mid \forall g \in G} \subseteq \Omega
+    $$
+\end{dfn}
+
+\begin{dfn}[Estabilizador de un elemento de un conjunto]
+    Sea $G$ un grupo, el \textbf{estabilizador} de un elemento $\omega$ de un conjunto $\Omega$ es:
+    $$
+        G_\omega = \mathrm{St}(\omega) = \sdf{g \in G \mid \omega \cdot g = \omega} \leq G
+    $$
+    que es un subgrupo de $G$.
+\end{dfn}
+
+\begin{thm}[Teorema de la Órbita-Estabilizador]\label{thm:orbita}
+    Sea $G$ un grupo que actúa sobre $\Omega$ y $\omega \in \Omega$ un elemento, entonces la longitud de la $G$-órbita de $\omega$ ($\left|\theta_\omega\right| = \vabs{G_\omega}$) es:
+    $$
+        \vabs{G_\omega} = \vabs{\theta_\omega} = \vabs{G:G_\omega}
+    $$
+\end{thm}
+
+\begin{dfn}[Puntos fijos por la acción de un grupo]
+    Sea $G$ un grupo y $\Omega$ un conjunto.
+    \begin{itemize}
+        \item Los puntos fijos por la acción de $G$ son los pertenecientes al conjunto:
+        $$
+            \Omega^G = \sdf{ \omega \in \Omega \mid \omega \cdot g = \omega,\ \forall g \in G}
+        $$
+        \item Los puntos fijos por la acción de $g \in G$ son los pertenecientes al conjunto:
+        $$
+            \Omega^g = \sdf{ \omega \in \Omega \mid \omega \cdot g = \omega}
+        $$
+    \end{itemize}
+\end{dfn}
+
+\subsection{Grupo de Galois}
+
+En esta subsección, vamos a considerar $E$ como una extensión. Además, sea $\aut(E)$ el conjunto de automorfismos de $E$, podemos comprobar que $(\aut(E), \circ)$ es un grupo (no abeliano en general).\\
+
+El grupo $(\mathrm{Aut}(E), \circ)$, actúa sobre $E$. ($e \cdot \sigma = \sigma(e) = e$).
+
+\begin{dfn}[Grupo de Galois]
+Sea $\sigma \in \aut(E)$, $E^\sigma = \sdf{e \in E \mid e \sigma = e}$ el conjunto de puntos fijos de $E$ por la acción de $\sigma$ (es subcuerpo de $E$). Sea $E/K$ una extensión, llamamos \textbf{grupo de Galois} de $E/K$ a:
+$$
+    \gal(E/K) = \sdf{\sigma \in \aut(E) \mid \sigma(k) = k \forall k \in K} = \sdf{\sigma \in \aut(E) \mid K \subseteq E^\sigma}
+$$
+Donde además, el \textit{grupo de Galois} es un cuerpo intermedio de $E/K$.
+\end{dfn}
+
+\begin{pro}
+Sea $L$ un cuerpo intermedio de $E/K$, entonces: $\gal(E/L) \leq \gal(E/K)$. En general $\left.\sigma\right|_L \notin \gal(L/K)$.
+\end{pro}
+
+\begin{obs}[Notación]
+    Sea $\sigma \in \gal(E/K)$, decimos que es un $K$-automorfismo de $E$ si fija todo $K$ elemento a elemento.
+\end{obs}
+
+\begin{dfn}[$K$-isomorfismo]
+    Sea $E/K$ una extensión, $L_1, L_2$ cuerpos intermedios, $\sigma: L_1 \to L_2$ es un $\mbf K$\textbf{-isomorfismo} si $\sigma: L_1 \to L_2$ es un isomorfismo y $\sigma(k) = k,\ \forall k \in K$.
+\end{dfn}
+
+Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
+\begin{thm}\label{thm:3.8bis}
+    Sea $E/K$ extensión normal,$L_1, L_2$ cuerpos intermedios. Si $\sigma: L_1 \to L_2$ es un $K$-isomorfismo, entonces: $\exists \tau \in \gal(E/K)$ tal que $\left. \tau \right|_{L_1} = \sigma$.
+\end{thm}
+
+\begin{cor}[al teorema \ref{thm:3.8bis}] \label{cor:3.10}
+    Sea $E/K$ una extensión normal, $p \in K[x]$ un polinomio irreducible. Si $a$ y $b$ son raíces de $p$ en $E$, entonces $\exists \tau \in \gal(E/K):\ \tau(a) = b$.
+\end{cor}
+\begin{proof}
+    Por el corolario \ref{cor:2.6}, existe un $K$-isomorfismo $\sigma: K(a) \to K(b)$. Por el teorema \ref{thm:3.8bis}, $\sigma$ se extiende a $\tau \in \gal(E/K)$.
+\end{proof}
+
+\begin{obs}
+    $\gal(E/K)$ actúa sobre las raíces de $f \in K[x]$ en $E$.
+\end{obs}
+
+\begin{thm}[Grupo de Galois y raíces de un polinomio]\label{thm:3.11}
+    Sea $E/K$ una extensión, $0 \neq f \in K[x]$, $\Omega = \sdf{a_1, \ldots, a_n}$ el conjunto de todas las raíces distintas de $f$ en $E$, con $n \leq 1$ y sea $L = K(\mbf a) \subseteq E$ un subcuerpo intermedio, entonces:
+    \begin{itemize}
+        \item[(a)] Si $a \in \Omega$ y $\sigma = \gal(E/K)$, entonces $\sigma(a) \in \Omega$. En particular, $\left.\sigma\right|_\Omega \in S_\Omega$ y $\sigma(L) = L$.
+        \item[(b)] La aplicación $\psi: \gal(E/K) \to \gal(L/K);\ \sigma \mapsto \left.\sigma\right|_L$ es un homomorfismo de grupos con $\ker(\psi) = \gal(E/L) \normsub \gal(E/K)$.
+        \item[(c)] Si $E/K$ es normal, entonces $\psi$ es sobreyectivo. En particular, $\quo{\gal(E/K)}{\gal(E/L)} \isom \gal(L/K)$.
+        \item[(d)] La aplicación $\rho: \gal(E/K) \to S_\Omega;\ \sigma \mapsto \left.\sigma\right|_\Omega$ es un homomorfismo de grupos con $\ker(\rho) = \gal(E/L)$.
+        \item[(e)] Si $E/K$ es normal y $\rho$ es irreducible, dados $a, b \in \Omega$ existe $\sigma \in \gal(E/K)$ tal que $\sigma(a) = b$. Por tanto:
+        $$
+            n = \left|\gal(E/K):\gal(E/K(a))\right|
+        $$
+    \end{itemize}
+\end{thm}
+
+\begin{obs}[al teorema \ref{thm:3.11}]
+    $$
+        \left(\gal(L/L) = \sdf{id}\right)
+    $$
+    En el teorema, (d) aplicado a $L/K$ implica que:
+    $$
+        \gal(L/K) \isom \rho(\gal(L/K)) \leq S_\Omega
+    $$
+\end{obs}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item[(a)]
+        $$
+            0 = \sigma(0) = \sigma(f(a)) = \sigma(f)(\sigma(a)) = f(\sigma(a)) \implies \sigma(a) \in \Omega
+        $$
+        Como:
+        $$
+            \left. \sigma \right|_\Omega: \Omega \to \Omega \text{ es inyectiva,}
+        $$
+        entonces:
+        $$
+            \Omega \text{ es finita } \implies \left. \sigma \right|_\Omega \in S_\Omega \text{ es biyectiva,}
+        $$
+        por tanto:
+        $$
+            \sigma(L) = \sigma(K(a_1, \ldots, a_n)) = \sigma(K)(\sigma(a_1), \ldots, \sigma(a_n)) = K(a_1, \ldots, a_n) = L
+        $$
+        \item[(b)] Se deja como ejercicio.
+        \item[(c)] Sea $\theta \in \gal(L/K)$, por el teorema \ref{thm:3.8bis}, $\exists \sigma \in \gal(E/K)$ tal que $\left. \sigma \right|_L = \theta$. En particular, $\psi$ es sobreyectiva. (La segunda conclusión se sigue del teorema de isomorfía).
+        \item[(d)] Se deja como ejercicio partiendo de $\left. \sigma \right|_\Omega \in S_\Omega$.
+        \item[(e)] Por el corolario \ref{cor:3.10} si $a, b \in \Omega$ cualesquiera, $\exists \sigma \in \gal(E/K)$ con $a\sigma = \sigma(a) = b$ y $\theta_a = \Sigma$ por el teorema \ref{thm:orbita}.
+        %%TODO: COMPLETAR demostración del cardinal
+    \end{itemize}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 29/10
+
+\begin{cor}[Caracterización de normalidad a través de isomorfismos]\label{cor:3.12}
+    Sea $E/K$ una extensión, $L$ un cuerpo intermedio:
+    \begin{itemize}
+        \item[(a)] Si $L/K$ es norma entonces $\tau \in \gal(E/K)$:
+        $$
+            \tau(L) = L \left(\rest{\tau}_L\right) \in \gal(L/K)
+        $$
+        \item[(b)] Si $E/K$ es normal:
+        $$
+            L/K \text{es normal} \iff \forall \tau \in \gal(E/K),\ \tau(L) = L
+        $$
+        En particular $\gal(E/L) \normsub \gal(E/K)$ y $\quo{\gal(E/K)}{\gal(E/L)} \isom \gal(L/K)$.
+    \end{itemize}
+\end{cor}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item[(a)] $L = K(f) = K(a_1, \ldots, a_n)$. $f \in K[x] = K(a_1, \ldots, a_n)$. Con $\Omega = \sdf{a_i}$ todas las raíces distintas entre sí de $f$ en $L$.
+        Por el teorema \ref{thm:3.11}(a), si $\sigma \in \gal(E/K)$ $\sigma(L)=L$.
+        \item[(b)] Supongamos $E/K$ normal.
+        \begin{itemize}
+            \item[$(\implies)$] Directo de firma análoga al apartado (a).
+            \item[$(\ \Longleftarrow \ )$] Suponemos que $\tau \in \gal(E/K),\ \tau(L) = L$ y queremos probar que $L/K$ es normal. Para ello, usamos el teorema \ref{thm:3.9}.\\
+
+            Sea $p \in K[x]$ irreducible con una raíz $a \in L$m queremos ver que $p$ se escinde en $L$. Por el teorema \ref{thm:3.9}, $p$ se escinde en $E$ (pues $E/K$) es normal. Sea $b \in E$ una raíz de $p$, por el corolario \ref{cor:3.10}, $\exists \tau \in \gal(E/K)$ tal que $\tau(a) = b$ y además $a \in L \implies b = \tau(a) \in L$.\\
+
+            Como $L$ tiene todas las raíces de $p$, entonces $p$ se escinde en $L$. La última parte se demuestra de forma directa aplicando el teorema \ref{thm:3.11}(c).
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\begin{obs}
+    Puede parecer que el corolario \ref{cor:3.12}(b) no nos da una caracterización por que requiere estar dentro de una extensión normal, pero si $L/K$ es finita, existe una extensión $E/K$, $L \subseteq E$, tal que $E/K$ es normal (y es la menor con estas propiedades). $E$ es la \textit{clausura normal} de $L/K$.\\\\
+
+    Por ejemplo, sea $L = K(a_1, \ldots, a_n)$ (por ejemplo adjuntando una $K$-base). Sea $a_i \in L$ es algebraico sobre $K$. Para constuir $E$ la clausura normal:
+    $$
+        p_i = Irr(K, a_i),\ f = \prod_{i=1}^{n} p_i, \text{ entonces } E = K(f)
+    $$
+\end{obs}
+
+\begin{pro}[Finitud de las extensiones de Galois]\ref{pro:ext-gal-finit}
+    Sea $L/K$ una extensión, si $L/K$ es finita entonces $\gal(L/K)$ es finita.
+\end{pro}
+
+\begin{proof}
+    Si $L/K$ es normal, entonces sea $L = K(a_1, \ldots, a_n)$ y $\Omega = \sdf{a_i}$ todas las raíces distintas entre sí de $f \in K[x]$. Por \ref{thm:3.11}(d), $\gal(L/K) \leq S_\Omega \isom S_n$, donde $S_n$ es el enésimo grupo simétrico.\\
+    Sabemos que $\vabs{S_n} = n! \implies \text(por Lagrange) \vabs{\gal(L/K)} \divides \vabs{S_n} = n!$.\\
+\end{proof}
+
+\begin{eg}[Ejemplos de ejercicios de extensiones de Galois]$ $
+    \begin{enumerate}
+        \item Sea $E = \quo{\F_2[x]}{\gen{x^2 + x + 1}} = \sdf{\bar 0, \bar 1, \bar x, \bar x + \bar 1}$, además $E/\bar \F_2$, de hecho, $E = \bar \F_2(\bar x)$. Comprueba que $E = \bar\F_2(y^2 + y + 1)$ y calcula $\gal(E/\bar \F_2)$.\\\\
+
+        Por el lema $\ref{lm:3.3}$ $\bar x$ es una raíz, y $y^2 + y + 1 \in \bar\F_2[y]$. Sabemos además que $y^2 + y + 1$ tiene como máximo dos raíces distintas en su cuerpo de escisión.\\
+        $\gal(E/\bar\F_2)$ manda $\bar x$ en otra raíz de $y^2 + y + 1$. Es decir, sea $\sigma \in \gal(E/K), f\in K[x], a\in E$ una raíz de $f$, entonces:
+        $$
+            0 = \sigma(0) = \sigma(f(a)) = \sigma(f)(\sigma(a)) = f(\sigma(a))
+        $$
+        Sabemos además que $Frob \in \gal(E/\bar \F_2)$ donde $Frob$ es el automorfismo de Frobenius, ya que fija el cuerpo primo de $E$ que es $\bar \F_2$. Por tanto:
+        $$
+            Frob(\bar x) = \bar x^2 = \bar x + \bar 1 \in E \text{ es otra raíz de } y^2 + y + 1
+        $$
+        Por tanto, $E = \bar \F_2(\bar x, \bar x + \bar 1)$, es el cuerpo de escisión de $y^2 + y + 1$.\\
+
+        Para calcular $\gal(E/\bar \F_2)$, por \ref{thm:3.11}(d): $\sdf{id, Frob} = \gal(E/\bar \F_2) \leq S_2$ Donde $\vabs{S_2} = 2 \implies \gal(E/\bar \F_2) = \sdf{id, Frob} = \gen{Frob}$.
+
+        \item Sea $f(x) = x^3 - 2 \in \Q[x]$.
+        \begin{itemize}
+            \item[(a)] $E = \Q(f)$.
+            \item[(b)] $\vabs{E: \Q}$
+            \item[(c)] Calcula $\gal(E/\Q)$.
+        \end{itemize}
+
+        Vamos a ver la solución:
+        \begin{itemize}
+            \item[(a)] Las raíces de $f$ en $\C$ son $\sdf{\sqrt[3]{2}, \sqrt[3]{2} \omega, \sqrt[3]{2} \omega^2}$ donde:
+            $$
+                \omega = exp\left( \frac{2\pi}{3} \right) = -\frac{1}{2} + \frac{\sqrt 3}{2} i
+            $$
+            y por tanto:
+            $$
+                E = \Q(\sqrt[3]{2}, \sqrt[3]{2} \omega, \sqrt[3]{2} \omega^2) = \Q(\sqrt[3]{2}, \omega) = \Q(\sqrt[3]{2}, \sqrt{3} i)
+            $$
+            \item[(b)] Sabemos por el teorema \ref{thm:2.3} que $\vabs{\Q(\sqrt[3]{2}):\Q} = 3$ y $\vabs{\Q(\omega):\Q} = 2$. Por tanto:
+            $$
+                \Q \subseteq \Q(\sqrt[3]{2}) \subseteq \Q(\sqrt[3]{2})(\omega) \implies \vabs{\Q(\sqrt[3]{2}, \omega):\Q} = 6
+            $$
+            \item[(c)] Sea $L = \Q(\omega)$, sabemos que $\Q \subseteq L \subseteq E$. Por el teorema \ref{thm:3.11}(d):
+            $$
+                \gal(E/\Q) \leq S_3 \implies \vabs{\gal(E/\Q)} \divides 6
+            $$
+            Por el teorema \ref{thm:2.1}, sabemos que una $\Q$-base de $E$ es $\sdf{1, \sqrt[3]{2}, \sqrt[3]{4} \sqrt[3]{2} \omega, \sqrt[3]{4} \omega,  \omega}$. Luego $\tau \in \gal(E/\Q)$ queda determinado por $\tau(\sqrt[3]{2})$ y $\tau(\omega)$.\\
+            Las distintas posibilidades de $\tau$ son:
+            $$
+                \tau(\omega) \in \sdf{\omega, \bar \omega} \text{ y } \tau(\sqrt[3]{2}) \in \sdf{\sqrt[3]{2}, \sqrt[3]{2} \omega, \sqrt[3]{2} \bar \omega}
+            $$
+            Donde con un rápido cálculo combinatorio vemos que hay como mucho $6$ posibles $\tau$.
+            %% TODO: Completar de Santorum.
+        \end{itemize}
+    \end{enumerate}
+\end{eg}
