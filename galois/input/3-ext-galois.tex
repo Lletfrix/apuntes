@@ -49,8 +49,8 @@ Sea $f \in K[x]$, entonces $E$ es un cuerpo de escisión de $f$ sobre $K$ si:
 \begin{lm}[Escisión de polinomios no constantes]\label{lm:3.1}
     Sea $K$ un cuerpo:\\
     \begin{enumerate}
-        \item Si $f \in K[x]$ no constante se escinde en $K$ si y sólo si todos los polinomios en la descomposición en términos de factores irreducibles tienen grado $1$.
-        \item Si $f \in K[x]$ no constante que se escinde en $K$ y sea $p \in K[x]$ tal que $p \divides f$, entonces $p$ se escinde en $K$.
+        \item[($i$)] Si $f \in K[x]$ no constante se escinde en $K$ si y sólo si todos los polinomios en la descomposición en términos de factores irreducibles tienen grado $1$.
+        \item[($ii$)] Si $f \in K[x]$ no constante que se escinde en $K$ y sea $p \in K[x]$ tal que $p \divides f$, entonces $p$ se escinde en $K$.
     \end{enumerate}
 \end{lm}
 
@@ -70,7 +70,7 @@ Si $f$ es un polinomio sobre $\Q[x]$ de grado $n$, \textit{sabemos} que $\exists
 
 Vamos a ver resultados para generalizar este proceso.
 
-\begin{lm}[Lema de Kronecker]\label{lm:3.3}
+\begin{lm}[Teorema de Kronecker]\label{lm:3.3}
     Sea $p \in K[x]$ un polinomio irreducible, entonces existe $E/K$ tal que $p$ tiene una raíz en $E$.
 \end{lm}
 
@@ -384,7 +384,7 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
 \end{obs}
 
 \begin{thm}[Grupo de Galois y raíces de un polinomio]\label{thm:3.11}
-    Sea $E/K$ una extensión, $0 \neq f \in K[x]$, $\Omega = \sdf{a_1, \ldots, a_n}$ el conjunto de todas las raíces distintas de $f$ en $E$, con $n \leq 1$ y sea $L = K(\mbf a) \subseteq E$ un subcuerpo intermedio, entonces:
+    Sea $E/K$ una extensión, $0 \neq f \in K[x]$, $\Omega = \sdf{a_1, \ldots, a_n}$ el conjunto de todas las raíces distintas de $f$ en $E$ (no quiere decir que $E$ contenga todas las raíces de $f$), con $n \leq 1$ y sea $L = K(\mbf a) \subseteq E$ un subcuerpo intermedio, entonces:
     \begin{itemize}
         \item[(a)] Si $a \in \Omega$ y $\sigma = \gal(E/K)$, entonces $\sigma(a) \in \Omega$. En particular, $\left.\sigma\right|_\Omega \in S_\Omega$ y $\sigma(L) = L$.
         \item[(b)] La aplicación $\psi: \gal(E/K) \to \gal(L/K);\ \sigma \mapsto \left.\sigma\right|_L$ es un homomorfismo de grupos con $\ker(\psi) = \gal(E/L) \normsub \gal(E/K)$.
@@ -536,3 +536,121 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
         \end{itemize}
     \end{enumerate}
 \end{eg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 31/10
+\begin{eg}[Hallar grupo de Galois dado un polinomio y una extensión]
+    Sea $f \in \Q[x]$, $f(x) = x^4 - 2$. Y sea $E = \Q(\sqrt[4] 2)$, entonces el conjunto $\Omega$ del teorema \ref{thm:3.11} es $\Omega = \sdf{\sqrt[4] 2, -\sqrt[4] 2}$. Sea $L = \Q(\Omega) = E$, por el teorema \ref{3.11}(d), $\gal(E/\Q) \leq S_\Omega \isom S_2 \implies |\gal(E/\Q)| = 1$ o $2$ por el teorema de Lagrange de grupos. Además:
+    $$
+        \gal(E/\Q) = \aut(E) = \aut(\Q(\sqrt[4]{2}))
+    $$
+    Por \ref{cor:2.6}, $\exists K$-isomorfismo $\sigma$ tal que:
+    $$
+        \sigma: \Q(\sqrt[4]{2}) \to \Q(-\sqrt[4] 2) = E;\ \ \sqrt[4]{2} \mapsto -\sqrt[4]{4} \implies \sigma \in \gal(E/\Q) = \sdf{1, \sigma}
+    $$
+    Considerando las extensiones:
+    %   TODO
+    % \Q(\sqrt[4]{2}) = E \to  E
+    %                   |      |
+    %                   |      |
+    % \Q(\sqrt{2})    = L \to  L
+    %                   |      |
+    %                   \Q \to \Q
+    %
+    Donde la extensión $L/\Q$ es normal pero $E/\Q$ no.  Además, sea $\theta: L \to L;\ \sqrt 2 \mapsto \sqrt 2$ no se extiende a $E$.\\
+
+    Este ejemplo muestra que la hipótesis $E/K$ normal es necesaria en el teorema \ref{thm:3.8bis}.
+\end{eg}
+
+\section{Extensiones separables}
+
+El siguiente teorema y proposición se vieron en el capítulo 1 pero vamos a reescribirlos con el lenguaje actual, es por ello que no se aporta demostración de los mismos.
+
+\begin{thm}[Derivada formal y raíces multiples]\label{thm:3.13}\label{thm:3.4.1}
+    Si $f \in K[x]$ irreducible y $f'$ su derivada formal tal que $f' \neq 0$, entonces todas las raíces de $f$ en su cuerpo de escisión son distintas.
+\end{thm}
+\begin{obs}
+    Si $\car(K) = 0$ y $f\in K[x]$ con $\delta f > 1$, entonces $f' \neq 0$.
+\end{obs}
+
+\begin{eg}[Aplicación del contrarrecíproco del teorema \ref{thm:3.13}]
+    Sea $f(x) = x^p -1$, $\car(K) = p$, vemos que $f' = 0$. Entonces no todas las raíces de $f$ en su cuerpo de escisión son distintas, de hecho $f = (x-1)^p$.
+\end{eg}
+
+\begin{pro}[Multiplicidad de raíces y derivada formal]\ref{pro:3.4.2}
+    Sea $E/K$ una extensión, $f \in K[x]$  un polinomio y $a \in E$ tal que $f(a) = 0$, y sea $m$ la multiplicidad de la raíz $a$, entonces:
+    $$
+        m > 1 \iff f(a)=0=f'(a)
+    $$
+\end{pro}
+
+\begin{dfn}[Separabilidad. Polinomios, elementos y extensiones]$ $
+    \begin{itemize}
+        \item[($i$)] Sea $f \in K[x]$ un polinomio, decimos que es un \textbf{polinomio separable} si todas sus raíces en un cuerpo de escisión son distintas, es decir, $f' \neq 0$ (por el teorema \ref{3.13}).
+        \item[($ii$)] Sea $E/K$ una extensión, $a \in E$ un elemento algebraico, decimos que $a$ es un \textbf{elemento separable} si $p = Irr(K, a)$ es separable.
+        \item[($iii$)] Sea $E/K$ una extensión algebraica, decimos que es una \textbf{extensión separable} si todo $a \in E$ es separable.
+    \end{itemize}
+\end{dfn}
+
+\begin{pro}[Divisores irreducibles de un polinomio separable]
+    Sea $f \in K[x]$ un polinomio separable, entonces para todo $p$ irreducible tal que $p \divides f$, $p$ es separable.
+\end{pro}
+\begin{proof}
+    Si $p$ divide a $f$ quiere decir que todas sus raíces están contenidas en las de $f$, por tanto, si $f$ es separable, $p$ también lo es.
+\end{proof}
+
+\begin{pro}[Separabilidad de extensiones intermedios]
+    Sea $E/K$ una extensión separable, y $L$ un cuerpo intermedio, entonces, $E/L$ y $L/K$ son separables.
+\end{pro}
+\begin{proof}
+    Es fácil ver que $L/K$ es separable. Vamos a ver que $E/L$ es separable.\\
+    Sean $a \in E$, $p = Irr(L, a)$. Y sea $q = Irr(K, a)$ que es separable por hipótesis. Como $p \divides q$ (en $L[x]$), sea $M$ un cuerpo de escisión de $q$ sobre $L$ (que sabemos que existe por el teorema \ref{thm:3.4}), entonces $q$ se escinde en $M \implies p$ se escinde en $M$ por \ref{lm:3.1}($ii$).\\
+
+    Si $\alpha, \beta$ son raíces de $p$ en $M$, enotnces $\alpha, \beta$ son raíces de $q$ en $M \implies \alpha \neq \beta$.
+\end{proof}
+
+\begin{lm}[Separabilidad en cuerpos de característica $0$]\ref{lm:3.4.3}
+    Todo polinomio $f \in K[x]$ con $\car(K) = 0$ es separable y toda extensión $E/K$ algebraica es separable.
+\end{lm}
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{cor}[Separabilidad en cuerpos de característica $p$]\ref{cor:3.4.4}
+    Sea $f \in K[x]$ irreducible con $\car(K) = p$:
+    $$
+        f(x) \text{ es separable } \iff f \notin K[x^p]
+    $$
+\end{cor}
+
+Sin embargo el corolario no nos resuelve una pregunta. \textit{¿Podemos encontrar polinomios irreducibles que no sean separables?}, es decir, \textit{ ¿podemos encontrar un polinomio irreducible en $K[x^p]$?}.\\
+
+Recordemos que un cuerpo $K$ es perfecto si el monomorfismo de Frobenius es un isomorfismo, es decir, $\varphi = Frob \in \aut(K)$, donde $\varphi(a) = a^p$.\\
+En particular $\forall b \in K, \exists a \in K$ tal que $a^p = b$
+
+\begin{thm}\ref{thm:3.4.5}
+    Sea $K$ un cuerpo perfecto, todo polinomio irreducible sobre $K$ es separable. En particular, todo polinomio es separable.
+\end{thm}
+\begin{proof}
+    Sea $K$ perfecto, entonces:
+    $$
+        \forall b \in K,\ \exists a \in K:\ a^p = b.
+    $$
+    Sea $f\in K[x]$ irreducible. Sabemos por \ref{cor:3.4.4} que si $f \notin K[x^p]$, entonces $f$ es separable. Supongamos que $f \in K[x^p]$ de la forma:
+    \begin{align*}
+        f &= b_0 + b_1 x^(pn_1) + \cdots + b_k x^{pn_k}\\
+          &= a_0^p + \cdots + a_k^p (x^{n_k})^p\\
+          &= a_0^p + \cdots + (a_k x^{n_k})^p\\
+          &= (a_0 + \cdots a_k x^{n_k})^p \text{ que no es irreducible }
+    \end{align*}
+\end{proof}
+
+\begin{ex}[H3.16]
+    ¿Cuántas raíces distitnas tiene $x^{12} + 2x^6 + 1 \in \F_3[x]$ en su cuerpo de escisión?\\\\
+
+    \begin{align*}
+        x^{12} + 2x^6 + 1 &= (x^4)^4 + (-1)^3 (x^2)^3 + 1^3\\
+                          &= (x^4 -x^2 +1) ^3\\
+                          &= ((x^2 + 1)^2)^3 = (x^2 + 1)^6
+    \end{align*}
+    Sabemos que $x^2 + 1$ es separable por ser $\F_3$ perfecto. Además como es separable es irreducible y por tanto, tiene dos raíces distintas en su cuerpo de escisión.
+\end{ex}
