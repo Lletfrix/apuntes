@@ -131,7 +131,36 @@ Vamos a ver resultados para generalizar este proceso.
 \end{thm}
 
 \begin{proof}
-    Pedir a Santorum. %% TODO
+    Por inducción sobre $|E_1:K_1| < \infty$.\\\\
+    \begin{itemize}
+        \item[$|E_1:K_1|=1$] En este caso, $\vabs{E_1:K_1} \iff f_1$ se escinde en $K_1[x] \implies \sigma(f_1) = f_2$ se escinde en $K_2[x] \implies E_2 = K_2$ y podemos tomar $\tau = \sigma$.
+        \item[$\vabs{E_1:K_1}>1$] En este caso $f_1$ no se escinde en $K_1[x]$, y podemos escoger $p$ un factor de $f_1$ irreducible con $\delta(p) > 1$. Además, sea $q = \sigma(p)$ tal que $q \divides f_2$ y es irreducible con $\delta(q) > 1$.
+        Escogemos las raíces de $p$ en $E_1(a)$ y las de $q$ en $E_2(b)$ (por el lema \ref{lm:3.1} sabemos que $p$ y $q$ se escinden en $E_1$ y $E_2$ respectivamente).
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) {$\tau: E_1 = K_1(f_1)$};
+                \node (B) [right= of A] {$E_2 = K_2(f_2)$};
+                \node (C) [below of =A] {$\rest{\tau}_{K_1(a)} = \theta: K_1(a)$};
+                \node (D) [below of =B] {$K_2(b)$};
+                \node (E) [below of =C] {$\rest{\theta}_{K_1} = \sigma: K_1$};
+                \node (F) [below of =D] {$K_2$};
+                \node (p) [below of =E] {$p$};
+                \node (q) [below of =F] {$q$};
+                \draw[->] (C) to node {$\isom$}(D);
+                \draw[->] (E) to node {$\isom$}(F);
+                \draw[|->] (p) to node {}(q);
+                \draw[-] (A) to node {}(C);
+                \draw[-] (B) to node {}(D);
+                \draw[-] (C) to node {}(E);
+                \draw[-] (D) to node {}(F);
+                \draw[-] (E) to node {}(p);
+                \draw[-] (F) to node {}(q);
+            \end{tikzpicture}\\
+        \end{center}
+        Por el teorema \ref{thm:2.5} existe un isomorfismo $\theta: K_1(a) \to K_2(b)$ que extiende a $\sigma$.\\\\
+        Por el teorema \ref{thm:2.3} $\vabs{K_1(a):K_1} = o(p) > 1$, luego por el teorema \ref{thm:2.1} $\vabs{E_1:K_1(a)} < \vabs{E_1:K_1}$ y además $E_1 = K_1(a)(f_1)$ (por el lema \ref{lm:3.2}). Del mismo modo $E_2$ es un cuerpo de escisión de $f_2$ sobre $K_2(b)$.
+        Por inducción, existe un isomorfismo $\tau: E_1 \to E_2$ tal que $\rest{\tau}_{K_1(a)} = \theta$. En particular, $\rest{\tau}_{K_1} = \rest{\left( \rest{\tau}_{K_1(a)} \right)}_{K_1} = \rest{\theta}_{K_1} = \sigma$.
+    \end{itemize}
 \end{proof}
 
 \begin{cor}[Unicidad de los cuerpos de escisión]
@@ -141,7 +170,49 @@ Vamos a ver resultados para generalizar este proceso.
     Basta tomar $\sigma = id_K$ en el teorema \ref{thm:3.5}.
 \end{proof}
 
-%% TODO: COMPLETAR EL DIA 22/10. Santorum.
+\begin{obs}
+    Un cuerpo $K$ en el que todo polinomio $f \in K[x]$ se escinde se dice que es \textit{algebraico cerrado}. Por ejemplo $\C$ es un cuerpo algebraico cerrado.
+\end{obs}
+
+\section{Extensiones normales}
+
+\begin{dfn}[Extensión normal]
+    Sea $K$ un cuerpo y $E/K$ una extensión, diremos que $E/K$ es una \textbf{extensión normal} si $E$ es el cuerpo de escisión de algún polinomio $f \in K[x]$.
+\end{dfn}
+
+\begin{obs}
+    Como consecuencia del teorema \ref{thm:2.2} y del teorema \ref{thm:2.4}, si $E/K$ es normal $\implies E/K$ es finita $\implies E/K$ es algebraica.
+\end{obs}
+
+\begin{ex}[H3.1]
+    Construye los cuerpos de escisión $\Q(x^3-1)$, $\Q(x^4 + 5x^2 + 5)$, $\Q(x^6-8)$ y calcula los grados de las extensiones que resultan.\\\\
+
+    \textbf{Solucion}\\
+    \begin{itemize}
+        \item[$f(x) = x^3-1$] Las raíces son las raíces cúbicas de la unidad: $1, \omega, \bar\omega = \omega^2$, por lo que $\Q(f) = \Q(1, \omega, \omega^2) = \Q(\omega)$.
+        \item[$f(x) = x^4+5x^2+5$] Muy parecido a un ejemplo ya resuelto.
+        \item[$f(x) = x^6 - 8$] Las raíces son las complejas de $8$.
+        $$
+            \sqrt[6] 8 = (8^\frac{1}{3})^\frac{1}{2} = \sqrt 2
+        $$
+        Sea $\xi = e^\frac{2 \pi i}{6} = e^{\pi i }{3}$, las raíces de $f$ son:
+        $$
+            \sdf{\sqrt 2, \sqrt 2 \xi, \sqrt 2 \xi^2, \sqrt 2 \xi^3, \sqrt 2 \xi^4, \sqrt 2 \xi^5}
+        $$
+        Por tanto $\Q(f) = \Q(\sqrt 2, \sqrt 2 \xi, \sqrt 2 \xi^2, \sqrt 2 \xi^3, \sqrt 2 \xi^4, \sqrt 2 \xi^5) $.Faltaría comprobar que esta extensión es la misma que $\Q(\sqrt 2 \xi)$. Procediendo de forma similar a ejercicios anteriores, para hallar el grado de la extensión calculamos el polinomio $Irr(\Q, \sqrt 2 \xi)$ y vemos que es $x^4 + 2x^2 + 4$ con lo que el grado de la extensión es $4$.
+    \end{itemize}
+\end{ex}
+
+\begin{ex}[H3.5]
+    Decide si las extensiones $\Q(\sqrt 5 i)/\Q$, $\Q(\sqrt 5)/\Q$, $\Q(\sqrt[4] 5)/\Q$ son normales.\\\\
+
+    \textbf{Solución}\\
+    \begin{itemize}
+        \item[$\Q(\sqrt 5 i)/\Q$] Es fácil comprobar que $\Q(\sqrt 5 i) = \Q(x^2 + 5)$ y por tanto son normales.
+        \item[$\Q(\sqrt 5)/\Q$] Es fácil comprobar que $\Q(\sqrt 5) = \Q(x^2 - 5)$ y por tanto son normales.
+        \item[$\Q(5^{\frac{1}{4}})/\Q$] $x^4 - 5$ tiene una raíz en $\Q(\sqrt[4]{5})$ pero no se escinde, por tanto no es normal.
+    \end{itemize}
+\end{ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 24/10
 
@@ -157,7 +228,7 @@ Vamos a ver resultados para generalizar este proceso.
 \end{proof}
 
 
-\begin{cor}[al teorema \ref{thm:3.5}]
+\begin{cor}[al teorema \ref{thm:3.5}]\label{cor:3.8}
     Sea $E/K$ una extensión normal, $K \subseteq M_1, M_2 \subseteq E$ con $M_1, M_2$ cuerpos intermedios.\\\\
     Si existe un isomorfismo $\sigma: M_1 \to M_2$ que fija a $K$, es decir, $\sigma(a) = a,\ \forall a \in K$, entonces $\sigma$ se extiende a un isomorfismo $\tau: E \to E$ ($\left. \tau \right|_{M_1} = \sigma$).
 \end{cor}
@@ -193,27 +264,42 @@ Vamos a ver resultados para generalizar este proceso.
         $$
         Dado $d_i$ con $i > 1$, queremos ver que $d_i \in E$. Llamemos $b = d_i$ para algún $i$. Como $a$ y $b$ son raíces de $p \in K[x]$ irreducible, por el teorema \ref{thm:2.5} $\exists \sigma: K(a) \to K(b)$ tal que $\sigma(k) = k,\ \forall k \in K$.
 
-        %TODO
-        %\sigma: K(a) --------> K(b)
-        %         ^              ^
-        %         |              |
-        %         v              v
-        %id:      K  --------->  K
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) {$\sigma: K(a)$};
+                \node (B) [right= of A] {$K(b)$};
+                \node (C) [below of =A] {$id: K$};
+                \node (D) [below of =B] {$K$};
+                \draw[->] (A) to node {}(B);
+                \draw[->] (C) to node {}(D);
+                \draw[<->] (A) to node {}(C);
+                \draw[<->] (B) to node {}(D);
+            \end{tikzpicture}\\
+        \end{center}
 
         Como $K(a) \subseteq E$, en particular $E = K(a)(f)$. Por otro lado $K(b)(f) = E(b)$. Las raíces de $f$ en $E(b)$ son $b_1, \ldots, b_m$, así que:
         $$
             K(b)(f) = K(b)(b_1, \ldots, b_m) = K(b_1, \ldots, b_m) = E(b)
         $$
         Por el teorema \ref{thm:3.5} existe un isomorfismo $\tau: E \to E(b)$ que extiende a $\sigma$.
-        %TODO
-        %\tau:  E=K(a)(f) ----> E(b) = K(b)(f)
-        %         |              |
-        %         |              |
-        %\sigma: K(a) --------> K(b)
-        %         ^              ^
-        %         |              |
-        %         v              v
-        %id:      K  --------->  K
+
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (E) [above of =A]{$\tau: E = K(a)(f)$};
+                \node (E2)[above of =B]{$E(b) = K(b)(f)$};
+                \node (A) {$\sigma: K(a)$};
+                \node (B) [right= of A] {$K(b)$};
+                \node (C) [below of =A] {$id: K$};
+                \node (D) [below of =B] {$K$};
+                \draw[->] (A) to node {}(B);
+                \draw[->] (C) to node {}(D);
+                \draw[<->] (A) to node {}(C);
+                \draw[<->] (B) to node {}(D);
+                \draw[-] (A) to node {}(E);
+                \draw[-] (B) to node {}(E2);
+                \draw[->] (E) to node {}(E2);
+            \end{tikzpicture}\\
+        \end{center}
 
         Por el ejercicio $H2.15$, $|E:K| = |E(b):K|$ y $|K(a):K| = |K(b):K|$. Además $|E:K(a)| = |E(b):K(b)|$.
         Por tanto:
@@ -548,14 +634,23 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
         \sigma: \Q(\sqrt[4]{2}) \to \Q(-\sqrt[4] 2) = E;\ \ \sqrt[4]{2} \mapsto -\sqrt[4]{4} \implies \sigma \in \gal(E/\Q) = \sdf{1, \sigma}
     $$
     Considerando las extensiones:
-    %   TODO
-    % \Q(\sqrt[4]{2}) = E \to  E
-    %                   |      |
-    %                   |      |
-    % \Q(\sqrt{2})    = L \to  L
-    %                   |      |
-    %                   \Q \to \Q
-    %
+    \begin{center}
+        \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+            \node (A) {$\Q(\sqrt[4]{2}) = E$};
+            \node (B) [right= of A] {$E$};
+            \node (C) [below of =A] {$\Q(\sqrt{2}) = L$};
+            \node (D) [below of =B] {$L$};
+            \node (E) [below of =C] {$\Q$};
+            \node (F) [below of =D] {$\Q$};
+            \draw[->] (A) to node {}(B);
+            \draw[->] (C) to node {}(D);
+            \draw[->] (E) to node {}(F);
+            \draw[-] (A) to node {}(C);
+            \draw[-] (B) to node {}(D);
+            \draw[-] (C) to node {}(E);
+            \draw[-] (D) to node {}(F);
+        \end{tikzpicture}\\
+    \end{center}
     Donde la extensión $L/\Q$ es normal pero $E/\Q$ no.  Además, sea $\theta: L \to L;\ \sqrt 2 \mapsto \sqrt 2$ no se extiende a $E$.\\
 
     Este ejemplo muestra que la hipótesis $E/K$ normal es necesaria en el teorema \ref{thm:3.8bis}.
@@ -865,23 +960,166 @@ Vamos a empezar con un recordatorio de \textit{Teoría de Grupos}.
             \item $F \subseteq U$ ya que $\forall a \in F$ tenemos que $a^p = a$ (por el pequeño teorema de Fermat).
             \item $U$ es un cuerpo:
             \begin{align*}
-                \alpha, \beta \in U \text{ consideramos } \alpha^{p^n} = \alpha, \beta^{p^n} = \beta \\
-                (\alpha-\beta)^{p^n} = \alpha^{p^n} - \beta^{p^n} = \alpha - \beta \\
-                \text{Si } \beta \neq 0 \implies \frac{\alpha^{p^n}}{\beta^{p^n}} = \frac{\alpha}{\beta}
+                \alpha, \beta \in U \text{ consideramos } \alpha^{p^n} &= \alpha, \beta^{p^n} = \beta \\
+                (\alpha-\beta)^{p^n} &= \alpha^{p^n} - \beta^{p^n} = \alpha - \beta \\
+                \text{Si } \beta &\neq 0 \implies \frac{\alpha^{p^n}}{\beta^{p^n}} = \frac{\alpha}{\beta}
             \end{align*}
             Y por tanto, $F \subseteq U \subseteq E = F(U) \implies E = F(U) = U$.
         \end{enumerate}
         \item[(b)] Supongamos que $L$ es otro cuerpo con $\vabs{L} = p^n$. Sea $D \subseteq L$ su cuerpo primo, $D \isom \F_p \isom F$. Ahora $L^\times = \uds L$ es un grupo de $p^n - 1$ elementos. En particular si $l \in L^\times$, entonces $l^{p^n-1} = 1$. (por \ref{thm:3.5.1}(b)) $\implies l^{p^n} = l$. Es decir, $L$ es un cuerpo de escisión de $f(x) = x^{p^n} - x$. Entonces tenemos el diagrama (que demuestra el isomorfismo):
-        %% TODO
-        %% E = F(f) -> L = D
-        %%      |        |
-        %%      |  isom  |
-        %%      F -----> D
-        %%
+        
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) {$E = F(f)$};
+                \node (B) [right= of A] {$L=D$};
+                \node (C) [below of =A] {$F$};
+                \node (D) [below of =B] {$D$};
+                \draw[->] (A) to node {}(B);
+                \draw[->] (C) to node {$\isom$}(D);
+                \draw[-] (A) to node {}(C);
+                \draw[-] (B) to node {}(D);
+            \end{tikzpicture}\\
+        \end{center}
         con $f(n) = x^{p^n} -  x$.
     \end{itemize}
 \end{proof}
 
 \begin{obs}
-    Sea $K$ u cuerpo finito, y $F$ su cuerpo primo, como consecuencia del teorema \ref{thm:3.5.2}, $K/F$ es una extensión de Galois y si $\vabs{K:F} = n$ entonces $\vabs{\gal(K/F)} = n$.
+    Sea $K$ un cuerpo finito, y $F$ su cuerpo primo, como consecuencia del teorema \ref{thm:3.5.2}, $K/F$ es una extensión de Galois y si $\vabs{K:F} = n$ entonces $\vabs{\gal(K/F)} = n$.
 \end{obs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 07/11
+
+\begin{dfn}[Exponente de un grupo]
+    Sea $G$ un grupo finito, definimos el \textbf{exponente} de $G$ como:
+    $$
+        \mathrm{exp}(G) = \mathrm{mcm}\sdf{o(g) \mid g \in G}
+    $$
+    que es el menor entero $e$ tal que:
+    $$
+        g^e = 1,\ \forall g \in G
+    $$
+\end{dfn}
+\begin{obs}
+    $$
+        \mathrm{exp}(G) \divides \vabs{G}
+    $$
+\end{obs}
+
+\begin{eg}[Ejemplos de exponentes de un grupo]$ $
+    \begin{itemize}
+        \item $\exp{C_2 \times C_2} = \mcm{1, 2} = 2$
+        Donde $C_2 \times C_2 = \gen{a} \times \gen{b} = \sdf{1, a, b, ab}$ y tanto $o(a) = o(b) = o(ab) = 2$.
+        \item $\exp{C_2 \times C_3} = \mcm{1, 2, 3, 6} = 6$.
+        Donde $C_2 \times C_3 = \gen{c} \times \gen{d} = \sdf{1, c, d, d^2, cd, cd^2}$ y $o(cd^2) = o(cd) = 6$.
+        \item $\exp{S_3} = \mcm{1, 2, 3} = 6$
+        Donde $S_3$ es el grupo simétrico de elementos hasta $3-ciclos$.
+    \end{itemize}
+    En los dos primeros casos, existe un elemento cuyo orden es el mismo que el exponente del grupo, sin embargo esto no ocurre en general. Veremos que solo ocurre cuando el grupo es abeliano.
+\end{eg}
+
+\begin{lm}[Orden de elementos que conmutan entre sí]\label{lm:orden-conmut}$ $
+    \begin{enumerate}
+        \item Sea $H = \gen{h}$ cíclico y $\vabs{H} = n = o(h)$, para cada $d \divides n$ existe un elemento $g \in H$ tal que $d = o(g)$.
+        \item Sean $g_i, g_j \in G$, si $g_i$ conmuta con $g_j$ ($g_ig_j = g_jg_i$), entonces $o(g_ig_j) \divides o(g_i) o(g_j)$. Si además, $o(g_i) \cdot o(g_j) = 1 \implies o(g_ig_j) = o(g_i) o(g_j)$
+    \end{enumerate}
+\end{lm}
+
+\begin{proof}
+    Se deja como ejercicio.
+\end{proof}
+
+\begin{lm}[Existencia de un elemento de orden el exponente de un grupo]\label{lm:3.5.5}
+    Sea $G$ finito y abeliano, entonces $\exists g \in G$ tal que $o(g) = \exp{G}$.
+\end{lm}
+\begin{proof}
+    Sea $e = \exp{G} = p_1^{\alpha_1} \cdots p_r^{\alpha_r}$ con $p_i$ primos y distintos entre sí y $\alpha_i \geq 1$. Por definición de exponente, para cada $j$ existe $h_j \in G$ tal que $p_j^{\alpha_j} \divides o(h_j)$.\\
+    Por el lema \ref{lm:orden-conmut}(1), $\exists g_j \in G$ tal que $o(g_j) = p_j^{\alpha_j}$. Tomamos:
+    $$
+        g = \prod_{j=1}^r g_j \in G,\ \text{ y por el lema \ref{lm:orden-conmut}(2) } o(g) = e
+    $$
+\end{proof}
+
+\begin{thm}[Subgrupo multiplicativo y subgrupo cíclico]\label{thm:3.5.6}
+    Sea $K$ un cuerpo y $G \leq K^\times$ un subgrupo finito, entonces $G$ es cíclico. Enunciado informalmente:\\
+    \begin{center}
+        \textit{Todo subgrupo finito del grupo multiplicativo de un cuerpo es cíclico}
+    \end{center}
+\end{thm}
+
+\begin{proof}
+    Por el teorema \ref{thm:3.5.1}(d), queremos encontrar $g \in G$ tal que $o(g) = \vabs{G}$.\\
+    Como $K^\times$ es abeliano y $G \leq K^\times$, entonces $G$ es abeliano (y finito por hipótesis). Sea $e = \exp G$, $\forall h \in G,\ h^e = 1$, entonces todo elemento $h \in G$ es raíz del polinomio $x^e - 1 \in K[x]$. Por tanto:
+    $$
+        \vabs{G} \leq e \leq \vabs{G} \text{ pues $e \divides \vabs{G}$ } \implies e = \vabs{G}
+    $$
+    Por el lema \ref{lm:3.5.5}, $\exists g \in G$ tal que $o(g) = e = \vabs{G}$.
+\end{proof}
+
+\begin{obs}
+    Sea $K$ un cuerpo finito, en particular $K^\times$ es cíclico, luego $\exists \xi \in K\ :\ \gen{\xi} = K^\times$.
+\end{obs}
+
+\begin{ex}[H3.19]
+    Sea $E = \quo{\F_3[x]}{\gen{x^2 + 1}}$ (en particular $x^2 = -1 = 2$), halla un generador de $E^\times$.\\\\
+
+    \textbf{Solución}\\
+    Vemos que:
+    $$
+        E = \sdf{0, 1, 2, x, 2x, x+1, x+2, 2x+1, 2x+2},\ \vabs{E} = 9,\ \vabs{E^\times}=8
+    $$
+    Buscamos un elemento $g \in E^\times$ tal que $o(g) = 8$. No hay un método general, solo ensayo y error.\\
+    Vamos a probar algunos casos:
+    \begin{itemize}
+        \item[$(x)$]
+        $$
+            x^1 = x,\ x^2 = 2,\ x^3 = x\cdot x^2 = 2x,\ x^4 = 2 \cdot 2 = 1 \implies o(x) = 4 \implies x \text{ no es un generador.}
+        $$
+        \item[$(x+1)$]
+        \begin{align*}
+            (x+1)^1 &= x+1\\
+            (x+1)^2 &= x^2 + 2x + 1 = 2x\\
+            (x+1)^3 &= 2x(x+1) = 2x^2 + 2x = 2x + 1\\
+            (x+1)^4 &= (2x)^2 = x^2 = 2\\
+            (x+1)^5 &= 2x+2\\
+            (x+1)^6 &= 2(2x) = x\\
+            (x+1)^7 &= x(x+1) = x^2 + x = x + 2\\
+            (x+1)^8 &= (x+2)(x+1) = x^2 + 2 = 1
+        \end{align*}
+    \end{itemize}
+    \textit{Ejercicio extra}\\
+    Halla o calcula:
+    \begin{enumerate}
+        \item $E/\F_3$ es simple.
+        \item $E$ es el cuerpo de escisión de $y^2 + 1$ sobre $\F_3$.
+        \item $E$ es el cuerpo de escisión sobre $\F_3$ de cualquier polinomio irreducible de grado $2$ en $\F_3[x]$.
+    \end{enumerate}
+    \textbf{Solución}\\ %TODO: Completar el ejercicio (2 últimos apartados)
+    \begin{enumerate}
+        \item Hemos visto que $\exists \xi \in E$ tal que $\gen{\xi} = E^\times$. Entonces $\sdf{\xi, \xi^2, \ldots, \xi^n} \subset E = \F_3(\xi)$ y por tanto $E/\F_3$ es simple.
+    \end{enumerate}
+\end{ex}
+
+\begin{cor}[Teorema del Elemento Primitivo sobre cuerpos finitos]\label{cor:3.5.7}
+    Sea $E/K$ una extensión finita sobre un cuerpo finito $K$, entonces $E/K$ es simple.
+\end{cor}
+\begin{proof}
+    Aunque en el teorema del Elemento Primitivo (teorema \ref{thm:elemprim}) se pide que la extensión sea separable, en el corolario no hace falta pedirlo.\\
+    Como $K$ es finito, entonces $K$ es perfecto y cualquier extensión algebraica sobre un cuerpo finito es automáticamente separable. Además, $E/K$ es algebraica por ser finita (\ref{thm:2.2}). Para ver que es finito:
+    $$
+        \vabs{E} = \vabs{K}^{\vabs{E:K}} < \infty, \implies E \text{ es finito}
+    $$
+    Además por el teorema \ref{thm:3.5.6}, $\exists \xi \in E:\ \gen{\xi} = E^\times \implies K(\xi) = E$.
+\end{proof}
+
+\begin{ex}[H3.19]
+    Demuestra que para cada primo $p$ y cada natural $n \in \N$ positivo, existe un polinomio irreducible $f \in \F_p[x]$ de grado $n$.\\\\
+    \textbf{Solución}\\
+    Por el teorema \ref{thm:3.5.2}(a), $\exists$ un cuerpo $E$ tal que $\vabs{E} = p^n$.
+    Sea $F \subseteq E$ su cuerpo primo, $F = \F_p$. Por \ref{cor:3.5.7} $\exists \xi \in E$ tal que $E = \F_p(\xi)$.\\
+    Por el teorema \ref{thm:2.3}:
+    $$
+        n = \vabs{E:\F_p} = \delta Irr(\F_p, \xi) = \delta f(x)
+    $$
+    con lo que $f$ es un irreducible de grado $n$.
+\end{ex}
