@@ -150,7 +150,7 @@ Vamos a considerar además el concepto de anillo de polinomios:
     $R[x]$ nunca es un cuerpo.
 \end{pro}
 \begin{proof}
-    Solo hay que comprobar que aunque $f(x) = x \in R[x]$, $f(x) \notin \uds(R[x])$. Y por tanto $\uds(R[x]) \neq R[x]$, lo que nos dice que $R[x]$ no es un cuerpo.
+    Solo hay que comprobar que aunque $f(x) = x \in R[x]$, $f(x) \notin \uds{R[x]}$. Y por tanto $\uds{R[x]} \neq R[x]$, lo que nos dice que $R[x]$ no es un cuerpo.
 \end{proof}
 
 \begin{pro}[Unidades en anillos de polinomios]
@@ -401,10 +401,10 @@ Vamos a considerar además el concepto de anillo de polinomios:
 
 
 \begin{ex}[H1.14]
-    Demuestra que si $\varphi: R \to S$ es un homomorfismo de anillos y $a \in \uds{R}$, entonces $\varphi(a) \in \uds(S)$. ¿Es cierto el recíproco?.\\\\
+    Demuestra que si $\varphi: R \to S$ es un homomorfismo de anillos y $a \in \uds{R}$, entonces $\varphi(a) \in \uds S$. ¿Es cierto el recíproco?.\\\\
     Si $a \in \uds{R}$, tntonces $\exists b \in R$ tal que $\1 = a\cdot b$. Por tanto:
     $$
-        \1 = \varphi(\1) = \varphi(a \cdot b) = \varphi(a) \cdot \varphi(b) \implies \varphi(a) \in \uds(S)
+        \1 = \varphi(\1) = \varphi(a \cdot b) = \varphi(a) \cdot \varphi(b) \implies \varphi(a) \in \uds S
     $$
     El recíproco solo es cierto si $\varphi$ es un isomorfismo, pero en general no. Como contraejemplo consideramos el homomorfismo identidad $\iota : \Z \to \Q;\ a \mapsto a$. Es fácil ver que es un homomorfismo de anillos, sin embargo: $\iota(2) = (2)$ pero $\iota(2) \in \uds{\Q}$ y $2 \notin \uds{\Z}$.
 \end{ex}

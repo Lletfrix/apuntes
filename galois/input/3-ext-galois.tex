@@ -141,7 +141,7 @@ Vamos a ver resultados para generalizar este proceso.
     Basta tomar $\sigma = id_K$ en el teorema \ref{thm:3.5}.
 \end{proof}
 
-%% TODO: COMPLETAR EL DIA 22/10
+%% TODO: COMPLETAR EL DIA 22/10. Santorum.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 24/10
 
@@ -429,7 +429,7 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
         \item[(c)] Sea $\theta \in \gal(L/K)$, por el teorema \ref{thm:3.8bis}, $\exists \sigma \in \gal(E/K)$ tal que $\left. \sigma \right|_L = \theta$. En particular, $\psi$ es sobreyectiva. (La segunda conclusión se sigue del teorema de isomorfía).
         \item[(d)] Se deja como ejercicio partiendo de $\left. \sigma \right|_\Omega \in S_\Omega$.
         \item[(e)] Por el corolario \ref{cor:3.10} si $a, b \in \Omega$ cualesquiera, $\exists \sigma \in \gal(E/K)$ con $a\sigma = \sigma(a) = b$ y $\theta_a = \Sigma$ por el teorema \ref{thm:orbita}.
-        %%TODO: COMPLETAR demostración del cardinal
+        %%TODO: COMPLETAR demostración del cardinal. Santorum.
     \end{itemize}
 \end{proof}
 
@@ -475,7 +475,7 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
     $$
 \end{obs}
 
-\begin{pro}[Finitud de las extensiones de Galois]\ref{pro:ext-gal-finit}
+\begin{pro}[Finitud de las extensiones de Galois]\label{pro:ext-gal-finit}
     Sea $L/K$ una extensión, si $L/K$ es finita entonces $\gal(L/K)$ es finita.
 \end{pro}
 
@@ -539,7 +539,7 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 31/10
 \begin{eg}[Hallar grupo de Galois dado un polinomio y una extensión]
-    Sea $f \in \Q[x]$, $f(x) = x^4 - 2$. Y sea $E = \Q(\sqrt[4] 2)$, entonces el conjunto $\Omega$ del teorema \ref{thm:3.11} es $\Omega = \sdf{\sqrt[4] 2, -\sqrt[4] 2}$. Sea $L = \Q(\Omega) = E$, por el teorema \ref{3.11}(d), $\gal(E/\Q) \leq S_\Omega \isom S_2 \implies |\gal(E/\Q)| = 1$ o $2$ por el teorema de Lagrange de grupos. Además:
+    Sea $f \in \Q[x]$, $f(x) = x^4 - 2$. Y sea $E = \Q(\sqrt[4] 2)$, entonces el conjunto $\Omega$ del teorema \ref{thm:3.11} es $\Omega = \sdf{\sqrt[4] 2, -\sqrt[4] 2}$. Sea $L = \Q(\Omega) = E$, por el teorema \ref{thm:3.11}(d), $\gal(E/\Q) \leq S_\Omega \isom S_2 \implies |\gal(E/\Q)| = 1$ o $2$ por el teorema de Lagrange de grupos. Además:
     $$
         \gal(E/\Q) = \aut(E) = \aut(\Q(\sqrt[4]{2}))
     $$
@@ -565,18 +565,21 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
 
 El siguiente teorema y proposición se vieron en el capítulo 1 pero vamos a reescribirlos con el lenguaje actual, es por ello que no se aporta demostración de los mismos.
 
-\begin{thm}[Derivada formal y raíces multiples]\label{thm:3.13}\label{thm:3.4.1}
-    Si $f \in K[x]$ irreducible y $f'$ su derivada formal tal que $f' \neq 0$, entonces todas las raíces de $f$ en su cuerpo de escisión son distintas.
+\begin{thm}[Derivada formal y raíces multiples]\label{thm:3.13}\label{thm:3.4.1}$ $
+    \begin{itemize}
+        \item[(a)] Si $f \in K[x]$ tal que $mcd(f, f') = 1$ y $f' \neq 0$ donde $f'$ es la derivada formal, entonces todas las raíces de $f$ en su cuerpo de escisión son distintas.
+        \item[(b)] Si $f \in K[x]$ irreducible y $f'$ su derivada formal tal que $f' \neq 0$, entonces $f$ es separable.
+    \end{itemize}
 \end{thm}
 \begin{obs}
-    Si $\car(K) = 0$ y $f\in K[x]$ con $\delta f > 1$, entonces $f' \neq 0$.
+    Si $\car K = 0$ y $f\in K[x]$ con $\delta f > 1$, entonces $f' \neq 0$.
 \end{obs}
 
 \begin{eg}[Aplicación del contrarrecíproco del teorema \ref{thm:3.13}]
-    Sea $f(x) = x^p -1$, $\car(K) = p$, vemos que $f' = 0$. Entonces no todas las raíces de $f$ en su cuerpo de escisión son distintas, de hecho $f = (x-1)^p$.
+    Sea $f(x) = x^p -1$, $\car K = p$, vemos que $f' = 0$. Entonces no todas las raíces de $f$ en su cuerpo de escisión son distintas, de hecho $f = (x-1)^p$.
 \end{eg}
 
-\begin{pro}[Multiplicidad de raíces y derivada formal]\ref{pro:3.4.2}
+\begin{pro}[Multiplicidad de raíces y derivada formal]\label{pro:3.4.2}
     Sea $E/K$ una extensión, $f \in K[x]$  un polinomio y $a \in E$ tal que $f(a) = 0$, y sea $m$ la multiplicidad de la raíz $a$, entonces:
     $$
         m > 1 \iff f(a)=0=f'(a)
@@ -585,13 +588,13 @@ El siguiente teorema y proposición se vieron en el capítulo 1 pero vamos a ree
 
 \begin{dfn}[Separabilidad. Polinomios, elementos y extensiones]$ $
     \begin{itemize}
-        \item[($i$)] Sea $f \in K[x]$ un polinomio, decimos que es un \textbf{polinomio separable} si todas sus raíces en un cuerpo de escisión son distintas, es decir, $f' \neq 0$ (por el teorema \ref{3.13}).
+        \item[($i$)] Sea $f \in K[x]$ un polinomio, decimos que es un \textbf{polinomio separable} si todas sus raíces en un cuerpo de escisión son distintas, es decir, $f' \neq 0$ (por el teorema \ref{thm:3.13}).
         \item[($ii$)] Sea $E/K$ una extensión, $a \in E$ un elemento algebraico, decimos que $a$ es un \textbf{elemento separable} si $p = Irr(K, a)$ es separable.
         \item[($iii$)] Sea $E/K$ una extensión algebraica, decimos que es una \textbf{extensión separable} si todo $a \in E$ es separable.
     \end{itemize}
 \end{dfn}
 
-\begin{pro}[Divisores irreducibles de un polinomio separable]
+\begin{pro}[Divisores irreducibles de un polinomio separable]\label{pro:sepdiv}
     Sea $f \in K[x]$ un polinomio separable, entonces para todo $p$ irreducible tal que $p \divides f$, $p$ es separable.
 \end{pro}
 \begin{proof}
@@ -608,15 +611,15 @@ El siguiente teorema y proposición se vieron en el capítulo 1 pero vamos a ree
     Si $\alpha, \beta$ son raíces de $p$ en $M$, enotnces $\alpha, \beta$ son raíces de $q$ en $M \implies \alpha \neq \beta$.
 \end{proof}
 
-\begin{lm}[Separabilidad en cuerpos de característica $0$]\ref{lm:3.4.3}
-    Todo polinomio $f \in K[x]$ con $\car(K) = 0$ es separable y toda extensión $E/K$ algebraica es separable.
+\begin{lm}[Separabilidad en cuerpos de característica $0$]\label{lm:3.4.3}
+    Todo polinomio $f \in K[x]$ con $\car K = 0$ es separable y toda extensión $E/K$ algebraica es separable.
 \end{lm}
 \begin{proof}
     Se deja como ejercicio.
 \end{proof}
 
-\begin{cor}[Separabilidad en cuerpos de característica $p$]\ref{cor:3.4.4}
-    Sea $f \in K[x]$ irreducible con $\car(K) = p$:
+\begin{cor}[Separabilidad en cuerpos de característica $p$]\label{cor:3.4.4}
+    Sea $f \in K[x]$ irreducible con $\car K = p$:
     $$
         f(x) \text{ es separable } \iff f \notin K[x^p]
     $$
@@ -627,7 +630,7 @@ Sin embargo el corolario no nos resuelve una pregunta. \textit{¿Podemos encontr
 Recordemos que un cuerpo $K$ es perfecto si el monomorfismo de Frobenius es un isomorfismo, es decir, $\varphi = Frob \in \aut(K)$, donde $\varphi(a) = a^p$.\\
 En particular $\forall b \in K, \exists a \in K$ tal que $a^p = b$
 
-\begin{thm}\ref{thm:3.4.5}
+\begin{thm}[Irreducibilidad sobre cuerpos perfectos]\label{thm:3.4.5}
     Sea $K$ un cuerpo perfecto, todo polinomio irreducible sobre $K$ es separable. En particular, todo polinomio es separable.
 \end{thm}
 \begin{proof}
@@ -635,9 +638,9 @@ En particular $\forall b \in K, \exists a \in K$ tal que $a^p = b$
     $$
         \forall b \in K,\ \exists a \in K:\ a^p = b.
     $$
-    Sea $f\in K[x]$ irreducible. Sabemos por \ref{cor:3.4.4} que si $f \notin K[x^p]$, entonces $f$ es separable. Supongamos que $f \in K[x^p]$ de la forma:
+    Sea $f\in K[x]$ irreducible. Sabemos por el corolario \ref{cor:3.4.4} que si $f \notin K[x^p]$, entonces $f$ es separable. Supongamos que $f \in K[x^p]$ de la forma:
     \begin{align*}
-        f &= b_0 + b_1 x^(pn_1) + \cdots + b_k x^{pn_k}\\
+        f &= b_0 + b_1 x^{pn_1} + \cdots + b_k x^{pn_k}\\
           &= a_0^p + \cdots + a_k^p (x^{n_k})^p\\
           &= a_0^p + \cdots + (a_k x^{n_k})^p\\
           &= (a_0 + \cdots a_k x^{n_k})^p \text{ que no es irreducible }
@@ -645,7 +648,7 @@ En particular $\forall b \in K, \exists a \in K$ tal que $a^p = b$
 \end{proof}
 
 \begin{ex}[H3.16]
-    ¿Cuántas raíces distitnas tiene $x^{12} + 2x^6 + 1 \in \F_3[x]$ en su cuerpo de escisión?\\\\
+    ¿Cuántas raíces distintas tiene $x^{12} + 2x^6 + 1 \in \F_3[x]$ en su cuerpo de escisión?\\\\
 
     \begin{align*}
         x^{12} + 2x^6 + 1 &= (x^4)^4 + (-1)^3 (x^2)^3 + 1^3\\
@@ -654,3 +657,231 @@ En particular $\forall b \in K, \exists a \in K$ tal que $a^p = b$
     \end{align*}
     Sabemos que $x^2 + 1$ es separable por ser $\F_3$ perfecto. Además como es separable es irreducible y por tanto, tiene dos raíces distintas en su cuerpo de escisión.
 \end{ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 04/11
+\begin{eg}[Polinomio irreducible que no es separable]
+    Vamos a buscar un polinomio $f$ irreducible que no sea separable. Además por el lema \ref{lm:3.4.3} y el teorema \ref{thm:3.4.5}, tenemos que buscar $f \in K[x]$ tal que $\car K = p$ con $K$ no perfecto.\\
+    Por ejemplo, si consideramos $K = \F_p$, podemos ver que $K$ no es perfecto ya que $\varphi = Frob \in \mathrm{End}(\F_p(t))$.\\
+    Por otra parte, $\varphi(\F_p(t)) = \F_(t^p) \subsetneq \F_p(t)$. Vamos a considerar entonces la extensión $\F_p(t)/F_p(t^2)$, donde podemos ver que $\vabs{\F_p(t) : \F_p(t^2)} = p$ pues tenemos que $t$ es raíz de $x^p - t^p \in \F_p(t^p)[x]$.\\
+
+    Tenemos que ver ahora que $x^p - t^p = (x - t)^p$ es irreducible. En otro caso, $x^p - t^p = g(x) \cdot h(x)$, con $\delta g,\ \delta h \leq p$. Por tanto:
+    $$
+        g(x) = (x - t)^n \text{ con } 0 < n < p
+    $$
+    Lo que es imposible por que el término independiente de $g$ es $t^n$ que no pertenece a $\F_p(t^p)$. Luego $Irr(\F_p(t^p), t) = x^p - t^p$.
+\end{eg}
+
+\begin{pro}[Raíces comunes y polinomios irreducibles mónicos]
+    Sean $p \neq q \in K[x]$ irreducibles mónicos, entonces $p$ y $q$ no pueden tener una raíz en común.
+\end{pro}
+
+\begin{proof}
+    Sea $E/K$ una extensión y $\alpha \in E$ la raíz común de $p$ y $q$, entonces $p = Irr(K, \alpha) = q$ por la unicidad del polinomio mónico.\\\\
+    Otra forma de verlo es recordar que sean $f, g \in K[x]$ entonces $mcd_K(f, g) = mcd_E(f, g)$. Si $\alpha$ es una raíz común entonces $p \divides q$ y además $(x - \alpha) \divides mcd(p, q) > 1 \implies q \divides p$ y por tanto $p = q$.
+\end{proof}
+
+\begin{ex}[H3.??]
+    Calcular las raíces distintas de $f \in K[x]$ separables en su cuerpo de escisión.\\\\
+    Vamos a dar un esquema de la resolución del ejercicio:
+    \begin{enumerate}
+        \item Descomponer $f$ es factores irreducibles:
+        $$
+            f = a p_1^{e_1} p_2^{e_2} \ldots p_r^{e_r} \text{ donde los $p_i$ son irreducibles y distintos entre sí.}
+        $$
+        \item Por definición (por ser separable) cada $p_i$ es separable y además el número de raíces de $p_i$ coincide con $\delta p_i$.\\
+        Con esto vemos que el número de raíces distintas de $f$ es igual a $\sum \delta p_i$.
+    \end{enumerate}
+\end{ex}
+
+
+\begin{dfn}[Elemento primitivo]
+    Sea $E/K$ una extensión simple, a un elemento de $\gamma \in E$ se le denomina \textbf{elemento primitivo} si $E = K(\gamma)$.
+\end{dfn}
+
+\begin{thm}[del Elemento Primitivo]\label{thm:elemprim}
+    Toda extensión finita y separable es simple.
+\end{thm}
+
+\begin{proof}
+    Se proporciona un esquema de la demostración. Sea $E/K$ finita y separable, entonces $E = K(\alpha_1, \ldots, \alpha_n)$ con $\alpha_i$ algebraicos y separables.
+    \begin{itemize}
+        \item Por inducción sobre $n$, basta probar el resultado cuando $n =2$, con $n = 1$ habríamos terminado pues $E = K(\alpha_1)$ y por tanto sería simple. Vamos a considerar el caso $n > 1$, es decir $L = K(\alpha_1, \ldots, \alpha_{n-1})$. Por inducción $L = K(\alpha)$ y entonces $E = K(\alpha_1, \ldots, \alpha_n) = K(\alpha_1, \alpha_{n-1})(\alpha) = K(\alpha)(\alpha_n) = K(\alpha, \beta)$
+        \item Queremos probar que $K(\alpha, \beta)/K$ es simple. Esta parte es constructiva. Habría que conectar separabilidad y normalidad.
+    \end{itemize}
+\end{proof}
+
+
+\begin{pro}[Irreducibilidad y acción del grupo de Galois] % Lo vimos como ejercicio
+    Sea $f \in K[x]$ un polinomio, $E = K(f)$ y $G = \gal(E/K)$. Entonces:
+    \begin{enumerate}
+        \item Si $f$ es irreducible, $G$ actúa transitivamente (la acción define una sola G-órbita) sobre el conjunto $\Omega$ de raíces de $f$.
+        \item Si $f$ no tiene raíces múltiples en $E$ y $G$ actúa transitivamente sobre $\Omega$, entonces $f$ es irreducible.
+    \end{enumerate}
+\end{pro}
+\begin{proof}$ $
+    \begin{enumerate}
+        \item Se sigue inmediatamente del corolario \ref{cor:3.10}.
+        \item Sea $f = a p_i \ldots p_r$ con $p_i$ primos irreducibles. Supongamos que $r > 1$, sea $\alpha \in E$ raíz de $p_1$, $\beta \in E$ raíz de $p_2$. Por hipótesis $\exists \sigma \in G$ tal que $\alpha \cdot \sigma = \sigma(\alpha) = \beta$. Entonces:
+        $$
+            0 = \sigma(p_1(\alpha)) = \sigma(p_1)(\sigma(\alpha)) = p_1 \beta \implies Irr(K, \alpha) = p_1 = Irr(K, \beta) = p_2
+        $$
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}[Numero de extensiones de un isomorfismo]\label{thm:3.4.6}
+    Sea $\sigma: K_1 \to K_2$ un isomorfismo, $f_1 \in K_1[x]$, $f_2 = \sigma(f_1) \in K_2[x]$ polinomios y $E_i = K(f_i)$ extensiones. Entonces:
+    \begin{itemize}
+        \item[(a)] $\sigma$ se extiende a un isomorfismo $\tau: E_1 \to E_2$. (Teorema \ref{thm:3.4.5}).
+        \item[(b)] Si $f_1$ es separable entonces hay exactamente $\vabs{E_1:K_1}$ extensiones como en (a).
+    \end{itemize}
+\end{thm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 05/11
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item[(a)] Teorema \ref{thm:3.4.5}.
+        \item[(b)] Por inducción sobre $\vabs{E_1:K_1}$.
+        \begin{itemize}
+            \item $\vabs{E_1:K_1} = 1 \iff g_1$ se escinde en $E_1 \iff f_2$ se escinde en $E_2 \iff \vabs{E_2:K_2} = 1 \implies \tau = \sigma$
+            \item Podemos suponer que $\vabs{E_1:K_1} > 1$, entonces:
+            $$
+                f_1 = p_1g_1 \in K_1[x], \text{ donde } p_1 \text{ es irreducible y } \delta p_1 = d \geq 2.
+            $$
+            por tanto:
+            $$
+                f_2 = p_2g_2, \text{ donde } p_2 = \sigma^\star(p_1) \text{ es irreducible y } \delta p_2 = \delta p_1 = d \geq 2.
+            $$
+            Como $f_1$ es separable, entonces $p_1$ es separable (por la proposición \ref{pro:sepdiv}). Como $E_1 = K_1(f_1)$, entonces $p_1$ se escinde en $E_1$ (por el lema \ref{lm:3.1}(ii)). Ahora, desarrollando:
+            \begin{align*}
+                p_1(x) = (x-\alpha_1) \cdots (x - \alpha_d) \in E_1[x]\\
+                \text{Por (a)} \exists \tau:E_1 \to E_2 :\ \rest{\tau}_{K_1} = \sigma\\
+                p_2 = \tau^\star(p_1) = (x - \tau(\alpha_1)) \cdots (x - \tau(\alpha_d))\\
+                \beta_j = \tau(\alpha_j) \text{ donde las $\beta_j$ son las raíces distintas de } p_2 \text{ en } E_2.
+            \end{align*}
+            y por tanto $p_2$ es spearable.\\\\
+            Sea $\alpha = \alpha_1$, por el teorema \ref{thm:2.5}, para cada $j = 1, \ldots, d$, existe un isomorfismo:
+            $$
+                \hat\sigma : K_1(\alpha) \to K_2(\beta_j)
+            $$
+            que extiende a $\sigma$. Como:
+            $$
+                \vabs{E_1:K_1(\alpha_1)} = \frac{\vabs{E_1:K_1}}{\vabs{K_1(\alpha):K_1}} = \frac{\vabs{E_1:K_1}}{d} < \vabs{E_1:K_1}.
+            $$
+            Por inducción, para cada $j = 1, \ldots, d$, existen $\vabs{E_1:K_1}$ extensiones exactamente de $\hat\sigma_j$.\\
+            Es fácil ver que tenemos $\frac{\vabs{E_1:K_1}}{d} \cdot d$ extensiones de $\sigma$ a $E_1 \to E_2$. ¿Por qué son todas?.\\
+
+            Si $\tau: E_1 \to E:2$ extiende a $\sigma$, en particular $\tau$ manda $\sigma$ en una raíz de $\tau^\star(p_1) = \sigma^\star(p_1) = p_2$. Es decir, $\tau(\alpha) = \beta_j$ luego, $\rest{\tau}_{K_1(\alpha)} = \hat\sigma_j$.
+            Por tanto, $\sigma$ tiene exactamente $\vabs{E_1:K_1}$ extensiones a $E_1 \to E_2$.
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\begin{dfn}[Extensión de Galois]
+    Sean $E, K$ cuerpos, diremos que la extensión $E/K$ es una \textbf{extensión de Galois} si $E/K$ es normal y separable.
+\end{dfn}
+\begin{obs}
+    Si la extensión $E/K$ es de Galois, y sea $L$ un cuerpo intermedio, entonces $E/L$ es una extensión de Galois.
+\end{obs}
+
+\begin{cor}\label{cor:3.4.7}
+    Sea $E/K$ una extensión de Galois, y $K \subseteq L \subseteq E$, $L/K$ es una extensión de Galois. Además, cada $\sigma \in \gal(L/K)$ tiene exactamente $\vabs{E:L}$ extensiones a $\gal(E/K)$. En particular:
+    $$
+        \vabs{\gal(E/K)} = \vabs{E:K}
+    $$
+\end{cor}
+\begin{proof}
+    Consecuencia del teorema \ref{thm:3.4.6}. Los detalles se dejan como ejercicio.
+\end{proof}
+
+\begin{ex}[Ejercicio] %TODO: Añadir numeración
+    Sea $\xi$ la raíz primitiva quinta de $\1$. Demuestra o calcula:
+    \begin{itemize}
+        \item[(a)] $\Q(\xi)/\Q$ es normal.
+        \item[(b)] $\vabs{\Q(\xi):\Q}$.
+        \item[(c)] $\gal{\Q(\xi)/\Q}$.
+    \end{itemize}
+
+    \textbf{Solución:}\\\\
+    \begin{itemize}
+        \item[(a)] $\xi$ es raíz de $x^5 - 1$ y las raíces de $x^5 - 1$ son $\sdf{1, \xi, \xi^2, \xi^3, \xi^4}$, que son las raíces del quinto polinomio ciclotómico. Entonces $\Q(\xi) = \Q(x^5 - 1)$. Por tanto, el polinomio irreducible $Irr(\Q, \xi) = \phi_5(x) = x^4 + x^3 + x^2 + x + 1$.
+        \item[(b)] $\vabs{\Q(\xi):\Q} = \delta \phi_5(x) = 4$
+        \item[(c)] Sabemos que $\Q(\xi)/\Q$ es una extensión de Galois, (es normal por (a)  y separable por que $\car \Q = 0$). Además:
+        $$
+            \vabs{\gal(\Q(\xi)/\Q)} = 4, \text{ (usando el teorema \ref{thm:3.11}(d) sabemos que } \gal(\Q(\xi)/\Q) \leq S_4 \text{)}
+        $$
+        Por el corolario \ref{cor:3.10}, para $j = 1, 2, 3, 4$ sabemos que $\exists \sigma_j \in \gal(\Q(\xi)/\Q)$ tal que $\sigma_j(\xi) = \xi^j$, donde $\sigma_1 = id$. Y además, un $\sigma \in \gal(\Q(\xi)/\Q) = \sdf{id, \sigma_2, \sigma_3, \sigma_4}$ está determinado por la imagen de $\xi$. De hecho, $\gal(\Q(\xi)/\Q) = \gen{\sigma_2} \isom C_4$.
+    \end{itemize}
+\end{ex}
+
+\section{Cuerpos finitos}
+
+Vamos a empezar con un recordatorio de \textit{Teoría de Grupos}.
+
+\begin{dfn}[Orden del elemento de un grupo]
+    Sea $G$ un grupo finito, $g \in G$ un elemento, decimos que el \textbf{orden} de $g$ es:
+    $$
+        o(g) = n = \min\sdf{m \mid g^m = 1 } < \infty
+    $$
+\end{dfn}
+
+\begin{thm}[Resultados de orden en un grupo]\label{thm:3.5.1}
+    Sea $G$ un grupo finito, $g \in G$ un elemento del grupo:
+    \begin{itemize}
+        \item[(a)] $g^m = 1 \iff o(g) \divides m$.
+        \item[(b)] $o(g) \divides \vabs{G}$. En particular $g^{\vabs{G}} = 1$.
+        \item[(c)] Si $o(g) = n$, entonces $\gen{g} = \sdf{1, g, \ldots, g^{n-1}}$ y $\gen{g} = \gen{g^k} \iff mcd(g, k)=1$.
+        \item[(d)] $G$ es cíclico $\iff \exists g \in G:\ o(g) = \vabs{G}$.
+    \end{itemize}
+\end{thm}
+
+\begin{obs}
+    Sea $K$ un  cuerpo finito y $F$ su cuerpo primo. Entonces:
+    $$
+        F \isom \F_p \text{ y además } \vabs{K:F} = n
+    $$
+    $$
+        K \isom F^n \isom \F_p^n \implies \vabs{K} = p^n
+    $$
+\end{obs}
+
+\begin{thm}[Clasificación de cuerpos finitos]\label{thm:3.5.2}$ $
+    \item[(a)] Para cada primo $p$ y natural $n$, existe un cuerpo $\vabs{E} = p^n$.
+    \item[(b)] Dos cuerpos $E$ y $L$ con el mismo número de elementos son isomorfos.
+\end{thm}
+
+\begin{obs}
+    $$
+        \F_{p^n} = GF(p^n)
+    $$
+\end{obs}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item[(a)] Sea $F = \F_p$ y $f(x) = x^{p^n} - x \in F[x]$, entonces $E = F(f)$ (por el teorema \ref{thm:3.4}).\\
+        Sea $U$ el conjunto de raíces de $f$ en $E$, y como $f'(x) = -1$, entonces $mcd(f, f') = 1$. Por el teorema \ref{thm:3.4.1}(a), obtenemos que $\vabs{U} = p^n$.\\
+
+        \begin{enumerate}
+            \item $F \subseteq U$ ya que $\forall a \in F$ tenemos que $a^p = a$ (por el pequeño teorema de Fermat).
+            \item $U$ es un cuerpo:
+            \begin{align*}
+                \alpha, \beta \in U \text{ consideramos } \alpha^{p^n} = \alpha, \beta^{p^n} = \beta \\
+                (\alpha-\beta)^{p^n} = \alpha^{p^n} - \beta^{p^n} = \alpha - \beta \\
+                \text{Si } \beta \neq 0 \implies \frac{\alpha^{p^n}}{\beta^{p^n}} = \frac{\alpha}{\beta}
+            \end{align*}
+            Y por tanto, $F \subseteq U \subseteq E = F(U) \implies E = F(U) = U$.
+        \end{enumerate}
+        \item[(b)] Supongamos que $L$ es otro cuerpo con $\vabs{L} = p^n$. Sea $D \subseteq L$ su cuerpo primo, $D \isom \F_p \isom F$. Ahora $L^\times = \uds L$ es un grupo de $p^n - 1$ elementos. En particular si $l \in L^\times$, entonces $l^{p^n-1} = 1$. (por \ref{thm:3.5.1}(b)) $\implies l^{p^n} = l$. Es decir, $L$ es un cuerpo de escisión de $f(x) = x^{p^n} - x$. Entonces tenemos el diagrama (que demuestra el isomorfismo):
+        %% TODO
+        %% E = F(f) -> L = D
+        %%      |        |
+        %%      |  isom  |
+        %%      F -----> D
+        %%
+        con $f(n) = x^{p^n} -  x$.
+    \end{itemize}
+\end{proof}
+
+\begin{obs}
+    Sea $K$ u cuerpo finito, y $F$ su cuerpo primo, como consecuencia del teorema \ref{thm:3.5.2}, $K/F$ es una extensión de Galois y si $\vabs{K:F} = n$ entonces $\vabs{\gal(K/F)} = n$.
+\end{obs}
