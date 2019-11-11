@@ -524,7 +524,7 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
 \begin{cor}[Caracterización de normalidad a través de isomorfismos]\label{cor:3.12}
     Sea $E/K$ una extensión, $L$ un cuerpo intermedio:
     \begin{itemize}
-        \item[(a)] Si $L/K$ es norma entonces $\tau \in \gal(E/K)$:
+        \item[(a)] Si $L/K$ es normal entonces $\tau \in \gal(E/K)$:
         $$
             \tau(L) = L \left(\rest{\tau}_L\right) \in \gal(L/K)
         $$
@@ -967,7 +967,7 @@ Vamos a empezar con un recordatorio de \textit{Teoría de Grupos}.
             Y por tanto, $F \subseteq U \subseteq E = F(U) \implies E = F(U) = U$.
         \end{enumerate}
         \item[(b)] Supongamos que $L$ es otro cuerpo con $\vabs{L} = p^n$. Sea $D \subseteq L$ su cuerpo primo, $D \isom \F_p \isom F$. Ahora $L^\times = \uds L$ es un grupo de $p^n - 1$ elementos. En particular si $l \in L^\times$, entonces $l^{p^n-1} = 1$. (por \ref{thm:3.5.1}(b)) $\implies l^{p^n} = l$. Es decir, $L$ es un cuerpo de escisión de $f(x) = x^{p^n} - x$. Entonces tenemos el diagrama (que demuestra el isomorfismo):
-        
+
         \begin{center}
             \begin{tikzpicture}[node distance=1cm and 2cm, auto]
                 \node (A) {$E = F(f)$};
@@ -1122,4 +1122,77 @@ Vamos a empezar con un recordatorio de \textit{Teoría de Grupos}.
         n = \vabs{E:\F_p} = \delta Irr(\F_p, \xi) = \delta f(x)
     $$
     con lo que $f$ es un irreducible de grado $n$.
+\end{ex}
+
+\begin{ex}[H3.9]
+    Sea $E = \Q(\sqrt[4]{2})$, $L = \Q(\sqrt 2)$, $K = \Q$. Comprueba que $E/K$ no es normal.\\\\
+
+    \textbf{Solucion}\\
+    Sabemos que $E/L$ y $L/K$ son extensiones normales, ya que $E = L(x^2-\sqrt{2}) = L(\pm \sqrt[4]{2}) = \Q(\sqrt[4]{2})$ y $L = K(x^2-2) = \Q(\pm \sqrt{2})$. Sin embargo, $E/K$ no es normal porque el polinomio irreducible sobre $K$ ($x^4-2$) tiene dos raíces en $E$ pero no se escinde en $E$. (teorema \ref{thm:3.9})
+\end{ex}
+
+\begin{ex}[Ejercicio de examen]
+    Sea $f(x) = x^4 - 2 \in \Q[x]$. Determina:
+    \begin{itemize}
+        \item[(a)] $E=\Q(f)$.
+        \item[(b)] $\vabs{E:Q}$.
+        \item[(c)] $\alpha \in E$ tal que $\Q(\alpha) = E$.
+        \item[(d)] Decide si $\sigma: \Q(\sqrt 2) \to \Q(\sqrt 2);\ \sqrt{2} \mapsto -\sqrt{2}$ se puede extender a un isomorfismo de $\Q(\sqrt[4]{2})$ o de $E$.
+    \end{itemize}
+
+    \textbf{Solución}\\
+    \begin{itemize}
+        \item[(a)] Las raíces de $f$ son $\sdf{\pm \sqrt[4]{2}, \pm \sqrt[4]{2}i}$ entonces $E = \Q(\pm \sqrt[4]{2}, \pm \sqrt[4]{2}i) = \Q(\sqrt[4]{2}, i)$.
+        \item[(b)] Sabemos que $\Q \subseteq \Q(i), \Q(\sqrt[4]{2}) \subseteq E$. Vamos a hallar el grado de la extensión $E/\Q(\sqrt[4]{2})$, que resulta ser $2 = \delta Irr(\sqrt[4]{2}, i) = \delta(x^2 + 1)$.\\
+        Por otra parte calculamos $\delta Irr(\Q, \sqrt[4]{2}) = \delta(x^4-2) = 4$. Por tanto:
+        $$
+            \vabs{E:Q} = 2 \cdot 4 = 8
+        $$
+        \item[(c)] Hay dos formas:\\
+            \begin{enumerate}
+                \item Usando la demostración del Teorema del Elemento Primitivo (TEP) en el caso infinito:\\
+                $E = \Q(i = \alpha, \sqrt[4]{2} = \beta)$, entonces $$\alpha_1 = i, \alpha_2 = -i, \beta_1 = \sqrt[4]{2}, \beta_2 = -\sqrt[4]{2}, \beta_3 = \sqrt[4]{2}i, \beta_4 = -\sqrt[4]{2}i$$.
+                Tenemos que escoger $c \in \Q$ tal que:
+                $$
+                    c \neq \frac{\beta - \beta_j}{\alpha-\alpha_2} \text{ con } j \in \sdf{1, 2, 3, 4},\ \beta = \beta_1,\ \alpha = \alpha_1
+                $$
+                podemos ver que $c = -1$ funciona. Por la prueba del TEP: $$E = \Q(c\alpha - \beta) = \Q(-\alpha - \beta) = \Q(\alpha + \beta) = \Q(\sqrt[4]{2} + i)$$
+
+                \item Usando todo lo que hemos visto:
+                Sea $L = \Q(i)$, sabemos por el apartado (b) de este ejercicio que $\vabs{E:Q} = 8$, y además, $\vabs{L:\Q} = 2$ por lo que $\vabs{E:L} = 4 \implies x^4-2$. Sea $\alpha = \sqrt[4]{2} + i \in E$, por el teorema del elemento algebraico queremos ver que $\delta Irr(\Q, \alpha) = 8$.\\\\
+                Además, $Irr(L, \sqrt[4]{2}) = x^4 - 2 = f$, y por tanto $p(x) = (x-i)^4-2 = f(x-i)$ donde $\alpha$ es una raíz de $p \in L[x],\ p \notin \Q[x]$. Por el ejercicio H1.32(a), $p$ es irreducible sobre $L$, es decir, $p(x) = (x-i)^4-2 = Irr(L, \alpha)$.
+                %%TODO Pedir a Santorum.
+            \end{enumerate}
+        \item[(d)]
+            Recordamos que si $E/K$ es normal, y $M/K$ es normal con $K \subseteq M \subseteq K$, entonces todo $\sigma \in \gal(M/K)$ se puede extender a $\gal(E/K)$ (Teorema \ref{thm:3.11} y corolario \ref{cor:3.12}).\\\\
+            Sea $M = \Q(\sqrt[4]{2})$, podemos ver que $E/\Q$ es normal, $\Q(\sqrt{2})/\Q$ también lo es, pero $M/\Q$ no es normal. Por tanto, $\sigma$ no se puede extender a un isomorfismo de $M$. Podemos ver por reducción al absurdo:\\
+            Sea $\tau: M \to M$ una extensión de sigma, entonces $\tau(\sqrt[4]{2}) = \sqrt[4]{2}$ o $\tau(\sqrt[4]{2}) = -\sqrt[4]{2}$ ya que $\tau$ lleva raíces sobre $\Q$ en raíces sobre $\Q$ entonces:
+            $$
+                -\sqrt{2} = \sigma(\sqrt 2) = \tau(\sqrt 2) = \tau((\sqrt[4]{2})^2) = \tau(\sqrt[4]{2})^2 = \pm \sqrt{2}
+            $$
+            y llegamos a una contradicción.\\\\
+
+            Para ver que $\sigma$ se extiende a un isomorfismo $\omega$ de $E$ basta aplicar el corolario \ref{cor:3.12}, ya que las dos extensiones ($\Q(\sqrt 2)/\Q)$ y $E/\Q$ son normales).\\
+            Para verlo de otra forma, sea $\omega \in \gal(E/\Q)$ tal que $\omega(\sqrt[4]{2}) = \sqrt[4]{2} i$ (sabemos que existe uno por que tanto $\sqrt[4]{2}$ como $\sqrt[4]{2} i$ son raíces del mimso polinomio irreducible) entonces:
+            $$
+                \omega(\sqrt 2) = \omega((\sqrt[4]{2})^2) = \omega(\sqrt[4]{2})^2 = (\sqrt[4]{2} i)^2 = -\sqrt{2} = \sigma(\sqrt 2)
+            $$
+    \end{itemize}
+\end{ex}
+
+\begin{ex}[H3.10]
+    Todas las afirmaciones de este ejercicio son ciertas.
+    \begin{itemize}
+        \item[(f)] Sean $E/L$ y $L/K$ extensiones normales. Si todo $\sigma \in \gal(L/K)$ se extiende a $E$ ($\gal(E/K)$) entonces $E/K$ es normal.\\\\
+        \textit{Nota}\\
+        Este resultado se puede usar para ver que $\sigma \in \gal(\Q(\sqrt 2)/\Q)$ con $\sigma(\sqrt 2) = -\sqrt 2$ no se puede extender a $M = \Q(\sqrt[4]{2})$, por que si no $M/\Q$ sería normal y ya vimos que no lo es.
+    \end{itemize}
+\end{ex}
+
+\begin{ex}[H3.4]
+    Sea $K = \quo{\F_2[y]}{y^3 + y + 1}$, comprueba que es un cuerpo de escisión de $x^3 + x + 1$ y $x^3 + x^2 + 1$.\\\\
+    \textbf{Solución}\\
+    Podemos ver que $K = \sdf{0, 1, y, y+1, y^2, y^2+1, y^2+y, y^2+y+1}$. Por el lema \ref{lm:3.3}, sabemos que $y \in K$ es raíz de $x^3+x+1$. También sabemos que si $\sigma \in \gal(K/\F_2)$ entonces $\sigma(y)$ es raíz de $x^3+x+1$.\\
+    Tomamos $\varphi = Frob \in \gal(K/\F_2)$ y $\varphi^2 \in \gal(K/\F_2)$. Entonces $\varphi(y) = y^2$ es otra raíz, y $\varphi^2(y) = \varphi(y^2) = y^4 = y \cdot y^3 = y^2+y$.\\
+    Sabemos que $x^3+x+1$ y $x^3+x^2+1$ no comparten raíces en $K$. Comprobamos que $y+1$ es raíz de $x^3+x^2+1$ y vemos que $\varphi(y+1)=y^2+1$ y $\varphi(y^2+1) = y^2+y+1$ por lo que claramente $\F_2(y) = K$ y $\F_2(y+1)$
 \end{ex}
