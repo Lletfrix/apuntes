@@ -1196,3 +1196,68 @@ Vamos a empezar con un recordatorio de \textit{Teoría de Grupos}.
     Tomamos $\varphi = Frob \in \gal(K/\F_2)$ y $\varphi^2 \in \gal(K/\F_2)$. Entonces $\varphi(y) = y^2$ es otra raíz, y $\varphi^2(y) = \varphi(y^2) = y^4 = y \cdot y^3 = y^2+y$.\\
     Sabemos que $x^3+x+1$ y $x^3+x^2+1$ no comparten raíces en $K$. Comprobamos que $y+1$ es raíz de $x^3+x^2+1$ y vemos que $\varphi(y+1)=y^2+1$ y $\varphi(y^2+1) = y^2+y+1$ por lo que claramente $\F_2(y) = K$ y $\F_2(y+1)$
 \end{ex}
+
+\begin{ex}[H3.15]
+    ¿Cuántas raíces tiene distintas $f(x) = x^{12} + 2x^6 + 1 \in \F_3[x]$ en su cuerpo de escisión?\\\\
+    \textbf{Solución}\\
+    Empezamos comprobando si tiene raíces en $\F_3$.
+    \begin{align*}
+        f(0) &= 0 + 0 + 1 \neq 0\\
+        f(1) &= 1 + 2 + 1 \neq 0\\
+        f(2) &= 1 + 2 + 1 \neq 0\\
+    \end{align*}
+    Y vemos que no, sin embargo esto no quiere decir que el polinomio sea irreducible. De hecho, como $f(x) \in \F_3[x^3]$ es reducible. Usando un poco la intuición podemos observar que $f(x)$ es el desarrollo del producto notable:
+    $$
+        f(x) = (x^6 + 1)^2
+    $$
+    Sin embargo, este polinomio sigue sin ser irreducible, ya que $x^6 + 1 \in \F_3[x^3]$. Además como estamos en un cuerpo de característica $p$, sabemos que $(x^k + 1)^p = x^{k\cdot p} + 1$ por que los términos intermedios tienen todos un coeficiente que es múltiplo de $3$. Por tanto:
+    $$
+        f(x) = x^{12} + 2x^6 + 1 = (x^6+1)^2 = ((x^2+1)^3)^2 = (x^2+1)^6
+    $$
+    Ahora consideramos $g(x) = x^2 + 1$, como $g(x)$ es irreducible sobre $\F_3$, sabemos que $\F_3(g)/\F_3$ es una extensión separable y por tanto $g(x)$ tiene dos raíces distintas en su cuerpo de escisión lo que implica que $f$ también.\\\\
+    Por otra parte, si queremos hallar la descomposición de $f$ en el cuerpo de escisión, consideramos $\quo{\F_3[t]}{\gen{t^2+1}} = \quo{\F_3[t]}{\gen{g(t)}}$ que es un cuerpo con $9 = \vabs{\F_3} \cdot \delta(t^2+1)$ elementos. Ahora tendremos que ver que raíces del polinomio $\F_3[x]$ están presentes en $\quo{\F_3[t]}{\gen{t^2+1}}$.\\
+    $$
+        \quo{\F_3[t]}{\gen{t^2+1}} = \sdf{0, 1, 2, t, 1+t, 2+t, 2t, 1+2t, 2+2t}
+    $$
+    Como estamos cocientando por $t^2+1$, sabemos que $t^2+1 = 0 \implies t^2 = -1$ y por tanto $t$ es raíz de $x^2+1$. Además, $(2t)^2 = 4t^2 = -1$ y por tanto también es raíz de $x^2+1$. Entonces podemos descomponer de la forma:
+    $$
+        x^2 + 1 = (x-t)\cdot(x-2t)
+    $$
+    Por tanto, tendríamos:
+    $$
+        f(x) = (x-t)^6(x-2t)^6
+    $$
+\end{ex}
+\begin{ex}[H3.18]
+    Sea $f(x) = x^q - x \in \F_p[x]$ con $q = p^n$. Demuestra que:
+    \begin{itemize}
+        \item[(a)] Cualquier polinomio $g(x)$ irreducible en $\F_p[x]$ de grado $n$ divide a $f$.
+        \item[(b)] El grado de todos los factores irreducibles de $f$ divide a $n$.
+    \end{itemize}
+    \textbf{Solución}\\
+    \begin{itemize}
+        \item[(a)] Sabemos que por ser $f(x)$ irreducible de grado $q$ entonces:
+        $$
+            K = \F_p(f) \isom \F_q = \sdf{\alpha_1, \ldots, \alpha_q}
+        $$
+        entonces $f(x) = \prod_{i=1}^{q} (x-\alpha_i)$.\\
+        Por el teorema de Kronecker (lema \ref{lm:3.3}), sabemos que $L = \quo{\F_p[t]}{\gen{g}}$ es una extensión de $\F_p$ de grado $n$, que contiene una raíz de $g \in L[x]$. Además, $L$ contiene $p^{\delta(g)} = p^n = q$ elementos y por tanto es isomorfo a $K$ (por el teorema \ref{thm:3.5.2}).\\
+        También sabemos que existe un isomorfismo que fija $\F_p$ y por tanto, como $g$ no cambia por el isomorfismo, también tiene una raíz en $K$.
+        Es decir, $\exists \alpha K$ con $(x - \alpha) \divides g(x)$.\\
+        % Además $K = \F_p(f) / \F_p$ es un cuerpo de escisión por lo que es una extensión normal. Como $g$ tiene una raíz en $K$ que es extensión normal $\implies$ $g$ se escinde en $K$. Por tanto:
+        % $$
+        %     g(x) = \prod_{i=1}^n (x-\alpha_i)
+        % $$
+        % y además:
+        % $$
+        %     f(x) = g \cdot \prod_{n+1}^q (x-\alpha_i)
+        % $$
+        % Como tenemos un algoritmo de la división en $\F_p[x]$, lo que nos dice que $\prod_{n+1}^q (x-\alpha_i) \in \F_p[x]$.
+        Sabemos que $(x-\alpha)\divides g(x)$ y $(x-\alpha)\divides f(x)$ lo que quiere decir que $(x-\alpha)\divides mcd_{K[x]}(f, g) = mcd_{\F_p[x]}(f, q)$ y como $g(x)$ es irreducible, entonces $g(x) \divides f(x)$.
+        \item[(b)]
+        Sea $g \in \F_p[x]$ factor irreducible con $\delta(g) = d$. Sea $K = \F_p(f)$. Como $f$ se escinde en $K$ es obvio que $g$ se escinde en $K$. Sea $\alpha$ una raíz cualquiera de $g$. Vamos a construir un cuerpo intermedio $L$ de forma $\F_p \subseteq L = \F_p(\alpha) \subseteq K$. Sabemos que $\vabs{K:\F_p} = n$, y que por la elección de $\alpha$, $\vabs{L:\F_p} = d$. Entonces por transitividad de grados:
+        $$
+            \delta(g) = d \divides n
+        $$
+    \end{itemize}
+\end{ex}
