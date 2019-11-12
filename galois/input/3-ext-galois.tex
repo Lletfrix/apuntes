@@ -21,7 +21,7 @@
 \begin{obs}
     Si $f \in K[x]$, se escinde en $E$, sea $E/K$ una extensión:
     $$
-        f(x) = a (x - a_i) \ldots (x - a_n) \in E[x]
+        f(x) = a (x - a_1) \ldots (x - a_n) \in E[x]
     $$
     Entonces las raíces de $f$ en cualquier extensión de $E$ son $a_1, \ldots, a_n$
 \end{obs}
@@ -127,7 +127,7 @@ Vamos a ver resultados para generalizar este proceso.
 \end{obs}
 
 \begin{thm}\label{thm:3.5}
-    Sea $K_1, K_2$ cuerpos, y $\sigma: K_1 \to K_2$ un isomorfismo de cuerpos. Sea $f_1 \in K_1[x]$ no constante y $\delta(f_1) = f_2$.\\ Supongamos que $E_i$ son cuerpos de escisión de $f_1$ sobre $K_i$ con $i \in \setdef{1, 2}$. Entonces existe un isomorfismo $\tau: E_1 \to E_2$ que extiende a $\sigma$, es decir, $\left. \tau \right|_{K_1} = \sigma$.
+    Sea $K_1, K_2$ cuerpos, y $\sigma: K_1 \to K_2$ un isomorfismo de cuerpos. Sea $f_1 \in K_1[x]$ no constante y $\sigma(f_1) = f_2$.\\ Supongamos que $E_i$ son cuerpos de escisión de $f_1$ sobre $K_i$ con $i \in \setdef{1, 2}$. Entonces existe un isomorfismo $\tau: E_1 \to E_2$ que extiende a $\sigma$, es decir, $\left. \tau \right|_{K_1} = \sigma$.
 \end{thm}
 
 \begin{proof}
@@ -203,16 +203,16 @@ Vamos a ver resultados para generalizar este proceso.
     \end{itemize}
 \end{ex}
 
-\begin{ex}[H3.5]
-    Decide si las extensiones $\Q(\sqrt 5 i)/\Q$, $\Q(\sqrt 5)/\Q$, $\Q(\sqrt[4] 5)/\Q$ son normales.\\\\
-
-    \textbf{Solución}\\
-    \begin{itemize}
-        \item[$\Q(\sqrt 5 i)/\Q$] Es fácil comprobar que $\Q(\sqrt 5 i) = \Q(x^2 + 5)$ y por tanto son normales.
-        \item[$\Q(\sqrt 5)/\Q$] Es fácil comprobar que $\Q(\sqrt 5) = \Q(x^2 - 5)$ y por tanto son normales.
-        \item[$\Q(5^{\frac{1}{4}})/\Q$] $x^4 - 5$ tiene una raíz en $\Q(\sqrt[4]{5})$ pero no se escinde, por tanto no es normal.
-    \end{itemize}
-\end{ex}
+% \begin{ex}[H3.5]
+%     Decide si las extensiones $\Q(\sqrt 5 i)/\Q$, $\Q(\sqrt 5)/\Q$, $\Q(\sqrt[4] 5)/\Q$ son normales.\\\\
+%
+%     \textbf{Solución}\\
+%     \begin{itemize}
+%         \item[$\Q(\sqrt 5 i)/\Q$] Es fácil comprobar que $\Q(\sqrt 5 i) = \Q(x^2 + 5)$ y por tanto son normales.
+%         \item[$\Q(\sqrt 5)/\Q$] Es fácil comprobar que $\Q(\sqrt 5) = \Q(x^2 - 5)$ y por tanto son normales.
+%         \item[$\Q(5^{\frac{1}{4}})/\Q$] $x^4 - 5$ tiene una raíz en $\Q(\sqrt[4]{5})$ pero no se escinde, por tanto no es normal.
+%     \end{itemize}
+% \end{ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 24/10
 
@@ -324,7 +324,7 @@ Vamos a ver resultados para generalizar este proceso.
 
         Es normal ya que $\Q(\sqrt{5})/\Q = \Q(x^2-5)$ es el cuerpo de escisión de $x^2-5$.
 
-        \item $\Q(\sqrt[4]{5}/\Q)$.\\\\
+        \item $\Q(\sqrt[4]{5})/\Q$.\\\\
 
         No es normal. Sabemos que $\Q(\sqrt[4]{5})/\Q$ es finita, y como $p(x) = x^4 - 5$ es irreducible en $\Q[x]$, tiene una raíz en $\Q(\sqrt[4]{5})$ pero no escinde, por la caracterización de normalidad (teorema \ref{thm:3.9}), concluimos con que $\Q(\sqrt[4]{5})/\Q$ no es normal.
     \end{enumerate}
@@ -453,7 +453,7 @@ Sea $L$ un cuerpo intermedio de $E/K$, entonces: $\gal(E/L) \leq \gal(E/K)$. En 
     Sea $E/K$ una extensión, $L_1, L_2$ cuerpos intermedios, $\sigma: L_1 \to L_2$ es un $\mbf K$\textbf{-isomorfismo} si $\sigma: L_1 \to L_2$ es un isomorfismo y $\sigma(k) = k,\ \forall k \in K$.
 \end{dfn}
 
-Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
+Con esta notación vamos a reescribir el corolario \ref{cor:3.8}.
 \begin{thm}\label{thm:3.8bis}
     Sea $E/K$ extensión normal,$L_1, L_2$ cuerpos intermedios. Si $\sigma: L_1 \to L_2$ es un $K$-isomorfismo, entonces: $\exists \tau \in \gal(E/K)$ tal que $\left. \tau \right|_{L_1} = \sigma$.
 \end{thm}
@@ -476,7 +476,7 @@ Con esta notación vamos a reescribir el teorema \ref{thm:3.8}.
         \item[(b)] La aplicación $\psi: \gal(E/K) \to \gal(L/K);\ \sigma \mapsto \left.\sigma\right|_L$ es un homomorfismo de grupos con $\ker(\psi) = \gal(E/L) \normsub \gal(E/K)$.
         \item[(c)] Si $E/K$ es normal, entonces $\psi$ es sobreyectivo. En particular, $\quo{\gal(E/K)}{\gal(E/L)} \isom \gal(L/K)$.
         \item[(d)] La aplicación $\rho: \gal(E/K) \to S_\Omega;\ \sigma \mapsto \left.\sigma\right|_\Omega$ es un homomorfismo de grupos con $\ker(\rho) = \gal(E/L)$.
-        \item[(e)] Si $E/K$ es normal y $\rho$ es irreducible, dados $a, b \in \Omega$ existe $\sigma \in \gal(E/K)$ tal que $\sigma(a) = b$. Por tanto:
+        \item[(e)] Si $E/K$ es normal y $f$ es irreducible, dados $a, b \in \Omega$ existe $\sigma \in \gal(E/K)$ tal que $\sigma(a) = b$. Por tanto:
         $$
             n = \left|\gal(E/K):\gal(E/K(a))\right|
         $$
