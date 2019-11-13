@@ -54,8 +54,15 @@ Sea $f \in K[x]$, entonces $E$ es un cuerpo de escisión de $f$ sobre $K$ si:
     \end{enumerate}
 \end{lm}
 
-\begin{proof}
-    La demostración se deja como ejercicio.
+\begin{proof}$ $
+    \begin{enumerate}
+        \item[($i$)] Como $f \in K[x]$ no constante suponemos $\delta(f) = n \geq 1$, lo que quiere decir que $f$ tiene $n$ raíces. Entonces:
+        \begin{itemize}
+            \item[$\implies$] Si $f$ se escinde en $K$, sea $\Omega = \sdf{\omega \in K \mid f(\omega) = 0, \forall \omega \in \Omega}$ el conjunto de raíces de $f$, sabemos que $\Omega \subseteq K$, por tanto, por Ruffini podemos expresar $f$ como $\prod_i^n (x-\omega_i)^{m(i)},\ \forall \omega_i \in \Omega$ (donde $m(i)$ es la multiplicidad de cada raíz $\omega_i$) y entonces todos los términos de la descomposición tienen grado $1$.
+            \item[$\Longleftarrow$] Partimos de que $f$ se puede expresar en $K[x]$ como $\prod_i^n (x-\omega_i)^{m(i)}$ con $\omega_i$ como en el apartado anterior. Entonces $\omega_i \in K[x]\ \forall i \implies f$ se escinde en $K$.
+        \end{itemize}
+        \item[($ii$)] Ya hemos visto que si $f$ se escinde se puede expresar como producto de polinomios de grado $1$. Si $p \divides f$ entonces sea $\delta(p) = l \leq n$, $p$ es $\prod_i^l (x-\omega_i)^{m(i)}, \forall \omega_i \in \Omega' \subseteq \Omega$. Por el resultado anterior, como es producto de polinomios de grado $1$, se escinde en $K$.
+    \end{enumerate}
 \end{proof}
 
 \begin{lm}[Cuerpos de escisión y cuerpos intermedios]\label{lm:3.2}
@@ -187,7 +194,7 @@ Vamos a ver resultados para generalizar este proceso.
 \begin{ex}[H3.1]
     Construye los cuerpos de escisión $\Q(x^3-1)$, $\Q(x^4 + 5x^2 + 5)$, $\Q(x^6-8)$ y calcula los grados de las extensiones que resultan.\\\\
 
-    \textbf{Solucion}\\
+    \textbf{Solución}\\
     \begin{itemize}
         \item[$f(x) = x^3-1$] Las raíces son las raíces cúbicas de la unidad: $1, \omega, \bar\omega = \omega^2$, por lo que $\Q(f) = \Q(1, \omega, \omega^2) = \Q(\omega)$.
         \item[$f(x) = x^4+5x^2+5$] Muy parecido a un ejemplo ya resuelto.
@@ -195,7 +202,7 @@ Vamos a ver resultados para generalizar este proceso.
         $$
             \sqrt[6] 8 = (8^\frac{1}{3})^\frac{1}{2} = \sqrt 2
         $$
-        Sea $\xi = e^\frac{2 \pi i}{6} = e^{\pi i }{3}$, las raíces de $f$ son:
+        Sea $\xi = e^\frac{2 \pi i}{6} = e^\frac{\pi i}{3}$, las raíces de $f$ son:
         $$
             \sdf{\sqrt 2, \sqrt 2 \xi, \sqrt 2 \xi^2, \sqrt 2 \xi^3, \sqrt 2 \xi^4, \sqrt 2 \xi^5}
         $$
@@ -224,9 +231,8 @@ Vamos a ver resultados para generalizar este proceso.
 \end{lm}
 
 \begin{proof}
-    Es consecuencia directa del lema \ref{lm:3.2} y de la definición.
+    Como $E/K$ es normal $\implies \exists f \in K[x]$ tal que $E$ es el cuerpo de escisión de $f$ sobre $K$. En particular, $f \in K[x] \subseteq L[x]$. Por el lema \ref{lm:3.2}, $E$ también es el cuerpo de escisión de $f$ sobre $L$, por lo que $E/L$ es normal.
 \end{proof}
-
 
 \begin{cor}[al teorema \ref{thm:3.5}]\label{cor:3.8}
     Sea $E/K$ una extensión normal, $K \subseteq M_1, M_2 \subseteq E$ con $M_1, M_2$ cuerpos intermedios.\\\\
@@ -441,7 +447,7 @@ $$
 Donde además, el \textit{grupo de Galois} es un cuerpo intermedio de $E/K$.
 \end{dfn}
 
-\begin{pro}
+\begin{pro} % TODO: Dar nombre
 Sea $L$ un cuerpo intermedio de $E/K$, entonces: $\gal(E/L) \leq \gal(E/K)$. En general $\left.\sigma\right|_L \notin \gal(L/K)$.
 \end{pro}
 
@@ -455,7 +461,7 @@ Sea $L$ un cuerpo intermedio de $E/K$, entonces: $\gal(E/L) \leq \gal(E/K)$. En 
 
 Con esta notación vamos a reescribir el corolario \ref{cor:3.8}.
 \begin{thm}\label{thm:3.8bis}
-    Sea $E/K$ extensión normal,$L_1, L_2$ cuerpos intermedios. Si $\sigma: L_1 \to L_2$ es un $K$-isomorfismo, entonces: $\exists \tau \in \gal(E/K)$ tal que $\left. \tau \right|_{L_1} = \sigma$.
+    Sea $E/K$ extensión normal, $L_1, L_2$ cuerpos intermedios. Si $\sigma: L_1 \to L_2$ es un $K$-isomorfismo, entonces: $\exists \tau \in \gal(E/K)$ tal que $\left. \tau \right|_{L_1} = \sigma$.
 \end{thm}
 
 \begin{cor}[al teorema \ref{thm:3.8bis}] \label{cor:3.10}
@@ -514,7 +520,7 @@ Con esta notación vamos a reescribir el corolario \ref{cor:3.8}.
         \item[(b)] Se deja como ejercicio.
         \item[(c)] Sea $\theta \in \gal(L/K)$, por el teorema \ref{thm:3.8bis}, $\exists \sigma \in \gal(E/K)$ tal que $\left. \sigma \right|_L = \theta$. En particular, $\psi$ es sobreyectiva. (La segunda conclusión se sigue del teorema de isomorfía).
         \item[(d)] Se deja como ejercicio partiendo de $\left. \sigma \right|_\Omega \in S_\Omega$.
-        \item[(e)] Por el corolario \ref{cor:3.10} si $a, b \in \Omega$ cualesquiera, $\exists \sigma \in \gal(E/K)$ con $a\sigma = \sigma(a) = b$ y $\theta_a = \Sigma$ por el teorema \ref{thm:orbita}.
+        \item[(e)] Por el corolario \ref{cor:3.10} si $a, b \in \Omega$ cualesquiera, $\exists \sigma \in \gal(E/K)$ con $a\sigma = \sigma(a) = b$ y $\theta_a = \sigma$ por el teorema \ref{thm:orbita}.
         %%TODO: COMPLETAR demostración del cardinal. Santorum.
     \end{itemize}
 \end{proof}
@@ -683,34 +689,35 @@ El siguiente teorema y proposición se vieron en el capítulo 1 pero vamos a ree
 
 \begin{dfn}[Separabilidad. Polinomios, elementos y extensiones]$ $
     \begin{itemize}
-        \item[($i$)] Sea $f \in K[x]$ un polinomio, decimos que es un \textbf{polinomio separable} si todas sus raíces en un cuerpo de escisión son distintas, es decir, $f' \neq 0$ (por el teorema \ref{thm:3.13}).
-        \item[($ii$)] Sea $E/K$ una extensión, $a \in E$ un elemento algebraico, decimos que $a$ es un \textbf{elemento separable} si $p = Irr(K, a)$ es separable.
-        \item[($iii$)] Sea $E/K$ una extensión algebraica, decimos que es una \textbf{extensión separable} si todo $a \in E$ es separable.
+        \item[($i$)] Sea $f \in K[x]$ un polinomio \textbf{irreducible}, decimos que es un \textbf{polinomio separable} si todas sus raíces en un cuerpo de escisión son distintas, es decir, $f' \neq 0$ (por el teorema \ref{thm:3.13}).
+        \item[($ii$)] Sea $f \in K[x]$ un polinomio reducible, decimos que es un \textbf{polinomio separable} si sus factores irreducibles son separables.
+        \item[($iii$)] Sea $E/K$ una extensión, $a \in E$ un elemento algebraico, decimos que $a$ es un \textbf{elemento separable} si $p = Irr(K, a)$ es separable.
+        \item[($iv$)] Sea $E/K$ una extensión algebraica, decimos que es una \textbf{extensión separable} si todo $a \in E$ es separable.
     \end{itemize}
 \end{dfn}
 
 \begin{pro}[Divisores irreducibles de un polinomio separable]\label{pro:sepdiv}
-    Sea $f \in K[x]$ un polinomio separable, entonces para todo $p$ irreducible tal que $p \divides f$, $p$ es separable.
+    Sea $f \in K[x]$ un polinomio separable, entonces para todo $p$ irreducible tal que $p \divides f$, $p$ es separable. El recíproco es cierto por definición.
 \end{pro}
 \begin{proof}
     Si $p$ divide a $f$ quiere decir que todas sus raíces están contenidas en las de $f$, por tanto, si $f$ es separable, $p$ también lo es.
 \end{proof}
 
-\begin{pro}[Separabilidad de extensiones intermedios]
+\begin{pro}[Separabilidad de extensiones intermedias]
     Sea $E/K$ una extensión separable, y $L$ un cuerpo intermedio, entonces, $E/L$ y $L/K$ son separables.
 \end{pro}
 \begin{proof}
     Es fácil ver que $L/K$ es separable. Vamos a ver que $E/L$ es separable.\\
     Sean $a \in E$, $p = Irr(L, a)$. Y sea $q = Irr(K, a)$ que es separable por hipótesis. Como $p \divides q$ (en $L[x]$), sea $M$ un cuerpo de escisión de $q$ sobre $L$ (que sabemos que existe por el teorema \ref{thm:3.4}), entonces $q$ se escinde en $M \implies p$ se escinde en $M$ por \ref{lm:3.1}($ii$).\\
 
-    Si $\alpha, \beta$ son raíces de $p$ en $M$, enotnces $\alpha, \beta$ son raíces de $q$ en $M \implies \alpha \neq \beta$.
+    Si $\alpha, \beta$ son raíces de $p$ en $M$, entonces $\alpha, \beta$ son raíces de $q$ en $M \implies \alpha \neq \beta$.
 \end{proof}
 
 \begin{lm}[Separabilidad en cuerpos de característica $0$]\label{lm:3.4.3}
-    Todo polinomio $f \in K[x]$ con $\car K = 0$ es separable y toda extensión $E/K$ algebraica es separable.
+    Todo polinomio $f \in K[x]$ irreducible (no constante) con $\car K = 0$ es separable y toda extensión $E/K$ algebraica es separable.
 \end{lm}
 \begin{proof}
-    Se deja como ejercicio.
+    Como $f$ es irreducible, por el teorema \ref{thm:3.4.1}(b), si $f' \neq 0$ entonces es separable. Como estamos en característica $0$, $f'(x) = 0 \iff f(x) = cte$, con lo que hemos demostrado que $f(x)$ es separable si no es constante.
 \end{proof}
 
 \begin{cor}[Separabilidad en cuerpos de característica $p$]\label{cor:3.4.4}
@@ -742,22 +749,11 @@ En particular $\forall b \in K, \exists a \in K$ tal que $a^p = b$
     \end{align*}
 \end{proof}
 
-\begin{ex}[H3.16]
-    ¿Cuántas raíces distintas tiene $x^{12} + 2x^6 + 1 \in \F_3[x]$ en su cuerpo de escisión?\\\\
-
-    \begin{align*}
-        x^{12} + 2x^6 + 1 &= (x^4)^4 + (-1)^3 (x^2)^3 + 1^3\\
-                          &= (x^4 -x^2 +1) ^3\\
-                          &= ((x^2 + 1)^2)^3 = (x^2 + 1)^6
-    \end{align*}
-    Sabemos que $x^2 + 1$ es separable por ser $\F_3$ perfecto. Además como es separable es irreducible y por tanto, tiene dos raíces distintas en su cuerpo de escisión.
-\end{ex}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 04/11
 \begin{eg}[Polinomio irreducible que no es separable]
     Vamos a buscar un polinomio $f$ irreducible que no sea separable. Además por el lema \ref{lm:3.4.3} y el teorema \ref{thm:3.4.5}, tenemos que buscar $f \in K[x]$ tal que $\car K = p$ con $K$ no perfecto.\\
     Por ejemplo, si consideramos $K = \F_p$, podemos ver que $K$ no es perfecto ya que $\varphi = Frob \in \mathrm{End}(\F_p(t))$.\\
-    Por otra parte, $\varphi(\F_p(t)) = \F_(t^p) \subsetneq \F_p(t)$. Vamos a considerar entonces la extensión $\F_p(t)/F_p(t^2)$, donde podemos ver que $\vabs{\F_p(t) : \F_p(t^2)} = p$ pues tenemos que $t$ es raíz de $x^p - t^p \in \F_p(t^p)[x]$.\\
+    Por otra parte, $\varphi(\F_p(t)) = \F_p(t^p) \subsetneq \F_p(t)$. Vamos a considerar entonces la extensión $\F_p(t)/F_p(t^2)$, donde podemos ver que $\vabs{\F_p(t) : \F_p(t^2)} = p$ pues tenemos que $t$ es raíz de $x^p - t^p \in \F_p(t^p)[x]$.\\
 
     Tenemos que ver ahora que $x^p - t^p = (x - t)^p$ es irreducible. En otro caso, $x^p - t^p = g(x) \cdot h(x)$, con $\delta g,\ \delta h \leq p$. Por tanto:
     $$
@@ -889,7 +885,7 @@ En particular $\forall b \in K, \exists a \in K$ tal que $a^p = b$
     Consecuencia del teorema \ref{thm:3.4.6}. Los detalles se dejan como ejercicio.
 \end{proof}
 
-\begin{ex}[Ejercicio] %TODO: Añadir numeración
+\begin{ex}[H3.7]
     Sea $\xi$ la raíz primitiva quinta de $\1$. Demuestra o calcula:
     \begin{itemize}
         \item[(a)] $\Q(\xi)/\Q$ es normal.
