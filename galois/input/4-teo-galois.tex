@@ -1,0 +1,511 @@
+% !TeX root = ../galois.tex
+
+\chapter{Teoría de Galois}
+
+\section{Teorema Fundamental} % TODO: Comprobar si es la primera seccion
+
+A partir de este capítulo vamos a trabajar siempre con extensiones $E/K$ que sean de Galois, es decir, $E/K$ es separable y normal. En el teorema \ref{thm:3.11}, caracterizamos al grupo de Galois de una extensión, vamos a ver que ambas hipótesis (separabilidad y normalidad) son necesarias.
+
+\begin{eg}[Grupo de Galois de una extensión no normal]
+    Consideremos $\Q(\sqrt{1 + \sqrt 7})/\Q$. Podemos hallar que $\sqrt{1 + \sqrt 7}$ es raíz de $p(x) = x^4-2x^2-6 \in \Q[x]$, que es irreducible por el criterio de Einsestein para $p=2$.\\
+    Entonces, las raíces de $p(x)$ son $\pm\sqrt{1 + \pm\sqrt 7}$, y su cuerpo de escisión es $E = \Q(p) = \Q(\sqrt{1 + \sqrt 7}, \sqrt{1 - \sqrt 7})$.\\
+    Si suponemos que $\Q(\sqrt{1 + \sqrt 7}) = E(p)$ rápidamente llegamos a una contradicción con lo que concluimos que $\Q(\sqrt{1 + \sqrt 7})/\Q$ no es normal. Nos  preguntamos ahora acerca de $\gal(\Q(\sqrt{1 + \sqrt 7})/\Q)$.\\
+    Por el teorema \ref{thm:3.11}, $\Omega = \sdf{\pm \sqrt{1 + \sqrt 7}}$ es el conjunto de raíces de $p$ en $\Q(\sqrt{1 + \sqrt 7})/\Q$, y por tanto $\gal(\Q(\sqrt{1 + \sqrt 7})/\Q) \leq S_2 \implies \gal(\Q(\sqrt{1 + \sqrt 7})/\Q) = \sdf{id, \sigma}$ con $\sigma(\sqrt{1 + \sqrt 7}) = -\sqrt{1 + \sqrt 7}$.\\\\
+    De esta forma vemos que:
+    $$
+        \vabs{\gal(\Q(\sqrt{1 + \sqrt 7})/\Q)} = 2 \text{ pero } \vabs{\Q(\sqrt{1 + \sqrt 7}):\Q} = 4
+    $$
+\end{eg}
+
+\begin{ex}[H4.3]$ $
+    \begin{itemize}
+        \item[(a)] Determina que $\F_3(t) / \F_3(t^3)$ no es de Galois.
+        \item[(b)] Determina que $\C(t) / \C(t^3)$ es de Galois.
+        \item[(c)] Calcula los grupos de Galois asociados.
+    \end{itemize}
+    \textbf{Solución}\\
+    \begin{itemize}
+        \item[(a)] Vamos a ver que la extensión no es separable. Sabemos que $\F_3(t) / \F_3(t^3)$ es algebraica y finita. Consideramos el polinomio irreducible $x^3-t^3 \in \F_3(t^3)[x]$, que tiene $t$ como raíz, entonces no es separable por que $x^3-t^3 = (x-t)^3$ y por tanto no es de Galois.\\
+        Además, $\gal(\F_3(t)/\F_3(t^3)) = \sdf{id}$.
+        \item[(b)] Sabemos que $\C(t) / \C(t^3)$ es separable por que estamos en un cuerpo de característica cero. Además, sea el polinomio $x^3-t^3 \in \C(t^3)[x]$, sus raíces son $\Omega = \sdf{t, t\omega, t\bar\omega}$ donde $\omega \in \C:\ o(\omega)=3$.\\
+        Como $\Omega \subseteq \C(t)$, $\C(t)$ es el cuerpo de escisión de $p(x)$ y por tanto $\C(t)/\C(t^3)$ es separable y normal y por tanto de Galois.
+        $$
+            \text{Luego, } \vabs{\gal(\C(t) / \C(t^3))} = \vabs{\C(t) : \C(t^3)} = 3
+        $$
+        Con lo que hallamos:
+        $$
+            \gal(\C(t) / \C(t^3)) = \gen{\tau}:\ \tau(t) = t\omega,\ o(\tau) = 3
+        $$
+        \item[(c)] Resuelto en los apartados respectivos.
+        \end{itemize}
+\end{ex}
+
+\begin{ex}[H4.2]
+    Sea $E = \F_{p^n}$, demuestra que $E / \F_p$ es de Galois y calcula $\gal(E / \F_p)$.\\\\
+
+    \textbf{Solución}\\
+    Sabemos que $E / \F_p$ es separable por que $\F_p$ es perfecto y la extensión es algebraica. Tenemos que ver que $E / \F_p$ es normal.\\
+    Además $E$ es el cuerpo de escisión de $x^{p^n} - x$ sobre $\F_p \implies E / \F_p$ es normal y por tanto es de Galois.\\\\
+    Como $E / \F_p$ es de Galois $\implies \vabs{\gal(E / \F_p)} = \vabs{E : \F_p} = n$. Sea $\varphi = Frob \in \gal(E / \F_p)$, sabemos que $o(\varphi) \divides n$.
+    Sea $d = o(\varphi)$, sabemos que $d \leq n$ y que:
+    $$
+        a = id(a) = \varphi^d(a) = a^{p^d} \forall\ a \in E \implies \forall a \in E,\ a^{p^d} - a = 0
+    $$
+    Por tanto, todo elemento en $E$ es raíz de $x^{p^d} - x \implies E$ es el cuerpo de escisión de $x^{p^d} - x$. Esto quiere decir que $E$ tiene $\delta(x^{p^d} - x)$ elementos, pero $E = \F_{p^n}$ que tiene $p^n$ elementos $\implies d = n$. Por tanto:
+    $$
+        \gal(E / \F_p) = \gen{\varphi}
+    $$
+\end{ex}
+
+\begin{cor} % TODO: Dar nombre
+    Sea $E/K$ una extensión de Galois y $L$ un cuerpo intermedio ($K \subseteq L \subseteq E$), entonces:
+    $$
+        L/K \text{ es de Galois } \iff \forall \tau \in \gal(E/K),\ \rest{\tau}_L \in \gal(E/K)
+    $$
+    Y además, en cualquiera de los supuestos equivalentes anteriores, todo $\sigma \in \gal(L/K)$ se extiende a $\tau \in \gal(E/K)$ (tiene exactamente $\vabs{E:L}$ extensiones), $\gal(E/L) \normsub \gal(E/K)$ y $ \quo{\gal(E/K)}{\gal(E/L)} \isom \gal(L/K)$.\\\\
+    Podemos hacer un diagrama:
+    % TODO
+    % E          {1} = \gal(K/K)
+    % |          |
+    % |          |
+    % L -------- N = \gal(E/L)
+    % |          ||
+    % |          ||
+    % K          G = \gal(L/K)
+\end{cor}
+
+El objetivo de este capítulo es probar el teorema \ref{thm:fund-gal}:
+
+Para ello vamos a hacer uso del corolario \ref{cor:3.12}. Además, necesitaremos un resultado sobre automorfismos de cuerpos en general.\\
+Recordemos que si $E$ es un cuerpo, entonces $\aut(E)$ actúa sobre $E$ según:
+$$
+    \forall e \in E,\ \forall \sigma \in \aut(E),\ \ e \cdot \sigma = \sigma(e)
+$$
+y cumple las propiedades:
+\begin{align*}
+    e \cdot (\sigma \tau) = (e \cdot \sigma) \tau\\
+    e \cdot (\sigma \tau) = \sigma \circ \tau (e) = \tau ( \sigma (e)) = \tau(e \cdot \sigma) = (e \cdot \sigma) \tau
+\end{align*}
+Además, si $G \leq \aut(E)$, entonces $G$ actúa sobre $E$, y recordemos la notación del conjunto de puntos fijos de $E$ por la acción de $G$:
+$$
+    E^G = \sdf{e \in E \mid e \cdot \sigma = e} = \sdf{e \in E \mid \sigma(e) = e} \subseteq E \text{ es un subcuerpo }
+$$
+Por tanto $E/E^G$ es una extensión.
+
+\begin{thm}[de Artin]\label{thm:4.1}
+    Sea $E$ un cuerpo, y sea $G \leq \aut(E)$ un subgrupo finito, entonces:
+    $$
+        \vabs{E:E^G} = \vabs{G}
+    $$
+\end{thm}
+\begin{proof}
+    Se proporciona un esquema de la prueba.\\
+    Sea $F = E^G$, la prueba sigue por demostrar la doble igualdad:
+    \begin{enumerate}
+        \item $m = \vabs{E:F} \geq \vabs{G} = n$.\\
+        Por reducción al absurdo suponemos $m < n$, entonces podemos encontrar $\tau_1, \ldots, \tau_n \in G$ distintos tal que:
+        $$
+            \sum_{j=1}^n a_j\tau_j = 0
+        $$
+        Y esto entra en contradicción con el teorema de Dedekind (teorema \ref{thm:4.2}). Entonces $m \geq n$.
+        \item $\vabs{E:F} = m \leq n = \vabs{G}$\\
+        Tendríamos que trabajar con sistemas lineales, soluciones y manipulaciones...
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}[de Dedekind]\label{thm:4.2}
+    Sea $E$ un cuerpo y sean $\tau_1, \ldots, \tau_n \in \aut(E)$ distintos. Entonces $\tau_1, \ldots, \tau_n$ son $E-$linealmente independientes (en el espacio vectoreial de funciones de $E$).
+\end{thm}
+\begin{proof}
+    Queremos probar que si $a_j \in E$:
+    $$
+        \sum_{j=1}^{n} a_j\tau_j = 0 \implies a_j = 0 \forall j
+    $$
+    Procedemos por inducción sonre $n$.
+    \begin{itemize}
+        \item[$n=1$]
+        $$
+            a_1\tau_1 = 0 \implies a_1\tau_1(1) = a_1 = 0
+        $$
+        \item[$n>1$]
+        \begin{align}
+            \forall x  \in E:\ \sum_{j=1}^n a_j\tau_j(x) = 0\\
+            \forall y \in E:\ \sum_{j=1}^n a_j\tau_j(xy) = \sum_{j=1}^n a_j\tau_j(x)\tau_j(y) = 0\\
+            \forall y \in E:\ \sum_{j=1}^n a_j\tau_j(x)\tau_n(y) = 0
+        \end{align}
+        Entonces restando:
+        $$
+            0 = \sum_{j=1}^n a_j(\tau_j(y) - \tau_n(y)) \tau_j(x) = \sum_{j=1}^{n-1} a_j(\tau_j(y)-\tau_n(y))\tau_j(x)
+        $$
+        Por inducción:
+        $$
+            a_j(\tau_j(y) - \tau_n(y)) = 0 \forall j \in \sdf{1, \ldots, n-1}
+        $$
+        Supongamos que $\exists a_j \neq 0$, entonces:
+        $$
+            \tau_j(y) = \tau_n(y) \implies \tau_j = \tau_n \text{ y es imposible por hipótesis.}
+        $$
+    \end{itemize}
+\end{proof}
+
+\begin{thm}[de puntos fijados]\label{thm:4.3}
+    Sea $E/K$ una extensión de Galois, y $G = \gal(E/K)$ su grupo de Galois $\implies E^G = K$.\\
+    Es decir, si $a \in E$ tal que $\forall \tau \in G:\ \tau(a) = a \implies a \in K$.
+\end{thm}
+\begin{proof}
+    Escribimos $F = E^G \subseteq E$. Suponemos $K \subseteq F$, tenemos entonces el diagrama:
+    %TODO
+    %   |-- E ----------|
+    %   |   |           | |G|
+    %|G||   F = E^G ----|
+    %   |   |           | 1
+    %   |-- K ----------|
+    Por el teorema \ref{thm:3.4.6}, sabemos que $\vabs{G} = \vabs{E:K}$. Por el teorema de Artin (teorema \ref{thm:4.1}), $\vabs{E:E^G} = \vabs{E:F} \implies |F:K| = 1 \implies K = F = E^G$.
+\end{proof}
+\begin{obs}
+    El recíproco también es cierto, se corresponde con el ejercicio H4.4. Basta ver que $\forall \alpha \in E,\ Irr(K, \alpha)$ se escinde en $E$ y todas sus raíces son distintas.
+\end{obs}
+\begin{cor}\label{cor:4.4}%TODO Dar nombre
+    Sea $E/K$ una extensión de Galois, $G = \gal(E/K)$ su grupo de Galois y $L$ un cuerpo intermedio entonces:
+    $$
+        L/K \text{ es normal } \iff \gal(E/L) \normsub G
+    $$
+\end{cor}
+\begin{proof}$ $
+    \begin{itemize}
+        \item[($\implies$)] Por el corolario \ref{cor:3.12}(b), entonces:
+        $$
+            (\star)\ L/K \text{ normal } \iff \forall \tau \in G: \tau(L) = L
+        $$
+
+        \item[($\Longleftarrow$)] Partimos de $\gal(E/L) \normsub G$, y queremos ver que $L/K$ es normal. Usando $(\star)$, basta ver que $\forall \tau \in G$, $\tau(L) = L$. Entonces:
+        $$
+            H \normsub G \iff \forall \sigma \in H,\ \forall \tau \in G,\ \sigma^\tau = \tau^{-1} \sigma \tau \in H
+        $$
+        entonces $\forall l \in L$:
+        \begin{align*}
+            \sigma^\tau(l) = \tau^{-1} \sigma \tau(l) = l\cdot \tau^{-1} \cdot \sigma \cdot \tau = l\\
+            l \cdot (\tau^{-1} \cdot \sigma) = l \cdot \tau^{-1} \implies \tau^{-1}(l) \in E^H = L
+        \end{align*}
+        Y por tanto $E/L$ es de Galois por el teorema \ref{thm:4.3}. Como $E/L$ es de Galois $\implies \tau^{-1}(L) \subseteq L \implies L \subseteq \tau(L)$.\\
+        Entonces, tenemos el diagrama:
+        %   tau rest L : L \to (isom) tau(L)
+        %           |                   | 1
+        %           |                   |L cuerpo intermedio
+        %           K \to ------------> K
+        %
+        Y por el ejercicio H2.15, $\vabs{L:K} = \vabs{\tau(L):K} = \vabs{\tau(L):L}\vabs{L:K} \implies \tau(L) = L$.
+        Además, también tenemos el diagrama:
+        %        E
+        %      /   \
+        %  \tau(L)  L
+        %      \   /
+        %        K
+        Entonces:
+        \begin{align*}
+            H = \gal(E/L) \leq G = \gal(E/K),\ \tau \in G\\
+            H \isom H^\tau = \tau^{-1} H \tau = \sdf{\tau^{-1} \sigma \tau \mid \sigma \in H}\\
+            H^\tau = \gal(E/\tau(L))
+        \end{align*}
+    \end{itemize}
+\end{proof}
+
+\begin{obs}[Notación]
+    Recordamos que usamos la notación de acción de grupos a derechas, es decir:\\
+    Sean $f,\ g$ funciones $f,g: E \to E$ con $E$ un cuerpo, $f \circ g (e) = g (f (e))$ y sea el grupo de automorfismos $(\aut(E), \circ)$, entonces para $\sigma, \tau \in  \aut(E)$ tenemos que $\forall e \in E$:
+    $$
+        e \cdot \sigma = \sigma(e),\text{ y } e \cdot (\sigma \tau) = (e \cdot \sigma) \tau
+    $$
+\end{obs}
+
+\begin{lm}\label{lm:4.5} % TODO: Dar nombre
+    Sean $K \subseteq L \subseteq E$ cuerpos, $H = \gal(E/L) \leq \gal(E/K)$, y sea $\tau \in G$ entonces:
+    $$
+        H^\tau = \gal(E/\tau(L))
+    $$
+\end{lm}
+\begin{proof}$ $
+    \begin{align*}
+        %% TODO: Pedir a Santorum
+    \end{align*}
+\end{proof}
+
+
+\begin{thm}[Fundamental de la Teoría de Galois]\label{thm:fund-gal}\label{thm:4.6}
+    Sea $E/K$ una extensión de Galois con $G = \gal(E/K)$, y sean:
+    $$
+        \mathcal{K} = \sdf{L \mid K \subseteq L \subseteq E},\ \mathcal{J} = \sdf{H \mid H \leq G}
+    $$
+    Entonces:
+    \begin{itemize}
+        \item[(a)] Las aplicaciones:
+        $$ f: \mathcal{K} \to \mtc{J};\ L \mapsto \gal(E/L)$$
+        $$ g: \mtc{J} \to \mtc{K};\ H \mapsto E^H $$
+        son biyectivas y $f^{-1} = g,\ g^{-1} = f$.
+        \item[(b)] Bajo esta correspondencia:
+        $$
+            L/K \text{ es normal } \iff \gal(E/L) \normsub G
+        $$
+        \item[(c)] Si $L \longleftrightarrow H$, $\vabs{L:K}$ (grado) $ = \vabs{G:H}$ (índice)
+    \end{itemize}
+\end{thm}
+\begin{proof}$ $
+    \begin{itemize}
+        \item[(a)] Sea $L$ un cuerpo intermedio, como $E/L$ es una extensión de Galois, si $H = f(L) = \gal(E/L)$ entonces:
+        $$
+            (f \circ g)(L) = g(f(L)) = g(H) = E^H =^{\text{(teorema \ref{thm:4.3})}} = L \implies (f \circ g) = id_{\mtc K}
+        $$
+        En particular, $g$ es sobreyectiva, si probamos que es inyectiva, entonces $g^{-1} = f$.\\
+        Sean $H_1, H_2 \normsub G$ tales que:
+        $$
+            L = E^{H_1} = g(H_1) = g(H_2) = E^{H_2}
+        $$
+        Por el teorema de Artin (teorema \ref{thm:4.1}), entonces:
+        \begin{align*}
+            \vabs{E:E^{H_1}} &= \vabs{H_1}\\
+            \vabs{E:E^{H_1}} &= \vabs{E:L} = \vabs{E:E^{H_2}} = \vabs{H_2}\\
+            \vabs{E:L} &= \vabs{E:E^{\gal(E/L)}} = \vabs{\gal(E/L)}
+        \end{align*}
+        Como $E/L$ es de Galois, entonces
+        % TODO: Pedir a Santorum
+    \end{itemize}
+\end{proof}
+
+\begin{ex}[H4.5]
+    Calcular el grupo de Galois del cuerpo de escisión de $x^12 - 1$ sobre $\Q$ y todas las subextensiones intermedias.\\\\
+    \textbf{Solución}\\
+    Comenzamos viendo que:
+    \begin{align*}
+        E &= \Q(x^12-1) = \Q(x^6+1)\\
+          &=\Q(\pm 1, \pm i \pm \frac{\sqrt 3}{2} \pm \frac{1}{2}i, \pm\frac{1}{2} + \frac{\sqrt 3}{2})\\
+          &= \Q(\sqrt 3, i)
+    \end{align*}
+    Además, podemos comprobar que $\vabs{E:\Q} = 4 = \vabs{G}$ y como $\vabs{G} = 2^m$, entonces $G = \gal(E/\Q)$ es normal.\\
+    Recordamos que si un grupo $G$ es cíclico, entonces $\forall d \divides \vabs{G}$ existe un único subgrupo de índice $d$.\\
+    Además, $G$ tiene dos grupos distintos de índice $2 \implies G = C_2 \times C_2$.
+    Por el teorema \ref{thm:4.6}, existen tantas subextensiones como $H \leq G \isom C_2 \times C_2$. Es decir, tantos como subgrupos tiene $C_2 \times C_2$, que podemos calcularlos y hallar que son $5$.
+\end{ex}
+\begin{obs}
+    Si nos fijamos en la prueba del teorema \ref{thm:3.5}, entonces:
+    %
+    % K_1(f_1) = E_1 ---------> E_2 = K_2(f_2)
+    %          |                          |
+    %          |                          |
+    %          |                          |
+    %  \sigma: K_1 ---------------------> K_2
+    %
+    Sea $f_2 = \sigma^\star(f_1)$, entonces $\sigma$ se puede extender a $\tau: E_1 \to E_2$. Para cada $p_1 \divides f_1$ factores irreducibles de $f_1$ y para cada par $\alpha$ raíz de $p_1$ en $E_1$ y $\beta$ raíz $\sigma^\star(p_1) = p_2 \divides f_2$ existe $\tau: E_1 \to E_2$ tal que:
+    $$
+        \tau(\alpha) = \beta
+    $$.
+\end{obs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 26/11
+%TODO: Completar el ejercicio H4.5
+
+Vamos a recordar algunos resultados de teoría de grupos.
+\begin{pro}[Resultados de teoría de grupos]$ $
+    \begin{enumerate}
+        \item Si $G$ es cíclico $\implies G$ es abeliano.
+        \item Si $\vabs{G} = p^a$ con $p$ un primo, entonces $Z(G) > 1$.
+        \item Si $\vabs{G} = p^2$ con $p$ un primo, entonces $G$ es abeliano, en particular $G \isom C_{p^2}$ o $G \isom C_p \times C_p$.
+    \end{enumerate}
+\end{pro}
+
+\begin{eg}[Cálculo del grupo de Galois de una extensión dado un polinomio (1)]
+    Sea $x^4-2$ un polinomio en $\Q[x]$, calcula $\gal(E/\Q)$ siendo $E$ su cuerpo de escisión.\\\\
+
+    \textbf{Solución}\\
+    Las raíces en $\C$ del polinomio son $\sdf{\pm \sqrt[4]{2}, \pm \sqrt[4]{2} i}$, por tanto $E = \Q(\pm \sqrt[4]{2}, \pm \sqrt[4]{2} i)  = \Q(\sqrt[4]{2}, i)$.
+    Ahora calculamos el grado de la extensión, por transitividad de grados: $\vabs{E:\Q(\sqrt[4]{2})} = 2$ y $\vabs{\Q(\sqrt[4]{2}):\Q} = 4$ por tanto $\vabs{G} = \vabs{E:\Q} = 8$, con $G = \gal(E/\Q)$.\\
+
+    Además, sabemos que $\Q(\sqrt[4]{2})/\Q$ no es normal, lo que implica que $G$ tiene un subgrupo que no es normal (por el teorema \ref{thm:4.6}) y entonces $G$ no puede ser abeliano. De hecho $\gal(E/\Q(\sqrt[4]{2})) = \sdf{\1_E, \tau \mid \tau(i) = -i}$. Por tanto $G \isom D_8$ o $G \isom Q_8$.
+    Sin embargo, en $Q_8$ todo subgrupo es normal, por lo que $G \isom D_8$.\\
+
+    Recordamos que $D_8 = \gen{a, b\ \mid a^4 = b^2 = 1,\ a^b = b^{-1} a b = a^{-1}}$. En general:
+    $$
+        D_{2n} = \gen{\alpha, \beta\ \mid a^n = 1 = \beta^2,\ \alpha^\beta = \alpha^{-1}}
+    $$
+    Para calcular el grupo de Galois vamos a considerar $L = \Q(\sqrt 2, i)$, y ya hemos visto que $L = \gal(L/\Q) \isom C_2 \times C_2 = \sdf{\1_L, \alpha_2, \alpha_3, \alpha_4}$.\\
+
+    \begin{center}
+        \begin{tabular}{|c||c|c|c|}
+        \hline
+                   & $\sqrt{2}$  & $i$  & ord \\ \hline \hline
+        $id$       & $\sqrt{2}$  & $i$  & $1$ \\ \hline
+        $\alpha_2$ & $\sqrt{2}$  & $-i$ & $2$ \\ \hline
+        $\alpha_3$ & $-\sqrt{2}$ & $i$  & $2$ \\ \hline
+        $\alpha_4$ & $-\sqrt{2}$ & $-i$ & $2$ \\ \hline
+        \end{tabular}
+    \end{center}
+
+    Entonces sea $E = L(x^2-\sqrt{2})$, sabemos que $\alpha_i: L \to L$ es un ismorfismo, y que su extensión $\hat{\alpha}: E \to E$, puede llevar raíces de $x^2 - \sqrt{2}$ (si $\alpha(\sqrt 2) = \sqrt 2)$ o raíces de $x^2 - \sqrt{2}$ en raíces de $x^2 + \sqrt{2}$ (si$ \alpha(\sqrt 2) = -\sqrt 2$).\\
+
+    Además ya hemos comentado que $G \isom D_8$. Podemos hacer una tabla de sus elementos:\\
+    \begin{center}
+        \begin{tabular}{|c||c|c|c|}
+        \hline
+                 & $\sqrt[4]{2}$   & $i$  & ord \\ \hline \hline
+        $\1_E$     & $\sqrt[4]{2}$   & $i$  & $1$ \\ \hline
+        $\tau_2$ & $-\sqrt[4]{2}$  & $i$  & $2$ \\ \hline
+        $\tau_3$ & $\sqrt[4]{2}$   & $-i$ & $2$ \\ \hline
+        $\tau_4$ & $-\sqrt[4]{2}$  & $-i$ & $2$ \\ \hline
+        $\tau_5$ & $\sqrt[4]{2}$   & $i$  & $4$ \\ \hline
+        $\tau_6$ & $-\sqrt[4]{2}i$ & $i$  & $4$ \\ \hline
+        $\tau_7$ & $\sqrt[4]{2}$   & $-i$ & $2$ \\ \hline
+        $\tau_8$ & $-\sqrt[4]{2}i$ & $-i$ & $2$ \\ \hline
+        \end{tabular}
+    \end{center}
+
+Queremos encontrar una presentación del grupo. Sabemos que $\tau_5^{-1}$ tiene orden $4$ distinto de $\tau_5$, por tanto $\tau_5^{-1} = \tau_6$. Por otra parte:
+\begin{align*}
+    &o(\tau_3) = 2 \iff \tau_3^2 = \1_E \iff \tau_3^{-1} = \tau_3\\
+    &\tau_5^{\tau_3} = \tau_3^{-1}\tau_5\tau_3 = \tau_3\tau_5\tau_3 \implies \\
+    &\tau_5^{\tau_3}(i) = i,\ \tau_5^{\tau_3}(\sqrt[4]{2}) = -\sqrt[4]{2}i \implies\\
+    &\tau_5^{\tau_3} = \tau_6 = \tau_5^{-1}
+\end{align*}
+Por tanto:
+$$
+    G = \gen{\tau_5,\ \tau_3 \mid \tau_5^4 = \tau_3^2 = 1,\ \tau_5^{\tau_3} = \tau_5^{-1} }
+$$
+\end{eg}
+\begin{ex}[H4.7]
+    Sea $p$ un primo, y $f(x) = x^p - 1 \in \Q[x]$.
+    \begin{itemize}
+        \item[(a)] Halla $E = \Q(f)$
+        \item[(b)] Prueba que $E/\Q$ es simple de grado $p - 1$
+        \item[(c)] Demuestra que $G = \gal(E/\Q)$ es cíclico encontrando un isomorfismo explícito entre $G$ y $F_p^\times$
+        \item[(d)] Demuestra que si $p$ es impar, entonces $E$ contiene exactamente una extensión cuadrática de $\Q$ (es decir, una extensión de grado $2$ sobre $\Q$).
+    \end{itemize}
+
+    \textbf{Solución}\\\\
+    \begin{itemize}
+        \item[(a)] Las raíces de $f$ son las raíces $p$-ésimas de la unidad, por tanto, sea $\Omega$ el conjunto de raíces:
+        $$
+            \Omega = \sdf{1, \xi, \ldots, \xi^{p-1}},\ \xi = e^{\frac{2\pi i}{p}} \implies E = \Q(\xi)
+        $$
+        \item[(b)] $\Q(\xi)/\Q$ es simple pues ya hemos visto que $\xi$ la genera. Además, como $f$ es ciclotómico:
+        $$
+            \vabs{E:\Q} = \delta(Irr(\Q, \xi)) = \delta(x^{p-1} + \cdots + x + 1) = p-1
+        $$
+        \item[(c)] $\sigma \in \gal(\Q(\xi)/\Q)$ queda determinada por $\sigma(\xi)$. Además sabemos que $\vabs{\gal(\Q(\xi)/\Q)} = p-1$. Por tanto:\\
+        \begin{center}
+            \begin{tabular}{|c|c|}
+            \hline
+            $G = \gal(\Q(\xi)/\Q) $ & $ \xi $\\ \hline \hline
+            $\1 = \sigma_1 $ & $ \xi $\\ \hline
+            $\sigma_2 $ & $ \xi^2 $\\ \hline
+            $\vdots $ & $ \vdots $\\ \hline
+            $\sigma_{p-1} $ & $ \xi^{p-1} $\\ \hline
+            \end{tabular}
+        \end{center}
+        Tenemos que encontrar un isomorfismo entre $\F_p^\times$ y $G$. Recordemos que $F_p^\times = \sdf{1, 2, \ldots, p-1}$. Entonces, sea $\rho: G \to F_p^\times$ nuestro isomorfismo, basta establecer $\rho(\sigma_j) = j$, entonces:
+        $$
+            \rho(\sigma_k \sigma_j) = \rho(\sigma_{kj}) = \overline{kj} = \rho(\sigma_k) \rho(\sigma_j)
+        $$
+        Y es fácil ver que $\rho$ es biyectiva. Con esto hemos hallado que $G \isom \F_p^\times \isom C_{p-1}$.
+
+        \item[(d)]  Por el TFTG (\ref{thm:fund-gal}), $G$ tiene un único subgrupo $H$ con $\vabs{G:H} = 2 \iff $ se corresponde con la única subextensión de $\Q(\xi) / \Q$ de grado $2$ sobre $\Q$. Es decir:
+        $$
+            \Q(\xi)^H = \Q(\xi)^{\sigma_j} \text{ (habría que calcular un elemento $\sigma_j$ tal que $o(\sigma_j) = \frac{p-1}{2}$)}
+        $$
+    \end{itemize}
+\end{ex}
+
+
+\begin{eg}[Cálculo del grupo de Galois de una extensión dado un polinomio (2)]
+    Partimos del polinomio: $f = x^3 - 2 \in \Q[x]$, vamos a hallar el grupo de Galois de su cuerpo de escisión.
+    \begin{enumerate}
+        \item Calculamos $E = \Q(f)$.
+        $$
+            E = \Q(\sqrt[3]{2}, \sqrt[3]{2} \omega, \sqrt[3]{2} \omega^2) = \Q(\sqrt[3]{2}, \omega) = \sqrt(\sqrt[3]{2}, \sqrt{3} i) \text{ ya que } \omega = -\frac{1}{2} + \frac{\sqrt{3}i}{2}
+        $$
+        Además, como $\car(\Q) = 0$ es separable y $E = \Q(f)$ es normal, por tanto $E$ es de Galois.
+        \item Hallamos el orden de la extensión.\\
+        Podemos escribir el diagrama:\\
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) [above of =B] {$E = M(\omega)$};
+                \node (B) {$M = \Q(\sqrt[3]{2})$};
+                \node (C) [below of =B] {$\Q$};
+                \draw[-] (A) to node {2 ($x^2+x+1$)}(B);
+                \draw[-] (B) to node {3 ($x^3-2$)}(C);
+            \end{tikzpicture}\\
+        \end{center}
+        Por tanto, por transitividad de grados $\vabs{E:\Q} = 6$ y una $\Q$-base de $E$ sería:
+        $$
+            \sdf{1, \sqrt[3]{2}, \sqrt[3]{4}, \omega, \sqrt[3]{2}\omega, \sqrt[3]{4}\omega}
+        $$
+        \item Determinar la clase de isomorfía de $G = \gal(E/\Q)$.\\
+        Podemos verlo de dos formas:\\
+        Sabemos que $\vabs{G} = \vabs{E:\Q} = 6$. Además por el teorema \ref{thm:3.11}, $G \leq S_3$ y por órdenes llegamos a que $G \isom S_3$.\\ % TODO: Explicar mejor (?)
+        Por otra parte, sabemos que $M/\Q$ no es normal, por tanto por el TFTG (\ref{thm:fund-gal}), $\gal(E/M) \leq G$ no es normal, y entonces $G$ no es abeliano $\implies G \isom S_3$.
+
+        \item Describir $G$ y sus órdenes.\\
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) [above of =B] {$E = L(\sqrt[3]{2})$};
+                \node (B) {$L = \Q(\omega)$};
+                \node (C) [below of =B] {$\Q$};
+                \draw[-] (A) to node {$3$}(B);
+                \draw[-] (B) to node {$2$}(C);
+            \end{tikzpicture}\\
+        \end{center}
+        Como $L/\Q$ es normal (ya que es de grado $2$), todo $\tau \in G$ es la extensión de algún $\alpha \in \gal(L/\Q)$. Además, $\gal(L/\Q) = \sdf{1, \sigma}:\ \sigma(\omega) = \omega^2$.\\
+        Cada elemento $\alpha \in \gal(L/\Q)$ se extiende a $E$ de tres formas distintas ($\tilde\alpha(\sqrt[3]{2}) \in \sdf{\sqrt[3]{2}, \sqrt[3]{2}\omega, \sqrt[3]{2}\omega^2}$) $\implies x^3-2 \in L[x]$ es irreducible y fijado por $\gal(L/\Q)$.
+        Además, teniendo en cuenta que $\omega^2+\omega+1 = 0$ y $\omega^3 = 1$ podemos rellenar la siguiente tabla:
+        \begin{center}
+            \begin{tabular}{|c||c|c|c|}
+            \hline
+            Isomorfismo                 & $\omega$   & $\sqrt[3]{2}$         & ord\\ \hline \hline
+            $\1_L   \rightarrow \tau_1 = 1_E$ & $\omega$   & $\sqrt[3]{2}$         & $1$\\ \hline
+            $\1_L   \rightarrow \tau_2$       & $\omega$   & $\sqrt[3]{2}\omega$   & $3$\\ \hline
+            $\1_L   \rightarrow \tau_3$       & $\omega$   & $\sqrt[3]{2}\omega^2$ & $3$\\ \hline
+            $\sigma \rightarrow \tau_4$       & $\omega^2$ & $\sqrt[3]{2}$         & $2$\\ \hline
+            $\sigma \rightarrow \tau_5$       & $\omega^2$ & $\sqrt[3]{2}\omega$   & $2$\\ \hline
+            $\sigma \rightarrow \tau_6$       & $\omega^2$ & $\sqrt[3]{2}\omega^2$ & $2$\\ \hline
+            \end{tabular}
+        \end{center}
+        Por los órdenes, y por ser un grupo de orden $6$ podemos determinar que es isomorfo a $S_3$ ya que no es cíclico y solo existen dos grupos de orden $6$. Otra forma sería intentar hallar una presentación del grupo a partir de relaciones entre los elementos.
+        \item Describir las subextensiones de $E/\Q$ indicando cuáles de ellas son normales.\\
+        Por el TFTG:\\
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (B) {$K$};
+                \node (A) [above of =B] {$\sdf{\Q \subseteq K \subseteq E}$};
+                \node (E) [right= of B] {$\gal(E/K)$};
+                \node (C) [below of =B] {$E^H$};
+                \node (D) [above of =E] {$\sdf{H \leq G}$};
+                \node (F) [below of =E] {$H$};
+                \draw[<->] (A) to node {$1:1$}(D);
+                \draw[|->] (B) to node {}(E);
+                \draw[<-|] (F) to node {}(C);
+            \end{tikzpicture}\\
+        \end{center}
+        $$
+            K/\Q \text{ es normal } \iff \gal(E/K) \normsub G
+        $$
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) {$E$};
+                \node (B) [right= of A] {$\1$};
+                \node (C) [below of =A] {$E^H$};
+                \node (D) [below of =B] {$H$};
+                \node (E) [below of =C] {$\Q$};
+                \node (F) [below of =D] {$G$};
+                \draw[-] (A) to node {}(C);
+                \draw[-] (C) to node {$n$}(E);
+                \draw[-] (B) to node {}(D);
+                \draw[-] (D) to node {$n$}(F);
+                \draw[<->] (A) to node {$1:1$}(B);
+                \draw[<->] (E) to node {$1:1$}(F);
+            \end{tikzpicture}\\
+        \end{center}
+        Como $\vabs{G} = 6$, si $1 < H < G$ ($H$ subgrupo propio), entonces por el teorema de Lagrange para grupos, si:
+        \begin{align*}
+            \vabs{H} = 2 \implies H \in Syl_2(G)\\
+            \vabs{H} = 3 \implies H \in Syl_3(G)\\
+        \end{align*}
+        Y por tanto, $\vabs{G:H} = 2 \implies H \normsub G$
+    \end{enumerate}
+\end{eg}
