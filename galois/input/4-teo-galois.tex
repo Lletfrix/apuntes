@@ -218,7 +218,7 @@ Por tanto $E/E^G$ es una extensión.
     $$
 \end{obs}
 
-\begin{lm}\label{lm:4.5} % TODO: Dar nombre
+\begin{lm}[Lema]\label{lm:4.5} %%TODO: DAR NOMBRE
     Sean $K \subseteq L \subseteq E$ cuerpos, $H = \gal(E/L) \leq \gal(E/K)$, y sea $\tau \in G$ entonces:
     $$
         H^\tau = \gal(E/\tau(L))
@@ -413,6 +413,16 @@ $$
 \end{ex}
 
 
+
+\begin{pro}[Teoremas de Sylow]
+    Sea $G$ un grupo de orden $\vabs{G} = p^a n$ con $p$ primo y $p \not \divides n$, entonces:
+    \begin{enumerate}
+        \item $\exists P \leq G$ subgrupo, de orden $\vabs{P} = p^a$. Decimos que $P \in Syl_p(G)$.
+        \item Sean $P_1, P_2 \in Syl_p(G) \implies \exists g \in G: P_1^g = P_2$, es decir, $\exists g \in G: \sdf{g^{-1} \cdot x \cdot g \mid x \in P_1} = P_2$.
+        \item $\vabs{Syl_p(G)} = \vabs{G:N_G(P)}$.
+    \end{enumerate}
+\end{pro}
+
 \begin{eg}[Cálculo del grupo de Galois de una extensión dado un polinomio (2)]
     Partimos del polinomio: $f = x^3 - 2 \in \Q[x]$, vamos a hallar el grupo de Galois de su cuerpo de escisión.
     \begin{enumerate}
@@ -466,7 +476,10 @@ $$
             $\sigma \rightarrow \tau_6$       & $\omega^2$ & $\sqrt[3]{2}\omega^2$ & $2$\\ \hline
             \end{tabular}
         \end{center}
-        Por los órdenes, y por ser un grupo de orden $6$ podemos determinar que es isomorfo a $S_3$ ya que no es cíclico y solo existen dos grupos de orden $6$. Otra forma sería intentar hallar una presentación del grupo a partir de relaciones entre los elementos.
+        Por los órdenes, y por ser un grupo de orden $6$ podemos determinar que es isomorfo a $S_3$ ya que no es cíclico y solo existen dos grupos de orden $6$. Otra forma sería intentar hallar una presentación del grupo a partir de relaciones entre los elementos, de esta forma hallaríamos la presentación:
+        $$
+            G = \gen{\tau_2 \tau_4 \mid o(\tau_2) = 3,\ o(\tau_4)=2,\ \tau_2^{\tau_4} = \tau_2^{-1}} = \gen{\tau_2} \ast \gen{\tau_4}
+        $$
         \item Describir las subextensiones de $E/\Q$ indicando cuáles de ellas son normales.\\
         Por el TFTG:\\
         \begin{center}
@@ -506,6 +519,165 @@ $$
             \vabs{H} = 2 \implies H \in Syl_2(G)\\
             \vabs{H} = 3 \implies H \in Syl_3(G)\\
         \end{align*}
-        Y por tanto, $\vabs{G:H} = 2 \implies H \normsub G$
+        Entonces si $\vabs{H} = 3 \implies \vabs{G:H} = 2 \implies H \normsub G$. Con esto hemos visto que las subextensiones de $E/\Q$ son normales si son triviales o se corresponden con un grupo en $Syl_3(G)$.
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) {$P = \gen{\tau_2}$};
+                \node (B) [right= of A] {$ $};
+                \node (C) [right= of B] {$\gen{\tau_4} = Q$};
+                \node (D) [above of =B] {$G$};
+                \node (E) [below of =B] {$1$};
+                \draw[=] (D) to node {}(A);
+                \draw[-] (D) to node {$N_G(Q)$}(C);
+                \draw[-] (A) to node {$3$}(E);
+                \draw[-] (C) to node {$2$}(E);
+            \end{tikzpicture}\\
+        \end{center}
+        Sabemos que $P \in Syl_3(G)$ y $Q \in Syl_2(G)$. Como $Q \centernot \normsub G$, consideremos el normalizador $N_G(Q) < G$, entonces $\vabs{N_G(Q):Q}\vabs{G:Q} = 3 \implies N_G(Q) = Q$. Por tanto $\vabs{Syl_2(G)} = 3$:
+        $$
+            Syl_2(G) = \sdf{Q,\ Q^{\tau_2},\ Q^{\tau_2^{-1}}} \text{ y } Q \neq Q^{\tau_2} \neq Q^{\tau_2^{-1}} \neq Q
+        $$
+        Y entonces $1, G, P=\gen{\tau_2}, Q, Q^{\tau_2}, Q^{\tau_3}$ son todos los subgrupos de $G$ donde $Q = \gen{\tau_4}$. Además, $E/\Q$ tiene una suextensión normal que es de grado $2$ sobre $\Q$. Sea $L$ esta extensión afirmamos que $L/\Q$ es normal y $\vabs{L:\Q} = 2$, $L=\Q(\omega)$ y por el TFTG: $L = E^{P} = E^{\gen{\tau_2}} = E^{\tau_2}$.
+
+        Para calcular las subextensiones de grado $3$ sobre $\Q$, vamos a calcular $M_1 = E^{Q}$, $M_2 = E^{Q^{\tau_2}}$, $M_3 = E^{Q^{\tau_2^{-1}}}$. Además por el lema \ref{lm:4.5}:
+        $$
+            M_2 = E^{Q^{\tau_2}} = t_2(M_1),\ M_3 = E^{Q^{\tau_2^{-1}}} = \tau_2^{-1}(M_1)
+        $$
+        Vamos a calcular $M_1$, recordamos que $\sdf{1, \alpha, \alpha^2, \omega, \alpha \omega, \alpha^2 \omega}$ es una $\Q$-base de $E$ donde $\alpha = \sqrt[3]{2}$:
+        \begin{align*}
+            M_1 &= E^Q = E^{\gen{\tau_4}} = E^{\tau_4}\\
+            E^{\tau^4} &= \sdf{x \in E:\ \tau_4(x) = x}\\
+            x &= a + b\alpha + c \alpha^2 + d\omega + e\alpha\omega + f\alpha^2\omega = \tau_4(x) =\\
+              &= \cancel a + \cancel{b\alpha} + \cancel{c\alpha^2} + d\omega^2 + e\alpha\omega^2 + f\alpha^2\omega^2 = (\text{ ya que } \omega^2+\omega+1 = 0)\\
+              &= d(-\omega -1) + e\alpha^2(-\omega - 1) + f\alpha^2(-\omega -1) =\\
+              &= d + 2d\omega + e\alpha + 2e\alpha \omega + f\alpha^2 + 2f\alpha^2\omega = 0 \implies\\
+              &\implies d = e = f = 0
+        \end{align*}
+        Con este desarrollo hallamos:
+        $$
+            M_1 = E^{\tau_4} = \sdf{a + b\alpha + c\alpha^2 \mid a,b,c \in \Q} = \Q(\alpha) = \Q(\sqrt[3]{2})
+        $$
+        Para hallar $M_2$ y $M_3$ podemos repetir el mismo procedimiento o podemos:
+        $$
+            M_2 = E^{Q^{\tau_2}} = \tau_2(E^Q) = \tau_2(M_1) = Q(\sqrt[3]{2} \omega)
+        $$
+        y recordemos que $\tau_2^{-1} = \tau_3$, por tanto:
+        $$
+            M_3 = E^{Q^{\tau_3}} = \tau_3(E^Q) = \tau_3(M_1) = Q(\sqrt[3]{2} \omega^2)
+        $$
     \end{enumerate}
 \end{eg}
+
+\begin{pro}[Consecuencia del teorema \ref{thm:3.11}]
+    Sea $E/K$ una extensión, $E = K(f)$, $f \in K[x]$ irreducible y separable, y $\delta(f) = n$. Entonces $G = \gal(E/K) \leq S_n$ es transitivo, es decir:
+    $$
+        \forall i,j \in \sdf{1, \ldots, n} \exists \delta \in G \mid \delta(i) = j
+    $$
+\end{pro}
+\begin{proof}
+    Sea $\Omega = \sdf{\alpha_1, \ldots \alpha_n}$ el conjunto de raíces distintas de $f$ en $E$. Sea el morfismo $\rho: G \to S_\Omega;\ \delta \mapsto \rho(\delta)(\alpha) = \delta(\alpha)$, entonces como $f$ es separable $\ker(\rho) = \gal(E/E) = 1$ (tomando $L=E$ en \ref{thm:3.11}).\\
+
+    Por tanto, $G \leq S_\Omega \isom S_n$, y como $f$ es irreducible, dados $\alpha_i, \alpha_j \in \Omega$ podemos afirmar que $\exists \delta \in G \mid \delta(\alpha_i) = \alpha_j$.
+\end{proof}
+
+\begin{obs}
+    Los subgrupos transitivos de $S_n$ son $D_{2n}$
+\end{obs}
+
+\begin{pro}[Consecuencia del Teorema del Elemento Primitivo (\ref{thm:elemprim})]
+    Sea $E/K$ una extensión de Galois, existe $f \in K[x]$ irreducible tal que $E = K(f)$.
+\end{pro}
+
+\begin{proof}
+    Como $E/K$ es normal por ser de Galois, entonces $E = K(f)$, para algún $f \in K[x]$. Si $f$ es irreducible, lo hemos demostrado. Si $f$ no es irreducible, entonces $E = K_1(\alpha_1, \ldots, \alpha_n)$ y sabemos que por el teorema \ref{thm:elemprim}, $\exists \alpha \in E: E = K(\alpha)$. Entonces basta tomar $p = Irr(K, \alpha)$, con lo que tendríamos $E = K(p)$ con $p$ irreducible.
+\end{proof}
+
+\begin{pro}[Consecuencia del lema \ref{lm:4.5} y del teorema \ref{thm:4.3}]
+    Sea $E/K$ una extensión de Galois, $G = \gal(E/K)$ su grupo de Galois, $M$ un cuerpo intermedio y $H = \gal(E/M) \leq G$, entonces:
+    $$
+        \forall \tau \in G,\ \tau(M) = E^{H^\tau}
+    $$
+\end{pro}
+\begin{proof}
+    Por el lema \ref{lm:4.5}, $H^\tau = \gal(E/\tau{M})$. Además, $E/K$ de Galois $\implies E/\tau(M)$ de Galois $\implies$ (por el teorema \ref{thm:4.3}) $E^{H^{\tau}} = \tau(M)$
+\end{proof}
+
+\begin{obs}
+    El teorema \ref{thm:4.3} nos dice que sean $E/K$ finito y $G = \gal(E/K)$, si $E/K$ de Galois, entonces $E^G=K$. Se puede ver que el recíproco también es cierto. En resumen:\\
+
+    \begin{center}
+        Sean $E/K$ finita y $G=\gal(E/K)$:
+        $$
+            E^G = K \iff E/K \text{ es de Galois}
+        $$
+    \end{center}
+\end{obs}
+
+\begin{ex}[H4.11]
+    Sea $E/K$ una extensión de Galois con $G = \gal(E/K)$ cíclico de orden $n$. Demuestra que:
+    \begin{itemize}
+        \item[(a)] Para cada divisor $d$ de $n$ existe exactamente un cuerpo intermedio $L$ con $\vabs{E:L} = d$.
+        \item[(b)] Si $L_1$ y $L_2$ son dos cuerpos intermedios, entonces $L_1 \subseteq L_2$ si, y solo si, $E:L_2$ divide a $E:L_1$.
+        \item[(c)] Demuestra que la hipótesis de $E/K$ de Galois puede relajarse a que $E/K$ sea finita.
+    \end{itemize}
+
+    \textbf{Solución}
+    \begin{itemize}
+        \item[(a)] Basta representar las correspondencias entre subcuerpos intermedios y subgrupos de Galois para comprobarlo.
+
+        \begin{center}
+            \begin{tikzpicture}[node distance=1cm and 2cm, auto]
+                \node (A) {$E$};
+                \node (B) [right= of A] {$\1$};
+                \node (C) [below of =A] {$L = E^H$};
+                \node (D) [below of =B] {$H$};
+                \node (E) [below of =C] {$K$};
+                \node (F) [below of =D] {$G$};
+                \draw[-] (A) to node {$d$}(C);
+                \draw[-] (C) to node {}(E);
+                \draw[-] (B) to node {}(D);
+                \draw[-] (D) to node {}(F);
+                \draw[<->] (C) to node {$1:1$}(D);
+            \end{tikzpicture}\\
+        \end{center}
+        \item[(b)]
+        \begin{itemize}
+            \item[$(\implies)$] Es trivial.
+            \item[$(\Longleftarrow)$]
+                \begin{align*}
+                    d = &\vabs{E:L_2} = \vabs{H_2},\ H_2 = \gal(E/L_2)\\
+                        &\vabs{E:L_1} = \vabs{H_1},\ H_1 = \gal(E/L_1) \implies d \divides \vabs{alpha_1} \divides n
+                \end{align*}
+                $H_1$ tiene un único subgrupo de orden $d$. Como $H_2$ es el único subgrupo de orden $d$ de $G \implies $ tienen que coincidir $\implies H_2 \subseteq H_1 \implies L_1 = E^{H_1} \subseteq L_2 = E^{H_2}$
+        \end{itemize}
+        \item[(c)]
+            Basta aplicar que recíproco del teorema \ref{thm:4.3} (se resuelve en el ejercicio H4.4)
+    \end{itemize}
+\end{ex}
+
+\begin{ex}[H4.8]
+    Sea $E = \Q(\xi)$ donde $\xi = e^{\frac{2 \pi i}{7}}$. Muestra que $E$ es una extensión de Galois de $\Q$. Encuentra todos los subcuerpos intermedios de la extensión $E/\Q$, los subgrupos de $\gal(E/\Q)$ que les corresponden y determina qué subcuerpos intermedios se corresponden con extensiones normales de $\Q$.\\\\
+
+    \textbf{Solución}\\
+    $\xi$ es una raíz $p$-ésima de la unidad, con $p=7$. Es decir, $E = \Q(\xi) = \Q(x^7-1) = \Q(x^6 + x^5 + x^4 + x^3 + x^2 + x + 1)$. Por tanto, $\vabs{\Q(\xi):\Q} = 6$ y $G = \gal(\Q(\xi)/\Q) \isom \F_7^\times$ que es cíclico.\\
+    $$G = \sdf{\varphi_j \mid 1 \leq j \leq 6} \mapsto \bar{j},\ \varphi(\xi) = \xi^j$$
+
+    Buscamos $\gen{\varphi} = G$, que es lo mismo que buscar un generador de $\F_7^\times$ (de orden $6$). Fácilmente podemos ver que $3$ es un generador de $\F_7^\times$. Tomamos $\varphi = \varphi_3$, y como $G = C_6 \implies \varphi_2 = \varphi^2,\ \varphi_6 = \varphi^3$.\\
+    Los subgrupos son:
+    $$
+        1,\ \gen{\varphi^2}, \gen{\varphi^3}, G
+    $$
+    Que se corresponden con las subextensiones (por el TFTG):
+    $$
+        E,\ L=E^{\varphi^2}, M=E^{\varphi^3}, \Q
+    $$
+    Vamos a calcular $L$:
+    \begin{align*}
+        L=E^{\varphi^2} &= \sdf{x = a_0 + a_1 \xi + \cdots a_5 \xi^5,\ a_i \in \Q \mid \varphi_2(x) = x}\\
+        \varphi_2(x)    &= a_0 + a_1\xi^2 + a_2\xi^4 + a_3\xi^6 + a_4\xi + a_5\xi^3 =\\
+                        &= a_0 + a_1\xi^2 + a_2\xi^4 + a_3(-1 -\xi \cdots -\xi^5) + a_5\xi^3 = x \iff \\
+                        &\iff \xi(a_1-a_4-a_4) + \xi^2(a_2-a_1+a_3) + \xi^3(a_3-a_5+a_3) + \xi^4(a_4-a_2+a_3) + \xi^5(a_5-a_3) = 0
+    \end{align*}
+    %%TODO: REHACER FOTOS SANTORUM
+    Con estas restricciones hallamos $L =\Q(\sqrt{-1})$.
+\end{ex}
