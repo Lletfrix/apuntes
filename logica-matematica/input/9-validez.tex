@@ -1,0 +1,151 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Teorema de Validez.}
+
+\section{Introducción}
+
+A lo largo del curso hemos estado interesados en las consecuencias semánticas, donde veíamos que $T \vDash F$ representaba que un enunciado $F$ se satisfacía en todos los modelos de $T$. A continuación, introdujimos la relación sintáctica ($T \vdash F$) como una versión más potente de la consecuencia semántica ($\vdash F \implies \vDash F$). Sin embargo, tenemos que comprobar que lo que hemos introducido es válido, es decir, que los teoremas son fórmulas válidas.
+
+En esta sección vamos a ver las herramientas necesarias para demostrar que si $F$ es un teorema de $T$ ($T \vdash F$), es decir, existe una demostración de $F$ en $T$, entonces $F$ se satisface en $T$ ($T \vDash F$), es decir, $F$ se satisface en todos los modelos $\mtc A$ de $T$. Esto se enuncia formalmente con el teorema de validez.
+
+\begin{thm}[Teorema de validez]\label{thm:tv}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría y $F \in \for(L)$ un enunciado.
+    \begin{center}
+        Si $T \vdash F \implies T \vDash F$. Informalmente:\\
+        \textit{Los teoremas de $T$, que sean enunciados, se satisfacen en todos los modelos de $T$}.
+    \end{center}
+\end{thm}
+\begin{proof}
+    Más adelante. \hyperref[proof:tv]{Ir a la demostración}.
+\end{proof}
+
+Recordemos que una lógica consta de dos partes:
+\begin{itemize}
+    \item Una parte \textbf{sintáctica}: axiomas y teoremas ($T \vdash F$).
+    \item Una parte \textbf{semántica}: estructuras y relaciones de satisfacción ($\mtc A \vDash F$, $T \vDash F$)
+\end{itemize}
+
+\begin{dfn}[Validez de una lógica]
+    Decimos que una lógica es \textbf{válida} si satisface el teorema de validez (\ref{thm:tv}).
+\end{dfn}
+
+\begin{dfn}[Completitud de una lógica]
+    Decimos que una lógica es \textbf{completa} si satisface el teorema de validez (\ref{thm:tv}) y su recíproco, es decir:
+    $$
+        T \vdash F \iff T \vDash F
+    $$
+\end{dfn}
+\begin{obs}[Conjuntos de enunciados en una lógica completa]
+    Si una lógica es completa, entonces sea $F$ un enunciado:
+    $$
+        \sdf{F \mid T \vdash F} = \sdf{F \mid T \vDash F}
+    $$
+\end{obs}
+
+\begin{lm}[Validez de los axiomas lógicos]\label{lm:axval}
+    Sea $L$ un lenguaje, los axiomas lógicos de $L$ son fórmulas válidas.
+\end{lm}
+\begin{proof}$ $
+    \begin{enumerate}[(I)]
+        \item \textsc{Tautologías}\\
+        Ya lo vimos en la proposición \ref{pro:1.3}.
+        \item \textsc{Axiomas de cuantificadores}
+        \begin{itemize}
+            \item[(2.1)] Axioma de $\forall$\\
+                Sean $F, G \in \for(L)$ fórmulas, $F$ es $F(\sucn{x})$ y $G$ es $G(\sucn{x})$. Si $x$ no está libre en $G$:
+                $$
+                    H:\ \forall x (G \then F) \then G \then \forall x F
+                $$
+                Tenemos que ver que $H$ se satisface en cualquier estructura. Queremos llegar a:
+                \begin{equation*}
+                    \mtc A \vDash \forall x_1 \ldots \forall x_n H \text{ para toda $L$-estructura } \mtc A \tag{$\star$}
+                \end{equation*}
+                \begin{align*}
+                    (\star) &\iff \text{ para todo } \sucn{a} \in A \implies \mtc A \vDash H(\sucn{a})\\
+                            &\iff \mtc A \vDash (\forall x G \then F) (\sucn{a}) \tag{$1$} \\
+                            &\iff \mtc A \vDash (G \then \forall x F) (\sucn{a}) \tag{$+$} \\
+                    (+)     &\iff \text{Si } \mtc A \vDash G(\sucn{a}) \text{ entonces } \mtc A \vDash (\forall x F)(\sucn{a})
+                \end{align*}
+                Supongamos entonces:
+                \begin{equation*}
+                    \mtc A \vDash G(\sucn{a}) \tag{$2$}
+                \end{equation*}
+                y veamos que llegamos a
+                \begin{equation*}
+                    \mtc A \vDash (\forall x F)(\sucn{a}) \tag{$+++$}
+                \end{equation*}
+                Sea $x \neq x_i$, $(+++) \implies \forall b \in A$, $\mtc A \vDash F(b, \sucn{a})$. Llamemos $(3)$ a $\forall b \in A$, $\mtc A \vDash F(b, \sucn{a})$.\\
+                Fijamos $b \in A$, por $(1)$, para este $b$ sabemos $\mtc A \vDash (G \then F)(b, \sucn{a})$.\\
+                Por $(2)$, $\mtc A \vDash G(\sucn{a}) \implies \mtc A \vDash G(b, \sucn{a})$. Finalmente, como $x$ no aparece libre en $G$ podemos concluir que $(3)$ es cierto y por tanto, $(2) \implies (+++)$ con lo que se satisfacen $(+)$ y $(\star)$.
+
+            \item[(2.2)] Axioma de sustitución\\
+                Sea $F \in \for(L)$, $x \in V$m $t \in \ter(L)$ y $x$ sustituible por $t$ en $F$. Sea $\mtc A$ una $L$-estructura y $\sucn{a} \in A$.\\
+                Veamos que si $\mtc A \vDash (\forall x F)(\sucn{a})$ entonces $\mtc A \vDash F(\quox{t})(\sucn{a})$.\\
+                Por la proposición \ref{pro:1.2}, $\mtc A \vDash F(\quox{t})(\sucn{a}) \iff \mtc A \vDash F(t^{\mtc A}(\sucn{a}), \sucn{a})$.\\
+                Como $t^{\mtc A}(\sucn{a}) \in A$, por $(1)$ tenemos que $\mtc A \vDash F(b, \sucn{a})$. En particular, también para $b = t^{\mtc A}(\sucn{a})$.
+        \end{itemize}
+        \item \textsc{Axiomas de igualdad}
+        \begin{itemize}
+            \item[(3.1)] Variables\\
+            $$
+                \mtc A \vDash (x=x)(a)\ \forall a \in A,\ \text{ entonces para todo } a \in A,\ a = a
+            $$
+            \item[(3.2)] Funciones\\
+            $$
+                \mtc A \vDash \forall x_1 \ldots \forall x_n \forall y_1 \ldots \forall y_n\ \ x_1 = y_1 \then \cdots \then x_n = y_n \then f x_1 \ldots x_n = f y_1 \ldots y_n
+            $$
+            Entonces es claro que: $\forall \sucn{a} \in A,\ \forall \sucn{b} \in A$ si $a_i = b_i$ entonces $f a_1 \ldots a_n = f b_1 \ldots b_n$.
+            \item[(3.3)] Relaciones\\
+            $$
+                \mtc A \vDash \forall x_1 \ldots \forall x_m \forall y_1 \ldots \forall y_m\ \ x_1 = y_1 \then \cdots \then x_m = y_m \then R x_1 \ldots x_m = R y_1 \ldots y_m
+            $$
+            Entonces es claro que: $\forall \suc{b}{m} \in A,\ \forall \suc{b}{m} \in A$ si $a_i = b_i$ entonces $(\suc{a}{m}) \in R^{\mtc A}$ y $(\suc{b}{m} \in R^{\mtc A}) \implies (\sucn{a}) = (\suc{b}{m})$.
+        \end{itemize}
+    \end{enumerate}
+\end{proof}
+
+\section{Teorema de validez}
+
+Una vez hemos demostrado que los axiomas son fórmulas válidas ya disponemos de las herramientas necesarias para demostrar el teorema de validez (teorema \ref{thm:tv}).
+
+\begin{proof}[Demostración al teorema de validez]\label{proof:tv}
+    La demostración sigue por inducción en la longitud de una demostración de $F$ en $T$.
+    \begin{itemize}
+        \item[$(n=1)$] Si la longitud de la demostración es $1$ o $F \in T$ o $F$ es un axioma lógico.\\
+        Si $F \in T \implies \mtc A \vDash F,\ \forall \mtc A \vDash T$ y por tanto $T \vDash F$.
+        Si $F$ es un axioma lógico, por el lema \ref{lm:axval} sabemos que $ \vDash F$ pues $F$ es una fórmula válida. Entonces $\mtc A \vDash F \forall \mtc A \implies T \vDash F$.
+
+        \item[$(n>1)$]
+        Supongamos que $F_n$ es $F$ y $(\sucn{F})$ es una demostración de $F$ en $T$.
+        \begin{itemize}
+            \item Si $F_n \in T$ o $F_n$ es un axioma lógico (como en $n=1$) entonces $T \vDash F$.
+            \item Si $F_n$ es $\forall x F_i$ (aplicando \textit{Generalización} a algún $F_i$), por hipótesis de inducción, $T \vDash F_i (\iff T \vDash \overline{F_i} \text{ cualquier cierre universal de }F_i)$. Como todo cierre universal de $F_i$ también es cierre universal de $\forall x F_i$ entonces $T \vDash \forall x F_i$.
+            \item Si $F_n$ se obtiene de $F_i$ y $F_j: F_i \then F_n$ aplicando \textit{Modus Ponens}, con $i, j < n$, por hipótesis de inducción:
+            \begin{equation}
+                T \vDash F_i\\
+                T \vDash F_i \then F_n
+            \end{equation}
+            Veamos que $T \vDash F_n$. Sean $F_n:\ F_n(\sucn{x})$ y $F_i:\ F_i(\sucn{x})$, y $\mtc A \vDash T$, vamos a ver que $\mtc A \vDash \forall x_1 \ldots \forall x_n\ F_n$.\\
+            Sean $(\sucn{a})\in A$, por (1) tenemos $T \vDash \forall x_1 \ldots \forall x_n F_i$. Para este $(\sucn{a})$ se tiene $\mtc A \vDash F_i(\sucn{a})$.
+            Análogamente $\mtc A \vDash (F_i \then F_n)(\sucn{a}) \iff \mtc A (\sucn{a})$ entonces $\mtc{A} \vDash F_n(\sucn{a})$.\\
+            Como tenemos el antecedente $\mtc A (\sucn{a})$, y también $\mtc A \vDash (F_i \then F_n)(\sucn{a})$ por H.I, obtenemos $\mtc{A} \vDash F_n(\sucn{a})$.
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\begin{cor}[Corolario primero al teorema \ref{thm:tv}]\label{cor:tv1}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría. Si existe $\mtc A \vDash T$ entonces $T$ es coherente.
+\end{cor}
+
+\begin{proof}
+    Si $T$ es incoherente entonces existe un enunciado $F \in \for(L)$ tal que $T \vdash F \land \neg F$.\\
+    Por el \hyperref[thm:tv]{teorema de validez}, $T \vDash F \land \neg F \implies T$ no puede tener modelos. Esto demuestra el contrarrecíproco.
+\end{proof}
+
+\begin{cor}[Corolario segundo al teorema \ref{thm:tv}]\label{cor:tv2}
+    El corolario \ref{cor:tv1} es equivalente al \hyperref[thm:tv]{teorema de validez}.
+\end{cor}
+
+\begin{proof}
+    No se vió.
+\end{proof}

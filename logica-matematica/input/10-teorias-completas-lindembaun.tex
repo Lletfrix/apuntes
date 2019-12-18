@@ -1,0 +1,54 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Teorías completas y teorema de Lindembaun.}
+
+\section{Introducción}
+
+Hasta ahora habíamos visto que una teoría completa era aquella que cumplía el teorema de validez y su recíproco. Podemos enunciar así una primera forma del teorema de Completitud.
+
+\begin{thm}[Teorema de completitud. Primera forma.]\label{thm:tc1}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría y $F \in \for(L)$ entonces $T \vDash F \implies T \vdash F$.
+\end{thm}
+
+Sin embargo, podemos enunciarlo de otra forma, que es el recíproco al corolario \ref{cor:tv1}, ya que según el corolario 2 al teorema de validez, son equivalentes.
+\begin{thm}[Teorema de completitud. Segunda forma.]\label{thm:tc2}
+    Sea $L$ un lenguaje y $T$ una $L$-teoría, si $T$ es coherente entonces $T$ tiene un modelo.
+\end{thm}
+
+
+\begin{proof}[Demostración de que las dos formas del teorema de completitud son equivalentes]
+    Vamos a ver que la primera forma del TC $\iff$ la segunda forma del TC.
+    \begin{itemize}
+        \item[$\implies$] Vamos a ver que si $T$ no tiene modelos, entonces $T$ es incoherente.\\
+        Sea $F \in \for(L)$, $F$ un enunciado entonces, como $T$ no tiene modelos, trivialmente $T \vDash F \land \neq F$. Por la primera forma (teorema \ref{thm:tc1}) $T \vDash F \land \neq F \implies T \vdash F \land \neq F$ y entonces $T$ es incoherente.
+
+        \item[$\implied$] Vamos a ver que sea $F \in \for(L)$, si $T \cancel\vdash F$ entonces $T \cancel\vDash F$, o expresado de otra forma:
+        $$
+            T \cancel\vdash F \implies T \cancel\vDash G, \text{ con $G$ el cierre universal de F}
+        $$
+        Puesto que $G$ es un enunciado podemos hacer uso del \hyperref[cor:td1]{corolario 1 al TD}. Si $T \cancel\vdash G$ entonces $T \cup \sdf{\neq G}$ es coherente.\\
+        Si es coherente, por la segunda forma (teorema \ref{thm:tc2}) $T \cup \sdf{\neq G}$ tiene un modelo. Sea $\mtc A \vDash T \cup \sdf{\neq G}$, entonces $\mtc A \vDash T$ y $\mtc A \cancel\vDash G \implies T \cancel\vDash G \implies T \cancel\vDash F$.
+    \end{itemize}
+\end{proof}
+Sin embargo, la demostración del teorema se verá más adelante en el curso.
+
+
+\section{Teorías completas}
+
+
+Vamos a ver que para cualquier teoría podemos añadir un conjunto de axiomas que la haga completa. Por ejemplo podemos pasar de la teoría de grupos (que ya vimos que es incompleta)
+a grupos abelianos divisibles y sin torsión. GADST es una teoría completa.
+
+\begin{eg}[Teorías completas e incompletas]
+    \begin{enumerate}[(1)]
+        \item Teoría de grupos:\\
+        La teorías de grupos no es completa. Si $T \vdash \forall x \forall y\ xy = yx \implies T \vDash \forall x \forall y\ xy=yx$ por el teorema de validez, sin embargo esto no es cierto. Además, su negación tampoco lo es. Por tanto la teoría de grupos no es completa (no hay modelos).
+        \item $T = \sdf{F \land \neq F}$ con $F$ un enunciado:\\
+        Es una teoría completa. Toda teoría incoherente es trivialmente completa.
+        \item Teoría de una estructura:\\
+        La teoría de una estructura es completa. Sea $\mtc A$ una $L$-estructura, $T = \te(\mtc A) = \sdf{ F \in \for(L) \mid F \text{ enunciado y } \mtc A \vDash F}$.\\
+        Sea $F\in \for(L)$ un enunciado, entonces $A \vDash F$ o $A \vDash \neq F \implies F \in \te(A)$ o $\neq F \in \te(A)$ y por tanto $\te(A) \vdash F$ o $\te(A) \vdash \neq F$ con una demostración de longitud $1$.
+    \end{enumerate}
+\end{eg}
+
+\section{Teorema de Lindebaum}

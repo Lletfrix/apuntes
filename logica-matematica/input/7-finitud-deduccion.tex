@@ -8,20 +8,128 @@
     Sea $L$ un lenguaje, $T$ una $L$-teoría y $F \in \for(L)$ una fórmula. Si $T \vdash F$ entonces existe $T_0 \subseteq T$ finito tal que $T_0 \vdash F$.
 \end{thm}
 
-\begin{cor}[Corolario primero al teorema \ref{thm:tf}]
+\begin{proof}
+    Si $T \vdash F \implies$ existe $(F_1, \ldots F_n)$ una demostración de $F$ en $T$. Sea $T_0 = \sdf{F_1, \ldots, F_n} \cap T$, es claro que $T_0 \vdash F$ ya que $(F_1, \ldots, F_n) \in T_0$ y era una demostración de $F$.
+\end{proof}
+
+\begin{cor}[Corolario primero al teorema \ref{thm:tf}]\label{cor:tf1}
     Si para $T_0 \subseteq T$, $T_0$ es coherente, entonces $T$ es coherente.
 \end{cor}
+
+\begin{proof}
+    Vamos probar el contrarrecíproco.\\
+    Si $T$ es incoherente, entonces $T \vdash F \land \neg F$, para alguna $F \in \for(L)$. Por el TF (teorema \ref{thm:tf}), existe $T_0 \in T$ finito tal que $T_0 \vdash F \land \neg F$ y por tanto $T_0$ es incoherente.
+\end{proof}
 
 \begin{cor}[Corolario segundo al teorema \ref{thm:tf}. Unión de teorías coherentes]
     Sea $L$ un lenguaje, sea $\sdf{T_i, i\in I}$ una familia de $L$-teorías, tal que $\forall i, j\in I$, $T_i \subseteq T_j$ o $T_j \subseteq T_i$. Si $T_i$ es coherente, $\forall i \in I$, entonces $\bigcup_{i\in I} T_i$ es una $L$-teoría coherente.
 \end{cor}
 
+\begin{proof}
+    Vamos a probar el contrarrecíproco.\\
+    Sea $T = \bigcup_{i\in I} T_i$, si $T$ es incoherente entonces existe $F \in \for(L)$ tal que $T \vdash F \land \neg F$. Por tanto, $\exists T_0 \in T$ tal que $T_0 \vdash F \land \neg F$, y $\exists j \in I$ tal que $T_0 \subseteq T_j$ (por ser una cadena) $\implies T_j \vdash F \land \neg F \implies T_j$ es incoherente.
+\end{proof}
+
 \section{Teorema de la deducci\'on}
 
-\begin{thm}[Teorema de la deducción]
+Hasta ahora hemos utilizado la \textit{Generalización} y \textit{Modus Ponens} como reglas de deducción. Vamos a ver otro mecanismo para demostrar implicaciones.
+Por ahora hemos visto:
+\begin{itemize}
+    \item[(1)] Si $T \vdash G$ y $T \vdash G \then F$ entonces $T \vdash F$.
+    \item[(2)] Si $T \vdash G \then F$ entonces $T \cup \sdf{G} \vdash F$.
+\end{itemize}
+Vamos a introducir el teorema de la deducción, que es el recíproco de (2).
+
+\begin{thm}[Teorema de la deducción]\label{thm:td}
     Sea $L$ un lenguaje, $T$ una $L$-teoría, $F$ un enunciado de $L$ y $G \in \for(L)$. Si $T \bigcup \sdf{F} \vdash G$ entonces $T \vdash F \then G$.
 \end{thm}
+\begin{proof}
+    La demostración sigue por inducción sobre $n$, siendo $n$ la longitud de la demostración de $G$ en $T \cup \sdf{F}$. Es decir, si $G$ es una $L$-fórmula que tiene una demostración de longitud $n$ en $T \cup {F}$ entonces $T \vdash F \then G$.
+    \begin{itemize}
+        \item[$(n=1$)] Si la longitud es $1$, entonces $G$ es o un axioma lógico, o $G \in T$ o $G$ es $F$.\\
+        Si $G$ es un axioma lógico o $G \in T$ basta construir la demostración:
+        \begin{align}
+            &G\\
+            &G \then F \then G \text{ (tautología)}\\
+            &F \then G
+        \end{align}
+        Si $G$ es $F$, $F \then G$ es una tautología y por tanto $T \vdash F \then G$.
+        \item[$(n>1)$] Sea $(G_1, \ldots, G_n)$ una demostración de $G$ en $T \cup \sdf{F}$. Supongamos sin pérdida de generalidad que $G$ es $G_n$.\\
+        Si $G_n$ es un axioma lógico o $G_n \in T \cup \sdf{F}$, como en el caso base obtenemos $T \vdash F \then G_n$.\\
+
+        Si $G$ se obtiene de $G_i$ con $i < n$ por generalización, es decir $G_n$ es $\forall x G_i$, entonces:\\
+        Como $\sdf{G_1, \ldots, G_i}$ es una demostración de $G_i$ en $T \cup \sdf{F}$, por hipótesis de inducción $T \vdash F \vdash G_i$, y ya vimos que entonces $T \vdash F \vdash \forall x G_i$ (porque $x$ no está libre en $F$), formalmente:
+        \begin{align}
+            &F \then G_i\ &(T\vdash)\\
+            &\forall x (F \then G_i)\ &\text{(Gen($1$))}\\
+            &\forall x (F \then G_i) \then (F \then \forall x G_i)\ &\text{Axioma del $\forall$}\\
+            &F \then \forall x G_i\ &\text{MP($3$, $2$)}
+        \end{align}
+
+        Si $G$ se obtiene de $G_i$ y $G_j$ mediante $MP$, digamos $G_i \then G_j$ con $i,j < n$. Por hipótesis de inducción $T \vdash F \then G_i$ y $T \vdash F \then G_j$. Podemos dar una demostración abreviada de $G_n$ en $T$ (notamos que $T \vdash F \then G_j$ es $T \vdash F \then (G_i \then G_n)$):
+        \begin{align}
+            &F \then G_i\ &(T\vdash)\ [H_1]\\
+            &F \then (G_i \then G_n)\ &(T\vdash)\ [H_2]\\
+            &H1 \then H2 \then (F \then G_n) &(\text{tautología})
+        \end{align}
+        Y seguiríamos aplicando \textit{Modus Ponens} para terminar la demostración.
+    \end{itemize}
+\end{proof}
+
+
+\begin{cor}[Corolario primero al teorema \ref{thm:td}] \label{cor:td1}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría, $F$ un enunciado de $L$, entonces:
+    \begin{enumerate}[(1)]
+        \item $T \vdash F \iff T \cup \sdf{\neg F} \text{ es incoherente}$
+        \item $T \cancel{\vdash} F \iff T \cup \sdf{\neg F} \text{ es coherente}$.
+    \end{enumerate}
+\end{cor}
 
 \begin{proof}
-    A completar. %%TODO: Página 29, día 17/10/2019
+    Es claro que (1) $\iff$ (2), solo tendríamos que demostrar uno de ellos. Vamos a demostrar (1) por reducción al absurdo.\\
+    \begin{itemize}
+        \item[$(\implies)$] $T \vdash F \implies T \cup\sdf{\neg F} \vdash F$ y $T \cup \sdf{\neg F} \vdash \neg F \implies T \cup {\neg F} $ es incoherente.
+        \item[$(\implied)$] $T \cup \sdf{\neg F}$ es incoherente $\implies T \cup \sdf{\neg F} \vdash F \implies T \vdash \neg F \then F$. Como $(\neg F \then F) \then F$ es una tautología, $T \vdash F$.
+    \end{itemize}
 \end{proof}
+
+\begin{cor}[Corolario segundo al teorema \ref{thm:td}]
+    El teorema de finitud (teorema \ref{thm:tf}) es equivalente al corolario primero al teorema de finitud (corolario \ref{cor:tf1}).
+\end{cor}
+\begin{proof}
+    Que el teorema \ref{thm:tf} $\implies$ corolario \ref{cor:tf1} es claro y ya lo hemos demostrado. Vamos a ver el recíproco.\\
+    Sea $F \in \for(L)$ tal que $T \vdash F$. Supongamos que $\forall T_0 \subseteq T$ finita se cumple que $T_0 \cancel{\vdash} F$. Por el corolario \ref{cor:td1}, $\forall T_0 \in T$, $T_0 \cup \sdf{\neg F}$ es coherente.\\
+    Sea $T' = T \cup \sdf{\neg F}$ con $T_0' \subseteq T$ si $T_0' \subseteq T_0 \cup \sdf{\neg F}$ con $T_0$ finita, entonces $T_0'$ es coherente. Por el corolario \ref{cor:tf1}, $T'$ es coherente $\implies T \cancel{\vdash} F$, y llegamos a una contracción.
+\end{proof}
+
+\begin{pro}[Extensión mediante constantes nuevas]\label{pro:2.3}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría, $F$ una fórmula, $F$ es $F(\suc{x}{n})$, y $\suc{c}{n}$ nuevas constantes. Sea $L' = L \cup \sdf{\suc{c}{n}}$ entonces:
+    $$
+        T \vdash F \iff T \vdash F (\quo{c_1}{x_1}, \ldots, \quo{c_n}{x_n})
+    $$
+    Nota: $T$ es una $L'$-teoría en la parte derecha del condicional.
+\end{pro}
+
+\begin{proof}$ $
+    \begin{itemize}
+        \item[$\implies$] Supongamos $T \vdash F$. Hagamos una demostración abreviada de $ F (\quo{c_1}{x_1}, \ldots, \quo{c_n}{x_n}) $ en $T$ como $L'$-teoría.
+        \begin{align}
+            &F\ &(T\vdash) \tag{F1}\\
+            &\forall x_1 F\ &Gen(1) \tag{F2}\\
+            &\forall x_1 F \then F(\quo{c_1}{x_1})\ &\text{Ax. sust} \tag{F3}\\
+            &\forall F(\quo{c_1}{x_1})\ &MP(3, 2) \tag{F4}\\
+            &\textit{repetir el mismo proceso n veces} & \tag{$\cdots$}\\
+            &F(\quo{c_1}{x_1}, \ldots, \quo{c_n}{x_n})\ &MP(3n, 3-1) \tag{F3n+1}
+        \end{align}
+        \item[$\implied$] Dada una demostración de $G$, ($G$ es $F(\quo{c_1}{x_1}, \ldots, \quo{c_n}{x_n})$). Sea la demostración ($\suc{G}{m}$) de $F(\quo{c_1}{x_1}, \ldots, \quo{c_n}{x_n})$ en $T$. Para cada $i = 1,\ldots,m$, sea $F_i$ la fórmula obtenida sustituyendo $c_j$ por $x_j$.
+        Entonces $\suc{F}{m}$ es una demostración de $F$ en $T$.
+    \end{itemize}
+\end{proof}
+
+\begin{obs}$ $
+    \begin{enumerate}
+        \item Hay un paso intermedio en la demostración de $(\implied)$ anterior que es susituir $c_j$ por $y_j$ donde las $y_j$ son las variables nuevas. Luego cambiar el nombre de las variables ligadas y finalmente sustituir $y_j$ por $x_j$.
+        \item Los $G_i$ pueden ser $G\in T$ entonces $F_i$ es $G_i$.\\
+        Si $G_i$ es un axioma lógico $\implies F_i$ es un axioma lógico del mismo tipo. Si $G_i$ es una tautología $\implies F_i$ es una tautología (esto no es trivial, habría que verlo con cuidado)
+    \end{enumerate}
+\end{obs}

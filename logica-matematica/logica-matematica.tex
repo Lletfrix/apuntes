@@ -20,6 +20,7 @@
 \usepackage{wrapfig}
 \usepackage{multicol}
 \usepackage{subcaption}
+\usepackage{etoolbox}
 \usepackage{xfrac}
 \usepackage{glossaries}
 \usepackage{standalone}
@@ -29,6 +30,8 @@
 \usepackage{tikz}
 \usepackage{mathtools}
 \usepackage{tikz-qtree}
+\usepackage{cancel}
+\usepackage[shortlabels]{enumitem}
 
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{shapes}
@@ -230,11 +233,19 @@ numbered=no
 \newcommand{\model}{\mathrm{Mod}}
 \newcommand{\te}{\mathrm{te}}
 \newcommand{\quo}[2]{{\left.\raisebox{.2em}{$#1$}\middle/\raisebox{-.2em}{$#2$}\right.}}
+\newcommand{\quox}[1]{\quo{#1}{x}}
+\newcommand{\implied}{\ \Longleftarrow\ }
 %%%% MATRICES
 \newcommand\mx[1]{\begin{bmatrix*}#1\end{bmatrix*}}
 
+\newcommand{\suc}[3][1]{{#2}_{#1}, \ldots, {#2}_{#3}}
+\newcommand{\sucn}[1]{\suc{#1}{n}}
+
 \renewcommand\qedsymbol{$\diamondsuit$}
 \setcounter{MaxMatrixCols}{20}
+
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+\renewcommand{\theequation}{\arabic{equation}}
 
 \title{Apuntes de L\'ogica M\'atematica}
 \author{Rafael S\'{a}nchez S\'{a}nchez}
@@ -257,9 +268,13 @@ Revisión del \today $ $ a las \currenttime.
 \input{input/3-satisfaccion}
 \input{input/4-tautologias}
 \input{input/5-consecuencia-semantica}
-\part{Sistemas formales}
+\part{Sistemas formales de primer orden}
 \input{input/6-consecuencia-sintactica}
 \input{input/7-finitud-deduccion}
+\input{input/8-igualdad}
+\input{input/9-validez}
+\part{Completitud de la l\'ogica de primer orden}
+\input{input/10-teorias-completas-lindembaun}
 \part{Ap\'{e}ndices}
 
 %\renewcommand{\chaptername}{Apéndice}

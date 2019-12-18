@@ -1,0 +1,130 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Teorema de Igualdad.}
+
+
+\section{Teorema de igualdad}
+
+En esta sección vamos a ver algunos resultados acerca de igualdades. Vamos a apoyarnos en la proposición \ref{pro:2.1} por lo que convendría revisarla.
+
+\begin{lm}[$=$ en las consecuencias sintácticas]\label{lm:igualsintactico}
+    Sea $L$ un lenguaje, $t_i \in \ter(L)$ con $i = 1, 2, 3$, entonces:
+    \begin{gather*}
+        \vdash t_1 = t_1\\
+        \vdash t_1 = t_2 \then t_2 = t_1\\
+        \vdash t_1 = t_2 \land t_2 = t_3 \then t_1 = t_3
+    \end{gather*}
+\end{lm}
+
+\begin{proof}
+    Vamos a proceder con una demostración abreviada haciendo uso de la proposición \ref{pro:2.1}.
+    \begin{align}
+        &x=x &\text{Axioma de igualdad 3.1}\\
+        &\forall x\ x=x&\text{Gen(1)}\\
+        &\forall x\ x=x \then (x=x)(\quo{t_1}{x})&\text{Axioma de sustitución}\\
+        &(x=x)(\quo{t_1}{x}): t_1=t_1&\text{MP(3, 1)}
+    \end{align}
+    \begin{align}
+        &x=y \then y=x   &\vdash x=y \then y=x\\
+        &\forall x\ F_1   &   \text{Gen(1)}\\
+        &\forall x\ F_1 \then (x=y \then y=x)(\quo{t_1}{x})   &   \text{Axioma de sustitución}\\
+        &t_1 = y \then y = t_1   &   \text{MP(3,2)}\\
+        &\forall y\ F_4   &   \text{Gen(4)}\\
+        &\forall y\ F_4 \then F_4(\quo{t_2}{y})   &   \text{Axioma de sustitución}\\
+        &t_1 = t_2 \then t_2 = t_1   &   \text{MP(6, 5)}
+    \end{align}
+    \begin{align} %TODO: Demostrar
+        &x=y \then y=x   &\text{se demuestra de forma análoga}
+    \end{align}
+\end{proof}
+
+\begin{thm}[Teorema de igualdad]\label{thm:igualdad}
+    Sea $L$ un lenguaje, $t, s_1, s_2 \in \ter(L)$, $x \in V$, $F \in \for(L)$ tal que $x$ es sustituible por $s_i$ en $F$. Sea $T$ una $L$-teoría. Entonces:
+    \begin{enumerate}[(a)]
+        \item $T \vdash s_1 = s_2 \implies T \vdash t(\quo{s_1}{x}) = t(\quo{s_2}{x})$
+        \item $T \vdash s_1 = s_2 \implies T \vdash F(\quo{s_1}{x}) = F(\quo{s_2}{x})$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}$ $
+    \begin{enumerate}[(a)]
+        \item Se da una demostración abreviada de $t(\quo{s_1}{x}) = t(\quo{s_2}{x})$ en $T$. Por inducción sobre la complejidad de $t$.\\\\
+
+            Si $t\in V$:\\
+                \begin{itemize}
+                    \item $t$ es $x \implies t(\quo{s_i}{x})$ es $s_i$, y por tanto $T \vdash s_1 = s_2$ por hipótesis.
+                    \item $t$ es $v \neq x \implies t(\quo{s_1}{x})$ es $t$, y por tanto $T \vdash t = t$ por el lema \ref{lm:igualsintactico}.
+                    \item $t$ es $c$ se demuestra igual que el caso $v \neq x$
+                \end{itemize}
+            Si $t$ es $f t_1 \ldots t_m$. Por hipótesis de inducción se cumple que $T \vdash t_i(\quo{s_1}{x}) = t_i(\quo{s_2}{x})$, vamos a dar una demostración abreviada.\\
+            \begin{align*}
+                & t_1(\quo{s_1}{x}) = t_1(\quo{s_2}{x})                                                                                  &\ T\vdash \tag{$F_1$}\\
+                & \vdots                                                                                                                 & \tag{$\cdots$}\\
+                & t_m(\quo{s_1}{x}) = t_m(\quo{s_2}{x})                                                                                  &\ T\vdash  \tag{$F_m$}\\
+                & x_1 = y_1 \then \cdots \then x_m = y_m \then f x_1 \ldots x_m = f y_1 \ldots y_m                                       & \text{Axioma de igualdad 3.2} \tag{$F_{m+1}$}\\
+                & \forall x_1\ F_{m+1}                                                                                                   & \text{Gen($F_{m+1}$)} \tag{$F_{m+2}$}\\
+                & \forall x_1\ F_{m+1} \then F_{m+1}(\quo{t_1(\quo{s_1}{x})}{x_1})                                                       & \text{Axioma de sustitución} \tag{$F_{m+3}$}\\
+                & F_{m+1}(\quo{t_1(\quo{s_1}{x})}{x_1})                                                                                  & \text{MP($m+3$, $m+2$)}\tag{$F_{m+4}$}\\
+                & \forall y_1\ F_{m+4}                                                                                                   & \text{Gen($F_{m+4}$)} \tag{$F_{m+5}$}\\
+                & \forall y_1\ F_{m+4} \then F_{m+4}(\quo{t_1(\quo{s_2}{y})}{y_1})                                                       & \text{Axioma de sustitución} \tag{$F_{m+6}$}\\
+                & F_{m+4}(\quo{t_1(\quo{s_2}{y})}{y_1})                                                                                  & \text{MP($m+6$, $m+5$)}\tag{$F_{m+7}$}\\
+                & x_2 = y_2 \then \cdots \then x_m = y_m \then & \text{MP($m+7$, $1$)}\tag{$F_{m+8}$}\\
+                &\then f t_1(\quo{s_1}{x}) x_2 \ldots x_m = t_1(\quo{s_2}{y}) f y_2 \ldots y_m &\\
+                &\text{repetir el proceso m veces}&
+            \end{align*}
+        \item Demostramos por inducción sobre la complejidad de $F$. Como $F$ es $R t_1 \ldots t_m$ siendo $R$ un símbolo de relación $m$-aria (incluyendo $=$), basta demostrar:
+            \begin{equation*}
+                \tag{$+$} T \vdash F(\quo{s_1}{x}) \then F(\quo{s_2}{x})
+            \end{equation*}
+            ya que $T \vdash s_1 = s_2 \implies T \vdash s_2 = s_1$. De $(+)$ se obtiene:
+            \begin{equation*}
+                \tag{$++$} T \vdash F (\quo{s_2}{x}) \then F(\quo{s_1}{x})
+            \end{equation*}
+            y finalmente de $(+)$ y $(++)$ acabamos por obtener:
+            $$
+                T \vdash F(\quo{s_1}{x}) \bicond F(\quo{s_2}{x})
+            $$
+            por tautologías.
+            \begin{itemize}
+                \item Si $F$ es atómica, la demostración es análoga al apartado (a) usando el axioma de igualdad 3.3 en vez de 3.2.
+                \item Si $F$ es $\neg G$.\\
+                      Por hipótesis de inducción $T \vdash s_1 = s_2 \implies T \vdash G(\quo{s_1}{x}) \bicond G(\quox{s_2})$. De aquí podemos hallar $T \vdash \neg G(\quox{s_1}) \bicond \neg G(\quox{s_2})$ por tautologías.
+                      Como $\neg(G(\quox{s_1}))$ es $(\neg G)(\quox{s_1})$ hemos terminado.
+                \item Si $F$ es $G \then H$, por hipótesis de inducción y observando que $(G \then H)(\quox{s_i})$ es $(G(\quox{s_i}) \then H(\quox{s_i}))$ habríamos terminado.
+                \item Si $F$ es $\forall y G$ distinguimos dos casos. Si $x$ no aparece libre, entonces $F(\quox{s_i})$ es $F$ y $T \vdash F \bicond F$ es una tautología.\\
+                      Si $x$ aparece libre, entonces $x \neg y$ y como $x$ es sustituible por $s_i$ con $i = 1,2$ también tenemos que $y$ no aparece en $s_i$.\\
+                      Además $(\forall y G)(\quox{s_i})$ es $\forall y (G(\quox{s_i}))$. Por hipótesis de inducción, $T \vdash s_1 = s_2 \implies T \vdash G(\quox{s_1}) \bicond G(\quox{s_2})$. Y como ya vimos en clase, podemos generalizar a ambos lados del bicondicional, con lo que obtenemos:
+                      $$
+                            T \vdash \forall y (G\quox{s_1}) \bicond \forall y (G\quox{s_2})
+                      $$
+                      es decir,
+                      $$
+                            T \vdash F \bicond F
+                      $$
+                      que es lo que queríamos demostrar
+            \end{itemize}
+    \end{enumerate}
+\end{proof}
+
+\begin{cor}[al teorema de igualdad (teorema \ref{thm:igualdad})]
+    Con las mismas hipótesis que el teorema:
+        \begin{enumerate}[(a')]
+            \item $T \vdash s_1 = s_2 \then t(\quox{s_1}) \then t(\quox{s_2})$
+            \item $T \vdash s_1 = s_2 \then F(\quox{s_1}) \then F(\quox{s_2})$
+        \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    Si $s_1 = s_2$ fuera un enunciado, (a') y (b') se obtienen de (a) y (b) usando el teorema de la deducción (teorema \ref{thm:td}). En general, si $s_i$ es $s_i(\sucn{x})$, construimos $s_i'$ como $s_i'(\sucn{c})$ sustituyendo cada $x_j$ por el $c_j$ correspondiente.\\
+    Por la proposición \ref{pro:2.3}, sea $L' = L \cup \sdf{\sucn{c}}$ y $s_i' \in \ter(L')$, tenemos que:
+    \begin{itemize}
+        \item[] (a')$\iff T \vdash s'_1 = s'_2 \then t(\quox{s'_1}) \then t(\quox{s'_2})$
+        \item[] (b')$\iff T \vdash s'_1 = s'_2 \then F(\quox{s'_1}) \then F(\quox{s'_2})$
+    \end{itemize}
+    También sabemos que $T \vdash s_1 = s_2 \iff T \vdash s_1' = s_2'$. Como ahora son enunciados basta aplicar el teorema \ref{thm:td} y obtenemos el resultado que queremos demostrar.\\
+    Además, también hemos demostrado que:
+        \begin{gather*}
+            T \vdash t(\quox{s_1}) = t(\quox{s_2}) \implies T \vdash t(\quox{s_1'}) = t(\quox{s_2'})\\
+            T \vdash F(\quox{s_1}) = F(\quox{s_2}) \implies T \vdash F(\quox{s_1'}) = F(\quox{s_2'})
+        \end{gather*}
+\end{proof}
