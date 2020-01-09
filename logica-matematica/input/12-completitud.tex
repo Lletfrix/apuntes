@@ -1,0 +1,96 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Teorema de completitud.}
+
+\begin{thm}[Teorema de la construcción de un modelo]\label{thm:modelos}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría tal que:
+    \begin{enumerate}[(a)]
+        \item $T$ es coherente.
+        \item $T$ es completa.
+        \item $T$ admite testigos de Henkin.
+    \end{enumerate}
+    Entonces $T$ tiene un modelo. Es decir, existe una $L$-estructura $\mtc A$ tal que $\mtc A \vDash F$ para todo $F \in T$.
+\end{thm}
+
+\begin{proof}$ $
+    \begin{enumerate}[(1)]
+        \item \textsc{Elección del universo}\\\\
+        Sea $TC(L) = \sdf{t \in \ter(L) \mid t \text{ sin variables}}$ (el conjunto de términos constantes del lenguaje), definimos en $TC(L)$ la relación:
+        $$
+            t_1 \sim t_2 \iff T \vdash t_1 = t_2
+        $$
+        Entonces vamos a tomar el universo $A$ de nuestra estructura $\mtc A$ como:
+        $$
+            A = \quo{TC(L)}{\sim}
+        $$
+        De aquí deducimos que sea $t \in \ter(L)$, la clase de $t$ queda determinada por $\widehat t = \sdf{t_1 \in TC(L) \mid T \vdash t = t_1}$.
+
+        \item \textsc{Elección de la $L$-estructura}\\\\
+        Vamos a determinar $\mtc A = \gen{A,\ c^\mtc A, \ldots, f^\mtc A, R^\mtc A, \ldots}$. El universo ya hemos indicado como vamos a escogerlo. Ahora vamos a determinar constantes, funciones y relaciones.\\\\
+        \begin{itemize}
+            \item Sea $c\in L$ las constantes del lenguaje, $c^\mtc A = \widehat c \in A$.
+            \item Sea $f\in L$ símbolos de función $n$-aria y $(\sucn{\widehat t}) \in A^n$, $f^\mtc A (\sucn{\widehat t}) = \widehat{f t_1 \ldots t_n}$, con $\sucn{t} \in TC(L)$ y $f t_1 \ldots t_n \in TC(L)$.
+            \item Sea $R \in L$ símbolos de relación $m$-aria y $(\suc{\widehat t}{m}) \in A^m$, entonces:
+                $$
+                    (\suc{\widehat t}{m}) \in R^\mtc A \iff T \vdash R t_1 \ldots t_m \text{ con } t_1 \ldots t_m \in TC(L)
+                $$
+        \end{itemize}
+        Tenemos que ver que $f^\mtc A$ y $R^\mtc A$ están bien definidas, es decir, para cualquier representante de la clase que escojamos, la función $f^\mtc A$ lo manda al mismo elemento y se sigue satisfaciendo la relación $R^\mtc A$.\\
+        Sean $\sucn s \in TC(L)$, $s_i \sim t_i \iff T \vdash s_i = ti \iff \widehat t_i = \widehat s_i$.
+        $T \vdash t_1 = s_1, \ldots, T \vdash t_n = s_n \implies T \vdash f t_1 \ldots t_n = f s_1 \ldots s_n$ (aplicando el teorema de igualdad $n$ veces).\\
+        Sean $\suc{s}{m} \in TC(L)$. Queremos ver que si $t_i \sim s_i$, entonces $R t_1 \ldots t_m \iff R s_1 \ldots s_m$.
+        $\hat t_1 = \hat t_2 \iff T\vdash t_i = s_i \iff$ (por el teorema de igualdad) ($T \vdash R t_1 \ldots t_m \bicond R s_1 \ldots s_m$) $\iff$ ($T \vdash R t_1 \ldots t_m \iff T \vdash R s_1 \ldots s_m$). Sean $(\suc{\hat t}{m}) \in R^\mtc A$ entonces $T \vdash R t_1 \ldots t_m$ y por \textit{Modus Ponens} llegamos a que $(\suc{\hat s}{m}) \in R^\mtc A$\\
+
+        Por último, falta ver qué es exactamente $t^\mtc A$ y comprobar que es cerrado, entonces $\mtc A$ será una $L$-estructura. Lo veremos por inducción sobre la complejidad de $t$.\\
+        \begin{itemize}
+            \item Si $t$ es $c$, entonces $t^\mtc A = c^\mtc A = \hat c \in A$.
+            \item Si $t$ es $f t_1 \ldots t_n$ entonces por hipótesis de inducción $t_i^\mtc A = \hat t_i$:
+                $$
+                    t^\mtc A = (f t_1 \ldots t_n)^\mtc A = f^\mtc A (t_1 ^\mtc A \ldots t_n^\mtc A) = f^\mtc A (\hat t_1 \ldots \hat t_n) = \widehat(f t_1 \ldots t_n) ) \hat t \in A
+                $$
+        \end{itemize}
+        Y con ello vemos que $\mtc A$ es una $L$-estructura.
+
+        \item \textsc{Comprobación de que $\mtc A$ es un modelo}\\\\
+        Basta demostrar que $\mtc A \vDash F \iff T \vdash F$ $\forall F \in \mathrm{Enun}(F)$. Así: $\te(\mtc A) = \gen{F \in \mathrm{Enun}(F) \mid T\vdash F}$ y en particular $\mtc A \vDash F$.\\
+        Vamos a ver la demostración por inducción sobre la complejidad de $F$.
+        \begin{itemize}
+            \item Si $F$ es atómica, entonces $F$ es $R t_1 \ldots t_m$:
+            $$
+                \mtc A \vDash R t_1 \ldots t_m \iff (\suc{t^\mtc A}{m})\in R^\mtc A \iff (\suc{\hat t}{m})\in R^\mtc A \iff T \vdash R t_1 \ldots t_m
+            $$
+            \item Si $F$ es $\neg G$, vamos a ver que $\mtc A \vDash \neg G \implies T \vdash \neg G$:
+            \begin{gather}
+                \mtc A \vDash \neg G \implies \mtc A \cancel\vDash G \implies (H.I)\ T \cancel\vdash G \implies\text{($T$ completa) } T \vdash \neg G\\
+                T\vdash \neg G \implies\text{($T$ coherente) } T \cancel\vdash G \implies (H.I)\ A \cancel\vDash G \implies A \vDash \neg G
+            \end{gather}
+            \item $F$ es $G \then H$:\\
+            A completar. Demostrar la doble implicación tanto si $x$ aparece libre como si no. Mirar apuntes de Emilio.
+        \end{itemize}
+    \end{enumerate}
+\end{proof}
+
+\section{Teorema de completitud.}
+
+En esta sección vamos a demostrar \hyperref[thm:tc2]{la segunda versión del teorema de completitud}, que ya demostramos que es equivalente a la primera.
+
+\begin{proof}\label{proof:tc2}
+    Sea $T$ una $L$-teoría coherente.
+    Por el teorema de Henkin existe $L' \supseteq L$ un lenguaje y $T' \supseteq T$ una $L'$-teoría coherente que admite testigos de Henkin (en $L'$). Para esta $T'$ y $L'$, como $T'$ es coherente, existe $T'' \supseteq T'$ con $T''$ una $L'$-teoría completa y coherente (por el \hyperref[thm:lindembaun]){teorema de Lindembaun}.\\
+    Veamos que $T''$ admite testigos de Henkin, es decir, que no pierde esta propiedad al usar Lindembaun.\\
+    Sea $F \in \for(L')$, como $T'$ es una $L'$-teoría que admite testigos, para esta $F$ existe $c$ constante de $L'$ tal que:
+    $$
+        T' \vdash \exists x F \then F(\quox c)
+    $$
+    Como $T' \subseteq T''$, tomamos: $T'' \vdash \exists x F \then F(\quox c)$, por lo que $T''$ admite testigos de Henkin.\\
+
+    Recapitulando tenemos que $T''$ es una teoría coherente, completa y que admite testigos de Henkin, entonces por el \hyperref[thm:modelos]{teorema de construcción de modelos}, existe $\mtc A'$ una $L'$-estructura tal que:
+    \begin{align*}
+        &\mtc A' \vDash T''\\
+        &\mtc A' \vDash T \text{ considerando $T$ como $L'$-teoría (porque $T \subseteq T''$)}
+    \end{align*}
+    Sea $\mtc A$ el reducto de $\mtc A'$ en $L$, como $A$ y $\mtc A$ satisfacen los mismos enunciados de $L$ tenemos:
+    $$
+        \mtc A \vDash T,\text{ con } \mtc A \text{ una $L$-estructura}
+    $$
+\end{proof}

@@ -30,6 +30,8 @@
 \usepackage{tikz}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage{cancel}
+\usepackage[shortlabels]{enumitem}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{shapes}
 \usetikzlibrary{decorations.text}
@@ -180,6 +182,7 @@ numbered=no
 % COMANDOS ÚTILES PARA LA TEORÍA DE GRUPOS
 %\newcommand{\normsub}{\mathbin{\triangleleft}}
 \newcommand{\normsub}{\lhd}
+\newcommand{\normsubeq}{\trianglelefteq}
 \newcommand{\uds}[1]{\mathcal{U}(#1)}
 \newcommand{\inv}[1]{#1^{-1}}
 \newcommand{\ima}{\text{Im }}
@@ -245,11 +248,12 @@ Revisión del \today $ $ a las \currenttime.
 \tableofcontents
 \part{Primer parcial}
 \input{input/1-anillos}
-\input{input/2-extensiones.tex}
+\input{input/2-extensiones}
 \part{Segundo parcial}
-\input{input/3-ext-galois.tex}
+\input{input/3-ext-galois}
 \part{Tercer parcial}
-\input{input/4-teo-galois.tex}
+\input{input/4-teo-galois}
+\input{input/5-aplicaciones}
 \part{Apéndices}
 
 %\renewcommand{\chaptername}{Apéndice}

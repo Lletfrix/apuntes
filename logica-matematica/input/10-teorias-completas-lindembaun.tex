@@ -30,11 +30,9 @@ Sin embargo, podemos enunciarlo de otra forma, que es el recíproco al corolario
         Si es coherente, por la segunda forma (teorema \ref{thm:tc2}) $T \cup \sdf{\neq G}$ tiene un modelo. Sea $\mtc A \vDash T \cup \sdf{\neq G}$, entonces $\mtc A \vDash T$ y $\mtc A \cancel\vDash G \implies T \cancel\vDash G \implies T \cancel\vDash F$.
     \end{itemize}
 \end{proof}
-Sin embargo, la demostración del teorema se verá más adelante en el curso.
-
+Sin embargo, la demostración del teorema se verá más adelante en el curso. Se encuentra en \hyperref[proof:tc2]{el capítulo 12}.
 
 \section{Teorías completas}
-
 
 Vamos a ver que para cualquier teoría podemos añadir un conjunto de axiomas que la haga completa. Por ejemplo podemos pasar de la teoría de grupos (que ya vimos que es incompleta)
 a grupos abelianos divisibles y sin torsión. GADST es una teoría completa.
@@ -51,4 +49,76 @@ a grupos abelianos divisibles y sin torsión. GADST es una teoría completa.
     \end{enumerate}
 \end{eg}
 
-\section{Teorema de Lindebaum}
+\begin{obs}
+    Por lo general es muy difícil encontrar teorías completas.
+\end{obs}
+
+\begin{pro}\label{pro:3.2}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría completa. Entonces:
+    \begin{enumerate}
+        \item Todos los modelos de $T$ satisfacen los mismos enunciados.
+        \item Todos los modelos de $T$ son elementalmente equivalentes.
+    \end{enumerate}
+\end{pro}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Queremos ver que $\mtc A,\ \mtc B\ \vDash T$, $F \in \mathrm{Enun}(L)$.\\
+        $T$ completa $\implies$ $T \vdash F$ o $T \vdash \neg F$.
+        \begin{itemize}
+            \item Si $T \vdash F$ entonces por el teorema de validez $T \vDash F \implies \mtc A,\ \mtc B \vDash F$.
+            \item Si $T \vdash \neg F$ entonces $T \vDash \neg F \implies \mtc A \vDash \neg F \land \mtc B \vDash \neg F$.
+        \end{itemize}
+        \item Directa desde 1 por definición.
+    \end{enumerate}
+\end{proof}
+
+\begin{pro}\label{pro:3.3}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría \textit{coherente}. Las siguientes propiedades son equivalentes:
+    \begin{enumerate}[(a)]
+        \item $T$ es completa.
+        \item $\forall F,G \in \mathrm{Enun}(L)$, si $T \vdash F \lor G$ entonces $T \vdash F$ o $T \vdash G$.
+        \item $T' = \sdf{F \in \mathrm{Enun}(L) \mid T \vdash F}$ es una $L$-teoría coherente maximal.
+    \end{enumerate}
+\end{pro}
+
+\begin{proof}$ $
+    \begin{enumerate}
+        \item[(a) $\implies$ (b)] Sabemos que $T \vdash F \lor G \iff T \vdash \neg F \then G$. Además, supongamos que $T \cancel\vdash G \implies T \vdash \neg F$ (por ser teoría completa), entonces por \textit{Modus Ponens} $T\vdash G$.\\
+        Si por el contrario $T \vdash F$ entonces ya estaría demostrado.
+        \item[(b) $\implies$ (c)] Vamos a ver primero que $T'$ es coherente. Sea $T'$ como en el teorema, si no fuera coherente entonces $T' \vdash F \land \neg F$ para algún $F$ enunciado de $L$.\\
+        Sea $(\sucn{F})$ una demostración de $F \land \neg F$ en $T'$, como $F_i \in T'$ entonces $T \vdash F_i$. Por tanto $(\sucn{F})$ también es una demostración de $F \land \neg F$ en $T$.
+        Pero $T$ es coherente por hipótesis, con lo que llegamos a una contradicción. Vamos a ver ahora que es maximal.\\
+
+        Sea $T''$ una $L$-teoría $T' \subset T''$. Sea $F \in T''$ tal que $F \notin T' \implies T \cancel\vdash F$. Como $T \vdash F \lor \neg F$, por (b), $T \vdash \neg F \implies \neg F \in T' \implies F,\neg F \in T'' \implies T''$ incoherente, que entra en contradicción con lo que acabamos de demostrar.
+
+        \item[(c) $\implies$ (a)]
+        Sea $F$ un enunciado de $L$. $T \cancel\vdash F \implies F \notin T' \implies T' \cup \sdf{F} \supset T' \implies T' \cup \sdf{F} \text{ incoherente } \implies \text{ (por colorario al TD) } T' \vdash \neg F \implies T \vdash F \implies T$ es completa.
+    \end{enumerate}
+\end{proof}
+
+\section{Teorema de Lindembaum}
+
+\begin{thm}[Teorema de Lindembaum]\label{thm:lindembaun}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría coherente. Entonces existe una $L$-teoría $T'$ que contiene a $T$ y es completa y coherente.
+\end{thm}
+\begin{obs}
+    Si $T$ es coherente $\implies T$ tiene un modelo (Teorema de completitud). Usando esto la demostración del teorema sería trivial:
+    $$
+        T \text{ coherente } \implies \exists \mtc A \vDash T \implies T \subseteq \te(A)
+    $$
+    donde $\te(A)$ es completa y coherente (ya que existe un modelo). Sin embargo, como aún no hemos probado el teorema de completitud vamos a probarlo de otra forma.
+\end{obs}
+
+\begin{proof}
+    Sea $\Gamma' = \sdf{T_i,\ L-\text{teoría } \mid T \subseteq T_i \text{ y } T_i \text{ es coherente}}$. Veamos que estamos ante la hipótesis del lema de Zorn:
+    \begin{enumerate}
+        \item $T \in\Gamma$ con lo que $\Gamma \neq \varnothing$.
+        \item $\subseteq$ define un orden parcial en $\Gamma$.
+        \item Sea $\sdf{T_i}_{i\in I}$ una cadena en $\Gamma$, $T \subseteq T_i \forall i \in T$. Sea $T'' = \bigcup_{i\in I} T_i$. Por el corolario al teorema de finitud, la unión de una cadena de teorías coherentes es coherente. Es decir, toda cadena tiene una cota superior.
+    \end{enumerate}
+    Entonces por el lema de Zorn existe $T' \in \Gamma$ un elemento maximal. Veamos que $T'$ es coherente, $T \subset T'$ y que es completa. Sea $F$ un enunciado de $L$:
+    $$
+        T' \cancel\vdash F \implies F \notin T' \implies T' \cup \sdf{F} \supset T' \implies T' \cup{F}\notin \Gamma \implies T' \cup \sdf{F} \text{ incoherente } \implies T' \neg F \implies T'\text{ completa}
+    $$
+\end{proof}

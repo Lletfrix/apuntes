@@ -1,0 +1,81 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Testigos de Henkin.}
+
+Recordemos que el axioma de sustitución nos da los siguientes resultados:
+\begin{gather*}
+    \vdash \forall x F \then F(\quox{t})\\
+    \vdash F(\quox{t}) \then \exists x F \text{(axioma de sustitución usando $\neg F$)}
+\end{gather*}
+para todo $t \in \ter(L)$ tal que $x$ es sustituible por $t$ en $F$. En particular, si $F$ no tiene variables: $\vdash \forall x F \then F$.\\
+Sin embargo, podemos ver que $\vdash F \then \forall x F$ no es cierto en general:
+\begin{gather*}
+    \text{Si }\cancel\vdash F \then \forall x\ F \implies x \text{ libre en } F\\
+    \text{Si } \vdash F \then \forall x\ F \implies \text{ por el teorema de validez } \vDash F \then \forall x F
+\end{gather*}
+
+\begin{eg}[Ejemplo ilustrativo de testigos de Henkin]
+    Sea $\vdash \exists x F \then F(\quox t)$, en general, ($\forall t \in \ter(L)$).
+    $$
+        \mtc Q = \gen{\Q, +, -, \cdot, 0, 1},\ T=\te(\mtc Q)
+    $$
+    Podemos escribir:
+    \begin{gather*}
+        T \vdash \exists x,\ x \neq 0 \then F(\quox 1)\\
+        T \vdash \exists x,\ x \neq 0 \then 1 \neq 0
+    \end{gather*}
+    Con esto decimos que \textit{1 es testigo de $\exists x F$}.
+\end{eg}
+
+\begin{dfn}[Testigo de Henkin]
+    Sea $L$ un lenguaje, $T$ una $L$-teoría, $c \in C$, $F(x) \in \for(L)$ con $x$ libre en $F$. Decimos que $c$ es un \textbf{testigo de Henkin} de $F$ en $T$ si $T\vdash \exists x F \then F(\quox{c})$.\\
+    Diremos que $T$ admite testigos de Henkin si para cada $F(x) \in \for(L)$ con $x$ libre existe un $c$ que es testigo de Henkin.
+\end{dfn}
+
+\begin{obs}[Notación]
+    $\for_1(L) = \sdf{F(x) \in \for(L) \mid x\text{ está libre en} F}$
+\end{obs}
+
+\begin{thm}[Teorema de Henkin]\label{thm:henkin}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría coherente. Entonces existe un lenguaje $L' \supset L$ y una $L'$-teoría $T' \supset T$, tal que $T'$ es coherente y admite testigos de Henkin. Tal $T'$ va a ser la union de una cadena de teorías coherentes.
+\end{thm}
+Vamos a ver un lema antes de la demostración del teorema,
+\begin{lm}
+    Sea $L$ un lenguaje, $S$ una $L$-teoría, $F \in \for_1(L)$ y $c$ una constante que no aparezca ni en $F$ ni en las fórmulas de $S$. Entonces si $S$ es coherente también lo es: $S \cup \sdf{\exists x F \then F(\quox c)}$.
+\end{lm}
+
+\begin{proof}
+    Sea $S$ coherente, si $S \cup \sdf{\exists x F \then F(\quox c)}$ es incoherente, entonces por el \hyperref[cor:td1]{corolario primero al TD}: $S \vdash \neg ( \exists x F \then F(\quox c)) \implies S \vdash \exists x F \land \neg F (\quox c) \implies S \vdash \exists x F$ y $S \vdash \neg F(\quox c)$.\\
+
+    Consideramos $L_0 = L \cap (\sdf{s \in L \mid \text{ s aparece en alguna fórmula de S}} \cup \sdf{s \in L \mid \text{ s aparece en F}})$. Entonces $S$ es una $L_0$-teoría.\\
+    Sea $F \in \for(L_0)$, aplicando la proposición \ref{pro:2.3}:
+    $$
+        \text{En } L_0,\ S \vdash \neg F(\quox c) \iff S \vdash \neg F \text{ (ya que $c \notin L_0$)} \implies \text{(por Gen.) } S \vdash \forall x \neg F
+    $$
+    Pero ya habíamos visto que $S \vdash \exists x F$, es decir, $S \vdash \neg \forall x \neg F$, entonces $S$ es incoherente y llegamos a una contradicción.\\
+
+    Por tanto $S \cup \sdf{\exists x F \then F(\quox c)}$ es coherente.
+\end{proof}
+
+\begin{proof}[Demostración al teorema de Henkin]
+    Sea $D = \sdf{c_f \mid F \in \for_1(L)}$ nuevas constantes, es decir, $D \cup L = \varnothing$. Llamamos $L_1 = L \cup D$ y:
+    $$
+        T_1 = T \bigcup \sdf{\exists x F \then F(\quox{c_F}) \mid F \in \for(L)}
+    $$
+    Vamos a ver que $T$ coherente $\implies T_1$ coherente. Por el teorema de finitud basta demostrar $\forall T_1^0$ finito $\subseteq T$, $T_1^0$ es coherente.\\
+    Sea $T_1^0 \subseteq T_1$ finito, es claro que $T_1^0 \subseteq T \cup \sdf{\exists x F_i \then F_i(\quox{c_i}) \mid F_i \in \for(L)\ \ i\in 1,\ldots,n}$.\\
+    Sabemos que $T$ es coherente, y además $c_1 \in D \implies c_1$ no aparece ni en $T$ ni en $F$ y podemos aplicar el lema. $T$ coherente $\implies T \cup \sdf{\exists x F_1 \then F_1(\quox{c_1})}$ coherente.\\
+    Como  $c_2 \in D \implies c_2$ no aparece ni en $T \cup \sdf{\exists x F_1 \then F_1(\quox{c_1})}$ ni en $F_1(x)$ podemos volver a aplicar el lema.\\
+    Haciendo esto $m$ veces obtenemos que $T \cup \sdf{\exists x F_i \then F_i(\quox{c_i}) \mid F_i \in \for(L)\ \ i\in 1,\ldots,n}$ es coherente $\implies T_1^0$ es coherente $\implies T_1$ es coherente.\\\\
+
+    Al introducir nuevas constantes al lenguaje obtenemos más fórmulas, pero solamente tenemos testigos para $F \in \for_1(L)$\\
+    Sean $L_0 = L$ y $T_0 = T$. $T_0$ una $L_0$-teoría coherente. Definimos $\sdf{L_n}_{n\in\N}$ lenguajes con $L_n \subseteq L_{n+1}$ y $\sdf{T_n}_{n\in\N}$ teorías con $T_n$ $L_n$-teorías coherentes, $T_n \subseteq T_{n+1}$ de la forma:
+    \begin{gather*}
+        L_{n+1} = L_n \bigcup \sdf{c_F \mid F \in \for_1(L_n)} \text{ tal que } c_F \neq c_G \text{ si } F \neq G\\
+        T_{n+1} = T_n \bigcup \sdf{\exists x F \then F(\quox{c_F}) \mid F \in \for_1(L_n)}
+    \end{gather*}
+    Con el mismo argumento (aplicando el lema) que demuestra que $T_0$ coherente $\implies T_1$ coherente obtenemos $T_n$ coherente $\implies T_{n+1}$ coherente. Así obtenemos una cadena de $L'$-teorías coherentes, donde $L' = \bigcup_{n\in\N} L_n$.\\
+    Sea $T' = \bigcup_{n\in\N} T_n$, por el corolario al teorema de finitud, $T'$ es coherente.\\\\
+
+    Falta ver que $T'$ admite testigos de Henkin. Como $L' \supset L$ y $T' \supset T$ habremos acabado. Sea $F \in \for_1(L')$, como $L' = \bigcup_{n\in\N} L_n$, $\exists m\in\N$ $F \in \for_1(L_m)$ (por construcción) tal que $\exists x F \then F(\quox{c_F} \in T_{m+1})$. Entonces $T' \supset T_{m+1}:\ T'\vdash \exists x F \then F(\quox{c_F})$ y $c_F$ es una constante de $L'$.
+\end{proof}

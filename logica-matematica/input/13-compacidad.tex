@@ -1,0 +1,68 @@
+% !TeX root = ../logica-matematica.tex
+
+\chapter{Teorema de compacidad.}
+
+En este capítulo vamos a tratar con el teorema de compacidad y resultados relacionados. Informalmente es la versión semántica del teorema de finitud.
+
+\section{Teorema de compacidad}
+
+\begin{thm}[Teorema de compacidad. Primera forma.]\label{thm:compacidad1}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría y $F \in \mathrm{Enun}(L)$, si $T \vDash F$ entonces existe una teoría $T_0$ finita tal que $T_0 \vDash F$ y $T_0 \subseteq T$.
+\end{thm}
+
+\begin{proof}
+    $$
+        T \vDash F \implies T \vdash F \implies \exists T_\text{$0$ finito} \subseteq T \text{ tal que } T_0 \vdash F \implies \exists T_\text{$0$ finito} \subseteq T \text{ tal que } T_0 \vDash F
+    $$
+\end{proof}
+
+\begin{thm}[Teorema de compacidad. Segunda forma.]\label{thm:compacidad2}
+    Sea $L$ un lenguaje, $T$ una $L$-teoría y $F \in \mathrm{Enun}(L)$. Para todo $T_0 \subseteq T$ finita, si $T_0$ tiene un modelo, entonces $T$ tiene un modelo.
+\end{thm}
+
+\begin{proof}
+    Ya hemos demostrado la primera forma, vamos a ver que son equivalentes:
+    \begin{itemize}
+        \item[$\implies$] Vamos a demostrar el contrarrecíproco de la segunda forma haciendo uso de la primera.\\
+        Si $T$ no tiene modelos, entonces $T \vDash F \land \neg F$. Por la primera forma, $\exists T_0 \subseteq T$ tal que $T_0 \vDash F \land \neg F \implies T_0$ no tiene modelos.
+        \item[$\implied$] Si $\forall T_\text{$0$ finito} \subseteq T$, $T_0 \cancel\vDash F \implies \forall T_0 \subseteq T_0 \cup \sdf{\neg F}$ tiene modelos. Por la segunda forma, para la $L$-teoría $T \cup \sdf{\neg F}$ llegamos a que tiene un modelo, por tanto $T \cancel\vDash F$.
+    \end{itemize}
+\end{proof}
+
+\begin{obs}
+    El teorema de compacidad implica la existencia de cotas uniformes, es decir:
+    Sea $L$ un lenguaje, $T$ una $L$-teoría y $F(x) \in \for(L)$. Si para todo $\mtc A \vDash T$, $F(\mtc A) ) \sdf{ a \in A \mid \mtc A \vDash F(a)}$ es finito, entonces existe $n \in \N$ tal que $\vabs{F(\mtc A) < N}$ para toda $\mtc A \vDash F$.
+\end{obs}
+
+\section{Axiomatización}
+
+\begin{dfn}[Axiomatización]
+    Sea $L$ un lenguaje y $T$ una $L$-teoría. Una axiomatización de $T$ es una $L$-teoría $T_1$ equivalente a $T$.\\
+    Análogamente, una axiomatización finita de $T$ es una $L$-teoría $T_1$ finita equivalente a $T$.
+\end{dfn}
+
+\begin{eg}[Ejemplo de axiomatización]
+    Sea $L = \sdf{0, 1}$, $T = \sdf{F \in\mathrm{Enun}(L) \mid G \vDash F \text{ para todo grupo $G$}}$.\\
+    $T_1 = \sdf{\forall x\forall y \forall z\ (xy)z = x(yz) \land \forall x\ x\cdot 1 = x \land \forall x \exists y\ xy = yx = 1}$. Entonces $T_1$ axiomatiza a $T$ y son equivalentes.
+\end{eg}
+
+\begin{dfn}[Propiedad axiomatizable]
+    Sea $\P$  una propiedad sobre $L$-estructuras. Decimos que:
+    \begin{itemize}
+        \item $\P$ es axiomatizable.
+        \item La clase de $L$-estructuras que tienen la propiedad $\P$ es una clase elemental.
+        \item $\P$ es elemental.
+        \item $\P$ es de primer orden.
+    \end{itemize}
+    si existe una $L$-teoría $T$ tal que:
+    $$
+        \forall \mtc A,\ \mtc A \text{ tiene la propiedad } \P \iff \mtc A \vDash T
+    $$
+\end{dfn}
+\begin{obs}[Notación]
+    Se dice que $T$ axiomatiza $\P$.
+\end{obs}
+
+\begin{dfn}[Propiedad finitamente axiomatizable]
+    $\P$ es finitamente axiomatizable si existe un $F$ enunciado de $L$ tal que $\sdf{F}$ axiomatiza $\P$.
+\end{dfn}

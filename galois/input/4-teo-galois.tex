@@ -2,7 +2,7 @@
 
 \chapter{Teoría de Galois}
 
-\section{Teorema Fundamental} % TODO: Comprobar si es la primera seccion
+\section{Introducción}
 
 A partir de este capítulo vamos a trabajar siempre con extensiones $E/K$ que sean de Galois, es decir, $E/K$ es separable y normal. En el teorema \ref{thm:3.11}, caracterizamos al grupo de Galois de una extensión, vamos a ver que ambas hipótesis (separabilidad y normalidad) son necesarias.
 
@@ -143,7 +143,7 @@ Por tanto $E/E^G$ es una extensión.
         $$
         Supongamos que $\exists a_j \neq 0$, entonces:
         $$
-            \tau_j(y) = \tau_n(y) \implies \tau_j = \tau_n \text{ y es imposible por hipótesis.}
+            \tau_j(y) = \tau_n(y) \implies \tau_j = \tau_n \text{ y es imposible por hipótesis}
         $$
     \end{itemize}
 \end{proof}
@@ -230,7 +230,7 @@ Por tanto $E/E^G$ es una extensión.
     \end{align*}
 \end{proof}
 
-
+\section{Teorema fundamental de la teoría de Galois}
 \begin{thm}[Fundamental de la Teoría de Galois]\label{thm:fund-gal}\label{thm:4.6}
     Sea $E/K$ una extensión de Galois con $G = \gal(E/K)$, y sean:
     $$
@@ -527,17 +527,17 @@ $$
                 \node (C) [right= of B] {$\gen{\tau_4} = Q$};
                 \node (D) [above of =B] {$G$};
                 \node (E) [below of =B] {$1$};
-                \draw[=] (D) to node {}(A);
+                \draw[-, double] (D) to node {}(A);
                 \draw[-] (D) to node {$N_G(Q)$}(C);
                 \draw[-] (A) to node {$3$}(E);
                 \draw[-] (C) to node {$2$}(E);
             \end{tikzpicture}\\
         \end{center}
-        Sabemos que $P \in Syl_3(G)$ y $Q \in Syl_2(G)$. Como $Q \centernot \normsub G$, consideremos el normalizador $N_G(Q) < G$, entonces $\vabs{N_G(Q):Q}\vabs{G:Q} = 3 \implies N_G(Q) = Q$. Por tanto $\vabs{Syl_2(G)} = 3$:
+        Sabemos que $P \in Syl_3(G)$ y $Q \in Syl_2(G)$. Como $Q \cancel \normsub G$, consideremos el normalizador $N_G(Q) < G$, entonces $\vabs{N_G(Q):Q}\vabs{G:Q} = 3 \implies N_G(Q) = Q$. Por tanto $\vabs{Syl_2(G)} = 3$:
         $$
             Syl_2(G) = \sdf{Q,\ Q^{\tau_2},\ Q^{\tau_2^{-1}}} \text{ y } Q \neq Q^{\tau_2} \neq Q^{\tau_2^{-1}} \neq Q
         $$
-        Y entonces $1, G, P=\gen{\tau_2}, Q, Q^{\tau_2}, Q^{\tau_3}$ son todos los subgrupos de $G$ donde $Q = \gen{\tau_4}$. Además, $E/\Q$ tiene una suextensión normal que es de grado $2$ sobre $\Q$. Sea $L$ esta extensión afirmamos que $L/\Q$ es normal y $\vabs{L:\Q} = 2$, $L=\Q(\omega)$ y por el TFTG: $L = E^{P} = E^{\gen{\tau_2}} = E^{\tau_2}$.
+        Y entonces $1, G, P=\gen{\tau_2}, Q, Q^{\tau_2}, Q^{\tau_3}$ son todos los subgrupos de $G$ donde $Q = \gen{\tau_4}$. Además, $E/\Q$ tiene una subextensión normal que es de grado $2$ sobre $\Q$. Sea $L$ esta extensión afirmamos que $L/\Q$ es normal y $\vabs{L:\Q} = 2$, $L=\Q(\omega)$ y por el TFTG: $L = E^{P} = E^{\gen{\tau_2}} = E^{\tau_2}$.
 
         Para calcular las subextensiones de grado $3$ sobre $\Q$, vamos a calcular $M_1 = E^{Q}$, $M_2 = E^{Q^{\tau_2}}$, $M_3 = E^{Q^{\tau_2^{-1}}}$. Además por el lema \ref{lm:4.5}:
         $$
