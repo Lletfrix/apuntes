@@ -21,6 +21,7 @@
 \usepackage{wrapfig}
 \usepackage{multicol}
 \usepackage{subcaption}
+\usepackage{etoolbox}
 \usepackage{xfrac}
 \usepackage{glossaries}
 \usepackage{standalone}
@@ -228,6 +229,9 @@ numbered=no
 
 %%%% MATRICES
 \newcommand\mx[1]{\begin{bmatrix*}#1\end{bmatrix*}}
+
+\newcommand{\suc}[3][1]{{#2}_{#1}, \ldots, {#2}_{#3}}
+\newcommand{\sucn}[1]{\suc{#1}{n}}
 
 \renewcommand\qedsymbol{$\diamondsuit$}
 
