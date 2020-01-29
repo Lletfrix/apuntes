@@ -226,6 +226,21 @@ numbered=no
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\gr}{\text{gr }}
 \newcommand\ninf[1]{\left|\left|#1\right|\right|_\infty}
+\newcommand\cnj[1]{\overline{#1}}
+% \renewcommand\Re{\mathrm{Re}}
+% \renewcommand\Im{\mathrm{Im}}
+\newcommand\fn[5]{
+    \begin{center}
+        \begin{tikzpicture}[node distance=0.5cm and 2cm, auto]
+            \node (A) [above of =B] {#2};
+            \node (B) {#4};
+            \node (E) [right= of B] {#5};
+            \node (D) [above of =E] {#3};
+            \draw[->] (A) to node {#1}(D);
+            \draw[|->] (B) to node {}(E);
+        \end{tikzpicture}\\
+    \end{center}
+}
 
 %%%% MATRICES
 \newcommand\mx[1]{\begin{bmatrix*}#1\end{bmatrix*}}
@@ -235,7 +250,7 @@ numbered=no
 
 \renewcommand\qedsymbol{$\diamondsuit$}
 
-\title{Apuntes de Teor\'ia de Galois}
+\title{Apuntes de Variable Compleja}
 \author{Rafael S\'{a}nchez S\'{a}nchez}
 \begin{document}
 \begin{titlepage}
@@ -244,7 +259,6 @@ numbered=no
 
 
 Revisión del \today $ $ a las \currenttime.
-Agradecimientos a Alejandro Santorum.
 
 \begin{center}
 
@@ -252,13 +266,13 @@ Agradecimientos a Alejandro Santorum.
 
 \tableofcontents
 \part{Primer parcial}
-\input{input/1-anillos}
-\input{input/2-extensiones}
-\part{Segundo parcial}
-\input{input/3-ext-galois}
-\part{Tercer parcial}
-\input{input/4-teo-galois}
-\input{input/5-aplicaciones}
+\input{input/1-numeros-complejos}
+% \input{input/2-extensiones}
+% \part{Segundo parcial}
+% \input{input/3-ext-galois}
+% \part{Tercer parcial}
+% \input{input/4-teo-galois}
+% \input{input/5-aplicaciones}
 \part{Apéndices}
 
 %\renewcommand{\chaptername}{Apéndice}
