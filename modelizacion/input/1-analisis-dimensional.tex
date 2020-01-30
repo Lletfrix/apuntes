@@ -1,0 +1,199 @@
+% !TeX root = ../modelizacion.tex
+
+\chapter{An\'alisis dimensional}
+
+El análisis dimensional es una herramienta que nos permite simplificar el estudio de cualquier fenómeno que involucre varias magnitudes físicas para tratarlas como variables independientes. Esto nos ayudará a simplificar los modelos matemáticos de lo que queramos estudiar.\\
+
+Vamos a comenzar con un ejemplo introductorio a la asignatura, con el que se busca de alguna forma introducir conceptos que si bien no son del todo matemáticos o formales serán de utilidad en el desarrollo del curso.
+
+\begin{eg}[Segunda Ley de Newton - Ley física]\label{eg:1}
+    La segunda ley de Newton se puede escribir como la ecuación diferencial:
+    $$
+        m \ddot x(t) = F(x, t),\ t\in[0, T]
+    $$
+    donde $m$ representa la masa de un objeto, $x(t)$ la posición del mismo respecto del tiempo, $F(x, t)$ la fuerza que se ejerce sobre él y $T$ es el tiempo final.\\
+    Para completar el problema daremos un par de condiciones iniciales:
+    \begin{align*}
+        x(0) = x_0 \text{ la posición inicial }\\
+        \dot x(0) = v_0 \text{ la velocidad inicial}
+    \end{align*}
+
+    En el análisis dimensional analizaremos que \textbf{magnitudes} entran en juego en la \textbf{ley}. En este caso tenemos:
+    \begin{itemize}
+        \item $m$ - masa.
+        \item $x$ - posición.
+        \item $F$ - fuerza.
+        \item $T$ - tiempo final.
+        \item $x_0$ - posición inicial.
+        \item $v_0$ - velocidad inicial.
+    \end{itemize}
+
+    Por tanto nuestra función final será de la forma:
+    $$
+        f(m, x, F, T, x_0, v_0) = 0
+    $$
+    que es otra forma de expresar la \textbf{ley}. Además, querremos ver de qué \textbf{magnitudes} dependen estos $6$ parámetros. Esto lo expresaremos con la notación:
+    $$
+        \mx{p} = M
+    $$
+    donde $p$ representa un parámetro y $M$ una magnitud (también puede ser un producto de ellas). En nuestro caso tenemos:
+    \begin{itemize}
+        \item $\mx{m} = M$. Masa, una magnitud elemental.
+        \item $\mx{x} = L$. Longitud, una magnitud elemental.
+        \item $\mx{T} = \tau$. Tiempo, una magnitud elemental.
+        \item $\mx{x_0} = L$. Longitud.
+        \item $\mx{v_0} = L \cdot \tau^{-1}$. Velocidad, longitud $\times$ tiempo$^{-1}$.
+        \item $\mx{F} = \mx{m \cdot \ddot x} = M \cdot L \cdot \tau^{-2}$. Fuerza, masa $\times$ longitud $\times$ tiempo$^{-2}$.
+    \end{itemize}
+\end{eg}
+
+\section{Magnitudes. Teorema $\Pi$.}
+
+Vamos a suponer la existencia de $\sucn{L}$ magnitudes elementales con $n < \infty \in \N$, es decir, cada $L_i$ es independiente de cada magnitud de $\mtc L \setminus L_i$. Diremos que una colección de magnitudes conforman un sistema.
+
+\begin{dfn}[Dimensión de una magnitud]
+    Sea $a \in \R$ una medida de una magnitud $A$ en un sistema $\sucn{L}$. Si cambiamos a un sistema $\sucn{L'}$ con $L'_i = \lambda_i L_i$ y sea $a'$ la medida de $A$ en el nuevo sistema, entonces si se cumple que:
+    $$
+        a' = a \cdot \lambda_1^{a_1} \cdot \cdots \cdot \lambda_n^{a_n}
+    $$
+    para una serie de escalares $\sucn{a}$, entonces diremos que la magnitud $A$ tiene \textbf{dimensión} $L_{1}^{a_1} \cdots L_{n}^{a_n}$ y lo expresamos por:
+    $$
+        \mx{A} = L_{1}^{a_1} \cdots L_{n}^{a_n}
+    $$
+
+    Cuando el sistema $\sucn{L}$ esté fijado podremos identificar la dimensión de la magnitud $A$ con el vector de escalares $(\sucn{a})$.
+\end{dfn}
+
+Recordando el \hyperref[eg:1]{ejemplo de la segunda ley de Newton}, donde teníamos tres magnitudes elementales $(L, \tau, M)$, si consideramos que nuestro sistema $\sucn{L}$ es dicha $3$-tupla, entonces podemos expresar las magnitudes no elementales como $3$-tuplas (o vectores de $\R^3$):
+\begin{itemize}
+    \item $\mx{v_0} = L \cdot \tau^{-1} = (1, -1, 0)$
+    \item $\mx{F} = \mx{m \ddot x} = M \cdot L \cdot \tau^{-1} =  (1, -2, 1)$
+\end{itemize}
+
+\begin{eg}[Dimensión de una magnitud]
+    Sea $L_1 = \sdf{m} $ y $L_2=\sdf{s}$ un sistema de magnitudes (longitud en metros y tiempo en segundos  respectivamente), consideramos la magnitud de la velocidad $V$ que tiene dimensión:
+    $$
+        \mx{V} = L_1 \cdot L_2^{-1} = (1, -1)
+    $$
+    entonces, si tenemos una medida $v = 30 \sfrac{m}{s}$ y queremos ver su medida $L'$ en el sistema:
+    \begin{align*}
+        L_1' &= 10^{-3} L_1 \text{ con $L_1'$ longitud en km }\\
+        L_2' &= \frac{1}{3600} L_2 \text{ con $L_2'$ tiempo en h }
+    \end{align*}
+    entonces:
+    $$
+        v' = v \cdot \lambda_1 \cdot \lambda_2^{-1} = \frac{30 \cdot 3.6 \cdot \cancel{10^3}}{\cancel{10^3}} = 108 \sfrac{km}{h}
+    $$
+\end{eg}
+
+\begin{pro}[Expresión de una magnitud dependiente]
+    Sean $A, B$ dos magnitudes tales que:
+    \begin{align*}
+        \mx{A} &= \Multn{L}{a}\\
+        \mx{B} &= \Multn{L}{b}
+    \end{align*}
+    Sea $C$ otra magnitud dependiente de $A$ y $B$, tal que si $a, b$ son medidas de $A, B$ y $C$ y $\exists p, q, d$ tales que $c = d\cdot a^p + b^q$ con $p, q, d$ independientes de las unidades $\sucn{L}$, entonces:
+    $$
+        \mx{C} = L_1^{a_1p + b_1q} \cdots L_n^{a_n p + b_n q}
+    $$
+\end{pro}
+
+\begin{proof}
+    Sean $L'_i = \lambda_i L_i$ un nuevo sistema, entonces:
+    $$
+        a' = a \cdot \Multn{\lambda}{a},\ \ b' = b \cdot \Multn{\lambda}{b}
+    $$
+    y por tanto $c'$ es:
+    \begin{align*}
+        c' &= da'^p + b'^q = d(a\Multn{\lambda}{a})^p + (b\Multn{\lambda}{b})\\
+          &= (da^p + b^q) \cdot (\lambda_1^{a_1p+b_1q} \cdots \lambda_n^{a_np+b_nq})\\
+          &=  c \cdot (\lambda_1^{a_1p+b_1q} \cdots \lambda_n^{a_np+b_nq}) \implies\\
+          \mx{C} &= L_1^{a_1p + b_1q} \cdots L_n^{a_n p + b_n q}
+    \end{align*}
+\end{proof}
+
+\begin{dfn}[Matriz de dimensiones]
+    Dados $\sucm{q}$ magnitudes, tales que su dimensión es:
+    $$
+        \mx{q_i} = \Multn{L}{{a_i}}
+    $$
+    llamamos \textbf{matriz de dimensiones} a la matriz ($n \times m$):
+    $$
+        \dmx{
+            a_{11} & a_{21} & \cdots & a_{m1}\\
+            \vdots & \vdots & \ddots & \vdots\\
+            a_{1n} & a_{2n} & \cdots & a_{mn}
+            }
+    $$
+    que tiene $n$ filas (una por cada \textit{magnitud elemental} $L_i$) y $m$ columnas (una por cada magnitud del problema $q_i$)
+\end{dfn}
+
+\begin{obs}
+    Los índices de los elementos de la matriz quedan permutados respecto de la notación habitual.
+\end{obs}
+
+Retomando el \hyperref[eg:1]{ejemplo de la segunda ley de Newton} tendríamos la \textit{matriz de dimensiones}:
+$$
+    \Dmx{~ & x_0 & v_0 & T & F & M & x \cr
+        L & 1 & 1 & 0 & 1 & 0 & 1\cr
+        \tau & 0 & -1 & 1 & -2 & 0 & 0\cr
+        M & 0 & 0 & 0 & 1 & 1 & 0
+    }
+$$
+
+\begin{dfn}[Magnitud adimensional]
+    Una magnitud $\Pi$ se dice adimensional si $\mx{\Pi} = 1$.
+\end{dfn}
+
+Hallar magnitudes adimensionales en los distintos problemas nos ayuda a simplificar el estudio de los mismos. Retomemos el \hyperref[eg:1]{ejemplo de la segunda ley de Newton}, vamos a intentar reducir la dimensión del problema.
+
+\begin{eg}[Reduciendo la dimensión del ejemplo \ref{eg:1}]
+    Recordemos que teníamos $6$ parámetros ($x, x_0, v_0, T, F, m$). Una forma de reducir los parámetros es intentar \textit{enmascarar} los valores iniciales en nuevas variables.\\ Recordemos que tanto $x$ como $x_0$ tenían la misma dimensión. Gracias a ello podemos definir un nuevo parámetro $y$ sin dimensión:
+    $$
+        y = \frac{x}{x_0}
+    $$
+    Además, como $x(0) = x_0$ tendremos que $y(0) = 1$ y como $\dot x(0) = v_0$ entonces $\dot y(0) = \frac{v_0}{x_0}$.\\
+    Podemos también hacer lo mismo con el tiempo, recordemos que en la fórmula original la variable $t$ pertencía a $[0, T]$. Podemos definir entonces:
+    $$
+        \frac{t}{T} = \tau
+    $$
+    y por tanto $\tau \in [0, 1]$, con lo que hemos \textit{eliminado} $T$. Sin embargo, cambiar $t$ tiene consecuencias debido que es la variable respecto de la que se diferencia $x$ (y por tanto $y$), tenemos que ver como afectan estos cambios a nuestras variables.\\
+    Usaremos la notación $\dot x$ para referirnos a $\pd{x}{t}$ y $x'$ para referirnos a $\pd{x}{\tau}$.\\
+    Entonces obtenemos:
+    $$
+        y' = \pd{y}{\tau} = \frac{1}{x_0} \pd{x}{\tau} = \frac{T}{x_0} \pd{x}{t} = \frac{T}{x_0} \dot x \implies y'(0) = \frac{T}{x_0} \cdot v_0 = \tilde q
+    $$
+    y de nuevo $\mx{\tilde q} = 1$.\\\\
+
+    Recordemos que nuestro problema comenzaba con $m\ddot x = F$, vamos a usar esto para encontrar otro parámetro adimensional.
+    \begin{align*}
+        &\pd{x}{t} = \frac{x_0}{T} \pd{y}{\tau}\\
+        &\pdn{x}{t}{2} = \frac{x_0}{T} \Pd{t} \left(\pd{y}{\tau}\right) = \frac{x_0}{T} \pd{\tau}{t} \pdn{y}{\tau}{2} = \frac{x_0}{T} \cdot y''\\
+        & \frac{mx_0}{T^2} \cdot y'' = F \implies y'' = \frac{T^2}{mx_0}\cdot F = f
+    \end{align*}
+    y podemos comprobar que $\mx{f} = 1$. Recapitulado, hemos conseguido encontrar nuevos parámetros adimensionales $y$, $\tilde q = y'$, $f = y''$ haciendo algunos cambios en el problema. Con esto, podemos reescribir el problema de valores iniciales con los nuevos parámetros adimensionales:
+    \begin{align*}
+        &y'' = f = \frac{T^2}{mx_0}\cdot F\\
+        &y(0) = 1\\
+        &y'(0) = \tilde q = \frac{T v_0}{x_0}
+    \end{align*}
+\end{eg}
+
+\begin{dfn}[Ley invariante]
+    Sea una ley $f(\sucm{q}) = 0$, se dice que es \textbf{invariante} frente al cambio de unidades $L'_1 = \lambda_1 L_1, \ldots L'_n = \lambda_n L_n$ si verifica que $f(\sucm{q'}) = 0$ para $\sucm{q'}$ las medidas de $\sucm{q}$ en las nuevas unidades $\sucn{L'}$. Informalmente:\\
+    \begin{center}
+        Una ley es invariante cuando sigue siendo cierta tras el cambio de variables del problema
+    \end{center}
+\end{dfn}
+
+\begin{thm}[Teorema $\Pi$]
+    Sea $f(\sucm{q}) = 0$ una ley invariante con $\sucm{q}$ magnitudes con matriz de dimensiones:
+    $$
+        D = \dmx{
+            a_{11} & \cdots & a_{m1}\\
+            \vdots & \ddots & \vdots\\
+            a_{1n} & \cdots & a_{mn}
+        }
+    $$
+    tal que $n < m$ y el rango de $D$ es $r \leq n$. Entonces existen $m - r$ cantidades $\suc{\Pi}{m-r}$ que van a ser magnitudes adimensionales tales que la ley invariante es equivalente a una relación $F(\suc{\Pi}{m-r}) = 0$.
+\end{thm}
