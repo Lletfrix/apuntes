@@ -162,7 +162,8 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
     Además, toman especial importancia los puntos de la circunferencia unidad, (los que satisfacen la ecuación $x^2 + y^2 = 1$). Usando un poco de trigonometría podemos obtener fácilmente que los puntos del plano complejo que se corresponden con los de la circunferencia unidad son $(\cos \theta, \sin \theta)$.
 
     \begin{obs}
-        Los números complejos no tienen una expresión única en esta forma ya que $(\cos \theta, \sin \theta) = (\cos (\theta + 2k\pi), \sin  (\theta + 2k\pi) )$ con $k \in \Z$.
+        Los números complejos no tienen una expresión única en esta forma ya que $(\cos \theta, \sin \theta) = (\cos (\theta + 2k\pi), \sin  (\theta + 2k\pi) )$ con $k \in \Z$.\\
+        El $(0, 0)$ no tendría sentido expresarlo de forma polar, lo denominaremos simplemente $0$.
     \end{obs}
 
     \begin{center}
@@ -170,6 +171,7 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
             \path (63: 1.5) coordinate (P);
             \path (120:1) coordinate (Q);
             \path (0: 0.3) coordinate (R);
+            \path (0: 0.5) coordinate (R1);
             \draw (0, 0) ellipse (1cm and 1cm);
             \draw (-2, 0) -- (2, 0);
             \draw (0, -1.2) -- (0, 1.2);
@@ -177,16 +179,90 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
             \filldraw[black] (Q) circle (1pt) node[anchor=east] {$(x, y)$};
             \draw (0, 0) -- (P);
             \draw[->] (R) arc (0:63:0.3) node[anchor=west] {$\theta$};
+            \draw[->] (R1) arc (360:63:0.5) node [anchor=south] {$\sigma$};
         \end{tikzpicture}
     \end{center}
 
-    De esta forma, cualquier número complejo $z$ podrá expresarse como $z = \vabs{z}(\cos \theta, \sin \theta)$. Usualmente denominaremos a $\theta$ como el argumento de $z$, es decir, $\theta=\arg(z)$. Además, es común encontrar el módulo expresado con la letra $\rho$.\\
+    De esta forma, cualquier número complejo $z$ podrá expresarse como $z = \vabs{z}(\cos \theta, \sin \theta)$. Usualmente denominaremos a $\theta$ como el argumento de $z$, es decir, $\theta=\arg(z)$. Además, es común encontrar el módulo expresado con la letra $\rho$. Con esto podremos expresar $z$ como:\\
+    $$
+        z = \rho(\cos \theta, \sin \theta) = \rho(\cos \theta + i \sin \theta)
+    $$
+
+    Cuando definamos la exponencial compleja veremos que podemos expresar $z$ de la forma $z = \rho e^{i\theta}$.
+
+    \begin{obs} %%TODO: Referenciar la imagen
+        Como se aprecia en la figura superior, el argumento de $z$ no es único, tanto $\sigma$ como $\theta$ son el argumento de z (debido a que $\sigma = \theta - 2\pi$).\\
+
+        Debido a que $\arg(z)$ es una función multievaluada (si $\arg(z) = \theta \implies \arg(z) = \sdf{\theta + 2n \pi \mid n \in \Z}$), en ocasiones querremos usar una función que escoja un solo argumento de ellos. La denominamos \textbf{argumento principal} ($\Arg{z}$), y la definimos restringiendo la imagen de $\arg{z}$ al intervalo $\left[0, 2\pi\right)$ o $\left[-\pi, pi\right)$.\\
+
+        Sin embargo, aun habiendo determinado un argumento principal, en ninguno de los dos casos la función $\Arg()$ es continua en todo punto. Se puede ver que no existe una determinación continua del argumento.
+    \end{obs}
 
     Esta forma de representar los números complejos nos simplificará varias tareas, como multiplicarlos o hallar raíces.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 30/01
 
+    \begin{obs}
+        Sea $\rho(\cos \theta, \sin \theta) = z = a + bi \implies \frac{b}{a} = \tan{\theta}$. Esto no significa que $\theta = \tan^{-1}\left(\frac{b}{a}\right)$ ya que la imagen de $\tan^{-1} \subseteq \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$.
+    \end{obs}
+
+    En general, encontrar el argumento de un número complejo no es tarea fácil, sin embargo en ciertos casos puede comprobarse a mano.
+
+    \begin{eg}[Hallar la expresión polar de un número complejo. Hallar su inverso]
+        Sea $z = 1-i \in \C$, vamos a hallar su expresión polar.
+        $$
+            \vabs{z} = \sqrt{1^2 + (-1)^2} = \sqrt 2
+        $$
+        Por tanto, $z = \sqrt{2} \cdot \left( \frac{1}{\sqrt 2} - \frac{i}{\sqrt 2} \right) = \sqrt 2 (\cos \theta + i \sin \theta)$. Resolviendo el sistema:
+        \begin{align*}
+            \cos \theta &= \frac{1}{\sqrt 2}\\
+            \sin \theta &= - \frac{1}{\sqrt 2}
+        \end{align*}
+        Y al resolverlo hallamos $\theta = -\frac{\pi}{4}$ y entonces:
+        $$
+            z = \sqrt{2} (\cos \left(-\frac{\pi}{4}\right) + i \sin \left(-\frac{\pi}{4}\right))
+        $$
+
+        Si ahora queremos hallar su inverso, vamos a usar la identidad $z^{-1} = \frac{\cnj z}{\vabs{z}^2}$. Por tanto:
+        $$
+            z^{-1} = \frac{1}{2} (1 + i)
+        $$
+    \end{eg}
+
 \subsection{Ra\'ices y potencias}
+
+    Ya vimos al comienzo del capítulo que la forma de hallar la raíz cuadrada de un número complejo en la primera expresión que dimos del mismo era poco agradable. Podemos ver que la forma polar nos simplifica el cálculo.\\
+    Para ello vamos a comenzar observando como se comporta la expresión polar frente a la multiplicación de complejos.\\
+
+    Consideremos $z = \rho(\cos \theta, \sin \theta)$ y $w = \rho'(\cos \theta', \sin \theta')$. Entonces:
+    $$
+        z \cdot w = \rho \cdot \rho' (\cos \theta \cos \theta' - \sin \theta \sin \theta', \cos\theta \sin \theta' + \sin \theta \cos \theta') = \rho \cdot \rho' (\cos (\theta + \theta') + i\sin(\theta+\theta'))
+    $$
+    Es decir, cuando multiplicamos dos complejos en forma polar, el resultado es otro número complejo cuyo módulo es el producto de los módulos y el argumento es la suma de los argumentos. Esta propiedad simplifica el cálculo de raíces y potencias.
+
+    \begin{eg}[Cálculo de una potencia de un número complejo]
+        Sea $z = (\cos \theta, \sin \theta)$, entonces, usando lo que acabamos de ver:
+        $$
+            z^n = (\cos \theta, \sin \theta)^n = \cos(n\theta) + i \sin(n\theta)
+        $$
+    \end{eg}
+
+    \begin{eg}[Cálculo de las raíces de un número complejo]
+        Sean $z, w \neq 0 \in \C$, queremos resolver la ecuación $z^n = w$, es decir, encontrar las raíces n-ésimas de $w$.\\
+        Podemos suponer que $w = \rho(\cos \theta + i \sin \theta)$ y $z = r (\cos t + i \sin t)$. Entonces queremos que:
+        $$
+            z^n = w \implies r^n (\cos(nt) + i \sin(nt)) =  \rho(\cos \theta + i \sin \theta)
+        $$
+        y entonces:
+        \begin{align*}
+            r &= \sqrt[n]{\rho}\\
+            \theta + 2\pi k &= nt
+        \end{align*}
+        Simplificando la última identidad, obtenemos:
+        $$
+            t = \frac{\theta}{n} + 2\pi \frac{k}{n},\ k=0, \ldots, n-1
+        $$
+        y por tanto resultan $n$ raíces. (Para $k=n$ el complejo es el mismo que para $k = 0$).
+    \end{eg}
 % \section{Topolg\'ia del plano complejo}
 % \section{Esfera de Riemann}
 % \section{Funciones complejas}

@@ -186,7 +186,7 @@ Hallar magnitudes adimensionales en los distintos problemas nos ayuda a simplifi
     \end{center}
 \end{dfn}
 
-\begin{thm}[Teorema $\Pi$]
+\begin{thm}[Teorema $\Pi$]\label{thm:pi}
     Sea $f(\sucm{q}) = 0$ una ley invariante con $\sucm{q}$ magnitudes con matriz de dimensiones:
     $$
         D = \dmx{
@@ -197,3 +197,139 @@ Hallar magnitudes adimensionales en los distintos problemas nos ayuda a simplifi
     $$
     tal que $n < m$ y el rango de $D$ es $r \leq n$. Entonces existen $m - r$ cantidades $\suc{\Pi}{m-r}$ que van a ser magnitudes adimensionales tales que la ley invariante es equivalente a una relación $F(\suc{\Pi}{m-r}) = 0$.
 \end{thm}
+
+\begin{proof}$ $
+    \begin{enumerate}[(1)]
+        \item Vamos a demostrar que existen $\suc{\Pi}{m-r}$ magnitudes adimensionales independientes entre sí. Partimos de la matriz de dimensiones:
+        $$
+            \GDmx{a}
+        $$
+        Y entonces tenemos:
+        $$\mx{\Pi} = 1 \text{ con } \Pi = \Multm{q}{\alpha}$$
+        $$
+            \mx{\Pi} = (\Multn{L}{{a_1}})^{\alpha_1} \cdot (\Multn{L}{{a_2}})^{\alpha_2} \cdots (\Multn{L}{{a_m}})^{\alpha_m} = L_1^{\alpha_1 a_{11} + \cdot + \alpha_m a_{m1}} \cdots L_n^{\alpha_1 a_{1n} + \cdots \alpha_m a_{m1}}
+        $$
+        De donde surge el sistema:
+        \begin{align*}
+            \alpha_1 a_{11} + \alpha_2 a_{21} + \cdots + \alpha_m a_{m1} &= 0\\
+            \alpha_1 a_{12} + \alpha_2 a_{22} + \cdots + \alpha_m a_{m2} &= 0\\
+            (\cdots)\\
+            \alpha_1 a_{1n} + \alpha_2 a_{2n} + \cdots + \alpha_m a_{mn} &= 0\\
+        \end{align*}
+        Y la demostración se reduce a resolver un sistema homogéneo de $n$ ecuaciones con $m$ incógnitas. Como la matriz $D$ es de rango $r$, entonces existen $m-r$ soluciones linealmente independientes.
+
+        \item La demostración de que la ley invariante es equivalente a otra que solo comprende a las magnitudes adimensionales para el caso general resulta muy difícil de escribir. Un caso particular para $m=4, n=2$ y $r=2$ se encuentra en el siguiente ejemplo.
+    \end{enumerate}
+\end{proof}
+
+\begin{eg}[Cálculo de las magnitudes adimensionales y la ley invariante asociada]
+    Vamos a hacer un caso particular del sistema de la demostración. Sea $m=4$, $n=2$ y $r=2$, es decir:
+    \begin{align*}
+        \alpha_1 a_{11} + \alpha_2 a_{21} + \alpha_3 a_{31} + \alpha_4 a_{41} &= 0\\
+        \alpha_1 a_{12} + \alpha_2 a_{22} + \alpha_3 a_{32} + \alpha_4 a_{42} &= 0\\
+    \end{align*}
+    Como el rango es $2$, sin perdida de generalidad puedo suponer que:
+    $$
+        \det \mx{a_{11} & a_{21}\\
+                 a_{12} & a_{22}} = 0
+    $$
+    Entonces por Rouche-Frobenius existen $C_{34}, C_{32}, C_{41}, C_{42}$ tales que:
+    \begin{align*}
+        \alpha_1 = - \alpha_3 C_{31} - \alpha_4 C_{41} &\text{ con } \alpha_3 = 1,\ \alpha_4=0\\
+        \alpha_2 = - \alpha_3 C_{32} - \alpha_4 C_{42} &\text{ con } \alpha_3 = 0,\ \alpha_4=1
+    \end{align*}
+
+    Y entonces puedo encontrar las magnitudes adimensionales:
+    \begin{align*}
+        \Pi_1 = q_1^{-C_{31}} q_2^{-C_{32}} q_3^{1} q_4^{0} \implies q_3 = \Pi_1 q_1^{C_{31}} q_2^{C_{32}}\\
+        \Pi_2 = q_1^{-C_{41}} q_2^{-C_{42}} q_3^{0} q_4^{1} \implies q_4 = \Pi_2 q_1^{C_{41}} q_2^{C_{42}}
+    \end{align*}
+
+    Recordemos que partíamos de una ley:
+    $$
+        f(q_1, q_2, q_3, q_4) = 0
+    $$
+    Y además, hemos encontrado que:
+    $$
+        f(q_1, q_2, q_3, q_4) = f(q_1, q_2, \Pi_1 q_1^{C_{31}} q_2^{C_{32}}, \Pi_2 q_1^{C_{41}} q_2^{C_{42}}) = G(q_1, q_2, \Pi_1, \Pi_2)
+    $$
+    Además, vamos a hacer un cambio del sistema de magnitudes de la forma:
+    $$
+        L_1' = \lambda_1 L_1,\ L_2' = \lambda_2 L_2
+    $$
+    para conseguir:
+    \begin{align*}
+        q_1' &= q_1 \lambda_1^{a_11} \lambda_2^{a_12}\\
+        q_2' &= q_2 \lambda_1^{a_21} \lambda_2^{a_22}\\
+        \Pi'_1 &= \Pi_1\\
+        \Pi'_2 &= \Pi_2
+    \end{align*}
+    Entonces tenemos una nueva ley invariante al cambio de escala:
+    $$
+        0 = G(q_1, q_2, \Pi_1, \Pi_2) = G(q_1', q_2', \Pi_1, \Pi_2)
+    $$
+    Finalmente, querremos hacer un cambio de variables tal que $q_1 = q_2 = 1$ en nuestra nueva ley.
+    \begin{align*}
+        L_nq_1 + a_{11} L_n \lambda_1 + a_{12} L_n + \lambda_2 &= 0\\
+        L_nq_2 + a_{21} L_n \lambda_1 + a_{22} L_n + \lambda_2 &= 0
+    \end{align*}
+    En el sistema anterior hacemos el cambio: $y_i = L_n \lambda_i$ y tomando logaritmos obtenemos:
+    \begin{align*}
+        a_{11} y_1 + a_{12} y_2 = - \log(q_1)\\
+        a_{21} y_1 + a_{22} y_2 = - \log(q_2)
+    \end{align*}
+    Y sabemos que dichos $q_1, q_2$ existen porque la matriz es invertible, y por tanto:
+    $$
+        0 = f(q_1, q_2, q_3, q_4) = G(1, 1, \Pi_1, \Pi_2) = F(\Pi_1, \Pi_2)
+    $$
+\end{eg}
+
+\begin{eg}[H1.4]$ $
+    \begin{enumerate}[a)]
+        \item Magnitudes. Magnitudes elementales. Magnitudes adimensionales.\\\\
+        Nuestras magnitudes $q_i$ serán ($h, t, g, R, v$). Podemos analizarlas en función de las magnitudes elementales:
+        \begin{itemize}
+            \item $\mx{h} = L = $ \{longitud\}.
+            \item $\mx{t} = T = $ \{tiempo\}.
+            \item $\mx{g} = L T^{-2}$.
+            \item $\mx{v} = L T^{-1}$.
+            \item $\mx{R} = L$.
+        \end{itemize}
+        Que tiene como matriz de dimensiones:
+        $$
+            \dmx{
+                1 & 0 &  1 &  1 & 1\\
+                0 & 1 & -2 & -1 & 0
+            }
+        $$
+        Donde podemos encontrar las siguientes $3$ magnitudes adimensionales (ya que el rango de la matriz es $2$):
+        $$
+            \frac{h}{R},\ \frac{tv}{R},\ \frac{v}{\sqrt{gR}}
+        $$
+        \item Relación de la altura máxima a alcanzar el proyectil con respecto a $v$, $g$, $R$.\\\\
+        Partimos de $0 = f(h, t, v, g, R)$ y por el \hyperref[thm:pi]{teorema \Pi} sabemos que tenemos una ley equivalente:
+        $$
+            0 = F\left(\frac{h}{R},\ \frac{tv}{R},\ \frac{v}{\sqrt{gR}}\right)
+        $$
+        Además, sabemos que la altura máxima $h_{max}$ se va a tomar en un tiempo determinado $t_{max}$. Por tanto tenemos la relación:
+        $$
+            0 = F\left(\frac{h_{max}}{R},\ \frac{t_{max}v}{R},\ \frac{v}{\sqrt{gR}}\right)
+        $$
+        Por el Teorema de la función implícita (TFI):
+        $$
+            \frac{h}{R} = G\left( \frac{tV}{R}, \frac{V}{\sqrt{gR}} \right)
+        $$
+        Como alcanzamos la altura máxima:
+        $$
+            h'(t_{max}) = 0 \implies \pd{G}{\Pi_2}\left( \frac{t_{max}V}{R}, \frac{V}{\sqrt{gR}} \right) = 0
+        $$
+        Aplicando de nuevo el TFI:
+        $$
+            \frac{t_{max} v}{R} = \varphi\left( \frac{V}{\sqrt{gR}} \right)
+        $$
+        Y llegamos a la relación que nos pedían:
+        $$
+            \frac{h_{max}}{R} = G\left( \varphi\left( \frac{V}{\sqrt{gR}} \right), \frac{V}{\sqrt{gR}} \right) = \varphi^{\star}\left( \frac{V}{\sqrt{gR}} \right)
+        $$
+    \end{enumerate}
+\end{eg}

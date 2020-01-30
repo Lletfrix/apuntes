@@ -252,6 +252,22 @@ numbered=no
 \newcommand\Dmx[1]{
     \bordermatrix{#1}}
 
+\newcommand\Gdmx[1]{
+    \dmx{
+        {#1}_{11} & \cdots & {#1}_{m1}\\
+        \vdots & \ddots & \vdots\\
+        {#1}_{1n} & \cdots & {#1}_{mn}
+    }
+}
+
+\newcommand\GDmx[1]{
+    \Dmx{~ & q_1 & \cdots & q_m \cr
+        L_1 & {#1}_{11} & \cdots & {#1}_{m1}\cr
+        \vdots & \vdots & \ddots & \vdots\cr
+        L_n & {#1}_{1n} & \cdots & {#1}_{mn}
+    }
+}
+
 \newcommand{\Suc}[4][1]{{#2}_{#1}^{#4_{#1}}, \ldots, {#2}_{#3}^{#4_{#3}}}
 \newcommand{\suc}[3][1]{{#2}_{#1}, \ldots, {#2}_{#3}}
 \newcommand{\sucn}[1]{\suc{#1}{n}}
