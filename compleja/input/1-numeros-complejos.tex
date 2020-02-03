@@ -244,6 +244,11 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         $$
             z^n = (\cos \theta, \sin \theta)^n = \cos(n\theta) + i \sin(n\theta)
         $$
+        Esta fórmula se conoce como fórmula de De Moivre.\\
+        Si tuvieramos $w = \rho(\cos \theta, \sin \theta)$, entonces usando la fórmula de De Moivre tenemos:
+        $$
+            w^n = \rho^n (\cos(n\theta) + i\sin(n\theta))
+        $$
     \end{eg}
 
     \begin{eg}[Cálculo de las raíces de un número complejo]
@@ -263,6 +268,116 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         $$
         y por tanto resultan $n$ raíces. (Para $k=n$ el complejo es el mismo que para $k = 0$).
     \end{eg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 03/02
+    Gracias a esta forma de calcular las raíces de un número complejo, podemos calcular lo que se conoce como \textit{raíces de la unidad}, que serán útiles a lo largo del curso, de esta forma, si $z^n = 1$, entonces:
+    $$
+        z = (\cos \bfrac{2\pi k}{n} + i\sin \bfrac{2\pik}{n}),\ k=0, \ldots, 1
+    $$
+    Que tienen una representación geométrica sobre el círculo unidad.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \path (0: 2) coordinate (P1);
+            \path (180: 2) coordinate (P2);
+
+            \path (120: 2) coordinate (Q1);
+            \path (240: 2) coordinate (Q2);
+
+            \path (90: 2) coordinate (R1);
+            \path (-90: 2) coordinate (R2);
+
+            \path (72: 2) coordinate (S1);
+            \path (72*2: 2) coordinate (S2);
+            \path (72*3: 2) coordinate (S3);
+            \path (72*4: 2) coordinate (S4);
+
+            \draw (0, 0) ellipse (2cm and 2cm);
+            \filldraw[black] (P1) circle (1pt);
+            \filldraw[black] (P2) circle (1pt);
+            \filldraw[red] (Q1) circle (1pt);
+            \filldraw[red] (Q2) circle (1pt);
+            \filldraw[blue] (R1) circle (1pt);
+            \filldraw[blue] (R2) circle (1pt);
+            \filldraw[green] (S1) circle (1pt);
+            \filldraw[green] (S2) circle (1pt);
+            \filldraw[green] (S3) circle (1pt);
+            \filldraw[green] (S4) circle (1pt);
+
+            \draw (P1) -- node [anchor=north, sloped]{$n=2$} (P2);
+
+            \draw[red] (P1) -- node [anchor=north, red, sloped]{$n=3$} (Q1) ;
+            \draw[red] (Q1) -- (Q2);
+            \draw[red] (Q2) -- (P1);
+
+            \draw[blue] (P1) -- node [anchor=north, blue, sloped]{$n=4$} (R1);
+            \draw[blue] (P1) -- (R2);
+            \draw[blue] (P2) -- (R1);
+            \draw[blue] (P2) -- (R2);
+
+            \draw[green] (P1) -- node [anchor=south, green, sloped]{$n=5$} (S1);
+            \draw[green] (S1) -- (S2);
+            \draw[green] (S2) -- (S3);
+            \draw[green] (S3) -- (S4);
+            \draw[green] (S4) -- (P1);
+        \end{tikzpicture}
+    \end{center}
+
+
+    \begin{th_ex}
+        Demuestra que $z^2 + 2z + 4 = 0$ no tiene soluciones en el círculo real.\\
+
+        \textbf{Solución}\\\\
+        Basta ver que para que $z$ esté en el círculo real necesitamos que $\vabs{z} \leq 1$. Supongamos que sí, entonces:
+        $$
+            0 \leq \vabs{z^2+2z} \leq \vabs{z^2} + \vabs{2z} = \vabs{z}^2 + 2\vabs{z} \leq 3
+        $$
+        Y por tanto, no es posible que al sumar $4$ a $z^2+2z$ resulte $0$.
+    \end{th_ex}
+
+    \begin{eg}[Polinomio real]
+        Sea $P \in \R[z]$, con $z \in \C$. Entonces:
+        \begin{align*}
+            P(z):&\ a_0 + a_1z + \cdots + a_{n-1}z^{n-1} = 0\\
+            P(\cnj{z}):&\ a_0 + a_1\cnj z + \cdots + a_{n-1}a^{n-1} = 0
+        \end{align*}
+        y por tanto $P(\cnj z) = P(z)$, entonces $z$ y $\cnj z$ son soluciones del polinomio. Es decir, si $\sdf{a_i}_{\i \in \N} \subset \R$ entonces las raíces son reales o vienen en parejas $z, \cnj z$.
+    \end{eg}
+
+    \begin{th_ex}
+        Probar que $1 + \cos \frac{2\pi}{n} + \cos \frac{4\pi}{n} + \cdots + \frac{2(n-1)\pi}{n} = 0$.\\
+
+        \textbf{Solución}\\\\
+        Notamos que si $w = \cos \frac{2\pi}{n} + i\sin \frac{2\pi}{n} \neq 1$, entonces $w^n = 1$ y por tanto $w$ es una raíz de la unidad.
+        \begin{align*}
+            w^n &= 1\\
+            0 &= 1 - w^n
+        \end{align*}
+        Podemos factorizar entonces $0 = 1-w^n$:
+        $$
+            0 = 1-w^n = (1-w)(1+w+\cdots+w^{n-1})
+        $$
+        Como $(1-w) \neq 0$, entonces $(1+w+\cdots+w^{n-1}) = 0$ y por tanto $\Re(1+w+\cdots+w^{n-1}) = 0$ y vemos que hemos llegado a lo que queremos demostrar:
+
+        $$
+            0  =\Re(1+w+\cdots+w^{n-1}) = 1 + \cos \frac{2\pi}{n} + \cos \frac{4\pi}{n} + \cdots + \frac{2(n-1)\pi}{n}
+        $$
+
+        De aquí podemos hallar también una igualdad de forma análoga con $\Im(1+w+\cdots+w^{n-1})=0$:
+        $$
+            \sin \frac{2\pi}{n} + \sin \frac{4\pi}{n} + \cdots + \sin \frac{2(n-1)\pi}{n} = 0
+        $$
+    \end{th_ex}
+
+    \begin{th_ex}
+        Demostrar que $\cos nx$ es un polinomio de $\cos x$ de grado $n$.\\
+
+        \textbf{Solución}\\\\
+        $$
+            \cos 3x = \Re(\cos x + i\sin x)^3 = \Re(\cos^3 x + 3 \cos^2(x) i \sin(x) - 3 \cos(x)\sin^2(x) - i\sin^3(x))
+        $$
+        %TODO: Completar
+    \end{th_ex}
+
 % \section{Topolg\'ia del plano complejo}
 % \section{Esfera de Riemann}
 % \section{Funciones complejas}

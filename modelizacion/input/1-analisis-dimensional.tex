@@ -284,7 +284,7 @@ Hallar magnitudes adimensionales en los distintos problemas nos ayuda a simplifi
     $$
 \end{eg}
 
-\begin{eg}[H1.4]$ $
+\begin{ex}[H1.4]$ $
     \begin{enumerate}[a)]
         \item Magnitudes. Magnitudes elementales. Magnitudes adimensionales.\\\\
         Nuestras magnitudes $q_i$ serán ($h, t, g, R, v$). Podemos analizarlas en función de las magnitudes elementales:
@@ -331,5 +331,111 @@ Hallar magnitudes adimensionales en los distintos problemas nos ayuda a simplifi
         $$
             \frac{h_{max}}{R} = G\left( \varphi\left( \frac{V}{\sqrt{gR}} \right), \frac{V}{\sqrt{gR}} \right) = \varphi^{\star}\left( \frac{V}{\sqrt{gR}} \right)
         $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 03/02
+        \item Identificar las escalas privilegiadas del problema y como se simplifica en dichas escalas:\\\\
+        Vamos a hacer los cambios de variables:
+        \begin{align*}
+            \bar{t} &= \frac{t}{t_C}\\
+            \bar h (\bar t) &= \frac{h(t_C \cdot \bar t)}{h_C}
+        \end{align*}
+        y entonces:
+        \begin{align*}
+            \dot{\bar h}(\bar t) &= \pd{\bar h}{\bar t}(\bar t) = \Pd{\bar t}\bfrac{h(t_C\bar t)}{h_C} = \frac{t_C}{h_C} h'(t_C \bar t)\\
+            \ddot{\bar h}(\bar t) &= \Pd{\bar t}\bfrac{t_C h'(t_C \bar t)}{h_C} = \frac{t_C^2}{h_C} h''(t_C \bar t)\\
+            \bar h (0) &= 0\\
+            \dot{\bar h}(0) &= \frac{t_C}{h_C} h'(0) = \frac{t_C}{h_C} v\\
+        \end{align*}
+        y por último:
+        $$
+            h''(t) = \frac{h_C}{t_C^2} \ddot{\bar h}(\bar t) \text { y } h(t) = h_C \bar h (\bar t) \implies \frac{h_C}{t_C^2}\ddot{\bar h}(\bar t) = - \frac{SR^2}{(h_C \bar h(\bar t) + R)^2}
+        $$
+        Vamos a tratar de simplificar el problema con estas escalas de tres formas distintas:
+        \begin{enumerate}[(1)]
+            \item
+            \begin{align*}
+                \frac{h}{R};&\ h_C = R\\
+                \frac{t}{\sfrac{R}{v}};&\ t_C = \frac{R}{v}
+            \end{align*}
+            De esto, hallamos:
+            \begin{align*}
+                \frac{R}{(\sfrac{R}{V})^2} \ddot{\bar h} &= \frac{-SR^2}{(R\bar h + R)^2}\\
+                \frac{R^3 \ddot{\bar h}}{ (\sfrac{R}{V})^2 g R^2 } &= -\frac{1}{(1+\bar h)^2}\\
+                \frac{v^2}{Rg} \ddot{\bar{h}} &= -\frac{1}{(1+\bar h)^2}
+            \end{align*}
+            Y para $R >> 1$ (el radio terrestre), entonces $\epsilon = \frac{v^2}{Rg} << 1$ es casi $0$. Donde obtenemos:
+            $$
+                0 =  -\frac{1}{(1+\bar h)^2}
+            $$
+            Que no tiene mucho sentido y entonces lo que hemos hecho no nos ha servido, vamos a probar otro cambio.
+            \item
+            \begin{align*}
+                \frac{h}{R};&\ h_C = R\\
+                \frac{t}{\sqrt{\sfrac{R}{g}}};&\ t_C = \sqrt{\frac{R}{g}}
+            \end{align*}
+            De esto hallamos:
+            \begin{align*}
+                \frac{R}{\sfrac{R}{g}} \ddot{\bar h} &= - \frac{gR^2}{(R\ddot{\bar h} + R)^2}\\
+                g\ddot{\bar h} &= -\frac{g}{(\bar h + 1)^2}\\
+                \ddot{\bar h} &= - \frac{1}{(1+\bar h)^2}
+            \end{align*}
+            Si ahora simplificamos el problema, vemos que $\dot{\bar h}(0) = \frac{t_C}{h_C} v = \frac{v}{\sqrt{g R}} = \epsilon << 1$ y obtenemos el sistema:
+            \begin{align*}
+                \ddot{\bar h} &= - \frac{1}{(1+\bar h)^2}\\
+                h(0) &= 0\\
+                h'(0) &= \epsilon \simeq 0
+            \end{align*}
+            Y este sistema también carece de sentido físico ya que indica que el proyectil se lanzaría en sentido contrario.
+            \item
+            \begin{align*}
+                \frac{h}{\sfrac{v^2}{g}};&\ h_C = \frac{v^2}{g}\\
+                \frac{t}{\sqrt{\sfrac{v}{g}}};&\ t_C = \sqrt{\frac{v}{g}}
+            \end{align*}
+            De este obtenemos:
+            \begin{align*}
+                \dot{\bar {h}} (0) &= \frac{ \frac{v}{g}  }{ \frac{v^2}{g} } = 1\\
+                \frac{ \frac{v^2}{g}  }{ \bfrac{v}{g}^2 } \ddot{\bar h}(t) &= -\frac{gR^2}{\left(\frac{v^2}{g}\bar h + R\right)^2}\\
+                \ddot{\bar h}(t) &= - \frac{1}{\left( \frac{v^2}{gR} \bar h + 1 \right)}
+            \end{align*}
+            y con este resultado hallamos el sistema:
+            \begin{align*}
+                \bar h (0) &= 0\\
+                \dot{\bar h} (0) &= 1\\
+                \ddot{\bar h} &= -\frac{1}{(t^2h+1)^2}
+            \end{align*}
+            Cuando $t \to 0$ entonces:
+            \begin{align*}
+                \ddot{\bar h }(\bar t) &= -1\\
+                \bar h(\bar t) &= \frac{\bar t^2}{2}+A\bar t + B\\
+                \bar h (0) &= 0 \implies B = 0 \implies \bar h (\bar t) = -\bar t + A
+            \end{align*}
+            También hallamos:
+            \begin{align*}
+                h(\bar t) &= - \frac{\bar t^2}{2} + \bar t\\
+                \frac{h(t_C \bar t)}{h_C} &= -\frac{1}{2}\bfrac{t}{t_C}^2 + \bfrac{t}{t_C}\\
+                h(t) &= - \frac{h_C}{2t_C^2}t^2 + \frac{h_Ct}{t_C}\\
+                h(t) &= - \frac{\sfrac{v^2}{g}}{2 \left( \sfrac{v}{g} \right)^2}t^2 + \frac{\sfrac{v^2}{g}}{\sfrac{v}{g}}t = -g\frac{t^2}{2} + vt
+            \end{align*}
+        \end{enumerate}
     \end{enumerate}
-\end{eg}
+\end{ex}
+
+\begin{ex}[H1.1]
+    Comenzamos identificando las magnitudes del problema:
+    \begin{align*}
+        \mx{m} &= M\\
+        \mx{\rho} &= L\\
+        \mx{V} &= L^3\\
+        \mx{S} &= L^2
+    \end{align*}
+    Y las magnitudes elementales son $L$ y $M$. Escribimos la matriz de dimensiones:
+    $$
+    \Dmx{
+        ~ & & & & \cr
+        M & 1 & 1 & 0 & 0\cr
+        L & 0 & -3 & 3 & 2
+        } = A
+    $$
+    Donde comprobamos que el rango de $A$ es $2$ y entonces por el teorema $\Pi$ existen $2$ magnitudes adimensionales independientes $\Pi_1,\ \Pi_2$.
+    %%TODO: Terminar ejercicio.
+\end{ex}
