@@ -436,6 +436,54 @@ Hallar magnitudes adimensionales en los distintos problemas nos ayuda a simplifi
         L & 0 & -3 & 3 & 2
         } = A
     $$
-    Donde comprobamos que el rango de $A$ es $2$ y entonces por el teorema $\Pi$ existen $2$ magnitudes adimensionales independientes $\Pi_1,\ \Pi_2$.
-    %%TODO: Terminar ejercicio.
+    Donde comprobamos que el rango de $A$ es $2$ y entonces por el teorema $\Pi$ existen $2$ magnitudes adimensionales independientes $\Pi_1,\ \Pi_2$.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 04/02
+    %%TODO: Añadir desarrollo para hallar las magnitudes adimensionales
+    Hallamos entonces $\Pi_1,\ \Pi_2$:
+    \begin{align*}
+        \Pi_1 &= \frac{\rho V}{m}\\
+        \Pi_2 &= \frac{S}{V^{\sfrac{2}{3}}} = S \cdot \pfrac{\rho}{m}^{\sfrac{2}{3}}
+    \end{align*}
+    De aquí hallamos (teniendo en cuenta que $\lambda = \frac{\rho}{m}$):
+    \begin{align*}
+        S &= \pfrac{m}{\rho}^{\sfrac{2}{3}} \cdot g\pfrac{\rho V}{m}\\
+        S &= \lambda^{\sfrac{-2}{3}} \cdot g(\lambda V)
+    \end{align*}
+\end{ex}
+
+\begin{ex}[H1.2]
+    Una cantidad de energía térmica $e$ está concentrada inicialmente en un
+    punto y se difunde en una región que inicialmente tiene una temperatura 0. Determinar a tiempo $t$ la siguiente relación de la temperatura $u$:
+    $$
+        u = \frac{e}{c}(kt)^{-\frac{3}{2}}g\pfrac{r}{\sqrt{kt}}
+    $$
+    donde $r$ es la distancia a la fuente, $c$ es la capacidad calorífica del medio de dimensiones $\mx{c} = \mx{eu^{-1}r^{-3}} $ y $k$ la difusidad térmica de dimensiones $\mx{k} = \mx{r^2t^{-1}}$.\\
+
+    \textbf{Solución}\\\\
+    Comenzamos expresando la relación a la que queremos llegar de una forma más simple:
+    $$
+        u(r, t) = \frac{e}{c}(kt)^{-\frac{3}{2}}g\pfrac{r^2}{kt}
+    $$
+    Hacemos el análisis de magnitudes:
+    \begin{itemize}
+        \item $\mx{u} = u$
+        \item $\mx{t} = t$
+        \item $\mx{r} = x$
+        \item $\mx{e} = e$
+        \item $\mx{c} = e u^{-1} x^{-3}$
+        \item $\mx{k} = x^2 t^{-1}$
+    \end{itemize}
+    De donde vemos que podemos hallar dos magnitudes adimensionales:
+    \begin{align*}
+        \mx{\Pi_1} &= \mx{\frac{\r^2}{kt}} = \frac{x^2}{x^2t^{-1}t} = 1\\
+        \mx{\Pi_2} &= \mx{\frac{cu}{e(kt)^{\sfrac{-3}{2}}}} = \frac{\mx{c} \mx{u}}{\mx{e} \mx{kt}^{\sfrac{-3}{2}}} = \frac{eu^{-1}x^{-3}u}{ex^{-3}} = 1
+    \end{align*}
+    Y por tanto podemos sacar la relación:
+    \begin{align*}
+        g(\Pi_1, \Pi_2) &= 0\\
+        \Pi_2 &= g(\Pi_1)\\
+        u &= \frac{e}{c} (k+1)^{\sfrac{3}{2}} g\pfrac{r^2}{kt}
+    \end{align*}
+    %% TODO: Pedir última línea a Santorum
 \end{ex}

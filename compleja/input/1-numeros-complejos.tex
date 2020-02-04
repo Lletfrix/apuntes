@@ -378,7 +378,166 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         %TODO: Completar
     \end{th_ex}
 
-% \section{Topolg\'ia del plano complejo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 04/02
+\section{Topolg\'ia del plano complejo}
+
+    Podemos definir subconjuntos en el plano con los números complejos.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \path (30*2: 2) coordinate (W);
+            \path (30: 1.2) coordinate (Z);
+
+
+            \filldraw[black] (W) circle (1pt) node[anchor=west] {$w$};
+            \filldraw[black] (Z) circle (1pt) node[anchor=west] {$z$};
+
+            \draw (-2, 0) -- (2, 0);
+            \draw (0, -2) -- (0, 2);
+            \draw[->] (0, 0) -- (W);
+            \draw[->] (0, 0) -- (Z);
+            \draw[->] (Z) -- (W);
+        \end{tikzpicture}
+    \end{center}
+
+    Podemos definir una distancia en $\C$ con el módulo de la siguiente forma:
+    $$
+        \forall z, w \in \C\ \ \mathrm{dist}(z, w) = \vabs{z - w} = \vabs{\vabs{z-w}}_2
+    $$
+    y es fácil comprobar que cumple las propiedades de una distancia.\\\\
+
+    \subsection{Bolas y discos en $\C$}
+    Ya vimos que podemos definir la circunferencia unidad:\\
+    \begin{center}
+        \begin{tikzpicture}
+            \path (0: 1.5) coordinate (P);
+
+
+            \draw (0, 0) ellipse (1.5cm and 1.5cm);
+            \filldraw[black] (P) circle (1pt) node[anchor=west] {$1$};
+
+            \draw (-2, 0) -- (2, 0);
+            \draw (0, -2) -- (0, 2);
+        \end{tikzpicture}
+    \end{center}
+    que se corresponde con el conjunto:
+    $$
+        \S^1 = \sdf{w \in \C \mid \vabs w = 1} = \sdf{\cos t + i \sin t \mid t \in \left[0, 2\pi\right)}
+    $$
+
+    También podemos definir otras bolas o discos en el plano, abiertos o cerrados:\\
+    \begin{center}
+        \begin{tikzpicture}
+            \path (30: 2) coordinate (Z);
+            \filldraw[fill=blue!40!white, draw=black] (Z) circle (1.5cm);
+            \filldraw[black] (Z) circle (1pt) node[anchor=west] {$z$};
+
+
+            \draw (Z) --  node[anchor=north, sloped] {$r$} ++(45:1.5);
+            \draw[<->] (-2, 0) -- (2, 0);
+            \draw[<->] (0, -2) -- (0, 2);
+            \draw[->, thin] (0, 0) -- (Z);
+        \end{tikzpicture}
+    \end{center}
+    Que son los conjuntos definidos por:
+    \begin{align*}
+        D_r(z) = B_r(z) = B(z, r) &= \sdf{w \in \C \mid \vabs{w - z} < r}\\
+        \overline{D_r}(z) = \overline{B_r}(z) = \overline B(z, r) &= \sdf{w \in \C \mid \vabs{w - z} \leq r}\\
+        C_r(z) = C(z, r) &= \sdf{w \in \C \mid \vabs{w - z} = r}
+    \end{align*}
+
+    \subsection{Rectas en $\C$}
+    Las rectas en el plano complejo (a partir de la expresión punto pendiente) se definen como:
+    \begin{center}
+        \begin{tikzpicture}
+            \path (30: 2) coordinate (Z);
+            \filldraw[black] (Z) circle (1pt) node[anchor=west] {$z_0$};
+
+            \draw[->] (Z) -- node[anchor=east] {$v$} ++(90:1);
+            \draw (1.73205080757, -2) -- (1.73205080757, 2);
+            \draw[<->] (-2, 0) -- (2, 0);
+            \draw[<->] (0, -2) -- (0, 2);
+        \end{tikzpicture}
+    \end{center}
+    \begin{align*}
+        L &= \sdf{z = z_0 + tv \mid t \in \R}\\
+          &= \sdf{z-z_0 = tv \mid t \in \R}\\
+          &= \sdf{\frac{z-z_0}{v} = t \mid t \in \R} = \sdf{z \in \C \mid \Im\pfrac{z-z_0}{v} = 0}
+    \end{align*}
+
+    Es decir, que una recta vertical $S$ que pase por el punto $(1, 0)$ se puede expresar como:
+    $$
+        S = \sdf{z \in \C \mid \Re(z) = 1} = \sdf{\Re(z) = 1}
+    $$
+
+    \subsection{Im\'agenes de conjuntos en $\C$}
+
+    Consideremos ahora:\\
+    \fn{$f$}{$\C$}{$\C$}{$z$}{$z^2$}
+
+    Sin duda resulta difícil determinar la imagen de $S$ mediante $f$. Para hallar $f(S)$ necesitamos una descripción algo más detallada de $S$. Comenzamos con:
+
+    $$
+        S = \sdf{z=(1, t) \mid t \in \R} = \sdf{z = 1 + ti \mid t \in \R}\\
+    $$
+    Queremos hallar el conjunto de los cuadrados de los elementos de $S$, entonces:
+    $$
+        (1+ti)^2 = (1-t^2)+2ti = x + yi
+    $$
+    de donde obtenemos:
+    \begin{align*}
+        x(t) &= 1-t^2\\
+        y(t) &= 2t\\
+        x &= 1-\pfrac{y}{2}^2
+    \end{align*}
+
+    Y esto resulta en:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (1, -3) -- node[anchor=west] {$S$} (1, 3);
+            \draw[thick,  domain=-1.5:1.5, samples=40] plot ({1-\x*\x}, {2*\x}) node[anchor=east]{$f(S)$};
+            \draw[<->] (-3, 0) -- (3, 0);
+            \draw[<->] (0, -3) -- (0, 3);
+        \end{tikzpicture}
+    \end{center}
+
+    Es fácil ver que para otras rectas verticales cuya parte real es estrictamente positiva, es decir $\sdf{\Re(z)=k>0 \mid k\in \R, \forall z \in \C}$. Sin embargo, si consideramos:
+    $$
+        L = \sdf{\Re(z) = 0 \mid z\in\C}
+    $$
+    entonces $f(L)$ es:
+    $$
+        f(L) = \sdf{(-t^2, 0) \mid t \in \R}
+    $$
+    es decir, se corresponde con la semirrecta $\R^{-} = (-\infty, 0)$.\\
+    \begin{center}
+        \begin{tikzpicture}
+            \draw(0.5, -3) -- node[anchor=east] {$S_0$} (0.5, 3);
+            \draw (1, -3) -- node[anchor=east] {$S$} (1, 3);
+            \draw[thick,  domain=-1.5:1.5, samples=40] plot ({0.25-\x*\x}, {\x}) node[anchor=west] {$f(S_0)$};
+            \draw[thick,  domain=-1.5:1.5, samples=40] plot ({1-\x*\x}, {2*\x}) node[anchor=west] {$f(S)$};
+            \draw[thick] (-3, 0) -- node[anchor=north] {$f(L)$} (0, 0);
+            \draw[<->] (-3, 0) -- (3, 0);
+            \draw[<->] (0, -3) -- (0, 3);
+        \end{tikzpicture}
+    \end{center}
+
+    Consideremos ahora el semiplano formado por el conjunto de rectas verticales con parte real no negativa $H = \sdf{\Re(z) \geq 0}$. Nos planteamos qué conjunto es $f(H)$. Podemos preguntarnos si $f(H) = \C$, vamos a ver que sí.
+
+    $$
+        f(H) = \sdf{z^2 \mid \Re(z) \geq 0} = \sdf{w \in \C \mid \exists z \in H,\ z^2 = w}
+    $$
+    Es decir, son los cuadrados de los complejos $z \in H$. Si consideramos $w \notin f(H)$, eso querría decir que si $z^2 = w$ entonces $\Re(z) < 0$. Sin embargo, $(-z)^2 = w$ y $\Re(-z) \geq 0$ por tanto, $w \in H$.\\
+    Recapitulando, hemos supuesto que existe un $w \in \C$ tal que $w \notin f(H)$ y aún así hemos visto que si pertenece a $\C$. Por tanto $f(H) = \C$
+
+    \begin{th_ex}
+        Describe el subconjunto
+        $$
+            L = \sdf{z \in \C \mid \vabs{z^2-1} < 1}
+        $$
+    \end{th_ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 05/02
 % \section{Esfera de Riemann}
 % \section{Funciones complejas}
 % \section{L\'imites y continuidad}

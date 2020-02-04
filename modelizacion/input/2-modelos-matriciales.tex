@@ -1,0 +1,27 @@
+% !TeX root = ../modelizacion.tex
+
+\chapter{Modelos matriciales discretos}
+
+\section{Modelo discreto unidimensional}
+
+En esta sección trataremos problemas con ecuaciones en diferencias finitas. Podemos dar un ejemplo con el interés de una tarjeta de crédito.
+
+\begin{eg}[Interés en una tarjeta de crédito]
+    Tomamos $x_0$ la cantidad que debemos, e $i = 2\%$ el tipo de interés.\\
+    $x(t)$ es la cantidad de dinero que debo cuando han pasado $t$ días. Vamos a intentar dar una expresión para $x$.
+    \begin{align*}
+        x(0) &= x_0\\
+        x(1) &= (1 + i)\cdot x(0) = x(0) + i \cdot x(0)\\
+        x(2) &= (1+i) \cdot x(1) = (1+i)^2\cdot x(0)
+    \end{align*}
+    y por inducción hallamos:
+    $$
+        x(k) = (1+i)^{k} \cdot x(0)
+    $$
+    Por tanto obtenemos el sistema:
+    \begin{align*}
+        x(k+1) &= ax(k)\\
+        x(0) &= x_0
+    \end{align*}
+    donde $a = (1+i)$, y estamos ante un sistema de ecuaciones en diferenciadas finitas homogéneas y autónomas.
+\end{eg}
