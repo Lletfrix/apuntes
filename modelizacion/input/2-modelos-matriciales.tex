@@ -25,3 +25,103 @@ En esta sección trataremos problemas con ecuaciones en diferencias finitas. Pod
     \end{align*}
     donde $a = (1+i)$, y estamos ante un sistema de ecuaciones en diferenciadas finitas homogéneas y autónomas.
 \end{eg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 05/02
+\section{Dinámica discreta de poblaciones}
+
+Vamos a ver como podemos dar distintos modelos de poblaciones.
+
+\begin{eg}[Modelo de población de elefantes hembras de Botswana]
+    Consideramos:
+    \begin{align*}
+        y(k) &= \sdf{\text{Población de elefantes hembras de Botswana}}\\
+        y(k+1) &= \sdf{\text{Sobreviven}} + \sdf{\text{Nacen}} - \sdf{\text{Emigrantes}} + \sdf{\text{Inmigrantes}}
+    \end{align*}
+    Y llamamos $k$ al número de años, $s$ a la tasa de supervivencia, $n$ a la tasa de natalidad y suponiendo que Botswana no deja salir ni entrar a ningún elefante, tenemos que la tasa de inmigración y los puntos de emigración son nulas.\\
+    Si hallamos que $s = 0.8$ y $n = 0.3$ tenemos la ecuación:
+    $$
+        y(k+1) = 0.8\cdot y(k) + 0.3\cdot y(k) = (1.1)\cdot y(k) = ay(k)
+    $$
+    Entonces, por inducción $y(k) = a^k y(0)$.\\
+    En este caso, como $a > 1$, $1.1 = a = 1 + \alpha$ y $\alpha = 0.1$ diremos que la tasa de crecimiento de la población es del $10\%$. Además, el límite cuando $k \to \infty$ es $\infty$.
+\end{eg}
+
+Sin embargo, este modelo se puede sofisticar, veamos otro ejemplo.
+\begin{eg}[Modelo de población de la mariposa monarca]
+    Consideraremos $y(k) = \sdf{\text{Población de mariposas monarca}}$. Vamos a expresar este valor de forma matricial:
+    $$
+        y(k) = \px{y_1(k)\\y_2(k)} \implies
+        \Mx{
+            y_1(k)=\sdf{\text{número de crisálidas}} \\
+            y_2(k)=\sdf{\text{número de mariposas adultas}}
+        }
+    $$
+    En este sistema, $k$ nos indica el período de semana en que estamos y sabemos que:
+    \begin{itemize}
+        \item Cada semana maduran el $30\%$ de las crisálidas.
+        \item Cada semana sobreviven el $10\%$ de las adultas.
+        \item Las crisálidas o se transforman en adultas o se mantienen como crisálidas.
+        \item Por cada mariposa adulta, una oruga se transforma en crisálida.
+    \end{itemize}
+    Entonces tenemos las relaciones:
+    \begin{align*}
+        y_1(k+1) &= 0.7 \cdot y_1(k) + y_2(k)\\
+        y_2(k+1) &= 0.3 \cdot y_1(k) + 0.6 \cdot y_2(k)
+    \end{align*}
+    Y lo podemos expresar como $y(k+1) = A y(k)$ con la matriz:
+    $$
+        A = \px{0.7 & 1 \\ 0.3 & 0.6}
+    $$
+    Con esto, podríamos hacer el análisis de la población. Supongamos que tenemos una población inicial de:
+    $$
+        y(0) = \px{1000\\ 1000}
+    $$
+    Para hallar la población en el período $k$ basta usar la expresión:
+    $$
+        y(k+1) = A y(k) \implies y(k) = A^k \cdot y(0)
+    $$
+\end{eg}
+
+Nos preguntamos ahora qué pasa con estas poblaciones. Recordemos que una matriz $A$ la podemos descomponer como $A = P J P^{-1}$  (por la descomposición de Jordan). $J$ es algo más fácil de manejar y en algunos estupendos casos es diagonal.
+Además, recordemos que una condición suficiente de ser matriz diagonalizable es ser simétrica.\\
+
+De esta forma, podemos expresar:
+\begin{align*}
+    A &= P J P^{-1}\\
+    A^2 &= P J^2 P^{-1}\\
+    A^n &= P J^{n} P^{-1}
+\end{align*}
+y nuestra pregunta se resuelve estudiando el \textbf{espectro} de $A$ (sus autovalores).\\
+
+\begin{eg}[Modelo de población de la mariposa monarca - Continuación]
+
+    Retomando el ejemplo de la población de mariposas, los autovalores son los ceros de:
+    $$
+        0 = \rho(\lambda) = \det(A - \lambda I) = \lambda^2 - 1.3\cdot \lambda + 0.42\cdot 0.3
+    $$
+    De donde obtenemos $\lambda_1 \simeq 1.2$ y $\lambda_2 \simeq 0.1$ y por tanto:
+    $$
+        J = \px{1.2 & 0 \\ 0 & 0.1} \implies J^n = \px{\infty & 0 \\ 0 & 0}
+    $$
+    También vamos a hallar los autovectores, (para la condición del primer autovector hemos pedido que tenga $\vabs{\vabs\cdot}_1 = 1$).
+    \begin{align*}
+        \px{-0.5 & 1\\ 0.3 & -0.6}\px{u_1 \\ u_2} = 0 &\implies u_1 = 2u_2,\ u_1+u_2=1\\
+        \px{6 & 1\\ 0.3 & 0.5}\px{v_1 \\ v_2} = 0 &\implies v_2 = -0.6 \cdot v_1,\ v_1 = -\frac{5}{3}v_2\\
+        &\implies u_1 = \px{\frac{2}{3} \\ \frac{1}{3}},\ u_2 = \px{\frac{5}{3}\\ -1}
+    \end{align*}
+
+    Donde tenemos que $\lambda_1$ un autovalor dominante $-0.1 = \lambda_2 < \lambda_1 = 1.2$ ya que
+    $$
+        \exists \lambda_1 \text{ tal que } \lambda_1 > \vabs{\lambda_i} i\neq 1
+    $$
+    y también $\lambda_1$ es positivo y por tanto, es el autovector de componentes positivas.\\
+    Vamos a hallar una expresión de $y(k)$:
+    \begin{align*}
+        y(0) &= c_1 u_1 + c_2 u_2,\ y(0) \leq 0\\
+        y(k) &= A^k \cdot y(0)\\
+             &= A^{k-1} \cdot A \cdot y(0) = A^{k-1} \cdot(c_1 \lambda u_1 + c_2 \lambda_2 u_2)\\
+             &= c_1 \lambda_1^k u_1 + c_2 \lambda_2^k u_2\\
+             &= \lambda_1^k \px{c_1 u_1 + c_2 \pfrac{\lambda_2}{\lambda_1}^ku_2} \to_{k>>1} \lambda_1^k c_1 u_1 \to \infty
+    \end{align*}
+    De donde podemos inferir que $\lambda_1 > 1$ hace que la población sea enorme en el infinito y $\lambda_1 < 0$ hace que se extinga la población.
+\end{eg}

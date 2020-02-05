@@ -514,7 +514,7 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         \begin{tikzpicture}
             \draw(0.5, -3) -- node[anchor=east] {$S_0$} (0.5, 3);
             \draw (1, -3) -- node[anchor=east] {$S$} (1, 3);
-            \draw[thick,  domain=-1.5:1.5, samples=40] plot ({0.25-\x*\x}, {\x}) node[anchor=west] {$f(S_0)$};
+            \draw[thick,  domain=-1.5:1.5, samples=40] plot ({0.5-\x*\x}, {\x}) node[anchor=west] {$f(S_0)$};
             \draw[thick,  domain=-1.5:1.5, samples=40] plot ({1-\x*\x}, {2*\x}) node[anchor=west] {$f(S)$};
             \draw[thick] (-3, 0) -- node[anchor=north] {$f(L)$} (0, 0);
             \draw[<->] (-3, 0) -- (3, 0);
@@ -535,9 +535,80 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         $$
             L = \sdf{z \in \C \mid \vabs{z^2-1} < 1}
         $$
-    \end{th_ex}
+        \textbf{Solución}\\\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 05/02
-% \section{Esfera de Riemann}
+        \begin{align*}
+            \sdf{z \in \C \mid \vabs{z^2-1} < 1} &= \sdf{z \in \C \mid \vabs{z^2-1}^2 < 1}\\
+            &= \sdf{z \in \C \mid (z^2-1)(\cnj z ^2 - 1) < 1}\\
+            &= \sdf{z \in \C \mid \vabs{z}^4 - z^2 - \cnj z ^2 < 0}\\
+            &= \sdf{\vabs{z}^4 < z^2 + \cnj z ^2}\\
+            &= \sdf{\vabs{z}^4 < \Re(z^2)}
+        \end{align*}
+        Si $z = \rho (\cos \theta + i \sin \theta)$ tenemos el conjunto:
+        $$
+            \sdf{\rho^4 < 2 \rho^2 \cos^2 2*\theta}
+        $$
+        Podemos comprobar que $\rho = 0$ no cumple la condición, por tanto, podemos suponer $\rho > 0$ y dividir por $\rho^2$:
+        $$
+            \sdf{\rho^2 < 2 \cos^2 2*\theta}
+        $$
+        Que son los puntos contenidos en una \textit{lemniscata}.
+        % TODO: Add figure 0
+    \end{th_ex}
+
+    \begin{th_ex}
+        Describe el subconjunto
+        $$
+            H = \sdf{z \in \C \mid \Im\pfrac{z-z_0}{v} > 0}
+        $$
+        con $z_0, v \in  \C$\\
+
+        \textbf{Solución}\\\\
+
+        Ya hemos visto que la expresión de una recta con vector director $v$ y que pasa por el punto $z_0$ tiene la expresión:
+        $$
+            \sdf{z \in \C \mid \Im\pfrac{z-z_0}{v} = 0}
+        $$
+        Por lo que cabría esperar que el conjunto que buscamos tiene alguna relación con la recta, y probablemente sea uno de los dos semiplanos definidos por la misma.\\
+        Consideremos $w = \frac{z-z_0}{v} = a + bi$. Entonces podemos reescribir el conjunto $H$:
+        $$
+            H = \sdf{z \mid w = \frac{z-z_0}{v} = a + bi,\ b>0}
+        $$
+        Desarrollamos la igualdad del conjunto:
+        \begin{align*}
+            z - z_0 &= v (a + bi)\\
+            z &= z_0 + v(a + bi)\\
+                &= z_0 + av + i\cdot bv
+        \end{align*}
+        Es decir, que los $z$ de $H$ son los puntos a los que llegamos de desplazarnos una cantidad en la recta $z_0 + av$ (recordemos que $v$ es vector director de la recta) y además, nos movemos en sentido positivo ($b>0$) en la dirección $i\cdot v$, es decir, el giro de $\sfrac{\pi}{2}$ en sentido positivo de $v$.\\
+
+        De esta forma, es claro ver que $H \subseteq \Pi$ donde $\Pi$ es el semiplano \textit{a la izquierda} del vector director $v$. Faltaría demostrar que $\Pi \subseteq H$.
+        %%TODO: Añadir dibujo
+    \end{th_ex}
+
+\section{Esfera de Riemann}
+    En ocasiones nos enfrentaremos a ecuaciones que no tienen solución en $\C$, como:
+    $$
+        w = \frac{1}{z}
+    $$
+    Para solucionar esto, vamos a \textbf{completar} $\C$, y vamos a añadir un punto a $\C$ que es la solución a la ecuación superior. Llamaremos a este punto $\infty$ y denominamos extensión de $\bar \C = \C \cup \sdf{\infty}$.\\\\
+    El plano complejo extendido se puede visualizar gracias a la proyección estereográfica de la esfera sobre el plano.
+    % TODO: Add figure 1
+    Vemos que la forma de relacionar $\C$ y $\S^2$ (la esfera unidad) es proyectar cada punto de la superficie de la esfera desde el punto $(0, 0, 1)$ hacia el plano, es decir, si $p = (x, y, z)$, su proyección $p'$ es la intersección del plano con la recta que une $p$ y $(0, 0, 1)$.\\
+    Además, notamos que todos los puntos contenidos en el disco unidad son la proyección del hemisferio sur de la esfera. De esta forma, todo $\C$ queda cubierto por la proyección de $\S^2\setminus\sdf{(0, 0, 1)}$. Diremos que $\infty \in \C$ es la proyección del punto $(0, 0, 1)$.
+
+    \begin{obs}
+        Supongamos conocido un punto $Z = (x_1, x_2, x_3) \in \S^2\setminus\sdf{(0, 0, 1)}$. ¿Cómo encontramos $z\in\C$ su proyección en el plano complejo?\\
+
+        Como hemos visto, es el punto de corte de la recta que une $Z$ y $(0, 0, 1)$ y el plano, entonces:
+        \begin{align*}
+            (x_1, x_2, x_3) &= Z = \lambda (0, 0, 1) + (1-\lambda)(x, y, 0)\\
+            x_1 &= (1-\lambda) x\\
+            x_2 &= (1-\lambda) y\\
+            x_3 &= \lambda
+        \end{align*}
+        %% TODO terminar esto - El lunes??
+    \end{obs}
 % \section{Funciones complejas}
 % \section{L\'imites y continuidad}
