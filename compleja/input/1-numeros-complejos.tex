@@ -610,5 +610,92 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         \end{align*}
         %% TODO terminar esto - El lunes??
     \end{obs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 06/02
+    \begin{ex}[H1.2]\label{ex:h1.2}
+        Calcule los valores:
+        \begin{enumerate}[a)]
+            \item $\vabs{(2-i)(1+i)^4}$
+            \item $\vabs{\frac{1+i\sqrt 3}{4-3i}}$
+            \item $\sum_{k=1}^{2020} i^k$
+        \end{enumerate}
+        \textbf{Solución}\\\\
+        \begin{enumerate}[a)]
+            \item
+            \item
+            \item
+            Notamos que $i + i^2 + i^3 + i^4 = i -1 +i +1 = 0$ y por tanto como $2020$ es múltiplo de $4$
+            $$
+                \sum_{k=1}^{2020} i^k = \sum_{j=1}^{505} i^{4j} + i^{4j+1} + i^{4j+2} + i^{4j+3} = \sum_{j=1}^{505} 0 = 0
+            $$
+        \end{enumerate}
+    \end{ex}
+
+    \begin{ex}[H1.3]
+        Compruebe la identidad $\vabs{1+z\cnj w}^2 + \vabs{z-w^2} = (1+\vabs{z}^2)(1+\vabs{w}^2)$ para todo $z, w \in \C$.\\
+
+        \textbf{Solución}\\\\
+        \begin{align*}
+            \vabs{1+z\cnj w}^2 + \vabs{z-w^2} &= (1+z\cnj w)(1+\cnj z w) + (z-w)(\cnj z - \cnj w)\\
+            &= 1+ \cancel{z\cnj{w}} + \cancel{\cnj{z} w} + z\cnj{z}\cnj{w}w + z\cnj{z} - \cancel{z\cnj{w}} - \cancel{w\cnj{z}} + w\cnj{w} \\
+            &= 1 + \vabs{z}^2 + \vabs{w}^2 + \cnj{z}^2\vabs{w}^2\\
+            &= (1+\vabs{z}^2)(1+\vabs{w}^2)
+        \end{align*}
+    \end{ex}
+
+    \begin{ex}[H1.4]
+        Demuestre la \textit{identidad de Lagrange}: si $z_1, z_2, \ldots, z_n$ y $w_1, w_2, \ldots, w_n$ son números complejos, entonces
+        $$
+            \px{\sum_{j=1}^{n} \vabs{z_j}^2} \px{\sum_{j=1}^n \vabs{w_j}^2} - \vabs{\sum_{j=1}^n z_jw_j}^2 = \sum_{1\leq i<j\leq n} \vabs{z_i \cnj{w_j} - z_j \cnj{w_i}}^2
+        $$
+        \textbf{Solución}\\\\
+        Vamos a comenzar escribiendo la igualdad de otra forma y desarrollando $S_1$
+        $$
+        \underbracket{\px{\sum_{j=1}^{n} \vabs{z_j}^2} \px{\sum_{j=1}^n \vabs{w_j}^2}}_{S_1} = \underbracket{\vabs{\sum_{j=1}^n z_jw_j}^2 + \sum_{1\leq i<j\leq n} \vabs{z_i \cnj{w_j} - z_j \cnj{w_i}}^2}_{S_2}
+        $$
+        \begin{align*}
+            \px{\sum_{j=1}^{n} \vabs{z_j}^2} \px{\sum_{j=1}^n \vabs{w_j}^2} &= \sum_{i=j}^n \vabs{z_iw_j}^2 + \sum_{i\neq j}^n \vabs{z_iw_j}^2\\
+            &= \sum_{i=1}^n \vabs{z_iw_i}^2 + \sum_{1 \leq i < j \leq n} \px{\vabs{z_iw_j}^2 + \vabs{z_jw_i}^2}\\
+            &= \underbracket{\sum_{i=1}^n \vabs{z_iw_i}^2}_{P_1}+ \underbracket{\sum_{1 \leq i < j \leq n} \px{\vabs{z_iw_j}^2 + \vabs{z_jw_i}^2}}_{P_2}\\
+        \end{align*}
+        Entonces tenemos que ver si $S_2$ es igual a lo anterior. Vamos a desarrollar un término de $S_2$
+        \begin{align*}
+            \vabs{\sum_{j=1}^n z_jw_j}^2 &= (z_1w_1 + \ldots + z_nw_n)(\cnj{z_1}\cnj{w_1} + \ldots \cnj{z_n}\cnj{w_n})\\
+            &= \sum_{1 \leq i, j \leq n} z_iw_i\cnj{z_j}\cnj{w_j} = \sum_i^n \vabs{z_i}^2 \vabs{w_i}^2 + \sum_{1 \leq i < j \leq n} z_i\cnj{z_j}w_i\cnj{w_j} + z_j\cnj{z_i} + w_j\cnj{w_i}\\
+            &= P_1 + \underbracket{\sum_{1 \leq i < j \leq n} z_i\cnj{z_j}w_i\cnj{w_j} + z_j\cnj{z_i} + w_j\cnj{w_i}}_{P_3}
+        \end{align*}
+        Por tanto podemos cancelar $P_1$ y entonces tenemos que demostrar:
+        $$
+            P_2 = P_3 + \underbracket{\sum_{1 \leq i < j \leq n} \vabs{z_i\cnj{w_j} - z_j\cnj{w_i}}^2}_{P_4}
+        $$
+        Y si desarrollamos $P_4$ obtenemos
+        $$
+            P_4 = \sum_{1 \leq i < j \leq n} (z_i\cnj{w_j} - z_j\cnj{w_i}) (\cnj{z_i} w_j  - \cnj{z_j} w_i )
+        $$
+        Que es $P_2 - P_3$ y hemos terminado.
+    \end{ex}
+
+    \begin{ex}[H1.5]
+        Demuestre las siguientes afirmaciones:
+        \begin{enumerate}[a)]
+            \item Si $a, b \in \C$ y $z \in \C\setminus\sdf{-\cnj{\pfrac{a}{b}}}$ con $\vabs{z} = 1$, entonces se cumple $\vabs{\frac{az+b}{\cnj b z + \cnj a}} = 1$
+            \item Si $\vabs{a} < 1$, entonces $\vabs{z} < 1$ es equivalente a $\vabs{\frac{z-a}{1-\cnj a z}} < 1$
+        \end{enumerate}
+        \textbf{Solución}\\\\
+        \begin{enumerate}[a)]
+            \item
+                \begin{align*}
+                    \vabs{az+b} = \vabs{\cnj b z + \cnj a} &\iff \vabs{az+b}^2 = \vabs{\cnj b z + \cnj a}^2\\
+                    &\iff (az + b)(\cnj a \cnj z + \cnj b) = (\cnj b z + \cnj a)(b \cnj z + a)
+                \end{align*}
+                Entonces basta demostrar
+                \begin{align*}
+                    (az + b)(\cnj a \cnj z + \cnj b) &= (\cnj b z + \cnj a)(b \cnj z + a)\\
+                     \vabs{a}^2 \vabs{z}^2 + \vabs{b}^2 + \cancel{a\cnj b z + b \cnj a \cnj z} &= \vabs{b}^2 \vabs{z}^2 + \vabs{a}^2 + \cancel{a\cnj b z + b \cnj a \cnj z}
+                \end{align*}
+                Y como $\vabs{z} = 1$ hemos terminado.
+        \end{enumerate}
+
+    \end{ex}
 % \section{Funciones complejas}
 % \section{L\'imites y continuidad}

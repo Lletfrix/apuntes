@@ -125,3 +125,59 @@ y nuestra pregunta se resuelve estudiando el \textbf{espectro} de $A$ (sus autov
     \end{align*}
     De donde podemos inferir que $\lambda_1 > 1$ hace que la población sea enorme en el infinito y $\lambda_1 < 0$ hace que se extinga la población.
 \end{eg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 06/02
+
+\begin{obs}
+    La \textbf{tasa de crecimiento} viene dada por el \textbf{autovalor dominante}, y el \textbf{estado estacionario} (el equilibrio de las distintas clases de la población) viene dado por el \textbf{autovector} del \textit{autovalor dominante}.
+\end{obs}
+
+Volvamos al ejemplo anterior. Buscamos una tasa de supervivencia para las mariposas adultas de tal manera que la población se mantenga estable. Recordamos que teníamos la matriz del sistema:
+$$
+\px{0.7 & 1\\ 0.3 & \alpha}
+$$
+Ahora buscamos $\alpha$ tal que $\lambda_1 = 1$, entonces:
+\begin{align*}
+    \rho(\lambda) &= (0.7 - \lambda)(\alpha - \lambda) - 0.3\\
+     &= \lambda^2 - \alpha \lambda - 0.7\lambda + 0.7\lambda - 0.3\\
+     &= \lambda^2 - (0.7 + \alpha)\lambda + 0.7\lambda -0.3
+\end{align*}
+Entonces, despejando $\alpha$ de $\lambda(\alpha)=1$ obtenemos que $\alpha=0$
+
+\subsection{Modelos de Leslie}
+Dividimos la población por el rango de edad en $n$ períodos.
+
+\begin{tikzpicture}[node distance=5cm and 2cm, auto]
+    \node[rectangle, draw] (p1) {Período $1 \equiv$ población $1$ };
+    \node[rectangle, draw, right of= p1] (p2) {Período $2 \equiv$ población $2$ };
+    \node[circle, draw, right = 1cm of p2] (ind) {$\cdots$};
+    \node[rectangle, draw, right = 1cm of ind] (p3) {Período $n \equiv$ población $n$ };
+    \draw[->] (p1) edge [loop left] node {$a_1$} (p1);
+    \draw[->] (p1) to node {$b_1$} (p2);
+    \draw[->] (p2) to node {$b_2$} (ind);
+    \draw[->] (ind) to node {$b_{n-1}$} (p3);
+    \draw[->, out=90, in=90, distance=1cm] (p2) to node {$a_2$} (p1);
+    \draw[->, out=90, in=90, distance=1.5cm] (p3) to node {$a_n$} (p1);
+\end{tikzpicture}
+
+Donde $b_i$ va a ser la \textit{tasa de supervivencia} de la población $i$ y $a_i$ a a ser la \textit{tasa de descendientes/reproducción} de la población $i$.\\
+Sea
+\begin{align*}
+    y_i(k) &= \sdf{\text{número de individuos $i$ en la etapa $k$}}\\
+    y_1(k+1) &= a_1y_1(k) + \cdots + a_ny_n(k)\\
+    y_2(k+1) &= b_1y_1(k)\\
+    y_n(k+1) &= b_ny_{n-1}(k)\\
+\end{align*}
+Entonces construimos la matriz
+$$
+    A = \px{
+    a_1 & a_2 & \cdots & a_{n-1} & a_n\\
+    b_1 & 0 & \cdots & 0 & 0\\
+    0 & b_2 & \ddots & 0 & 0\\
+    0 & 0 & \ddots & 0 & 0\\
+    0 & 0 & \cdots & b_{n-1} & 0
+    }
+$$
+De la que podemos hallar su polinomio característico.
+$$
+    \rho(\lambda) = \mathrm{det}(A - \lambda I) = (\cdots) = \lambda^n - a_1\lambda^{n-1} - b_1a_2\lambda^{n-2} - b_1b_2a_3\lambda^{n-3} - \cdots - (b_1b_2\ldots b_{n-1}a_n)
+$$
