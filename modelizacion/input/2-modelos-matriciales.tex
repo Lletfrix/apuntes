@@ -181,3 +181,97 @@ De la que podemos hallar su polinomio característico.
 $$
     \rho(\lambda) = \mathrm{det}(A - \lambda I) = (\cdots) = \lambda^n - a_1\lambda^{n-1} - b_1a_2\lambda^{n-2} - b_1b_2a_3\lambda^{n-3} - \cdots - (b_1b_2\ldots b_{n-1}a_n)
 $$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 10/02
+%TODO: Revisar todo este día
+Podemos reescribirlo como
+$$
+    \rho(\lambda) = \lambda^n - (A_1\lambda^{n-1} + \cdots + A_n)
+$$
+donde
+\begin{align*}
+    A_1 &= a_1\\
+    A_i &= b_1\cdots b_{i-1}a_i,\ i=2,\ldots, n
+\end{align*}
+De esta forma, vamos a ver ciertos aspectos:
+\begin{enumerate}[1)]
+    \item Existe un autovalor positivo $\lambda_1$.\\
+    Comenzamos con $\rho(\lambda)=0$. Queremos ver que existe un $\lambda > 0$, entonces:
+    \begin{align*}
+        \lambda^n &= A_1\lambda^{n-1} + \cdots + A_n\\
+        1 &= \underbracket{\frac{A_1}{\lambda} + \cdots + \frac{A_n}{\lambda^n}}_{q(\lambda)}
+    \end{align*}
+    Además, vemos que:
+    \begin{enumerate}[i]
+        \item $\lim_{\lambda\to\infty} q(\lambda) = 0$
+        \item $\lim_{\lambda\to 0} q(\lambda) = \infty$
+        \item $q'(\lambda) < 0,\ \lambda \in (0, \infty)$
+    \end{enumerate}
+    Notamos que $A_i \geq 0$ y además todos los $A_i = 0 \iff a_i = 0 \forall i$.
+    %TODO: preguntar a Santorum por la línea de x(k)
+    El caso en que $a_i = 0 \forall i$ es trivial ya que estamos ante una extinción.
+    Además la hipótesis de que exista algun $a_j \neq 0$ es \textit{natural}. Por tanto:
+    \begin{align*}
+        \exists \lambda > 0 \mid \rho(\lambda) = 0 \iff \exists \lambda \mid q(\lambda) = 1
+    \end{align*}
+    Y por continuidad de $q$ esto ocurre.
+    \item Existe un único autovalor positivo.\\
+    $$q'(\lambda) = - \frac{A_1}{\lambda^2} - \frac{2A_2}{\lambda^3} - \cdots - \frac{nA_n}{\lambda^{n+1}}$$
+    y por tanto $q'(\lambda) < 0 \forall \lambda \in (0, \infty)$, es decir, $q(\lambda)$ es una función decreciente. Como $\lambda_1$ es tal que $q(\lambda_1) = 1$ y entonces $\forall \lambda > \lambda_1\; q(\lambda) < 1$.
+    \item $\lambda_1$ es simple.\\
+    $\lambda_1$ no es simple $\iff \rho'(\lambda_1) = 0$. Recordemos que $\rho(\lambda) = \lambda^n(1-q(\lambda)) \forall \lambda \neq 0$.\\
+    Si $\lambda$ no es simple entonces $0 = n\lambda_1^{n-1}(1-q(\lambda_1)) - \lambda^nq'(\lambda_1)$ y sabemos que $q(\lambda_1) = 1$, entonces
+    $$
+        0 = -\lambda^nq'(\lambda_1) \iff q'(\lambda_1) = 0
+    $$
+    pero hemos visto que $q'(\lambda) < 0$, por lo que el supuesto es falso y $\lambda_1$ es simple.
+    \item Sean $\lambda_j$ los autovalores de $L$ (la matriz de Leslie), tenemos que:
+    $$
+        \vabs{\lambda_j} \leq \lambda_1
+    $$
+    \begin{enumerate}[i]
+        \item Por reducción al absurdo cuando $\lambda_j \in \R$. Supongamos que existe $\lambda_j$ tal que $-\lambda_j > \lambda_1$, $\lambda_j < 0$.\\
+        \begin{align*}
+            0 = \rho(\lambda_j) &\iff 1 = q(\lambda_j)\\
+            0 = \rho(\lambda_1) &\iff 1 = q(\lambda_1)
+        \end{align*}
+        entonces
+        $$
+            0 = q(\lambda_j) - q(\lambda_1) = A_1\px{\frac{1}{\lambda_j} - \frac{1}{\lambda_1}} + \cdots + A_n\px{\frac{1}{\lambda_j^n - \frac{1}{\lambda_1^n}}}
+        $$
+        Tenemos que $\frac{1}{\lambda_j} - \frac{1}{\lambda_1} < 0$, $\frac{1}{\lambda_j^2} - \frac{1}{\lambda_1^2} < 0$ y también $q(\lambda_j) - q(\lambda_1) < 0$.
+        Y esto contradice que $\lambda_j, \lambda_1$ son raíces de $\rho(\lambda) = 0$.
+        \item Supongamos $\lambda_j \in \C$ tal que $\mu = \vabs{\lambda_j} > \lambda_1$, con $\lambda_j = \mu e^{i\theta}$.
+        %% TODO: Pedir a Santorum
+    \end{enumerate}
+    \item Si existen dos coeficientes $a_i$ contiguos distintos de cero, entonces
+    $$
+        \vabs{\lambda_1} < \lambda_1 \forall j \neq 1
+    $$
+    es decir, $\lambda_1$ es dominante.
+    \begin{enumerate}[i]
+        \item Supongamos que $-\lambda_1$ es autovalor.
+        $$
+            0 = q(-\lambda_1) - q(\lambda_1)
+        $$
+        entonces
+        $$
+            0 = A_1\px{\frac{1}{\lambda_1} - \frac{1}{\lambda_1}} + 2A_3\pfrac{-1}{\lambda_1} + \cdots
+        $$
+        con todos los coeficientes impares, y como algún impar es distinto entonces llegamos a que $0 < 0$.
+        %% TODO: Pedir a Santorum línea de q(x) - q(y)
+        \item Supongamos que $\lambda_1e^{i\theta}, \lambda_1e^{-i\theta}$ son raíces del polinomio.\\
+        \begin{align*}
+            1 = q(\lambda_1) &= \frac{A_1}{\lambda_1} + \cdots + \frac{A_n}{\lambda_1^n}\\
+            1 = q(e^{i\theta}\lambda_1) &= \frac{A_1}{\lambda_1}e^{-i\theta} + \cdots + \frac{A_n}{\lambda_1^n}e^{-ni\theta}\\
+            1 = q(e^{-i\theta}\lambda_1) &= \frac{A_1}{\lambda_1}e^{i\theta} + \cdots + \frac{A_n}{\lambda_1^n}e^{ni\theta}\\
+        \end{align*}
+        y tenemos
+        $$
+            q(e^{i\theta}\lambda_1) + q(e^{-i\theta}\lambda_1) - 2q(\lambda_1) = 0
+        $$
+        aplicando identidades trigonométricas
+        $$
+            2 \frac{A_1}{\lambda_1}(\cos \theta - 1) + 2 \frac{A_2}{\lambda_1^2}(\cos(2\theta) - 1) + \cdots + 2 \frac{A_n}{\lambda_1^n}(\cos(n\theta) - 1) = 0
+        $$
+    \end{enumerate}
+\end{enumerate}

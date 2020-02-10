@@ -587,6 +587,22 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         %%TODO: Añadir dibujo
     \end{th_ex}
 
+
+    %% TODO: Ver si recolocar esto como sección 1.4
+    \subsection{Aspectos topol\'ogicos del plano complejo}
+        Cuando tengamos una sucesión de complejos $\sdf{z_n}$ diremos que
+        $$
+            \sdf{z_n} \to z \iff \sdf{\vabs{z_n - z}} \to 0
+        $$
+        Es decir, que para cada $\varepsilon > 0$, $\exists n_0 \in \N$ tal que $Z_n \in D(z, \varepsilon) \forall n \geq n_0$
+        %%TODO Add fig 2 10/02
+
+        Además, se puede demostrar (utilizando las propiedades de las normas $p$) que $\sdf{z_n} \to z \iff \sdf{\Re(z_n)} \to \Re(z)$ y $\sdf{\Im(z_n)} \to \Im(z)$.
+
+        \begin{th_ex}
+            Demostrar que $\sdf{z^n}$ con $z$ en la circunferencia solo converge si $z = 1$.
+        \end{th_ex}
+
 \section{Esfera de Riemann}
     En ocasiones nos enfrentaremos a ecuaciones que no tienen solución en $\C$, como:
     $$
@@ -596,19 +612,50 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
     El plano complejo extendido se puede visualizar gracias a la proyección estereográfica de la esfera sobre el plano.
     % TODO: Add figure 1
     Vemos que la forma de relacionar $\C$ y $\S^2$ (la esfera unidad) es proyectar cada punto de la superficie de la esfera desde el punto $(0, 0, 1)$ hacia el plano, es decir, si $p = (x, y, z)$, su proyección $p'$ es la intersección del plano con la recta que une $p$ y $(0, 0, 1)$.\\
-    Además, notamos que todos los puntos contenidos en el disco unidad son la proyección del hemisferio sur de la esfera. De esta forma, todo $\C$ queda cubierto por la proyección de $\S^2\setminus\sdf{(0, 0, 1)}$. Diremos que $\infty \in \C$ es la proyección del punto $(0, 0, 1)$.
 
     \begin{obs}
-        Supongamos conocido un punto $Z = (x_1, x_2, x_3) \in \S^2\setminus\sdf{(0, 0, 1)}$. ¿Cómo encontramos $z\in\C$ su proyección en el plano complejo?\\
-
-        Como hemos visto, es el punto de corte de la recta que une $Z$ y $(0, 0, 1)$ y el plano, entonces:
+        %% TODO: Add fig1 10/02
+        Si queremos encontrar $Z$ en función de $z$ la recta que une $N$ y $z$ interseca a la esfera en $Z$. La ecuación de esta recta es:
         \begin{align*}
-            (x_1, x_2, x_3) &= Z = \lambda (0, 0, 1) + (1-\lambda)(x, y, 0)\\
-            x_1 &= (1-\lambda) x\\
-            x_2 &= (1-\lambda) y\\
-            x_3 &= \lambda
+            r &= \sdf{tN + (1-t)Z \mid t \in \R}\\
+            &= \sdf{t(0, 0, 1) + (1-t)(x, y, 0) \mid t \in \R}\\
+            &= \sdf{((1-t)x, (1-t)y, t) \mid t \in \R}
         \end{align*}
-        %% TODO terminar esto - El lunes??
+        y además, sea $r(t)$ el punto de la recta $r$ para un valor de $t$:
+        \begin{align*}
+            r(t) \in S &\iff  (1-t)^2x^2+(1-t)^2y^2+t^2 = 1\\
+                       &\iff (1-t)^2\vabs{z}^2 + t^2 = 1
+        \end{align*}
+        Podemos desarrollar esta última igualdad para hallar las coordenadas de $Z$:
+        \begin{align*}
+            (1-t)^2 \vabs{z}^2 + t^2 &= 1\\
+            (1-t)^2 \vabs{z}^2 &= 1 - t^2\\
+            (1-t)(1-t)\vabs{z}^2 &= (1-t)(1+t)\\
+            (1-t)\vabs{z}^2 &= 1+t\\
+            \vabs{z}^2 - 1 &= t(1+\vabs{z}^2)\\
+            t &= \frac{\vabs{z}^2 -1}{\vabs{z}^2+1}
+        \end{align*}
+        Y hallamos:
+        \begin{align*}
+            Z &= \px{\frac{2x}{\vabs{z}^2+1}, \frac{2y}{\vabs{z}^2+1}, \frac{\vabs{z}^2-1}{\vabs{z}^2+1}}\\
+            &= \px{\frac{z+\cnj z}{\vabs{z}^2+1}, \frac{-i(z-\cnj z)}{\vabs{z}^2+1}, \frac{\vabs{z}^2-1}{\vabs{z}^2+1}}
+        \end{align*}
+
+        Supongamos ahora conocido un punto $Z = (x_1, x_2, x_3) \in \S^2\setminus\sdf{(0, 0, 1)}$. ¿Cómo encontramos $z\in\C$ su proyección en el plano complejo?
+
+        Como hemos visto, es el punto de corte entre el plano y la recta que une $Z$ y $N = (0, 0, 1)$, entonces:
+        \begin{align*}
+            (x_1, x_2, x_3) &= Z = t (0, 0, 1) + (1-t)(x, y, 0)\\
+            x_1 &= (1-t) x\\
+            x_2 &= (1-t) y\\
+            x_3 &= t
+        \end{align*}
+
+        Basta resolver este sistema con lo que hallamos:
+        \begin{align*}
+            x = \frac{x_1}{1-t} = \frac{x_1}{1-x_3}\\
+            y = \frac{x_2}{1-t} = \frac{x_2}{1-x_3}
+        \end{align*}
     \end{obs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 06/02
@@ -695,7 +742,25 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
                 \end{align*}
                 Y como $\vabs{z} = 1$ hemos terminado.
         \end{enumerate}
-
     \end{ex}
+
+
+    Con esta proyección, todo $\C$ queda cubierto por la proyección de $\S^2\setminus\sdf{(0, 0, 1)}$. Por tanto, existe un $F: \C \to \S^2\setminus\sdf{(0, 0, 1)}$ homeomorfismo.\\
+    Diremos que $\infty \in \C$ es la proyección del punto $(0, 0, 1)$. Llamaremos $\overline{\C} = \C \cup \sdf{\infty}$ y lo leeremos como $\C$ extendido y ahora tenemos un homeomorfismo $f: \overline{\C} \to \S^2$.\\
+
+    Nos gustaría además poder definir una distancia en $\cnj \C$ que induzca en $\C$ la topología usual. Recordamos que sea $Z \in \S^2$ un punto de la esfera unidad y $z$ su proyección en el plano complejo entonces llamamos $f(z)$ a
+    $$
+        f(z) = Z = \px{\frac{z+\cnj z}{\vabs{z}^2+1}, \frac{-i(z-\cnj z)}{\vabs{z}^2+1}, \frac{\vabs{z}^2-1}{\vabs{z}^2+1}}
+    $$
+    Vamos a definir la distancia entre $z, z' \in \cnj \C$ como:
+    $$
+        d(z, z') = \vabs{\vabs{f(z) - f(z')}}_2
+    $$
+    es decir, es la distancia en $R^3$ entre la proyección sobre la esfera unidad del plano complejo extendido.
+
+    \begin{th_ex}
+        Encontrar la expresión de $d(z, z')$ y $d(z, \infty)$.
+    \end{th_ex}
+
 % \section{Funciones complejas}
 % \section{L\'imites y continuidad}
