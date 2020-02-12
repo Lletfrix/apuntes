@@ -587,22 +587,6 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         %%TODO: Añadir dibujo
     \end{th_ex}
 
-
-    %% TODO: Ver si recolocar esto como sección 1.4
-    \subsection{Aspectos topol\'ogicos del plano complejo}
-        Cuando tengamos una sucesión de complejos $\sdf{z_n}$ diremos que
-        $$
-            \sdf{z_n} \to z \iff \sdf{\vabs{z_n - z}} \to 0
-        $$
-        Es decir, que para cada $\varepsilon > 0$, $\exists n_0 \in \N$ tal que $Z_n \in D(z, \varepsilon) \forall n \geq n_0$
-        %%TODO Add fig 2 10/02
-
-        Además, se puede demostrar (utilizando las propiedades de las normas $p$) que $\sdf{z_n} \to z \iff \sdf{\Re(z_n)} \to \Re(z)$ y $\sdf{\Im(z_n)} \to \Im(z)$.
-
-        \begin{th_ex}
-            Demostrar que $\sdf{z^n}$ con $z$ en la circunferencia solo converge si $z = 1$.
-        \end{th_ex}
-
 \section{Esfera de Riemann}
     En ocasiones nos enfrentaremos a ecuaciones que no tienen solución en $\C$, como:
     $$
@@ -762,5 +746,130 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         Encontrar la expresión de $d(z, z')$ y $d(z, \infty)$.
     \end{th_ex}
 
-% \section{Funciones complejas}
+
+\section{Sucesiones en $\C$}
+    Cuando tengamos una sucesión de complejos $\sdf{z_n}$ diremos que
+    $$
+        \sdf{z_n} \to z \iff \sdf{\vabs{z_n - z}} \to 0
+    $$
+    Es decir, que para cada $\varepsilon > 0$, $\exists n_0 \in \N$ tal que $Z_n \in D(z, \varepsilon) \forall n \geq n_0$
+    %%TODO Add fig 2 10/02
+
+    Además, se puede demostrar (utilizando las propiedades de las normas $p$) que $\sdf{z_n} \to z \iff \sdf{\Re(z_n)} \to \Re(z)$ y $\sdf{\Im(z_n)} \to \Im(z)$.
+
+    Además, utilizando las propiedades de las normas $p$, podemos obtener el siguiente resultado.
+    \begin{pro}[L\'imite de una sucesión compleja]
+        Sea $\sdf{z_n}$ una sucesión compleja
+        $$\sdf{z_n} \to_{n\to\infty} z \iff \sdf{\Re(z_n)}\to \Re(z) \text{ y } \sdf{\Im(z_n)}\to \Im(z)$$
+    \end{pro}
+    \begin{proof}
+        Se deja al lector.
+    \end{proof}
+
+    \begin{pro}[Condici\'on necesaria y suficiente para el l\'imite de una sucesi\'on compleja]
+        Sea $\sdf{z_n}$ una sucesión compleja
+        $$\sdf{z_n} \to_{n\to\infty} z \iff \vabs{z_n - z} \to 0$$
+    \end{pro}
+    \begin{proof}
+        Se deja al lector.
+    \end{proof}
+
+
+    \begin{th_ex}
+        Demostrar que $\sdf{z^n}$ con $z$ en la circunferencia solo converge si $z = 1$.
+    \end{th_ex}
+
+    \begin{pro}[Convergencia absoluta de una sucesi\'on]
+        Sea $\sdf{z_n}$ una sucesión compleja
+        $$
+            \sdf{z_n} \to z \implies \sdf{\vabs{z_n}} \to z
+        $$
+    \end{pro}
+    \begin{proof}
+        Si $\sdf{z_n} \to z \implies \vabs{z_n - z} \to 0$. Además sabemos que:
+        $$
+            0 \leq \vabs{\vabs{z_n} - \vabs{z}} \leq \vabs{z_n - z}
+        $$
+        Y tomando límites en cada término de la desigualdad, vemos que:
+        $$
+            0 \leq \lim_{n \to \infty} \vabs{\vabs{z_n} - \vabs{z}} \leq 0
+        $$
+        Y por tanto por el lema del Sandwich
+        $$
+        \lim_{n \to \infty} \vabs{\vabs{z_n} - \vabs{z}} = 0 \implies \sdf{\vabs{z_n}} \to \vabs{z}
+        $$
+    \end{proof}
+
+    \begin{eg}[Límite de una sucesión]
+        Sea la sucesión $\sdf{z_n} = \sdf{\frac{n}{n+i}}$, no es descabellado pensar que el límite es $1$, veámoslo:
+        $$
+            \vabs{\frac{n}{n+i} - 1} = \vabs{\frac{n}{n+i} - \frac{n+i}{n+i}} = \vabs{\frac{-i}{n+i}} = \frac{1}{\vabs{n+i}} = \frac{1}{\sqrt{n^2-1}}
+        $$
+        y efectivamente $\frac{1}{\sqrt{n^2-1}} \to_{n\to\infty} 0 \implies \sdf{z_n} \to 1$
+    \end{eg}
+
+    \begin{obs}[Convergencia de una serie]
+        Diremos que $$\sum_{n=1}^{\infty}  z_n = z \iff \sdf{\sum_{n=1}^{m} z_n} \to_{m\to\infty} z$$
+    \end{obs}
+
+    \begin{pro}[Convergencia y sucesión de Cauchy]
+        Sea $\sdf{z_n}$ una sucesión en $\C$
+        $$
+            \sdf{z_n} \text{ es convergente } \iff \sdf{z_n} \text{ es de Cauchy }
+        $$
+    \end{pro}
+    \begin{proof}
+        Se deja al lector.
+    \end{proof}
+
+    \begin{pro}[Resultados varios de convergencia]$ $
+        \begin{enumerate}[1)]
+            \item Sean $S_1$, $S_2$ dos series convergentes, entonces $S_1 + S_2$ es convergente.
+            \item Si $\sum z_n$ es convergente, entonces $\sdf{z_n} \to_{n\to \infty} 0$.
+            \item Si $\sum \vabs{z_n}$ es convergente, entonces $\sum \vabs{z_n}$ es convergente.
+            \item $A$ compacto $\iff$ $A$ es cerrado y acotado (en $\C$).
+        \end{enumerate}
+    \end{pro}
+    \begin{proof}
+        Se deja al lector.
+    \end{proof}
+
+    \begin{eg}[Convergencia de series]$ $
+        \begin{enumerate}[a)]
+            \item $\sum_{k=1}^{\infty} \frac{i^k}{k^2+i}$,
+            $$
+                \vabs{\frac{i^k}{k^2+1}} = \vabs{\frac{1}{k^2+i}} = \frac{1}{\vabs{k^2+i}} = \frac{1}{k^4+1} \leq \frac{1}{k^2}
+            $$
+            y entonces
+            $$
+                \sum \frac{1}{k^2} \text{ converge } \implies \sum \vabs{\frac{i^k}{k^2+i}} \text{ converge } \implies \sum_{k=1}^{\infty} \frac{i^k}{k^2+i} \text{ converge }
+            $$
+            \item $\sum_{k=1}^{\infty} \frac{1}{k+i} = \sum_{k=1}^{\infty} \frac{k-i}{k^2+1}$.\\
+
+            La parte real $\sum \frac{k}{k^2+1}$ es comparable a $\sum \frac{1}{k}$ que no es convergente, por tanto como su parte real no converge la serie tampoco lo hace.
+        \end{enumerate}
+    \end{eg}
+
+\section{Funciones complejas}
+
+    En secciones anteriores ya hemos vistos los efectos de la función $f(x) = x^2$ a algunos conjuntos definidos en $\C$. No todas las funciones van a ser objeto de estudio de la asignatura. Comenzamos restringiéndonos al estudio de funciones continuas.
+
+    \subsection{Funciones continuas complejas}
+    \begin{dfn}[Funci\'on continua]
+        Sea $z_0 \in \C$ arbitrario y $\mathcal{U}(z_0)$ un entorno de $z_0$. Sea $f: \mathcal{U}(z_0) \to \C$ una función compleja, diremos que $f$ es $\mathbf{continua}$ en $z_0$ si $\sdf{f(z_n)} \to f(z_0)$ para toda sucesión $\sdf{z_n} \to z_0$.\\
+
+        Si $f$ es continua en todo su dominio, se dice simplemente que es continua.
+    \end{dfn}
+
+    En ocasiones podremos analizar una función $f$ compleja como una función hacia $\R \times \R$, es decir\\
+
+    \fn{$f$}{$\mathcal D \subseteq \C$}{$\R \times \R$}{$z$}{$(u(z), v(z)) \equiv u(z) + i v(z)$}
+
+    Donde $u, v: \C \to \R$ son funciones escalares. En este caso podemos afirmar el resultado siguiente.
+    \begin{pro}
+        Sea $f$ una función compleja. Sean $u, v$ funciones escalares tales que $f(z) = (u(z), v(z))$, entonces:
+        $$
+            f \text{ es continua } \iff u, v \text{ son continuas }
+        $$
+    \end{pro}
 % \section{L\'imites y continuidad}
