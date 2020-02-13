@@ -547,14 +547,23 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         \end{align*}
         Si $z = \rho (\cos \theta + i \sin \theta)$ tenemos el conjunto:
         $$
-            \sdf{\rho^4 < 2 \rho^2 \cos^2 2*\theta}
+            \sdf{\rho^4 < 2 \rho^2 \cos^2 2\theta}
         $$
         Podemos comprobar que $\rho = 0$ no cumple la condición, por tanto, podemos suponer $\rho > 0$ y dividir por $\rho^2$:
         $$
-            \sdf{\rho^2 < 2 \cos^2 2*\theta}
+            \sdf{\rho^2 < 2 \cos^2 2\theta}
         $$
         Que son los puntos contenidos en una \textit{lemniscata}.
-        % TODO: Add figure 0
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[thick,  domain=1:3, samples=100] plot ({sqrt(\x-1)}, {sqrt( sqrt(4*\x-3) -\x)});
+                \draw[thick,  domain=1:3, samples=100] plot ({-sqrt(\x-1)}, {sqrt( sqrt(4*\x-3) -\x)});
+                \draw[thick,  domain=1:3, samples=100] plot ({sqrt(\x-1)}, {-sqrt( sqrt(4*\x-3) -\x)});
+                \draw[thick,  domain=1:3, samples=100] plot ({-sqrt(\x-1)}, {-sqrt( sqrt(4*\x-3) -\x)});
+                \draw[<->] (-3, 0) -- (3, 0);
+                \draw[<->] (0, -2) -- (0, 2);
+            \end{tikzpicture}
+        \end{center}
     \end{th_ex}
 
     \begin{th_ex}
@@ -584,7 +593,25 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         Es decir, que los $z$ de $H$ son los puntos a los que llegamos de desplazarnos una cantidad en la recta $z_0 + av$ (recordemos que $v$ es vector director de la recta) y además, nos movemos en sentido positivo ($b>0$) en la dirección $i\cdot v$, es decir, el giro de $\sfrac{\pi}{2}$ en sentido positivo de $v$.\\
 
         De esta forma, es claro ver que $H \subseteq \Pi$ donde $\Pi$ es el semiplano \textit{a la izquierda} del vector director $v$. Faltaría demostrar que $\Pi \subseteq H$.
-        %%TODO: Añadir dibujo
+        \begin{center}
+            \begin{tikzpicture}
+                \path (1.5, 1) coordinate (X);
+                \path (2, 2) coordinate (V);
+                \path (X) + (60+90: 1) coordinate (iV);
+                \path (1.25, 0.5) coordinate (Y);
+                \path (Y) + (60+90: 1.5) coordinate (W);
+                \draw[<->] (-3, 0) -- (3, 0);
+                \draw[<->] (0,-2) -- (0, 2);
+                \draw[thick,  domain=0:2, samples=100] plot ({\x}, {2*(\x-1)});
+                \draw[dashed, ->] (X) -- (iV) node[anchor=south] {$iv$};
+                \draw[red, ->] (X) -- (V) node[anchor=south] {$v$};
+                \draw[->] (X) -- node[anchor=north, sloped] {$av$} (Y);
+                \draw[->] (Y) -- node[anchor=north, sloped] {$ibv$} (W);
+                \filldraw[black] (X) circle (1pt) node[anchor=west] {$z_0$};
+                \filldraw[blue] (Y) circle (1pt) node[anchor=north] {$z_0 + av$};
+                \filldraw[black] (W) circle (1pt) node[anchor=north] {$z$};
+            \end{tikzpicture}
+        \end{center}
     \end{th_ex}
 
 \section{Esfera de Riemann}
@@ -594,12 +621,100 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
     $$
     Para solucionar esto, vamos a \textbf{completar} $\C$, y vamos a añadir un punto a $\C$ que es la solución a la ecuación superior. Llamaremos a este punto $\infty$ y denominamos extensión de $\bar \C = \C \cup \sdf{\infty}$.\\\\
     El plano complejo extendido se puede visualizar gracias a la proyección estereográfica de la esfera sobre el plano.
-    % TODO: Add figure 1
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            %Radius
+            \def\R{1};
+            \path (0, 0) coordinate (O);
+            \path (0, 1) coordinate (N);
+            % Plane corners
+            \path (1.26794919, -1) coordinate (P1);
+            \path (-4.73205081, -1) coordinate (P2);
+            \path (-1.26794919, 1) coordinate (P3);
+            \path (4.73205081, 1) coordinate (P4);
+
+            \path (-0.854161, -0.49315) coordinate (P);
+
+            % Point and projection
+            \path (0.07735027, 0.28867513) coordinate (S);
+            \path (0.1830127, -0.6830127) coordinate (S');
+            % Plane
+            \draw[thin, gray] (P1) -- (P2);
+            \draw[thin, gray] (P2) -- (P3);
+            \draw[thin, gray] (P3) -- (P4);
+            \draw[thin, gray] (P4) -- (P1);
+            % Axes
+            \draw[->] (0, \R) -- (0, \R+0.6);
+            \draw[->] (0, -\R) -- (0, -\R-0.6);
+            \draw[<-] (-\R-1.2, 0) -- (-\R, 0);
+            \draw[->] (\R, 0) -- (\R+1.2, 0);
+            \draw[dashed] (-\R, 0) -- (\R, 0);
+            \draw[dashed] (0, -\R) -- (0, \R);
+            \draw[dashed] (P) -- (30: \R);
+            \draw[->] (P) -- (210: \R+1.2);
+            \draw[->] (30:\R) -- (30:\R+1.2);
+
+            % Sphere
+            \draw (O) circle (\R);
+            \draw (-\R, 0) arc (180:360:\R cm and 0.43301270189221935cm);
+            \draw[dashed] (\R, 0) arc (0:180:\R cm and 0.43301270189221935cm);
+
+            % Point and projection
+            \draw[dashed, red] (0, \R) -- (S);
+            \draw[red] (S) -- (S');
+            \filldraw[red] (S) circle (1pt) node[anchor=west]{$p$};
+            \filldraw[red] (S') circle (1pt) node[anchor=west]{$p'$};
+        \end{tikzpicture}
+    \end{center}
     Vemos que la forma de relacionar $\C$ y $\S^2$ (la esfera unidad) es proyectar cada punto de la superficie de la esfera desde el punto $(0, 0, 1)$ hacia el plano, es decir, si $p = (x, y, z)$, su proyección $p'$ es la intersección del plano con la recta que une $p$ y $(0, 0, 1)$.\\
 
     \begin{obs}
-        %% TODO: Add fig1 10/02
-        Si queremos encontrar $Z$ en función de $z$ la recta que une $N$ y $z$ interseca a la esfera en $Z$. La ecuación de esta recta es:
+        \begin{center}
+            \begin{tikzpicture}[scale=1.5]
+                %Radius
+                \def\R{1};
+                \path (0, 0) coordinate (O);
+                \path (0, 1) coordinate (N);
+                % Plane corners
+                \path (1.26794919, -1) coordinate (P1);
+                \path (-4.73205081, -1) coordinate (P2);
+                \path (-1.26794919, 1) coordinate (P3);
+                \path (4.73205081, 1) coordinate (P4);
+
+                \path (-0.854161, -0.49315) coordinate (P);
+
+                % Point and projection
+                \path (0.59694754, 0.52380952) coordinate (S);
+                \path (1.5669873, -0.25) coordinate (S');
+                % Plane
+                \draw[thin, gray] (P1) -- (P2);
+                \draw[thin, gray] (P2) -- (P3);
+                \draw[thin, gray] (P3) -- (P4);
+                \draw[thin, gray] (P4) -- (P1);
+                % Axes
+                \draw[->] (0, \R) -- (0, \R+0.6);
+                \draw[->] (0, -\R) -- (0, -\R-0.6);
+                \draw[<-] (-\R-1.2, 0) -- (-\R, 0);
+                \draw[->] (\R, 0) -- (\R+1.2, 0);
+                \draw[dashed] (-\R, 0) -- (\R, 0);
+                \draw[dashed] (0, -\R) -- (0, \R);
+                \draw[dashed] (P) -- (30: \R);
+                \draw[->] (P) -- (210: \R+1.2);
+                \draw[->] (30:\R) -- (30:\R+1.2);
+
+                % Sphere
+                \draw (O) circle (\R);
+                \draw (-\R, 0) arc (180:360:\R cm and 0.43301270189221935cm);
+                \draw[dashed] (\R, 0) arc (0:180:\R cm and 0.43301270189221935cm);
+                \filldraw[black] (N) circle (1pt) node[anchor=south]{$N = (0, 0, 1)$};
+                % Point and projection
+                \draw[dashed, blue] (0, \R) -- (S);
+                \draw[blue] (S) -- node[anchor=south, sloped]{$r(t)$}(S');
+                \filldraw[blue] (S) circle (1pt) node[anchor=west]{$Z = (x_1, x_2, x_3)$};
+                \filldraw[blue] (S') circle (1pt) node[anchor=west]{$z = x+ yi$};
+            \end{tikzpicture}
+        \end{center}
+        Si queremos encontrar $Z$ en función de $z$, sea $r(t)$ la recta que une $N$ y $z$, entonces $r(t)$ interseca a la esfera en $Z$. La ecuación de esta recta es:
         \begin{align*}
             r &= \sdf{tN + (1-t)Z \mid t \in \R}\\
             &= \sdf{t(0, 0, 1) + (1-t)(x, y, 0) \mid t \in \R}\\
@@ -752,11 +867,26 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
     $$
         \sdf{z_n} \to z \iff \sdf{\vabs{z_n - z}} \to 0
     $$
-    Es decir, que para cada $\varepsilon > 0$, $\exists n_0 \in \N$ tal que $Z_n \in D(z, \varepsilon) \forall n \geq n_0$
-    %%TODO Add fig 2 10/02
+    Es decir, que para cada $\varepsilon > 0$, $\exists n_0 \in \N$ tal que $Z_n \in D(z, \varepsilon) \forall n \geq n_0$\\
 
-    Además, se puede demostrar (utilizando las propiedades de las normas $p$) que $\sdf{z_n} \to z \iff \sdf{\Re(z_n)} \to \Re(z)$ y $\sdf{\Im(z_n)} \to \Im(z)$.
+    \begin{center}
+        \begin{tikzpicture}
+            \path (0, 0) coordinate (Z);
+            \path (250:2) coordinate (Z1);
+            \path (275:1.7) coordinate (Z2);
+            \path (290:1.3) coordinate (Z3);
+            \path (320: 0.9) coordinate (Z0);
 
+            \draw (Z) circle (1cm);
+            \draw (0, 1)  node[anchor=south] {$D(z, \varepsilon)$};
+            \filldraw[black] (Z) circle (0.7pt) node[anchor=north] {$z$};
+            \filldraw[black] (Z1) circle (0.7pt) node[anchor=north] {$z_1$};
+            \filldraw[black] (Z2) circle (0.7pt) node[anchor=north] {$z_2$};
+            \filldraw[black] (Z3) circle (0.7pt) node[anchor=north] {$z_3$};
+            \filldraw[black] (Z0) circle (0.7pt) node[anchor=south] {$z_{n_0}$};
+            \draw (Z) -- node[anchor=east] {$\varepsilon$} (75:1);
+        \end{tikzpicture}
+    \end{center}
     Además, utilizando las propiedades de las normas $p$, podemos obtener el siguiente resultado.
     \begin{pro}[L\'imite de una sucesión compleja]
         Sea $\sdf{z_n}$ una sucesión compleja
