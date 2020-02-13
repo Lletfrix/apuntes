@@ -239,13 +239,13 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
     $$
     Es decir, cuando multiplicamos dos complejos en forma polar, el resultado es otro número complejo cuyo módulo es el producto de los módulos y el argumento es la suma de los argumentos. Esta propiedad simplifica el cálculo de raíces y potencias.
 
-    \begin{eg}[Cálculo de una potencia de un número complejo]
+    \begin{eg}[Cálculo de una potencia de un número complejo]\label{eg:DeMoivre}
         Sea $z = (\cos \theta, \sin \theta)$, entonces, usando lo que acabamos de ver:
         $$
             z^n = (\cos \theta, \sin \theta)^n = \cos(n\theta) + i \sin(n\theta)
         $$
         Esta fórmula se conoce como fórmula de De Moivre.\\
-        Si tuvieramos $w = \rho(\cos \theta, \sin \theta)$, entonces usando la fórmula de De Moivre tenemos:
+        Si tuviéramos $w = \rho(\cos \theta, \sin \theta)$, entonces usando la fórmula de De Moivre tenemos:
         $$
             w^n = \rho^n (\cos(n\theta) + i\sin(n\theta))
         $$
@@ -1002,4 +1002,57 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
             f \text{ es continua } \iff u, v \text{ son continuas }
         $$
     \end{pro}
+
+    \begin{ex}[H2.10]\label{ex:2.10}Demuestre que\\
+        \begin{enumerate}[a)]
+            \item $\sin(3x) = 3\sin(x) - 4\sin^3(x)$ para todo $x \in \R$.
+            \item $\forall \theta \in \px{\frac{-\pi}{2}, \frac{\pi}{2}}$ se cumple
+            $$
+                \pfrac{1+i\tan \theta}{1 - i \tan \theta}^n = \frac{1 + i\tan \theta}{1 - i \tan \theta}
+            $$
+        \end{enumerate}
+        \textbf{Solución}\\\\
+        \begin{enumerate}
+            \item
+            \begin{align*}
+                z &= \cos(x) + i \sin(x)\\
+                z^3 &= (\cos(x) + i\sin(x))^3 \implies \sin(3x) = \Im(z^3)\\
+                    &= \cos^3(x) + 3\cos^2(x) i \sin(x) - 3 \cos(x)\sin^2(x) - i \sin^3(x)\\
+                    &= \cos^3(x)-3\cos(x)+(3\cos^2(x)\sin( x) - \sin^3(x))i
+            \end{align*}
+            Y entonces $\Im(z^3) = 3(1 - \sin^2(x))\sin(x) - \sin^3(x) = 3 \sin(x) - 4 \sin^3(x)$ y como $\Im(z^3) = \sin(3x)$ hemos terminado.
+            \item Comenzamos observando que el denominador siempre tiene parte real $1$, por lo que la división está bien definida. Ahora multiplicamos todo por $\frac{\cos^n \theta}{\cos^n \theta}$.
+            \begin{align*}
+                \frac{\cos^n \theta}{\cos^n \theta} \frac{1 + i\pfrac{\sin \theta}{\cos \theta}}{1 - i\pfrac{\sin \theta}{\cos \theta}} = \frac{(\cos \theta + i \sin \theta)^n}{(\cos \theta - i \sin \theta)^n} = \frac{(\cos n\theta + i \sin n\theta)}{(\cos n\theta + i \sin n\theta)} = \frac{1 + i\tan \theta}{1 - i \tan \theta}
+            \end{align*}
+        \end{enumerate}
+    \end{ex}
+
+    \begin{obs}$ $
+        \begin{enumerate}[a)]
+            \item $\sin(nx)$ no es un polinomio de $\sin(x)$.
+            \item En el ejercicio \ref{ex:2.10}(b), hemos usado \hyperref[eg:DeMoivre]{la fórmula de De Moivre} pero con $(\cos \theta \mbf{-} i \sin \theta)$ en lugar de $(\cos \theta + i \sin \theta)$, sin embargo, basta observar que $(\cos \theta - i \sin \theta) = \cnj z$ y como podemos intercambiar conjugados y potencias
+            $$(\cos \theta \mbf{-} i \sin \theta)^n = (\cnj z)^n = \cnj{z^n} = \cnj{(\cos \theta + i \sin \theta)^n} = \cnj{\cos n\theta + i \sin n\theta} = \cos n\theta - i \sin n\theta$$
+        \end{enumerate}
+    \end{obs}
+
+    \begin{ex}[H2.15]\label{eg:2.15}
+        Resuelva en $\C$ la ecuación: $\cnj z = z^{n-1}$, $n\in \N$.\\
+
+        \textbf{Solución}\\\\
+        \begin{enumerate}[1)]
+            \item $0$ es solución.
+            \item Si $z \neq 0$, entonces multiplicando todo por $z$ entonces $\cnj z \cdot z = z^n$, y por tanto $\vabs{z}^2 = z^n$ y necesariamente $z^n$ es un número real. Así que podemos escribir:
+            $$
+                \vabs{z}^2 = \vabs{ \vabs{z}^2 } = \vabs{z^n} = \vabs{z}^n
+            $$
+            Si $n > 2$, entonces dividiendo por $\vabs{z}^2$ obtenemos $1 = \vabs{z}^{n-2} \implies \vabs{z} = 1$. Retomando nuestra igualdad anterior, sustituyendo $\vabs{z}=1$:
+            $$
+                1 = \cnj z \cdot z = z^n
+            $$
+            es decir, $z$ es una raíz $n$-ésima de la unidad.\\\\
+            Si $n=2$, entonces estamos en el caso $\cnj z = z$, es decir, $z \in \R$ y por tanto cualquier $x \in \R$ es solución de la ecuación.\\\\
+            Finalmente, si $n = 0$, tenemos la ecuación $\cnj z = z^{1-1} = z^0 = 1$, es decir, $\cnj z = 1 \implies z = 1$.
+        \end{enumerate}
+    \end{ex}
 % \section{L\'imites y continuidad}
