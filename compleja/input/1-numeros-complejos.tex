@@ -956,7 +956,7 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
         \begin{enumerate}[1)]
             \item Sean $S_1$, $S_2$ dos series convergentes, entonces $S_1 + S_2$ es convergente.
             \item Si $\sum z_n$ es convergente, entonces $\sdf{z_n} \to_{n\to \infty} 0$.
-            \item Si $\sum \vabs{z_n}$ es convergente, entonces $\sum \vabs{z_n}$ es convergente.
+            \item Si $\sum \vabs{z_n}$ es convergente, entonces $\sum z_n$ es convergente.
             \item $A$ compacto $\iff$ $A$ es cerrado y acotado (en $\C$).
         \end{enumerate}
     \end{pro}
@@ -1055,4 +1055,284 @@ que es un sistema resoluble, sin embargo la expresión no es nada agradable. Usa
             Finalmente, si $n = 0$, tenemos la ecuación $\cnj z = z^{1-1} = z^0 = 1$, es decir, $\cnj z = 1 \implies z = 1$.
         \end{enumerate}
     \end{ex}
-% \section{L\'imites y continuidad}
+
+    \begin{pro}[Operaciones de funciones continuas]
+        La suma, el producto y el cociente (allí donde el denominador no se anula) de funciones contínuas, es una función continua.
+    \end{pro}
+
+    \begin{proof}$ $
+        \begin{enumerate}[i)]
+            \item $$(f_1+ f_2)(z) = f(z) + f_2(z) = (u_1(z)+iv_1(z)) + (u_1(z) + iv_2(z)) = (u_1(z) + u_2(z)) + i(v_1(z) + v_2(z))$$
+            \item
+            $$
+                f_1 \cdot f_2 = (u_1(z)v_1(z) - u_2(z)v_2(z)) + i(u_1(z)v_2(z) + u_2(z)v_1(z))
+            $$
+            \item
+            $$
+                \frac{f_1}{f_2} = f_1 \cdot f_2^{-1}
+            $$
+            y $f_2^{-1}$ es continua cuando $f_2 \neq 0$ ya que:
+            $$
+                f_2^{-1} = \frac{\overline{f_2}}{\vabs{f_2}^2} = \frac{u}{u^2+v^2} - i \frac{v}{u^2+v^2}
+            $$
+        \end{enumerate}
+    \end{proof}
+
+    \begin{dfn}[Convergencia uniforme]
+        Sea $\sdf{f_n} : D \subseteq \C \to \C$ una sucesión de funciones complejas, decimos que $\sdf{f_n}$ \textbf{converge uniformemente} a $f: D \subseteq \C \to \C$ si $\forall \varepsilon > 0$, $\exists n_0 \in N$ tal que $\vabs{f_n(z) - f(z)} < \varepsilon$ $n \geq n_0$, $\forall z \in  D$.
+    \end{dfn}
+
+    \begin{pro}[Convergencia uniforme. Condición necesaria y suficiente]
+        $\sdf{f_n} \to f$ uniformemente $\iff$ $\sdf{\Re(f_n)} \to \Re(f)$ uniformemente y $\sdf{\Im(f_n)} \to \Im(f)$ uniformemente.
+    \end{pro}
+
+    \begin{proof}
+        Se deja al lector.
+    \end{proof}
+
+    \begin{obs}[Notación]
+        $$
+            \sdf{\sum_{n=1}^{k} f_n} \to_{k\to\infty} f \text{ se escribe: } \sum_{n} f_n = f
+        $$
+    \end{obs}
+
+    \begin{pro}[M-test]
+        Supongamos $\sdf{f_n}: D \subseteq \C \to \C$ continuas. Si $\vabs{f_n(z)} \leq M_n \forall z \in D$ y $\sum_n M_n < \infty \implies \sum_{n=1}^{\infty} f_n$ converge uniformemente a una función $f: D\subseteq \C \to \C$ continua.
+    \end{pro}
+
+    \begin{proof}
+        Fijado $z \in D$, $\sum_{n=1}^{\infty} f_n(z)$ es convergente porque es absolutamente convergente. $\sum_{n=1}^{\infty} \vabs{f_n(z)} < \sum_{n=1}^{\infty} M_n < \infty$.\\
+        Denotemos por $f(z)$ al límite $\sdf{\sum_{n=1}^{k} f_n(z)}$, es decir, a $\sum_n f_n(z)$. $f: D \subseteq \C \to C$ así definida es continua porque $\sum_{n=1}^k f_n(z)$ son continuas y convergen uniformemente a $f(z)$.\\
+        Fijo $\varepsilon > 0$, hay que encontrar $n_0 \in \N$ tal que $\vabs{\sum_{n=1}^m f_n(z) - f(z)} < \varepsilon$ si $m \geq n_0$, $\forall z \in D$. Entonces:
+
+        $$
+            \vabs{\sum_{n=1}^m f_n(z) - f(z)} = \vabs{ \cancel{\sum_{n=1}^{m} f_n(z)} - \cancel{\sum_{n=1}^{m} f_n(z)} - \sum_{n=m+1}^\infty f_n(z)} \leq \sum_{n=m+1}^{\infty} \vabs{f_n(z)} \leq \sum_{n=m+1}^{\infty} M_n
+        $$
+        Que es la cola de una serie convergente, por lo que se puede hacer tan pequeña como queramos, en nuestro caso $< \varepsilon$.
+    \end{proof}
+
+    \begin{obs}
+        El M-test es solo una implicación, no una condición necesaria y suficiente.
+    \end{obs}
+
+    \begin{eg}[Aplicación del M-test]
+        Sea $\sdf{f_n(z) = nz^n}$. Intentamos aplicar el M-test. Si $\vabs{z} < \frac{1}{2} \implies \vabs{nz^n} \leq n \pfrac{1}{2}^n = \frac{n}{2^n}$. Como $\sum_{n=1}^{\infty} \frac{n}{2^n}$ es convergente (por el criterio de la raíz), podemos aplicar el M-test, y por tanto $\sum f_n$ converge uniformemente en $\sdf{\vabs{z} \leq \frac{1}{2}}$
+    \end{eg}
+
+    \begin{obs}
+        Recordamos el criterio de la raíz, que es equivalente al caso real. Dada una serie compleja $\sum z_n$, consideramos $\rho = \limsup \sqrt[n]{\vabs{z_n}}$. Entonces si $\rho > 1$ la serie diverge, si $\rho < 1$ la serie converge y si $\rho = 1$ no podemos afirmar nada.
+    \end{obs}
+
+\section{Derivaci\'on de funciones complejas}
+Las funciones complejas son \textit{funciones de} $z$, es decir, $f: D \subseteq \C \to \C$.
+Por ejemplo
+$$
+    p(z) = \alpha_0 + \alpha_1 z + \cdots + \alpha_n z^n
+$$
+Y como $z = x + iy$, en particular tengo un función de dos variables $x, y$
+$$
+    p(z) = p(x, y) = (\Re(\alpha_0) + \Re(\alpha_1)x - \Im(\alpha_1)y + \cdots)
+$$
+Sin embargo, no es cierto en general que todo polinomio de dos variables sea un polinomio complejo. De hecho, no tiene utilidad ver los polinomios complejos como funciones de dos variables.
+
+\begin{dfn}[Derivabilidad. Función holomorfa]
+    Sea $f: D\subseteq \C \to \C$, $z \in \C$, se dice que $f$ es \textbf{derivable} en $z$ si existe el siguiente límite
+    $$
+        \lim_{h\to 0} \frac{f(z+h) - f(z)}{h}
+    $$
+    Cuando dicho límite existe, se denota mediante $f'(z)$ y se llama $\textbf{derivada}$ de $f$ en $z$.\\
+    Decimos que $f(z)$ es derivable en el sentido complejo y que $f$ es \textbf{holomorfa}.
+\end{dfn}
+
+\begin{eg}[Derivabilidad de funciones]$ $
+    \begin{enumerate}[1)]
+        \item Sea\\
+        \fn{$f$}{$\C$}{$\C$}{$z$}{$\cnj{z}$}
+        Es una función que no es derivable en ningún punto. Podemos comprobarlo:
+        $$
+            \lim_{h\to 0} \frac{f(z+h)-f(z)}{h} = \lim_{h \to 0} \frac{\cancel{\cnj z} + \cnj h - \cancel{\cnj z}}{h} = \lim_{h\to 0} \frac{\cnj h}{h} = \left\{ \Mx{
+            1 \text{ si } h \in \R\\
+            -1 \text{ si } \Re(h) = 0
+            } \right.
+        $$
+        Y es distinto en función de como nos acercamos, por tanto no es derivable.
+        \item Sea\\
+        \fn{$g$}{$\C$}{$\C$}{$z$}{$z^n$}
+        Es una función derivable y además, $g'(z) = n z^{n-1}$.
+        \begin{align*}
+            &\lim_{h\to 0} \frac{(z+h)^n - z^n}{h} = \lim_{h\to 0} \frac{\cancel{z^n} + \px{n\\1} z^{n-1}h + \px{n\\2}z^{n-2}h^2 + \cdots + h^n - \cancel{z^n}}{h} =\\
+            &\lim_{h\to 0} nz^{n-1} + h \px{\px{n\\2}z^{n-2} + \cdots + h^{n-2}}
+        \end{align*}
+        Y como $\px{n\\2}z^{n-2} + \cdots + h^{n-2}$ está acotado, el límite existe y vale $g'(z) = nz^{n-1}$
+    \end{enumerate}
+\end{eg}
+
+\begin{pro}[Derivada de suma y producto en $\C$]
+    Si $f, g$ son derivables en $z$, entonces $f+g$, $f-g$ y $f\cdot g$ y $\frac{f}{g}$ (allá donde $g$ no se anule) son derivables, siendo además:
+    \begin{itemize}
+        \item $(f+g)'(z) = f'(z) + g'(z)$
+        \item $(f-g)'(z) = f'(z) - g'(z)$
+        \item $(f\cdot g)'(z) = f'(z)\cdot g(z) + f(z) \cdot g'(z)$
+        \item $(\frac{f}{g})'(z) = \frac{f'(z)g(z) - f(z)g'(z)}{g^2(z)}$
+    \end{itemize}
+\end{pro}
+
+\begin{proof}
+    Se deja al lector.
+\end{proof}
+
+\begin{pro}[Derivabilidad y continuidad]
+    Si $f$ es derivable en $z$ $\implies$ $f$ es continua en $z$.
+\end{pro}
+
+\begin{proof}
+    $$
+        f \text{ es continua en } z \iff \lim_{h\to 0} f(z+h) - f(z) = 0
+    $$
+    \begin{align*}
+        & f(z+h) - f(z) = \frac{f(z+h) - f(z)}{h}\cdot h \implies\\
+        & \lim_{h\to 0} f(z+h) - f(z) = \lim_{h\to 0}  \frac{f(z+h) - f(z)}{h}\cdot h\\
+        & \lim_{h\to 0} \frac{f(z+h) - f(z)}{h} \cdot \lim_{h\to 0} h = f'(z) \cdot 0 = 0
+    \end{align*}
+\end{proof}
+
+\begin{th_ex}
+    Demuestra que el conjunto $\sdf{z \in \C \mid z^n = 1 \land \theta \notin \pi\Q}$ es denso en $\S^1$.\\
+
+    \textbf{Solución}\\\\
+    Vamos a ver que $\sdf{z^n}$ nunca repite el mismo valor.
+    Supongamos que sí repite el mismo valor, entonces:
+    $$
+        \cos(n\theta) + i \sin(n\theta) = \cos(m\theta) + i \sin(m\theta) \iff n\theta = m\theta + 2\pi k \iff (n-m)\theta = 2k\pi \iff \frac{\theta}{\pi} = \frac{2k}{n-m} \in \Q
+    $$
+    Que entra en contradicción con $\theta \notin \pi\Q \iff \frac{\theta}{\pi} \notin \Q$.\\\\
+    Para ver que es denso, dividimos $\S^1$ en arcos de tamaño $\frac{2\pi}{M}$, de tal forma que los puntos que limitan el arco están a distancia menor que $\varepsilon$. Buscamos encontrar dos potencias en el mismo arco. Si los encontramos, como $\varepsilon$ era arbitrario, el conjunto sería denso.\\
+    Además, sabemos que hay al menos dos potencias ya que hay un número finito de arcos y $\textbf{car}\sdf{z^n}$ no es finito, por lo que lo podemos asegurar por el Principio del Palomar.
+\end{th_ex}
+
+\subsection{Ecuaciones de Cauchy-Riemann}
+
+Consideremos $z\in \C:\ z = x+iy$ con $x,y\in \R$. También $f : D \subseteq \C \to \C$ una función derivable (en el sentido complejo), que podemos interpretar como función $f: D\subseteq \R^2 \to \R^2$, es decir, $f(z) = f(x, y) = u(x, y) + i v(x, y)$, con $u,v: D \subseteq \R^2 \to \R$. Entonces:
+$$
+    f'(z) = \lim_{h\to 0} \frac{f(z+h) - f(z)}{h}
+$$
+Si $h\in \R$:
+$$
+    f'(z) = \lim_{h\to 0} \frac{u(x+h, y) + iv(x+h, y) - u(x, y) - iv(x, y)}{h} = u_x + i v_x = \pd{u}{x} + i \pd{v}{x}
+$$
+Por otro lado, si $h \in \C\setminus \R$:
+$$
+    f'(z) = \lim_{h\to 0} \frac{f(z+ih) - f(z)}{ih} = \lim_{h\to 0} \frac{u(x, y+h) + iv(x, y+h) - u(x, y)- v(x, y)}{ih} = \frac{u_y}{i} + v_y = -iu_y + v_y = -i\pd{u}{y} + \pd{v}{y}
+$$
+Como $f$ es derivable, ambas expresiones han de ser iguales y por tanto llegamos a la \textbf{ecuaciones de Cauchy-Riemann}.
+
+\begin{pro}[Ecuaciones de Cauchy-Riemann]
+    Sea $f(z) = f(x, y) = (u(x, y), v(x, y))$ una función compleja, derivable en $z$ en el sentido complejo, entonces:
+    $$
+    \Mx{
+    u_x = v_y\\
+    v_x = -u_y
+    }
+    $$
+\end{pro}
+
+\begin{proof}
+    Leer el desarrollo anterior.
+\end{proof}
+
+\begin{obs}
+    El recíproco no es cierto en general. Sea
+    $$
+    f(z) = f(x, y) = \left\{
+    \Mx{
+    \frac{xy(x+iy)}{x^2+y^2} \text{ si } (x, y) \neq (0, 0)
+    }\\
+    0 \text{ si } (x, y) = (0, 0)
+    \right.
+    $$
+    Se cumple que $\pd{f}{x}(0, 0) = \pd{f}{y}(0, 0) = (0, 0)$, se verifica Cauchy-Riemann y sin embargo, $f$ no es derivable en $z = 0$.
+    $$
+        \lim_{h\to 0} \frac{f(0+h) - f(0)}{h} = \lim_{h\to 0} \frac{f(h)}{h} = \lim_{h\to 0} \frac{\Re(h)\Im(h)}{\vabs{h}^2} = \lim_{r \to 0} \frac{r^2\cos (\theta) \sin (\theta)}{r^2} = \cos(\theta)\sin(\theta)
+    $$
+    Como el límite por radiales depende de $\theta$, $f$ no es derivable.
+\end{obs}
+
+\begin{pro}
+    Si todas las derivadas parciales existen, son continuas en $z$ y se verifica Cauchy-Riemann, entonces $f$ es derivable en $z$.
+\end{pro}
+\begin{proof}
+    Se deja al lector.
+\end{proof}
+
+\begin{obs}
+    Si $f: D\subseteq \C \to \C$ es derivable en $z$, entonces también es diferenciable en $z$. Además, si $f'(z) = a+bi$, entonces:
+    $$
+        \mathrm{D}f(z) = \px{
+        \pd{u}{x} & \pd{u}{y}\\
+        \pd{v}{x} & \pd{v}{y}
+        } = \px{
+            a & -b \\
+            b & a
+        }
+    $$
+\end{obs}
+
+\begin{pro}[Regla de la cadena]
+    Sean $f, g$ holomorfas (diferenciables en sentido complejo) en $G$ y $\Omega$ respectivamente. Supongamos que $f(G) \subset \Omega$. Entonces $g\circ f: G \to \C$ es holomorfa y además cumple:
+    $$
+        (g \circ f)'(z) = g'(f(z)) \cdot f'(z)
+    $$
+\end{pro}
+\begin{proof}
+    Se deja al lector.
+\end{proof}
+
+\begin{pro}[Derivada de la función inversa]
+    Sea $f$ una función biyectiva. Sean $S$ y $T$ abiertos tales que: $f: S \to T$. Sea $g = f^{-1}: T \to S$ continua en $z_0 \in T$. Entonces si $f$ es derivable en $g(z_0)$ y además $f'(g(z_0)) \neq 0$, se tiene que $g$ es derivable en $z_0$ y $g'(z_0) = \frac{1}{f'(g(z_0))}$.
+\end{pro}
+
+\begin{proof}
+    No podemos aplicar la regla de la cadena porque $g$ no tiene por qué ser derivable. Ahora calculamos ($z \neq z_0$):
+    $$
+        \frac{g(z) - g(z_0)}{z - z_0} = \frac{1}{ \frac{z-z_0}{g(z) - g(z_0)} } = \frac{1}{f(g(z)) - f(g(z_0))}
+    $$
+    Y llegamos a lo que queremos tomando el límite $z \to z_0$ $\implies$ $g(z) \to g(z_0)$
+\end{proof}
+
+\begin{pro}[Función holomorfa constante (1)]
+    Si $f: G \subseteq \C \to \C$ (con $G$ abierto y conexo) es holomorfa ($f \in \mathcal{H}(G)$). Si $f = u + iv$ y $u$ es constante $\implies$ $f$ es constante.
+\end{pro}
+
+\begin{proof}
+    Hay que probar que $v$ también es constante. Usando Cauchy-Riemann:
+    \begin{align*}
+        &0 = u_x = v_y\\
+        &0 = u_y = -v_x
+    \end{align*}
+    y esto implica (bajo las hipótesis de cómo es $G$) que $v$ es constante.
+\end{proof}
+
+\begin{pro}[Función holomorfa constante (2)]
+    Sea $f: G \subseteq \C \to \C$ con $G$ abierto y conexo. Sea $f \in \mathcal{H}(G)$. Si $\vabs{f}$ es constante entonces $f$ es constante.
+\end{pro}
+\begin{proof}
+    Si $\vabs{f} = 0 \implies f = 0$.
+    Si $\vabs{f} = cte \neq 0 \implies u^2 + v^2 = cte$.
+    Usando Cauchy-Riemann, hallamos:
+    \begin{align*}
+        uu_x - vu_y &= 0\\
+        uu_x + vv_x &= 0\\
+        uu_y + vv_y &= 0\\
+        vu_x + uu_y &= 0
+    \end{align*}
+    De la primera y ultima condición, multiplicando por $u$ y $v$ respectivamente obtenemos:
+    \begin{align*}
+        u(uu_x - vv_y) &= 0\\
+        v(vu_x + uu_y) &= 0
+    \end{align*}
+    Y entonces, sabiendo que $u^2+v^2 \neq 0$:
+    $$
+        (u^2 + v^2) u_x = 0 \implies u_x = 0
+    $$
+    de modo similar hallamos que $u_y = 0$ y por tanto $u = cte \implies f = cte$.
+\end{proof}

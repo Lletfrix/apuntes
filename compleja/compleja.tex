@@ -179,7 +179,9 @@ numbered=no
 \AtBeginDocument{\renewcommand{\d}{\mathrm{d}}}
 \newcommand{\Dd}[1]{\frac{\mathrm{d}}{\mathrm{d}#1}}
 \newcommand{\dd}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
-\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\Pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdn}[3]{\frac{\partial^{#3} #1}{\partial #2^{#3}}}
 % COMANDOS ÚTILES PARA LA TEORÍA DE GRUPOS
 %\newcommand{\normsub}{\mathbin{\triangleleft}}
 \newcommand{\normsub}{\lhd}
@@ -248,6 +250,7 @@ numbered=no
 %%%% MATRICES
 \newcommand\mx[1]{\begin{bmatrix*}#1\end{bmatrix*}}
 \newcommand\px[1]{\begin{pmatrix*}#1\end{pmatrix*}}
+\newcommand\Mx[1]{\begin{matrix*}#1\end{matrix*}}
 
 \newcommand{\suc}[3][1]{{#2}_{#1}, \ldots, {#2}_{#3}}
 \newcommand{\sucn}[1]{\suc{#1}{n}}
